@@ -54,6 +54,15 @@ public class VendorManager {
         return dsActiveVendor;
     }
     
+    public Vendor getVendorviaMaNCC(int maNCC){
+        for (Vendor vendor : dsVendor){
+            if (vendor.getMaNCC() == maNCC){
+                return vendor;
+            }
+        }
+        return null;
+    }
+    
     // Phương thức import data từ CSDL
     public ArrayList<Vendor> loadData_DB() throws SQLException{
         // ArrayList<Vendor> dsVendor = new ArrayList<>();
@@ -77,6 +86,28 @@ public class VendorManager {
         }
         conn.close();
         return dsVendor;
+    }
+    
+    // Phương thức import data từ CSDL
+    public Vendor loadData_DB(int maNCC) throws SQLException{
+        // ArrayList<Vendor> dsVendor = new ArrayList<>();
+        dsVendor = new ArrayList(); // Khởi tạo lại dsVendor như một ArrayList mới (xoá data cũ) trước khi lấy dữ liệu từ SQL
+        // đối tượng s kết nối SQL Server
+        SQLConnection conn = new SQLConnection("sa", "159753");
+        // Chuỗi truy vấn SQL q
+        String q = "SELECT * FROM Vendor WHERE maNCC = ?";
+        PreparedStatement stmt = conn.getConnection().prepareStatement(q);
+        stmt.setInt(1, maNCC);
+        ResultSet rs = stmt.executeQuery();
+        Vendor vendor = new Vendor(
+                rs.getInt("maNCC"),
+                rs.getString("tenNCC"),
+                rs.getString("diaChi"),
+                rs.getString("mST"),
+                rs.getInt("trangThai"));
+        System.out.println(vendor);
+        conn.close();
+        return vendor;
     }
                
     // Add 1 sample từ JAVA về CSDL

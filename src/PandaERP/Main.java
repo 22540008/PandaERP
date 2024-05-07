@@ -9,6 +9,7 @@ import Controllers.UserController;
 import Models.User;
 import Views.DangNhapView;
 import Views.UserView;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -21,6 +22,7 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+
         User model = new User();
         DangNhapView view = new DangNhapView();
         view.setVisible(true);

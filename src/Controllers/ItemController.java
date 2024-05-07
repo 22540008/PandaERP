@@ -26,6 +26,13 @@ public class ItemController {
     public ItemController(ItemManager model, ItemView view) {
         this.model = model;
         this.view = view;
+        this.view.btnLoadActionListener(new LoadActionListener());
+        this.view.btnAddActionListener(new AddActionListener());
+        this.view.btnDialogAddActionListener(new DialogAddActionListener());
+        this.view.btnSearchActionListener(new SearchActionListener());
+        this.view.btnUpdateActionListener(new UpdateActionListener());
+        this.view.btnDialogUpdateActionListener(new DialogUpdateActionListener());
+        this.view.btnDeleteActionListener(new DeleteActionListener());
     }
     
         public ItemController() {
@@ -42,17 +49,26 @@ public class ItemController {
 
     public void setView(ItemView itemView) {
         this.view = itemView;
-        this.view.btnLoadActionListener(new LoadActionListener());
-        this.view.btnAddActionListener(new AddActionListener());
-        this.view.btnDialogAddActionListener(new DialogAddActionListener());
-        this.view.btnSearchActionListener(new SearchActionListener());
-        this.view.btnUpdateActionListener(new UpdateActionListener());
-        this.view.btnDialogUpdateActionListener(new DialogUpdateActionListener());
-        this.view.btnDeleteActionListener(new DeleteActionListener());
     }
 
     public ItemView getView() {
         return view;
+    }
+    
+    private class LoadActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnLoad is clicked");
+            try {
+                model.loadData_DB();
+                Object[][] dsObjItem = model.getObjDsItem();               
+                view.setColumn(Item.getColumns());
+                view.setData(dsObjItem);
+                view.loadData();
+            } catch (SQLException ex) {
+                Logger.getLogger(ItemController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     private class DialogUpdateActionListener implements ActionListener {
@@ -70,58 +86,110 @@ public class ItemController {
             }
         }
     }
+    
+    // criteria 1: Mã hàng, cri2: Tên hàng
+    public Object[][] SearchItembyCriteria(ItemManager itemManager, String[] paramSearch) throws SQLException{
+        ItemManager itemManager1 = itemManager;
+        int trackMaHang; String trackTenHang;
+        
+        if (paramSearch[0].isBlank() && paramSearch[1].isBlank()){
+            JOptionPane.showMessageDialog(view, "Vui lòng nhập từ khoá tìm kiếm");
+            return null;
+        }
+        ArrayList<Item> loadData = model.loadData_DB();
+        ArrayList<Item> trackResult = new ArrayList();
+        if (!paramSearch[0].isBlank()){
+            try {
+                trackMaHang = Integer.parseInt(paramSearch[0]);
+                for (Item item : loadData){
+                    if (item.getMaHang() == trackMaHang && item.getTrangThai() == 0){
+                        trackResult.add(item);
+                        break;
+                    }
+                }         
+            } catch (NumberFormatException numE) {
+                JOptionPane.showMessageDialog(view, "Mã hàng phải ở định dạng số");
+                return null;
+            }
+        }
+        else {
+            if (!paramSearch[1].isBlank()){
+                trackTenHang = paramSearch[1];
+                for (Item item : loadData){
+                    if (item.getTenHang().equals(trackTenHang)){
+                        trackResult.add(item);
+                    }
+                }
+            }
+        }
 
+        if (trackResult.isEmpty()){
+            JOptionPane.showMessageDialog(view, "Không tìm thấy");
+            return null;
+        }
+        int row = trackResult.size();
+        Object[][] trackObjItem2D = new Object[row][Item.getColumns().length];
+        for (int i = 0; i < row; i++){
+            Object[] objItem = trackResult.get(i).getObjectItem();
+            for (int j = 0; j < objItem.length; j++){
+                trackObjItem2D[i][j] = objItem[j];
+            }
+        }
+        return trackObjItem2D;
+    }
+    
     private class SearchActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("btnSearch is clicked");
             try {
                 String[] paramSearch = view.getSearchParams();
-                if (paramSearch[0].isBlank() && paramSearch[1].isBlank()){
-                    JOptionPane.showMessageDialog(view, "Vui lòng nhập từ khoá tìm kiếm");
-                    return;
-                }
-                int trackMaHang; String trackTenHang;
-                ArrayList<Item> loadData = model.loadData_DB();
-                ArrayList<Item> trackResult = new ArrayList();
-                if (!paramSearch[0].isBlank()){
-                    try {
-                        trackMaHang = Integer.parseInt(paramSearch[0]);
-                        for (Item item : loadData){
-                            if (item.getMaHang() == trackMaHang && item.getTrangThai() == 0){
-                                trackResult.add(item);
-                                break;
-                            }
-                        }         
-                    } catch (NumberFormatException numE) {
-                        JOptionPane.showMessageDialog(view, "Mã hàng phải ở định dạng số");
-                        return;
-                    }
-                              
-                }
-                else {
-                    if (!paramSearch[1].isBlank()){
-                        trackTenHang = paramSearch[1];
-                        for (Item item : loadData){
-                            if (item.getTenHang().equals(trackTenHang)){
-                                trackResult.add(item);
-                            }
-                        }
-                    }
-                }
-               
-                if (trackResult.isEmpty()){
-                    JOptionPane.showMessageDialog(view, "Không tìm thấy");
-                    return;
-                }
-                int row = trackResult.size();
-                Object[][] trackObjItem2D = new Object[row][Item.getColumns().length];
-                for (int i = 0; i < row; i++){
-                    Object[] objItem = trackResult.get(i).getObjectItem();
-                    for (int j = 0; j < objItem.length; j++){
-                        trackObjItem2D[i][j] = objItem[j];
-                    }
-                }
+//                if (paramSearch[0].isBlank() && paramSearch[1].isBlank()){
+//                    JOptionPane.showMessageDialog(view, "Vui lòng nhập từ khoá tìm kiếm");
+//                    return;
+//                }
+//                int trackMaHang; String trackTenHang;
+//                ArrayList<Item> loadData = model.loadData_DB();
+//                ArrayList<Item> trackResult = new ArrayList();
+//                if (!paramSearch[0].isBlank()){
+//                    try {
+//                        trackMaHang = Integer.parseInt(paramSearch[0]);
+//                        for (Item item : loadData){
+//                            if (item.getMaHang() == trackMaHang && item.getTrangThai() == 0){
+//                                trackResult.add(item);
+//                                break;
+//                            }
+//                        }         
+//                    } catch (NumberFormatException numE) {
+//                        JOptionPane.showMessageDialog(view, "Mã hàng phải ở định dạng số");
+//                        return;
+//                    }
+//                              
+//                }
+//                else {
+//                    if (!paramSearch[1].isBlank()){
+//                        trackTenHang = paramSearch[1];
+//                        for (Item item : loadData){
+//                            if (item.getTenHang().equals(trackTenHang)){
+//                                trackResult.add(item);
+//                            }
+//                        }
+//                    }
+//                }
+//               
+//                if (trackResult.isEmpty()){
+//                    JOptionPane.showMessageDialog(view, "Không tìm thấy");
+//                    return;
+//                }
+//                int row = trackResult.size();
+//                Object[][] trackObjItem2D = new Object[row][Item.getColumns().length];
+//                for (int i = 0; i < row; i++){
+//                    Object[] objItem = trackResult.get(i).getObjectItem();
+//                    for (int j = 0; j < objItem.length; j++){
+//                        trackObjItem2D[i][j] = objItem[j];
+//                    }
+//                }
+                Object[][] trackObjItem2D = SearchItembyCriteria(model, paramSearch);
                 view.setColumn(Item.getColumns());
                 view.setData(trackObjItem2D);
                 view.loadData();
@@ -213,31 +281,4 @@ public class ItemController {
     }
 
 
-    
-
-    private class LoadActionListener implements ActionListener {
-
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("btnLoad is clicked");
-            try {
-                model.loadData_DB();
-                Object[][] dsObjItem = model.getObjDsItem();               
-                view.setColumn(Item.getColumns());
-                view.setData(dsObjItem);
-                view.loadData();
-                
-                
-                
-            } catch (SQLException ex) {
-                Logger.getLogger(ItemController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            
-        }
-    }
-
-
-    
 }

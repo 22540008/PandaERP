@@ -4,6 +4,11 @@
  */
 package Models;
 
+import DBConnection.SQLConnection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author Ricardo
@@ -81,13 +86,6 @@ public class Item {
         return new Object[] {maHang, tenHang, dvt, donGia};
     }
     
-    
-    
-    
-    
 
-    
-    
-    
     
 }

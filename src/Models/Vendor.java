@@ -14,11 +14,11 @@ public class Vendor {
     private String diaChi;
     private String mST;
     private int trangThai; // 0: active; 1: deleted; 2: inactive
-     private static final String[] columns = {"Mã NCC", "Tên NCC", "Địa chỉ", "MST"};
+    private static final String[] columns = {"Mã NCC", "Tên NCC", "Địa chỉ", "MST"};
 
     public Vendor() {
+        this.trangThai = 0;
     }
-
     
     public Vendor(int maNCC, String tenNCC, String diaChi, String mST, int trangThai) {
         this.maNCC = maNCC;

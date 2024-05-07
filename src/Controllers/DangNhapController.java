@@ -6,7 +6,7 @@ package Controllers;
 
 import Models.User;
 import Views.DangNhapView;
-import Views.MainFrameView;
+import Views.MainFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -20,8 +20,8 @@ import java.util.logging.Logger;
 public class DangNhapController {
     private User model;
     private DangNhapView view;
-    private MainFrameController mainFrameCtl;
-    private MainFrameView mainFrameView;
+    private MainController mainFrameCtl;
+    private MainFrame mainFrameView;
     
     public DangNhapController(User model, DangNhapView view) {
         this.model = model;
@@ -49,8 +49,8 @@ public class DangNhapController {
                     view.displayErrorMessage("Đăng nhập thành công");
                     view.dispose();
                     model = user;
-                    mainFrameCtl = new MainFrameController(user);
-                    mainFrameView = new MainFrameView(mainFrameCtl);
+                    mainFrameCtl = new MainController(user);
+                    mainFrameView = new MainFrame(mainFrameCtl);
                     mainFrameCtl.setView(mainFrameView);
                     mainFrameView.setVisible(true);
                     mainFrameView.btnSignoutActionListener(new LogoutActionListener()); // Add LogoutActionListener to menuSignout

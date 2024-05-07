@@ -82,15 +82,16 @@ public class UserView extends javax.swing.JPanel {
         });
 
     }
-    
-    public void setController(UserController userCtl) {
-        this.userCtl = userCtl;
-        column = userCtl.getColumns();
+
+    public void setColumn(String[] column) {
+        this.column = column;
     }
+    
     
     public void setData(Object[][] data) {
         this.data = data;
     }
+   
 
     public TableERP getTableERP() {
         return tableERP;

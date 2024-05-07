@@ -27,6 +27,13 @@ public class VendorController {
     public VendorController(VendorManager model, VendorView view) {
         this.model = model;
         this.view = view;
+        this.view.btnLoadActionListener(new LoadActionListener());
+        this.view.btnAddActionListener(new AddActionListener());
+        this.view.btnDialogAddActionListener(new DialogAddActionListener());
+        this.view.btnSearchActionListener(new SearchActionListener());
+        this.view.btnUpdateActionListener(new UpdateActionListener());
+        this.view.btnDialogUpdateActionListener(new DialogUpdateActionListener());
+        this.view.btnDeleteActionListener(new DeleteActionListener());
     }
     
         public VendorController() {
@@ -43,13 +50,6 @@ public class VendorController {
 
     public void setView(VendorView vendorView) {
         this.view = vendorView;
-        this.view.btnLoadActionListener(new LoadActionListener());
-        this.view.btnAddActionListener(new AddActionListener());
-        this.view.btnDialogAddActionListener(new DialogAddActionListener());
-        this.view.btnSearchActionListener(new SearchActionListener());
-        this.view.btnUpdateActionListener(new UpdateActionListener());
-        this.view.btnDialogUpdateActionListener(new DialogUpdateActionListener());
-        this.view.btnDeleteActionListener(new DeleteActionListener());
     }
 
     public VendorView getView() {

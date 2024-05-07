@@ -54,6 +54,15 @@ public class ItemManager {
         return dsActiveItem;
     }
     
+//    public Item getItemviaMaHang(int maHang){
+//        for (Item item : dsItem){
+//            if (item.getMaHang() == maHang){
+//                return item;
+//            }
+//        }
+//        return null;
+//    }
+    
     // Phương thức import data từ CSDL
     public ArrayList<Item> loadData_DB() throws SQLException{
         // ArrayList<Item> dsItem = new ArrayList<>();
@@ -72,12 +81,39 @@ public class ItemManager {
                     rs.getString("dvt"),
                     rs.getLong("donGia"),
                     rs.getInt("trangThai"));
-            System.out.println(item);
+            //System.out.println(item);
             dsItem.add(item);
         }
         conn.close();
         return dsItem;
     }
+    
+    // Phương thức import data từ CSDL
+    public Item loadData_DB(int maHang) throws SQLException{
+        // ArrayList<Item> dsItem = new ArrayList<>();
+        Item item = null; // Khởi tạo lại dsItem như một ArrayList mới (xoá data cũ) trước khi lấy dữ liệu từ SQL
+        // đối tượng s kết nối SQL Server
+        SQLConnection conn = new SQLConnection("sa", "159753");
+        // Chuỗi truy vấn SQL q
+        String sql1 = "SELECT * FROM Item WHERE maHang = ?";
+        PreparedStatement stmt = conn.getConnection().prepareStatement(sql1);
+        stmt.setInt(1, maHang);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()){
+            item = new Item(
+                    rs.getInt("maHang"),
+                    rs.getString("tenHang"),
+                    rs.getString("dvt"),
+                    rs.getLong("donGia"),
+                    rs.getInt("trangThai"));
+            System.out.println(item);
+            
+        }
+        conn.close();
+        return item;
+    }
+    
+    
                
     // Add 1 sample từ JAVA về CSDL
     public int addDB(Item item) throws SQLException{

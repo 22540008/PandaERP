@@ -31,7 +31,9 @@ public class UserController {
     public UserController(UserManager model, UserView view) {
         this.model = model;
         this.view = view;
-//        this.view.btnLoadActionListener(new LoadActionListener());
+        this.view.btnLoadActionListener(new LoadActionListener());
+        this.view.btnDeleteActionListener(new DeleteActionListener());
+        this.view.btnSearchActionListener(new SearchActionListener());
     }
     
     public UserController() {
@@ -41,11 +43,8 @@ public class UserController {
     }
     
     public void setView(UserView view) {
-    this.view = view;
-    this.view.btnLoadActionListener(new LoadActionListener());
-    this.view.btnDeleteActionListener(new DeleteActionListener());
-    this.view.btnSearchActionListener(new SearchActionListener());
-}
+        this.view = view;
+    }
 
     public void setViewAdd(UserView_add viewAdd) {
         this.viewAdd = viewAdd;
@@ -77,6 +76,28 @@ public class UserController {
         view.getTableERP().addRow(newRow);
         //view.addData(newRow);
         view.updateTable();
+    }
+    
+    private class LoadActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnLoad is clicked");
+            try {
+                model.loadData_DB();
+                Object[][] dsObjUser = model.getObjDsUser();
+//                for (int i = 0; i < dsObjUser.length; i++){
+//                    for (int j = 0; j < model.getColumnns().length; j++){
+//                        System.out.print(dsObjUser[i][j]);
+//                    }
+//                }
+                view.setColumn(model.getColumnns());
+                view.setData(dsObjUser);
+                view.loadData();
+            } catch (SQLException ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            }            
+        }        
     }
 
     public void upDateUser(Object[] rowData) throws SQLException {
@@ -228,21 +249,7 @@ public class UserController {
         }  
     }
     
-    private class LoadActionListener implements ActionListener {
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("btnLoad is clicked");
-            try {
-                model.loadData_DB();
-                Object[][] dsObjUser = model.getObjDsUser();
-                view.setData(dsObjUser);
-                view.loadData();
-            } catch (SQLException ex) {
-                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-            }            
-        }        
-    }
     
 
     public UserView getView() {

@@ -4,8 +4,8 @@
  */
 package Models;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class GoodsReceipt extends Transaction {
     private PurchaseOrder purchaseOrder;
 
-    public GoodsReceipt(int soCT, User user, LocalDate ngayTao, LocalDate ngaySua, String trangThai, PurchaseOrder purchaseOrder) {
-        super(soCT, user, ngayTao, ngaySua, trangThai);
+    public GoodsReceipt(int soCT, String user, Date ngayTao, Date ngaySua, int trangThai, int itemLine, PurchaseOrder purchaseOrder) {
+        super(soCT, user, ngayTao, ngaySua, trangThai, itemLine);
         this.purchaseOrder = purchaseOrder;
     }
 

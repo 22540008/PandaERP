@@ -504,7 +504,6 @@ public class VendorView extends javax.swing.JPanel {
         String tenNCCStr = fieldTenNCC_update.getText();
         String diaChiStr = fieldDiaChi_update.getText();
         String  mstStr = fieldMST_update.getText();
-        System.out.println(maNCCStr + tenNCCStr + diaChiStr + mstStr);
 
         // Kiểm tra các trường nếu để rỗng
         if (tenNCCStr.isEmpty() || diaChiStr.isEmpty() || mstStr.isEmpty()) {
