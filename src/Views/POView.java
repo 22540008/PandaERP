@@ -29,7 +29,7 @@ import java.util.Set;
  *
  * @author Ricardo
  */
-public class PRView extends javax.swing.JPanel {
+public class POView extends javax.swing.JPanel {
     private PRController prCtl;
     private TableERP tableERP;
     private String[] column;
@@ -51,7 +51,7 @@ public class PRView extends javax.swing.JPanel {
     /**
      * Creates new form PRView
      */
-    public PRView() {
+    public POView() {
         
         
         initComponents();
@@ -989,7 +989,7 @@ public class PRView extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder("Đề nghị mua hàng (PR)"));
+        setBorder(javax.swing.BorderFactory.createTitledBorder("Đơn hàng (PO)"));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm"));
 
@@ -1029,21 +1029,21 @@ public class PRView extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Bảng Ds PR"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Bảng Ds PO"));
 
         tbPR.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Mã hàng", "Tên hàng", "ĐVT", "Số lượng", "Giá Est (VND)", "Tổng giá"
+                "Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PR", "PR line", "Mã hàng", "Tên hàng", "Mã NCC", "Tên NCC", "ĐVT", "Đơn giá", "Số lượng", "VAT", "Tổng giá"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Double.class
             };
 
             public Class getColumnClass(int columnIndex) {

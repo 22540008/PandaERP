@@ -199,7 +199,7 @@ public class UserController {
                 //model.loadData_DB();
                 //Object[][] dsObjUser = model.getObjDsUser();
                 //view.setData(dsObjUser);
-                view.getTableERP().xoa(deleteRow);
+                view.getTableERP().removeRow(deleteRow);
                 view.updateTable();
                 
             } catch (SQLException ex) {
@@ -219,7 +219,7 @@ public class UserController {
                 model.addDB(newUser);
                 JOptionPane.showMessageDialog(viewAdd, "Thêm thành công");
                 Object[] newRow = newUser.getObjectUser();
-                view.getTableERP().them(newRow);
+                view.getTableERP().addRow(newRow);
                 viewAdd.dispose();
             } catch (SQLException ex) {
                 Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);

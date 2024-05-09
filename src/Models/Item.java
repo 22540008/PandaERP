@@ -86,6 +86,4 @@ public class Item {
         return new Object[] {maHang, tenHang, dvt, donGia};
     }
     
-
-    
 }

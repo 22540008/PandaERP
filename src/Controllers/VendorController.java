@@ -204,7 +204,7 @@ public class VendorController {
             int deleteMaNCC = (int)view.getTbVendor().getValueAt(selRow, 0);
             try {
                 model.updateDB(deleteMaNCC);
-                view.getTableERP().xoa(view.getSelRow());
+                view.getTableERP().removeRow(view.getSelRow());
             } catch (SQLException ex) {
                 Logger.getLogger(VendorController.class.getName()).log(Level.SEVERE, null, ex);
             }

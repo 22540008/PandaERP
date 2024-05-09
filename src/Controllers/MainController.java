@@ -66,6 +66,7 @@ public class MainController {
         
         // Set các Model tương quan
         prController.setOtherModel(loginUser, itemController);
+        
 
         
     }

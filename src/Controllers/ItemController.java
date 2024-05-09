@@ -264,7 +264,7 @@ public class ItemController {
                 return;
             }
             if (view.getTbItem().getSelectedRow() == -1){
-                JOptionPane.showMessageDialog(view, "Vui lòng chọn dòng Item cần sửa");
+                JOptionPane.showMessageDialog(view, "Vui lòng chọn dòng Item cần xoá");
                 return;
             }
             int selRow = view.getTbItem().getSelectedRow();
@@ -272,7 +272,7 @@ public class ItemController {
             int deleteMaHang = (int)view.getTbItem().getValueAt(selRow, 0);
             try {
                 model.updateDB(deleteMaHang);
-                view.getTableERP().xoa(view.getSelRow());
+                view.getTableERP().removeRow(view.getSelRow());
             } catch (SQLException ex) {
                 Logger.getLogger(ItemController.class.getName()).log(Level.SEVERE, null, ex);
             }

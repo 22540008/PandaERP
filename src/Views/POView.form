@@ -894,7 +894,7 @@
   <Properties>
     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-        <TitledBorder title="&#x110;&#x1ec1; ngh&#x1ecb; mua h&#xe0;ng (PR)"/>
+        <TitledBorder title="&#x110;&#x1a1;n h&#xe0;ng (PO)"/>
       </Border>
     </Property>
   </Properties>
@@ -1003,7 +1003,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="B&#x1ea3;ng Ds PR"/>
+            <TitledBorder title="B&#x1ea3;ng Ds PO"/>
           </Border>
         </Property>
       </Properties>
@@ -1064,24 +1064,54 @@
             <Component class="javax.swing.JTable" name="tbPR">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="12" rowCount="4">
+                  <Table columnCount="17" rowCount="4">
                     <Column editable="true" title="S&#x1ed1; CT" type="java.lang.Integer"/>
                     <Column editable="true" title="Ng&#x1b0;&#x1edd;i t&#x1ea1;o" type="java.lang.String"/>
                     <Column editable="true" title="Ng&#xe0;y t&#x1ea1;o" type="java.lang.String"/>
                     <Column editable="true" title="Ng&#xe0;y s&#x1eed;a" type="java.lang.String"/>
                     <Column editable="true" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.String"/>
                     <Column editable="true" title="ItemLine" type="java.lang.Integer"/>
-                    <Column editable="true" title="M&#xe3; h&#xe0;ng" type="java.lang.String"/>
-                    <Column editable="true" title="T&#xea;n h&#xe0;ng" type="java.lang.Object"/>
-                    <Column editable="true" title="&#x110;VT" type="java.lang.Object"/>
+                    <Column editable="true" title="S&#x1ed1; PR" type="java.lang.Integer"/>
+                    <Column editable="true" title="PR line" type="java.lang.Integer"/>
+                    <Column editable="true" title="M&#xe3; h&#xe0;ng" type="java.lang.Integer"/>
+                    <Column editable="true" title="T&#xea;n h&#xe0;ng" type="java.lang.String"/>
+                    <Column editable="true" title="M&#xe3; NCC" type="java.lang.Integer"/>
+                    <Column editable="true" title="T&#xea;n NCC" type="java.lang.String"/>
+                    <Column editable="true" title="&#x110;VT" type="java.lang.String"/>
+                    <Column editable="true" title="&#x110;&#x1a1;n gi&#xe1;" type="java.lang.Long"/>
                     <Column editable="true" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng" type="java.lang.Integer"/>
-                    <Column editable="true" title="Gi&#xe1; Est (VND)" type="java.lang.Object"/>
+                    <Column editable="true" title="VAT" type="java.lang.Float"/>
                     <Column editable="true" title="T&#x1ed5;ng gi&#xe1;" type="java.lang.Double"/>
                   </Table>
                 </Property>
                 <Property name="autoResizeMode" type="int" value="4"/>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>

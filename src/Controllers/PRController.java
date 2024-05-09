@@ -18,13 +18,19 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import Utility.CurrencyUtils;
 import Views.TableERP;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.Date;
+import java.util.Vector;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
 
 
 /**
- *
+ * https://tips4java.wordpress.com/2008/12/12/table-stop-editing/
  * @author Ricardo
  */
 public class PRController {
@@ -49,10 +55,14 @@ public class PRController {
         this.view.btnDelete_addActionListener(new Delete_addActionListener());
         this.view.btnTinhTongPRActionListener(new TinhTongActionListener());
         this.view.btnCreateActionListener(new CreateActionListener());
+        this.view.btnUpdateActionListener(new UpdateActionListener());
+        this.view.DialogUpdateActionListener(new DialogUpdateActionListener());
+        this.view.btnCloseActionListener(new CloseActionListener());
 //        this.view.btnDialogAddActionListener(new DialogAddActionListener());
 //        this.view.btnUpdateActionListener(new UpdateActionListener());
 //        this.view.btnDialogUpdateActionListener(new DialogUpdateActionListener());
-//        this.view.btnDeleteActionListener(new DeleteActionListener());
+        this.view.btnDeleteActionListener(new DeleteActionListener());
+        
         
     }
 
@@ -80,6 +90,217 @@ public class PRController {
         return view;
     }
 
+    private class CloseActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnClose is clicked");
+            int confirmResult = JOptionPane.showConfirmDialog(view.getDialogUpdate(), "Vui lòng xác nhận chắc chắn muốn đóng PR.", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if(confirmResult == JOptionPane.NO_OPTION){
+                return;
+            }
+            int rowCount = view.getTablePRupdate().getRowCount();
+            ArrayList<PurchaseRequest> prList = new ArrayList();
+            for (int i = 0; i < rowCount; i++){
+                PurchaseRequest pr = new PurchaseRequest();
+                String trangThaiStr = String.valueOf(view.getTablePRupdate().getValueAt(i, 0));
+                System.out.println(trangThaiStr);
+                if (trangThaiStr.equals("Đang xử lý")){
+                    pr.setTrangThai(2); // 2: Đóng (inactive)
+                }
+                else {
+                    pr.encodeTrangThai(trangThaiStr);
+                }
+                pr.setSoCT(Integer.parseInt(view.getFieldSoCT_update().getText()));
+                pr.setNgaySua(view.getDate_update().getDate());
+                pr.setItemLine((int) view.getTablePRupdate().getValueAt(i, 1));
+                
+                prList.add(pr);
+            }
+            
+            try {
+                model.updateDBClose(prList);
+            } catch (SQLException ex) {
+                Logger.getLogger(PRController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            for (int i = 0; i < rowCount; i++){
+                view.getTablePRupdate().setValueAt(prList.get(i).getTrangThaiStr(), i, 0);
+            }
+                
+
+        }
+    }
+
+   
+    
+
+    private class DialogUpdateActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnUpdate_update is clicked");
+            // Phải stop edit JTable thì mới lưu dữ liệu vào bảng được.
+            if (view.getTbPRupdate().isEditing())
+                view.getTbPRupdate().getCellEditor().stopCellEditing();
+
+//            // Print out the data in the JTable
+//            for (int row = 0; row < view.getTbPRupdate().getRowCount(); row++) {
+//                for (int col = 0; col < view.getTbPRupdate().getColumnCount(); col++) {
+//                    System.out.print(view.getTbPRupdate().getValueAt(row, col) + " ");
+//                }
+//                System.out.println();
+//            }
+//
+//            // Print out the data in the TableModel
+//            TableModel modelTable = view.getTbPRupdate().getModel();
+//            for (int row = 0; row < modelTable.getRowCount(); row++) {
+//                for (int col = 0; col < modelTable.getColumnCount(); col++) {
+//                    System.out.print(modelTable.getValueAt(row, col) + " ");
+//                }
+//                System.out.println();
+//            }
+            
+            view.updateTbPR();
+            view.setVisible(true);
+            int soCT = Integer.parseInt(view.getFieldSoCT_update().getText());
+            String user = view.getFieldUser_update().getText();
+            Date date = view.getDate_update().getDate();
+            //System.out.println(date.toString());
+            ArrayList<PurchaseRequest> prList = new ArrayList();
+            int rowCount = view.getTbPRupdate().getRowCount();
+            for (int i = 0; i < rowCount; i++){
+                PurchaseRequest updatePR = view.getUpdatePRinfo(i);
+                updatePR.setSoCT(soCT);
+                updatePR.setUser(user);
+                updatePR.setNgaySua(date);
+                updatePR.setNgayTao(date);
+
+                prList.add(updatePR);
+            }
+            
+//            for (PurchaseRequest pr: prList){
+//                System.out.println(pr);
+//            }
+            System.out.println("số lượng pr sẽ update: " + prList.size());
+            
+            try {
+                model.updateDB(prList);
+            } catch (SQLException ex) {
+                Logger.getLogger(PRController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            for (PurchaseRequest pr : prList){
+                Object[] objPR = pr.getObjPR();
+                int tbERProwCount = view.getTableERP().getRowCount();
+                for (int i = 0; i < tbERProwCount; i++){
+                    String tbPRsoCT = String.valueOf(view.getTableERP().getValueAt(i, 0));
+                    String tbPRitemLine = String.valueOf(view.getTableERP().getValueAt(i, 5));
+                    if (tbPRsoCT.equals(String.valueOf(objPR[0])) && tbPRitemLine.equals(String.valueOf(objPR[5]))){
+                        view.getTableERP().sua(i, objPR);
+                        for (int k = 0; k < objPR.length; k++){
+                            System.out.println(tbPRsoCT + String.valueOf(objPR[0]));
+                            System.out.println(tbPRitemLine + String.valueOf(objPR[5]));
+                            System.out.print(objPR[k]);
+                        }
+                    }
+                    else {
+                        //System.out.println("Khong map: " + tbPRsoCT + "\t" + tbPRitemLine);
+                    }
+                }
+               
+            }
+            //Object[] rowData = updateItem.getObjectItem();
+            //view.getTableERP().sua(view.getSelRow(), rowData);
+            view.updateTbPR();
+            view.getDialogUpdate().dispose();
+            
+        }
+    }
+
+    // Action khi nút "Sửa" của quản lý PR được nhấn   
+    private class UpdateActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnUpdate is clicked");
+            if (view.getTableERP() == null){
+                JOptionPane.showMessageDialog(view, "Vui lòng Load dữ liệu trước");
+                return;
+            }
+            if (view.getTbPR().getSelectedRow() == -1){
+                JOptionPane.showMessageDialog(view, "Vui lòng chọn PR cần sửa");
+                return;
+            }
+            
+            String[] columPRupdate = {"Trạng thái", "ItemLine", "Mã hàng", "Tên hàng", "ĐVT", "Giá est", "Số lượng", "Tổng giá"};
+            view.setColumPRupdate(columPRupdate);
+            
+            
+            int selRow = view.getTbPR().getSelectedRow();
+            String selSoCT = String.valueOf(view.getTbPR().getValueAt(selRow, 0));
+            view.getFieldSoCT_update().setText(selSoCT);
+            view.getDate_update().setDate(new Date()); // set ngày PR hiện tại
+            view.getFieldUser_update().setText(loginUser.getTenTK()); // set người tạo PR là tài khoản đang dùng
+               
+            int rowCount = view.getTbPR().getRowCount();
+            int soCTitemCount = 0;
+            for (int i = 0; i < rowCount; i++){
+                if (selSoCT.equals(String.valueOf(view.getTableERP().getValueAt(i, 0)))){
+                    soCTitemCount++;
+                }
+            }
+            
+            Object[][] selData = new Object[soCTitemCount][columPRupdate.length];
+            int selSoCTitems = 0;
+            for (int i = 0; i < rowCount; i++){
+                if (String.valueOf(view.getTableERP().getValueAt(i, 0)).equals(selSoCT)){
+                    System.out.println("Khớp " + view.getTbPR().getValueAt(i, 0));
+                    Object[] data = view.getTableERP().getDataVector().get(i).toArray();
+                    for (int j = 0; j < columPRupdate.length; j++){
+                        selData[selSoCTitems][j] = data[j+4]; // [j+4] vì bỏ 4 cột đầu: soCT, nguoiTao, ngày tạo/sửa
+                        //System.out.print(selData[selSoCTitems][j] + "\t");    
+                    }
+                    selSoCTitems++;
+                }
+            }
+            view.setDataPRupdate(selData);
+            view.initTablePRUpdate();
+            view.getDialogUpdate().pack(); // giúp Dialog khởi tạo các thành phần bên trong hoàn toàn, điều chỉnh kích thước... -> tránh lỗi hiển thị.
+            view.getDialogUpdate().setVisible(true);
+        }
+    }
+
+    //Action khi nút "Xoá" của màn hình quản lý danh sách PR được nhấn
+    private class DeleteActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnDelete is clicked");
+            if (view.getTableERP() == null){
+                JOptionPane.showMessageDialog(view, "Vui lòng Load dữ liệu trước");
+                return;
+            }
+            if (view.getTbPR().getSelectedRow() == -1){
+                JOptionPane.showMessageDialog(view, "Vui lòng chọn dòng PR cần xoá");
+                return;
+            }
+            int confirmResult = JOptionPane.showConfirmDialog(null, "Vui lòng xác nhận chắc chắn muốn xoá", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if(confirmResult == JOptionPane.NO_OPTION){
+                return;
+            }
+            int selRow = view.getTbPR().getSelectedRow();
+            int deleteSoCT = (int)view.getTbPR().getValueAt(selRow, 0);
+            int deleteItemLine = (int)view.getTbPR().getValueAt(selRow, 5);
+            
+            try {
+                model.updateDB(deleteSoCT, deleteItemLine);
+            } catch (SQLException ex) {
+                Logger.getLogger(PRController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            view.getTableERP().removeRow(selRow);
+            view.updateTbPR();
+            JOptionPane.showMessageDialog(view, "Đã xoá thành công!");
+            
+        }
+    }
+
     //Action khi nút "Tạo PR" của Dialog "Tạo PR" được nhấn
     private class CreateActionListener implements ActionListener {
         @Override
@@ -99,9 +320,17 @@ public class PRController {
                 pr.setNgaySua(view.getDate_add().getDate()); // Ngày sửa = ngày tạo khi tạo mới PR.
                 pr.setItemLine(i+1);
                 pr.setItem(item);
-                pr.getItem().setDonGia((long)view.getTbPRdraft().getValueAt(i, 3));
+                pr.setDonGia((long)view.getTbPRdraft().getValueAt(i, 3));
                 pr.setSoLuong((int)view.getTbPRdraft().getValueAt(i, 4));
-                pr.setGiaItem((long)view.getTbPRdraft().getValueAt(i, 5));
+                if (view.getTbPRdraft().getValueAt(i, 5) != null){
+                    //pr.setGiaItem(0);
+                    pr.setGiaItem((double)view.getTbPRdraft().getValueAt(i, 5));
+                }
+                else {
+                    //pr.setGiaItem((double)view.getTbPRdraft().getValueAt(i, 5));
+                    pr.setGiaItem(0);
+                }
+                
                 
                 newPRlist.add(pr);
             }
@@ -117,8 +346,8 @@ public class PRController {
                 view.getTableERP().addRow(objPR);
             }
             view.updateTbPR();
-            JOptionPane.showMessageDialog(view, "Vui lòng \"Load\" lại dữ liệu để cập nhật mới nhất");
-
+            JOptionPane.showMessageDialog(view.getDialogAdd(), "Vui lòng \"Load\" lại dữ liệu để cập nhật mới nhất");
+            view.getDialogAdd().setVisible(false);
         }
     }
 
@@ -132,12 +361,12 @@ public class PRController {
             System.out.println("btnTinhTongPR is clicked");
             int rowCount = view.getTablePRdraft().getRowCount();
             for (int i = 0; i < rowCount; i++){
-                long value = (long)view.getTablePRdraft().getValueAt(i, 3) * (int)view.getTablePRdraft().getValueAt(i, 4);
+                double value = (long)view.getTablePRdraft().getValueAt(i, 3) * (int)view.getTablePRdraft().getValueAt(i, 4);
                 view.getTablePRdraft().setValueAt(value, i, 5);
             }
-            long tong = 0;
+            double tong = 0;
             for (int i = 0; i < rowCount; i++){
-                tong += (long) view.getTablePRdraft().getValueAt(i, 5);
+                tong += (double) view.getTablePRdraft().getValueAt(i, 5);
             }
             view.updateTbPRdraft();
             //view.getFieldTongPR().setText(String.valueOf(tong));
@@ -155,7 +384,7 @@ public class PRController {
                 return;
             }
             int selRow = view.getTbPRdraft().getSelectedRow();
-            view.getTablePRdraft().xoa(selRow);
+            view.getTablePRdraft().removeRow(selRow);
             view.updateTbPRdraft();
         }
     }
@@ -319,14 +548,7 @@ public class PRController {
                 JOptionPane.showMessageDialog(view, "Vui lòng Load dữ liệu trước");
                 return;
             }
-//            long totalPrice = 0;
-//            for (PurchaseRequest pr : model.getDsPR()){
-//                totalPrice += pr.tinhGiaItem();
-//            }
-//            Object[][] dsObjPR = model.getObjDsPR();
-            long totalPrice = view.getTableERP().capNhatTongGia(9, 10, 11);
-//            view.setData(dsObjPR);
-//            view.loadData();
+            double totalPrice = view.getTableERP().capNhatTongGia(9, 10, 11);
             view.updateTbPR();
             view.getFieldTotalPrice().setText(CurrencyUtils.VN_FORMAT.format(totalPrice));
             
