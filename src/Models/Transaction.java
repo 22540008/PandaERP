@@ -88,6 +88,16 @@ public class Transaction {
         return Transaction.status.get(this.trangThai);
     }
 
+    public int getItemLine() {
+        return itemLine;
+    }
+
+    public void setItemLine(int itemLine) {
+        this.itemLine = itemLine;
+    }
+    
+    
+
     @Override
     public String toString() {
         return "Transaction{" + "soCT=" + soCT + ", user=" + user + ", ngayTao=" + ngayTao + ", ngaySua=" + ngaySua + ", trangThai=" + trangThai + ", itemLine=" + itemLine + '}';

@@ -208,10 +208,9 @@ public class ItemView extends javax.swing.JPanel {
                     .addGroup(DialogAddLayout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(DialogAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(DialogAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel8)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
                             .addComponent(jLabel10))
                         .addGap(27, 27, 27)
                         .addGroup(DialogAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,23 +276,22 @@ public class ItemView extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(DialogUpdateLayout.createSequentialGroup()
                 .addGroup(DialogUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DialogUpdateLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDialogUpdate))
                     .addGroup(DialogUpdateLayout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(DialogUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(DialogUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel12)
-                                .addComponent(jLabel13)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14)
                             .addComponent(jLabel15))
                         .addGap(27, 27, 27)
                         .addGroup(DialogUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fieldDonGia_update)
                             .addComponent(fieldDVT_update, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(fieldMaHang_update)
-                            .addComponent(fieldTenHang_update, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DialogUpdateLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDialogUpdate)))
+                            .addComponent(fieldTenHang_update, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         DialogUpdateLayout.setVerticalGroup(
@@ -317,7 +315,7 @@ public class ItemView extends javax.swing.JPanel {
                 .addGroup(DialogUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(fieldDonGia_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addComponent(btnDialogUpdate)
                 .addContainerGap())
         );
@@ -461,7 +459,7 @@ public class ItemView extends javax.swing.JPanel {
         String donGiaStr = fieldDonGia_add.getText();
         String tenHang = fieldTenHang_add.getText();
         String dvt = fieldDVT_add.getText();
-
+        
         // Kiểm tra các trường nếu để rỗng
         if (donGiaStr.isEmpty() || tenHang.isEmpty() || dvt.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập vào tất cả các trường.");

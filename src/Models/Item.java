@@ -52,7 +52,7 @@ public class Item {
     public long getDonGia() {
         return donGia;
     }
-
+    
     public int getTrangThai() {
         return trangThai;
     }
@@ -81,6 +81,7 @@ public class Item {
     public String toString() {
         return "Item{" + "maHang=" + maHang + ", tenHang=" + tenHang + ", dvt=" + dvt + ", donGia=" + donGia + ", trangThai=" + trangThai + '}';
     }
+    
     
     public Object[] getObjectItem(){
         return new Object[] {maHang, tenHang, dvt, donGia};

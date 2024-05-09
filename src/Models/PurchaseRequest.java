@@ -37,7 +37,6 @@ public class PurchaseRequest extends Transaction {
         this.item = item;
         this.donGia = giaEst;
         this.soLuong = soLuong;
-        this.vat = 0f;
         this.giaItem = 0f;
     }
 
@@ -45,14 +44,6 @@ public class PurchaseRequest extends Transaction {
         return columns;
     }
 
-    public int getItemLine() {
-        return itemLine;
-    }
-
-    public void setItemLine(int itemLine) {
-        this.itemLine = itemLine;
-    }
-    
     public Item getItem() {
         return item;
     }
@@ -85,61 +76,6 @@ public class PurchaseRequest extends Transaction {
         this.giaItem = giaItem;
     }
 
-    @Override
-    public int getSoCT() {
-        return soCT;
-    }
-
-    @Override
-    public void setSoCT(int soCT) {
-        this.soCT = soCT;
-    }
-
-    @Override
-    public String getUser() {
-        return user;
-    }
-
-    @Override
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    @Override
-    public Date getNgayTao() {
-        return ngayTao;
-    }
-
-    @Override
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
-    }
-
-    @Override
-    public Date getNgaySua() {
-        return ngaySua;
-    }
-
-    @Override
-    public void setNgaySua(Date ngaySua) {
-        this.ngaySua = ngaySua;
-    }
-
-    @Override
-    public int getTrangThai() {
-        return trangThai;
-    }
-
-    @Override
-    public void setTrangThai(int trangThai) {
-        this.trangThai = trangThai;
-    }
-
-    @Override
-    public String getTrangThaiStr() {
-        return super.getTrangThaiStr();
-    }
-
     public float getVat() {
         return vat;
     }
@@ -147,8 +83,7 @@ public class PurchaseRequest extends Transaction {
     public void setVat(float vat) {
         this.vat = vat;
     }
-    
-    
+
 
     @Override
     public String toString() {

@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="3">
         <file>
             <url>src/Models/PurchaseOrder.java</url>
             <bookmark id="1">
                 <name/>
-                <line>68</line>
+                <line>74</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>src/Services/POManager.java</url>
+            <bookmark id="2">
+                <name/>
+                <line>26</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>src/Views/POView.java</url>
+            <bookmark id="3">
+                <name/>
+                <line>42</line>
                 <key/>
             </bookmark>
         </file>
@@ -14,15 +30,19 @@
         <group>
             <file>file:/C:/Users/Ricardo/OneDrive/UIT/HK4/IE303_Java%20Technology/PandaERP/src/Views/PRView.java</file>
             <file>file:/C:/Users/Ricardo/OneDrive/UIT/HK4/IE303_Java%20Technology/PandaERP/src/Views/POView.java</file>
-            <file>file:/C:/Users/Ricardo/OneDrive/UIT/HK4/IE303_Java%20Technology/PandaERP/src/Controllers/MainController.java</file>
             <file>file:/C:/Users/Ricardo/OneDrive/UIT/HK4/IE303_Java%20Technology/PandaERP/src/Services/POManager.java</file>
             <file>file:/C:/Users/Ricardo/OneDrive/UIT/HK4/IE303_Java%20Technology/PandaERP/src/Controllers/PRController.java</file>
             <file>file:/C:/Users/Ricardo/OneDrive/UIT/HK4/IE303_Java%20Technology/PandaERP/src/Models/Transaction.java</file>
-            <file>file:/C:/Users/Ricardo/OneDrive/UIT/HK4/IE303_Java%20Technology/PandaERP/src/Models/PurchaseRequest.java</file>
+            <file>file:/C:/Users/Ricardo/OneDrive/UIT/HK4/IE303_Java%20Technology/PandaERP/src/Services/ItemManager.java</file>
+            <file>file:/C:/Users/Ricardo/OneDrive/UIT/HK4/IE303_Java%20Technology/PandaERP/src/Models/Item.java</file>
+            <file>file:/C:/Users/Ricardo/OneDrive/UIT/HK4/IE303_Java%20Technology/PandaERP/src/Controllers/POController.java</file>
             <file>file:/C:/Users/Ricardo/OneDrive/UIT/HK4/IE303_Java%20Technology/PandaERP/src/Models/PurchaseOrder.java</file>
-            <file>file:/C:/Users/Ricardo/OneDrive/UIT/HK4/IE303_Java%20Technology/PandaERP/src/Views/TableERP.java</file>
-            <file>file:/C:/Users/Ricardo/OneDrive/UIT/HK4/IE303_Java%20Technology/PandaERP/src/Services/PRManager.java</file>
+            <file>file:/C:/Users/Ricardo/OneDrive/UIT/HK4/IE303_Java%20Technology/PandaERP/src/Models/PurchaseRequest.java</file>
             <file>file:/C:/Users/Ricardo/OneDrive/UIT/HK4/IE303_Java%20Technology/PandaERP/src/PandaERP/Main.java</file>
+            <file>file:/C:/Users/Ricardo/OneDrive/UIT/HK4/IE303_Java%20Technology/PandaERP/src/Views/ItemView.java</file>
+            <file>file:/C:/Users/Ricardo/OneDrive/UIT/HK4/IE303_Java%20Technology/PandaERP/src/Utility/CurrencyRenderer.java</file>
+            <file>file:/C:/Users/Ricardo/OneDrive/UIT/HK4/IE303_Java%20Technology/PandaERP/src/Services/PRManager.java</file>
+            <file>file:/C:/Users/Ricardo/OneDrive/UIT/HK4/IE303_Java%20Technology/PandaERP/src/Views/MainFrame.java</file>
         </group>
     </open-files>
 </project-private>

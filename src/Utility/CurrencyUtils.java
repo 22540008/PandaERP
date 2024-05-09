@@ -24,6 +24,7 @@ public class CurrencyUtils {
         ((DecimalFormat) VN_FORMAT).setDecimalFormatSymbols(formatSymbols);
     }    
 
+    // Format các kiểu dữ liệu về VN-currency
     public static String format(Long value) {
         return VN_FORMAT.format(value);
     }
@@ -31,11 +32,16 @@ public class CurrencyUtils {
     public static String format(Integer value) {
         return VN_FORMAT.format(value);
     }
+    
+    public static String format(Double value) {
+        return VN_FORMAT.format(value);
+    }
 
     public static String format(String value) {
-        return VN_FORMAT.format(Long.parseLong(value));
+        //return VN_FORMAT.format(Long.parseLong(value));
+        return VN_FORMAT.format(Double.parseDouble(value));
     }
-    
+
     public static String format(Object value) {
         if (value instanceof Long) {
             return format((Long) value);
@@ -55,6 +61,7 @@ public class CurrencyUtils {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    // Chuyển VN-currency format về number format
     public static Long parseToLong(String value) {
         try {
             Number number = VN_FORMAT.parse(value);

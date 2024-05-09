@@ -9,6 +9,8 @@ import Controllers.MainController;
 import DBConnection.SQLConnection;
 import Models.Item;
 import Models.PurchaseOrder;
+import Models.PurchaseRequest;
+import Models.Vendor;
 import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,35 +24,36 @@ import java.util.ArrayList;
  * @author Ricardo
  */
 public class POManager {
-    ArrayList<PurchaseOrder> dsPR;
+    ArrayList<PurchaseOrder> dsPO;
     ItemManager itemManager = new ItemManager();
 
     public POManager() {
     }
     
     public POManager(ArrayList<PurchaseOrder> dsPR) {
-        this.dsPR = dsPR;
+        this.dsPO = dsPR;
     }
 
-    public ArrayList<PurchaseOrder> getDsPR() {
-        return dsPR;
+    public ArrayList<PurchaseOrder> getDsPO() {
+        return dsPO;
     }
 
-    public void setDsPR(ArrayList<PurchaseOrder> dsPR) {
-        this.dsPR = dsPR;
+    public void setDsPO(ArrayList<PurchaseOrder> dsPO) {
+        this.dsPO = dsPO;
     }
    
     
-    public Object[][] getObjDsPR(){
+    public Object[][] getObjDsPO(){
         int column = PurchaseOrder.columns.length;
-        ArrayList<PurchaseOrder> dsPRActive = filterActivePR();
-        Object[][] dsObjPurchaseOrder = new Object[dsPRActive.size()][column];
+        ArrayList<PurchaseOrder> dsPOActive = filterActivePO();
+        Object[][] dsObjPurchaseOrder = new Object[dsPOActive.size()][column];
         //System.out.println("Convert to Object[][]");
-        for (int i = 0; i < dsPRActive.size(); i++){
-            Object[] objPurchaseOrder = dsPRActive.get(i).getObjPR();
+        for (int i = 0; i < dsPOActive.size(); i++){
+            Object[] objPurchaseOrder = dsPOActive.get(i).getObjPO();
+            System.out.println();
             for (int j=0; j < column; j++){
                 dsObjPurchaseOrder[i][j] = objPurchaseOrder[j];
-                //System.out.print(dsObjPurchaseOrder[i][j]);
+                System.out.print(dsObjPurchaseOrder[i][j] + " ");
             }
         }
         return dsObjPurchaseOrder;
@@ -58,40 +61,65 @@ public class POManager {
     
     
     // Lấy ds PurchaseOrder đang hoạt động
-    public ArrayList<PurchaseOrder> filterActivePR(){
-        ArrayList<PurchaseOrder> dsActivePR = new ArrayList();
-        for (PurchaseOrder pr : dsPR){
-            if (pr.getTrangThai() != 1){
-                dsActivePR.add(pr);
+    public ArrayList<PurchaseOrder> filterActivePO(){
+        ArrayList<PurchaseOrder> dsActivePO = new ArrayList();
+        for (PurchaseOrder po : dsPO){
+            if (po.getTrangThai() != 1){
+                dsActivePO.add(po);
             }
         }
-        return dsActivePR;
+        return dsActivePO;
     }
     
-//    // Phương thức import data từ CSDL
-//    public ArrayList<PurchaseOrder> loadData_DB() throws SQLException{
-////        private static final String[] columns = {"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Mã hàng", "Tên hàng", "ĐVT", 
-////        "Số lượng", "Giá Est", "Tổng giá"};
-//        dsPR = new ArrayList(); // Khởi tạo lại dsPurchaseOrder như một ArrayList mới (xoá data cũ) trước khi lấy dữ liệu từ SQL
-//        // đối tượng s kết nối SQL Server
-//        SQLConnection conn = new SQLConnection("sa", "159753");
-//        // Chuỗi truy vấn SQL q
-//        String q = """
-//                   SELECT *
-//                   FROM PurchaseOrder JOIN Item ON PurchaseOrder.maHang = Item.maHang
-//                   """;
-//        PreparedStatement stmt = conn.getConnection().prepareStatement(q);
-//
-//        ResultSet rs = stmt.executeQuery();
-//        while (rs.next()){
-////            Item item = itemManager.loadData_DB(rs.getInt("maHang"));
-//            Item item = new Item();
-//            item.setMaHang(rs.getInt("maHang")); // đúng cho truy vấn cột maHang đầu tiên
-//            item.setTenHang(rs.getString("tenHang"));
-//            item.setDvt(rs.getString("dvt"));
-//            item.setDonGia(rs.getLong("donGia"));
-//            
-//            PurchaseOrder pr = new PurchaseOrder(
+    // Phương thức import data từ CSDL
+    public ArrayList<PurchaseOrder> loadData_DB() throws SQLException{
+
+        dsPO = new ArrayList(); // Khởi tạo lại dsPurchaseOrder như một ArrayList mới (xoá data cũ) trước khi lấy dữ liệu từ SQL
+        // đối tượng s kết nối SQL Server
+        SQLConnection conn = new SQLConnection("sa", "159753");
+        // Chuỗi truy vấn SQL q
+        String q = """
+                    SELECT *, PurchaseOrder.soCT_line AS soPO_line
+                    FROM PurchaseOrder JOIN PurchaseRequest ON PurchaseOrder.soPR_line = PurchaseRequest.soCT_line
+                    JOIN Item ON PurchaseOrder.maHang = Item.maHang
+                    JOIN Vendor ON PurchaseOrder.maNCC = Vendor.maNCC
+                   """;
+        PreparedStatement stmt = conn.getConnection().prepareStatement(q);
+
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()){
+//            Item item = itemManager.loadData_DB(rs.getInt("maHang"));
+            Item item = new Item();
+            item.setMaHang(rs.getInt("maHang")); // đúng cho truy vấn cột maHang đầu tiên
+            item.setTenHang(rs.getString("tenHang"));
+            item.setDvt(rs.getString("dvt"));
+            item.setDonGia(rs.getLong("donGia"));
+            
+            Vendor vendor = new Vendor();
+            vendor.setMaNCC(rs.getInt("maNCC"));
+            vendor.setTenNCC(rs.getString("tenNCC"));
+            
+            PurchaseRequest pr = new PurchaseRequest();
+            String[] soPR_line = rs.getString("soPR_line").split("_");
+            pr.setSoCT(Integer.parseInt(soPR_line[0]));
+            pr.setItemLine(Integer.parseInt(soPR_line[1]));
+            pr.setItem(item);
+            
+            PurchaseOrder po = new PurchaseOrder();
+            po.setSoCT(rs.getInt("soCT"));
+            po.setUser(rs.getString("nguoiTao"));
+            po.setNgayTao(rs.getDate("ngayTao"));
+            po.setNgaySua(rs.getDate("ngaySua"));
+            po.setTrangThai(rs.getInt("trangThai"));
+            po.setItemLine(rs.getInt("itemLine"));
+            po.setPr(pr);
+            po.setVendor(vendor);
+            po.setDonGia(rs.getInt("gia"));
+            po.setVat(rs.getFloat("vat"));
+            po.setGiaItem(rs.getDouble("tongGia"));
+            
+            
+            
 //                rs.getInt("soCT"),
 //                rs.getString("nguoiTao"),
 //                rs.getDate("ngayTao"),
@@ -102,16 +130,16 @@ public class POManager {
 //                rs.getLong("giaEst"),
 //                rs.getInt("soLuong")         
 //            );
-//            
-//            //pr.setTrangThaiStr();
-//            
-//            //System.out.println(pr);
-//            dsPR.add(pr);
-//        }
-//        conn.close();
-//        return dsPR;
-//    }
-//               
+            
+            //pr.setTrangThaiStr();
+            
+            //System.out.println(pr);
+            dsPO.add(po);
+        }
+        conn.close();
+        return dsPO;
+    }
+               
 //    // Add 1 sample từ JAVA về CSDL
 //    public int addDB(ArrayList<PurchaseOrder> prList) throws SQLException{
 //        int rowEffect = 0;

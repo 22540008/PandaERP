@@ -53,7 +53,7 @@
                     <Property name="text" type="java.lang.String" value="Y&#xea;u c&#x1ea7;u mua h&#xe0;ng"/>
                   </Properties>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemPO">
+                <MenuItem class="javax.swing.JMenuItem" name="menuPO">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&#x110;&#x1a1;n h&#xe0;ng"/>
                   </Properties>

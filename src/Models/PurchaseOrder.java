@@ -54,12 +54,18 @@ public class PurchaseOrder extends Transaction {
         this.giaDonHang = giaDonHang;
     }
     
+    
+    
     @Override
     public String toString() {
         return super.toString() + "PurchaseOrder{" + "purchaseRequests=" + pr + ", vendor=" + vendor + ", giaDonHang=" + giaDonHang + '}';
     }
 
-    public Object[] getObjPR(){
+    
+    //public static final String[] columns = {"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PR", "PR line", "Mã hàng", 
+    //    "Tên hàng", "ĐVT", "Mã NCC", "Tên NCC", "Giá", "Số lượng", "VAT", "Tổng giá"};
+    
+    public Object[] getObjPO(){
         Object[] objPR =  new Object[]{this.getSoCT(), 
             this.getUser(), 
             DateUtils.format(this.getNgayTao()),
@@ -70,6 +76,7 @@ public class PurchaseOrder extends Transaction {
             getPRline(),
             getMaHang(),
             getTenHang(),
+            getDvt(),
             getMaNCC(),
             getTenNCC(),
             getDonGia(),
@@ -150,6 +157,10 @@ public class PurchaseOrder extends Transaction {
     
     public void setMaHang(int maHang){
         this.getPr().getItem().setMaHang(maHang);
+    }
+
+    private String getDvt() {
+        return this.pr.getItem().getDvt();
     }
        
 }

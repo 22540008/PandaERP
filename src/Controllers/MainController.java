@@ -6,15 +6,18 @@ package Controllers;
 
 import Models.User;
 import Services.ItemManager;
+import Services.POManager;
 import Services.PRManager;
 import Services.UserManager;
 import Services.VendorManager;
 import Views.ItemView;
 import Views.MainFrame;
+import Views.POView;
 import Views.PRView;
 import Views.UserView;
 import Views.VendorView;
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -40,6 +43,9 @@ public class MainController {
     private PRManager prModel;
     private PRController prController;
     private PRView prView;
+    private POManager poModel;
+    private POController poController;
+    private POView poView;
     
 
     
@@ -63,9 +69,15 @@ public class MainController {
         prModel = new PRManager();
         prView = new PRView();
         prController = new PRController(prModel, prView);
+        // Khởi tạo PO component
+        poModel = new POManager();
+        poView = new POView();
+        poController = new POController(poModel, poView);
+        
         
         // Set các Model tương quan
         prController.setOtherModel(loginUser, itemController);
+        poController.setOtherModel(loginUser, itemController, vendorController);
         
 
         
@@ -77,6 +89,7 @@ public class MainController {
         view.menuItemActionListener(new ItemActionListener());
         view.menuVendorActionListener(new VendorActionListener());
         view.menuPRActionListener(new PRActionListener());
+        view.menuPOActionListener(new POActionListener());
     }
     
     public UserView getUserView() {
@@ -97,6 +110,20 @@ public class MainController {
 
     public PRView getPrView() {
         return prView;
+    }
+
+    public Component getPoView() {
+        return poView;
+    }
+
+    private class POActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("menuPO is clicked");
+            CardLayout cl = (CardLayout) view.getPanelMain().getLayout();
+            cl.show(view.getPanelMain(), "POView");
+            poController.getView().setVisible(true);
+        }
     }
 
     private class PRActionListener implements ActionListener {

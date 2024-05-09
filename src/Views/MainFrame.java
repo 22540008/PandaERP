@@ -62,6 +62,7 @@ public class MainFrame extends javax.swing.JFrame {
         panelMain.add(controller.getItemView(), "ItemView");
         panelMain.add(controller.getVendorView(), "VendorView");
         panelMain.add(controller.getPrView(), "PRView");
+        panelMain.add(controller.getPoView(), "POView");
         
 
        
@@ -111,7 +112,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         menuPR = new javax.swing.JMenuItem();
-        jMenuItemPO = new javax.swing.JMenuItem();
+        menuPO = new javax.swing.JMenuItem();
         jMenuItemGR = new javax.swing.JMenuItem();
         menuItem = new javax.swing.JMenuItem();
         menuVendor = new javax.swing.JMenuItem();
@@ -180,8 +181,8 @@ public class MainFrame extends javax.swing.JFrame {
         menuPR.setText("Yêu cầu mua hàng");
         jMenu3.add(menuPR);
 
-        jMenuItemPO.setText("Đơn hàng");
-        jMenu3.add(jMenuItemPO);
+        menuPO.setText("Đơn hàng");
+        jMenu3.add(menuPO);
 
         jMenuItemGR.setText("Phiếu nhận hàng");
         jMenu3.add(jMenuItemGR);
@@ -222,6 +223,10 @@ public class MainFrame extends javax.swing.JFrame {
     
     public void menuPRActionListener(ActionListener listener){
         menuPR.addActionListener(listener);
+    }
+    
+    public void menuPOActionListener(ActionListener listener){
+        menuPO.addActionListener(listener);
     }
     
             
@@ -283,9 +288,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemGR;
-    private javax.swing.JMenuItem jMenuItemPO;
     private javax.swing.JMenuItem menuDSTaiKhoan;
     private javax.swing.JMenuItem menuItem;
+    private javax.swing.JMenuItem menuPO;
     private javax.swing.JMenuItem menuPR;
     private javax.swing.JMenuItem menuSignout;
     private javax.swing.JMenuItem menuVendor;

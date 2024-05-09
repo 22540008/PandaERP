@@ -4,11 +4,12 @@
  */
 package Views;
 
+import Controllers.POController;
 import Utility.CurrencyRenderer;
 import Controllers.PRController;
 import Models.Item;
 import Models.PurchaseItem;
-import Models.PurchaseRequest;
+import Models.PurchaseOrder;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.components.JSpinField;
 import java.awt.event.ActionListener;
@@ -30,7 +31,7 @@ import java.util.Set;
  * @author Ricardo
  */
 public class POView extends javax.swing.JPanel {
-    private PRController prCtl;
+    private POController poCtl;
     private TableERP tableERP;
     private String[] column;
     private Object[][] data;
@@ -39,13 +40,13 @@ public class POView extends javax.swing.JPanel {
     private String[] columnItem;
     private Object[][] dataItem;
     
-    private TableERP tablePRdraft;
-    private String[] columnPRdraft;
-    private Object[][] dataPRdraft;
+    private TableERP tablePOdraft;
+    private String[] columnPOdraft;
+    private Object[][] dataPOdraft;
     
-    private TableERP tablePRupdate;
-    private String[] columPRupdate;
-    private Object[][]dataPRupdate;
+    private TableERP tablePOupdate;
+    private String[] columPOupdate;
+    private Object[][] dataPOupdate;
 
 
     /**
@@ -112,24 +113,24 @@ public class POView extends javax.swing.JPanel {
         this.tableERP = tableERP;
     }
 
-    public JTable getTbPR() {
-        return tbPR;
+    public JTable getTbPO() {
+        return tbPO;
     }
 
-    public void setTbPR(JTable tbPR) {
-        this.tbPR = tbPR;
+    public void setTbPO(JTable tbPO) {
+        this.tbPO = tbPO;
     }
     
     public void setColumn(String[] columns) {
         this.column = columns;
     }
 
-    public void setData(Object[][] dsObjPR) {
-        this.data = dsObjPR;
+    public void setData(Object[][] dsObjPO) {
+        this.data = dsObjPO;
     }
     
-    public void setController(PRController prCtl){
-        this.prCtl = prCtl;
+    public void setController(POController poCtl){
+        this.poCtl = poCtl;
     }
 
     public JTextField getFieldTotalPrice() {
@@ -140,12 +141,12 @@ public class POView extends javax.swing.JPanel {
         return fieldUser_add;
     }
 
-    public PRController getPrCtl() {
-        return prCtl;
+    public POController getPoCtl() {
+        return poCtl;
     }
 
-    public void setPrCtl(PRController prCtl) {
-        this.prCtl = prCtl;
+    public void setPoCtl(POController poCtl) {
+        this.poCtl = poCtl;
     }
 
     public JDialog getDialogAdd() {
@@ -248,8 +249,8 @@ public class POView extends javax.swing.JPanel {
         return fieldTongPR;
     }
 
-    public void setFieldTongPR(JTextField fieldTongPR) {
-        this.fieldTongPR = fieldTongPR;
+    public void setFieldTongPO(JTextField fieldTongPO) {
+        this.fieldTongPR = fieldTongPO;
     }
 
     public JTextField getFieldUser_add() {
@@ -276,12 +277,12 @@ public class POView extends javax.swing.JPanel {
         this.tbItem = tbItem;
     }
 
-    public JTable getTbPRdraft() {
-        return tbPRdraft;
+    public JTable getTbPOdraft() {
+        return tbPOdraft;
     }
 
-    public void setTbPRdraft(JTable tbPRdraft) {
-        this.tbPRdraft = tbPRdraft;
+    public void setTbPOdraft(JTable tbPOdraft) {
+        this.tbPOdraft = tbPOdraft;
     }
 
     public TableERP getTableItem() {
@@ -308,28 +309,28 @@ public class POView extends javax.swing.JPanel {
         this.dataItem = dataItem;
     }
 
-    public TableERP getTablePRdraft() {
-        return tablePRdraft;
+    public TableERP getTablePOdraft() {
+        return tablePOdraft;
     }
 
-    public void setTablePRdraft(TableERP tablePRdraft) {
-        this.tablePRdraft = tablePRdraft;
+    public void setTablePOdraft(TableERP tablePOdraft) {
+        this.tablePOdraft = tablePOdraft;
     }
 
-    public String[] getColumnPRdraft() {
-        return columnPRdraft;
+    public String[] getColumnPOdraft() {
+        return columnPOdraft;
     }
 
-    public void setColumnPRdraft(String[] columnPRdraft) {
-        this.columnPRdraft = columnPRdraft;
+    public void setColumnPOdraft(String[] columnPOdraft) {
+        this.columnPOdraft = columnPOdraft;
     }
 
-    public Object[][] getDataPRdraft() {
-        return dataPRdraft;
+    public Object[][] getDataPOdraft() {
+        return dataPOdraft;
     }
 
-    public void setDataPRdraft(Object[][] dataPRdraft) {
-        this.dataPRdraft = dataPRdraft;
+    public void setDataPOdraft(Object[][] dataPOdraft) {
+        this.dataPOdraft = dataPOdraft;
     }
 
     public JDialog getDialogUpdate() {
@@ -340,20 +341,20 @@ public class POView extends javax.swing.JPanel {
         this.DialogUpdate = DialogUpdate;
     }
 
-    public TableERP getTablePRupdate() {
-        return tablePRupdate;
+    public TableERP getTablePOupdate() {
+        return tablePOupdate;
     }
 
-    public void setTablePRupdate(TableERP tablePRupdate) {
-        this.tablePRupdate = tablePRupdate;
+    public void setTablePOupdate(TableERP tablePOupdate) {
+        this.tablePOupdate = tablePOupdate;
     }
 
-    public Object[][] getDataPRupdate() {
-        return dataPRupdate;
+    public Object[][] getDataPOupdate() {
+        return dataPOupdate;
     }
 
-    public void setDataPRupdate(Object[][] dataPRupdate) {
-        this.dataPRupdate = dataPRupdate;
+    public void setDataPOupdate(Object[][] dataPOupdate) {
+        this.dataPOupdate = dataPOupdate;
     }
 
     public JTable getTbPRupdate() {
@@ -372,12 +373,12 @@ public class POView extends javax.swing.JPanel {
         this.date_update = date_update;
     }
 
-    public String[] getColumPRupdate() {
-        return columPRupdate;
+    public String[] getColumPOupdate() {
+        return columPOupdate;
     }
 
-    public void setColumPRupdate(String[] columPRupdate) {
-        this.columPRupdate = columPRupdate;
+    public void setColumPOupdate(String[] columPOupdate) {
+        this.columPOupdate = columPOupdate;
     }
 
     public JTextField getFieldSoCT_update() {
@@ -435,7 +436,7 @@ public class POView extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbPRdraft = new javax.swing.JTable();
+        tbPOdraft = new javax.swing.JTable();
         btnCreate = new javax.swing.JButton();
         btnDelete_add = new javax.swing.JButton();
         btnTinhTongPR = new javax.swing.JButton();
@@ -469,6 +470,8 @@ public class POView extends javax.swing.JPanel {
         btnTinhTongPR1 = new javax.swing.JButton();
         fieldTongPR1 = new javax.swing.JTextField();
         btnClose = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbPO = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         fieldSearchUser = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -476,8 +479,6 @@ public class POView extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         fieldSearchSoCT = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbPR = new javax.swing.JTable();
         btnLoad = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
@@ -625,7 +626,7 @@ public class POView extends javax.swing.JPanel {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Bản thảo PR"));
 
-        tbPRdraft.setModel(new javax.swing.table.DefaultTableModel(
+        tbPOdraft.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -651,7 +652,7 @@ public class POView extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tbPRdraft);
+        jScrollPane2.setViewportView(tbPOdraft);
 
         btnCreate.setText("Tạo PR");
 
@@ -989,7 +990,30 @@ public class POView extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder("Đơn hàng (PO)"));
+        setBorder(javax.swing.BorderFactory.createTitledBorder("Đề nghị mua hàng (PR)"));
+
+        tbPO.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PR", "PR line", "Mã hàng", "Tên hàng", "Mã NCC", "Tên NCC", "ĐVT", "Số lượng", "Giá Est (VND)", "vat", "Tổng giá"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tbPO.setMinimumSize(new java.awt.Dimension(400, 80));
+        tbPO.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(tbPO);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm"));
 
@@ -1012,7 +1036,7 @@ public class POView extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fieldSearchUser, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -1029,30 +1053,7 @@ public class POView extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Bảng Ds PO"));
-
-        tbPR.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PR", "PR line", "Mã hàng", "Tên hàng", "Mã NCC", "Tên NCC", "ĐVT", "Đơn giá", "Số lượng", "VAT", "Tổng giá"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Double.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        tbPR.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        tbPR.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(tbPR);
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         btnLoad.setText("Load");
 
@@ -1073,28 +1074,23 @@ public class POView extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnTotalItemPrice)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fieldTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDelete)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnUpdate)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAdd)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnLoad)))
+                .addComponent(btnTotalItemPrice)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fieldTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(btnDelete)
+                .addGap(18, 18, 18)
+                .addComponent(btnUpdate)
+                .addGap(18, 18, 18)
+                .addComponent(btnAdd)
+                .addGap(18, 18, 18)
+                .addComponent(btnLoad)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(fieldTotalPrice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1113,15 +1109,20 @@ public class POView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1197,8 +1198,8 @@ public class POView extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane4;
     private com.toedter.components.JSpinField spinFieldSL_add;
     private javax.swing.JTable tbItem;
-    private javax.swing.JTable tbPR;
-    private javax.swing.JTable tbPRdraft;
+    private javax.swing.JTable tbPO;
+    private javax.swing.JTable tbPOdraft;
     private javax.swing.JTable tbPRupdate;
     // End of variables declaration//GEN-END:variables
 
@@ -1208,13 +1209,20 @@ public class POView extends javax.swing.JPanel {
     
     public void loadData() {
         tableERP = new TableERP(data, column);
+        tableERP.setColumnType(0, Integer.class);
         tableERP.setColumnType(5, Integer.class);
-        tableERP.setColumnType(9, Long.class);
-        tableERP.setColumnType(10, Integer.class);
-        tableERP.setColumnType(11, Long.class);
-        tbPR.setModel(tableERP);
-        tbPR.getColumnModel().getColumn(9).setCellRenderer(new CurrencyRenderer()); // format VND
-        tbPR.getColumnModel().getColumn(11).setCellRenderer(new CurrencyRenderer());
+        tableERP.setColumnType(6, Integer.class);
+        tableERP.setColumnType(7, Integer.class);
+        tableERP.setColumnType(8, Integer.class);
+        tableERP.setColumnType(11, Integer.class);
+        tableERP.setColumnType(13, Long.class);
+        tableERP.setColumnType(14, Integer.class);
+        tableERP.setColumnType(15, Float.class);
+        tableERP.setColumnType(16, Double.class);
+        tbPO.setModel(tableERP);
+        
+        tbPO.getColumnModel().getColumn(13).setCellRenderer(new CurrencyRenderer()); // format VND
+        tbPO.getColumnModel().getColumn(16).setCellRenderer(new CurrencyRenderer());
         
     } 
     
@@ -1283,35 +1291,35 @@ public class POView extends javax.swing.JPanel {
     }
 
     public void initTablePRdraft() {
-        tablePRdraft = new TableERP(dataPRdraft, columnPRdraft);
-        tablePRdraft.setEditable(true);
+        tablePOdraft = new TableERP(dataPOdraft, columnPOdraft);
+        tablePOdraft.setEditable(true);
         //tablePRdraft.addEditableColumn(3); // không edit vì sẽ VND format
-        tablePRdraft.addEditableColumn(4);
-        tablePRdraft.setColumnType(0, Integer.class);
-        tablePRdraft.setColumnType(4, Long.class);
-        tablePRdraft.setColumnType(5, Integer.class);
-        tbPRdraft.setModel(tablePRdraft);
-        tbPRdraft.getColumnModel().getColumn(3).setCellRenderer(new CurrencyRenderer()); // VND format
-        tbPRdraft.getColumnModel().getColumn(5).setCellRenderer(new CurrencyRenderer());
+        tablePOdraft.addEditableColumn(4);
+        tablePOdraft.setColumnType(0, Integer.class);
+        tablePOdraft.setColumnType(4, Long.class);
+        tablePOdraft.setColumnType(5, Integer.class);
+        tbPOdraft.setModel(tablePOdraft);
+        tbPOdraft.getColumnModel().getColumn(3).setCellRenderer(new CurrencyRenderer()); // VND format
+        tbPOdraft.getColumnModel().getColumn(5).setCellRenderer(new CurrencyRenderer());
     }
     
     public void initTablePRUpdate() {
-        tablePRupdate = new TableERP(dataPRupdate, columPRupdate);
-        tablePRupdate.setEditable(true);
+        tablePOupdate = new TableERP(dataPOupdate, columPOupdate);
+        tablePOupdate.setEditable(true);
         //tablePRupdate.addEditableColumn(3);
         //tablePRupdate.addEditableColumn(4);
-        tablePRupdate.addEditableColumn(5);
-        tablePRupdate.addEditableColumn(6);
+        tablePOupdate.addEditableColumn(5);
+        tablePOupdate.addEditableColumn(6);
         // thiết lập các giá trị đặc biệt và cột xét để không cho edit
         Set<Object> specialValues = new HashSet<>();
         specialValues.add("Đã đóng");
         specialValues.add("Đã được xử lý");
-        tablePRupdate.setSpecialValues(specialValues, 0);
+        tablePOupdate.setSpecialValues(specialValues, 0);
         // Thiết lập kiểu giá trị cho các cột
-        tablePRupdate.setColumnType(1, Integer.class);
-        tablePRupdate.setColumnType(5, Long.class);
-        tablePRupdate.setColumnType(6, Integer.class);
-        tbPRupdate.setModel(tablePRupdate);
+        tablePOupdate.setColumnType(1, Integer.class);
+        tablePOupdate.setColumnType(5, Long.class);
+        tablePOupdate.setColumnType(6, Integer.class);
+        tbPRupdate.setModel(tablePOupdate);
         tbPRupdate.getColumnModel().getColumn(5).setCellRenderer(new CurrencyRenderer()); // VND format
         tbPRupdate.getColumnModel().getColumn(7).setCellRenderer(new CurrencyRenderer());
         
@@ -1364,34 +1372,34 @@ public class POView extends javax.swing.JPanel {
     }
 
     public void updateTbPRdraft() {
-        tbPRdraft.setModel(tablePRdraft);
+        tbPOdraft.setModel(tablePOdraft);
     }
 
     public void updateTbPR() {
-        tbPR.setModel(tableERP);
+        tbPO.setModel(tableERP);
     }
 
-    public PurchaseRequest getUpdatePRinfo(int row) {
-        PurchaseRequest pr = new PurchaseRequest();
-        
-        System.out.println("row: " + row);
-        System.out.println((String) tablePRupdate.getValueAt(row, 0));
-        pr.setItemLine((int) tablePRupdate.getValueAt(row, 1));
-        Item item = new Item();
-        item.setMaHang((int) tablePRupdate.getValueAt(row, 2));
-        item.setTenHang((String) tablePRupdate.getValueAt(row, 3));
-        item.setDvt((String) tablePRupdate.getValueAt(row, 4));
-        pr.setDonGia((long) tablePRupdate.getValueAt(row, 5));
-        pr.setItem(item);
-        pr.setSoLuong((int) tablePRupdate.getValueAt(row, 6));
-        pr.setGiaItem((double) tablePRupdate.getValueAt(row, 7));
-        
-        System.out.println("tablePRupdate" + tablePRupdate.getValueAt(row, 6));
-        System.out.println("tbPRupdate" + tablePRupdate.getValueAt(row, 6));
-        System.out.println("PR sau lấy thông tin từ bảng: " + pr);
-
-        return pr;
-    }
+//    public PurchaseOrder getUpdatePRinfo(int row) {
+//        PurchaseOrder po = new PurchaseOrder();
+//        
+//        System.out.println("row: " + row);
+//        System.out.println((String) tablePOupdate.getValueAt(row, 0));
+//        po.setItemLine((int) tablePOupdate.getValueAt(row, 1));
+//        Item item = new Item();
+//        item.setMaHang((int) tablePOupdate.getValueAt(row, 2));
+//        item.setTenHang((String) tablePOupdate.getValueAt(row, 3));
+//        item.setDvt((String) tablePOupdate.getValueAt(row, 4));
+//        pr.setDonGia((long) tablePOupdate.getValueAt(row, 5));
+//        pr.setItem(item);
+//        pr.setSoLuong((int) tablePOupdate.getValueAt(row, 6));
+//        pr.setGiaItem((double) tablePOupdate.getValueAt(row, 7));
+//        
+//        System.out.println("tablePRupdate" + tablePOupdate.getValueAt(row, 6));
+//        System.out.println("tbPRupdate" + tablePOupdate.getValueAt(row, 6));
+//        System.out.println("PR sau lấy thông tin từ bảng: " + pr);
+//
+//        return pr;
+//    }
 
     
     

@@ -26,6 +26,11 @@ public class CurrencyRenderer extends DefaultTableCellRenderer {
         if (formatter == null) {
             formatter = NumberFormat.getCurrencyInstance();
         }
-        setText((value == null) ? "" : formatter.format(value));
+        if (value instanceof Number) {
+            setText((value == null) ? "" : formatter.format(value));
+        } else {
+            // Handle the case where value is not a Number
+            System.err.println("Cannot format given Object as a Number: " + value);
+        }
     }
 }

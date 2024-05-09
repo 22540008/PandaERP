@@ -81,6 +81,7 @@ public class ItemManager {
                     rs.getString("dvt"),
                     rs.getLong("donGia"),
                     rs.getInt("trangThai"));
+                    
             //System.out.println(item);
             dsItem.add(item);
         }
@@ -121,13 +122,13 @@ public class ItemManager {
         // đối tượng s kết nối SQL Server
         SQLConnection conn = new SQLConnection("", "");
         // Chuỗi truy vấn SQL q cho bảng Items
-        String sql = "INSERT INTO Item (maHang, tenHang, dvt, donGia, trangThai) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Item (maHang, tenHang, dvt, donGia, vat, trangThai) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.getConnection().prepareStatement(sql)) {
             stmt.setInt(1, item.getMaHang());
             stmt.setString(2, item.getTenHang());
             stmt.setString(3, item.getDvt());
             stmt.setLong(4, item.getDonGia());
-            stmt.setInt(5, item.getTrangThai());
+            stmt.setInt(6, item.getTrangThai());
 
             rowEffect = stmt.executeUpdate();
         }
@@ -142,13 +143,13 @@ public class ItemManager {
         // đối tượng s kết nối SQL Server
         SQLConnection conn = new SQLConnection("", "");
         // Chuỗi truy vấn SQL q cho bảng Items
-        String sql1 = "UPDATE Item SET tenHang = ?, dvt = ?, donGia = ?, trangThai = ? WHERE maHang = ?";
+        String sql1 = "UPDATE Item SET tenHang = ?, dvt = ?, donGia = ?, vat = ?, trangThai = ? WHERE maHang = ?";
         try (PreparedStatement stmt = conn.getConnection().prepareStatement(sql1)) {
             stmt.setString(1, item.getTenHang());
             stmt.setString(2, item.getDvt());
             stmt.setLong(3, item.getDonGia());
-            stmt.setInt(4, item.getTrangThai());
-            stmt.setInt(5, item.getMaHang());
+            stmt.setInt(5, item.getTrangThai());
+            stmt.setInt(6, item.getMaHang());
 
             rowEffect = stmt.executeUpdate();
         }
