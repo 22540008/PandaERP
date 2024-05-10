@@ -47,8 +47,8 @@ public class POController {
         this.view = poView;
         this.view.btnLoadActionListener(new LoadActionListener());
         this.view.btnSearchActionListener(new SearchActionListener());
-//        this.view.btnCalItemPriceActionListener(new CalItemPriceActionListener());
-//        this.view.btnAddActionListener(new AddActionListener());
+        this.view.btnCalItemPriceActionListener(new CalItemPriceActionListener());
+        this.view.btnAddActionListener(new AddActionListener());
 //        this.view.btnDialogAddTimItemActionListener(new DialogTimIemActionListener());
 //        this.view.btnLoadItemActionListener(new LoadFindItemActionListener());
 //        this.view.btnSearchItemActionListener(new SearchItemActionListener());
@@ -111,6 +111,52 @@ public class POController {
             Object[][] trackObjPO;
             trackObjPO = view.getTableERP().searchByCriteria(paramSearch, new int[]{0, 1});
             view.getTableERP().setDataSearch(trackObjPO, PurchaseOrder.columns, view.getTbPO());
+        }
+    }
+    
+    // Action khi nút "Tính tổng" của Panel "Quản lý danh sách PO" được click
+    private class CalItemPriceActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnCalItemPrice is clicked");
+            //if (model.getDsPO() == null){
+            if (view.getTableERP() == null) {
+                JOptionPane.showMessageDialog(view, "Vui lòng Load dữ liệu trước");
+                return;
+            }
+            double totalPrice = view.getTableERP().capNhatTongGia(9, 10, 11);
+            view.updateTbPR();
+            view.getFieldTotalPrice().setText(CurrencyUtils.VN_FORMAT.format(totalPrice));    
+        }
+    }
+    
+    
+    // Action khi nút Thêm của Panel "Quản lý danh sách PO" được click
+    private class AddActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnAdd is clicked");
+            if (view.getTableERP() == null){
+                JOptionPane.showMessageDialog(view, "Vui lòng Load dữ liệu trước");
+                return;
+            }
+            // Tìm số PO lớn nhất hoặc theo format (6 chữ số): 2 (đại diện PO) + YY (2 số cuối của năm) + 0000
+            String lastYear2Digit = String.valueOf(Year.now().getValue() % 100);
+            int maxSoCT = Integer.parseInt("2" + lastYear2Digit + "0000");
+            for (PurchaseOrder po : model.getDsPO()){
+                if (po.getSoCT() > maxSoCT){
+                    maxSoCT = po.getSoCT();
+                }
+            }
+            view.getFieldSoCT_add().setText(String.valueOf(maxSoCT + 1));
+            view.getDate_add().setDate(new Date()); // set ngày PR hiện tại
+            view.getFieldUser_add().setText(loginUser.getTenTK()); // set người tạo PR là tài khoản đang dùng
+
+            view.setColumnPOdraft(new String[] {"Số PR", "PR line", "Mã hàng", "Tên hàng", "Mã NCC", "Tên NCC", "ĐVT", "Đơn giá", "Số lượng", "VAT", "Tổng giá"});
+            view.setDataPOdraft(new Object[0][0]);
+            view.initTablePOdraft();
+            view.getDialogAdd().pack(); // giúp Dialog khởi tạo các thành phần bên trong hoàn toàn, điều chỉnh kích thước... -> tránh lỗi hiển thị.
+            view.getDialogAdd().setVisible(true);
         }
     }
 
@@ -489,34 +535,7 @@ public class POController {
 //        }
 //    }
     
-//    // Action khi nút Thêm của Panel "Quản lý danh sách PR" được click
-//    private class AddActionListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            System.out.println("btnAdd is clicked");
-//            if (view.getTableERP() == null){
-//                JOptionPane.showMessageDialog(view, "Vui lòng Load dữ liệu trước");
-//                return;
-//            }
-//            // Tìm số PR lớn nhất hoặc theo format (6 chữ số): 1 (đại diện PR) + YY (2 số cuối của năm) + 0000
-//            String lastYear2Digit = String.valueOf(Year.now().getValue() % 100);
-//            int maxSoCT = Integer.parseInt("1" + lastYear2Digit + "0000");
-//            for (PurchaseRequest pr : model.getDsPR()){
-//                if (pr.getSoCT() > maxSoCT){
-//                    maxSoCT = pr.getSoCT();
-//                }
-//            }
-//            view.getFieldSoCT_add().setText(String.valueOf(maxSoCT + 1));
-//            view.getDate_add().setDate(new Date()); // set ngày PR hiện tại
-//            view.getFieldUser_add().setText(loginUser.getTenTK()); // set người tạo PR là tài khoản đang dùng
-//            
-//            view.setColumnPRdraft(new String[] {"Mã hàng", "Tên hàng", "ĐVT", "Giá est", "Số lượng", "Tổng giá"});
-//            view.setDataPRdraft(new Object[0][0]);
-//            view.initTablePRdraft();
-//            view.getDialogAdd().pack(); // giúp Dialog khởi tạo các thành phần bên trong hoàn toàn, điều chỉnh kích thước... -> tránh lỗi hiển thị.
-//            view.getDialogAdd().setVisible(true);
-//        }
-//    }
+
     
     
     
@@ -564,22 +583,8 @@ public class POController {
 //        return table;
 //    }
     
-//    private class CalItemPriceActionListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            System.out.println("btnCalItemPrice is clicked");
-//            if (model.getDsPR() == null){
-//                JOptionPane.showMessageDialog(view, "Vui lòng Load dữ liệu trước");
-//                return;
-//            }
-//            double totalPrice = view.getTableERP().capNhatTongGia(9, 10, 11);
-//            view.updateTbPR();
-//            view.getFieldTotalPrice().setText(CurrencyUtils.VN_FORMAT.format(totalPrice));
-//            
-//            
-//        }
-//    }
-//    
+
+    
 
 
 

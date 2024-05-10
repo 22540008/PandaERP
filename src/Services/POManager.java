@@ -50,10 +50,10 @@ public class POManager {
         //System.out.println("Convert to Object[][]");
         for (int i = 0; i < dsPOActive.size(); i++){
             Object[] objPurchaseOrder = dsPOActive.get(i).getObjPO();
-            System.out.println();
+            //System.out.println();
             for (int j=0; j < column; j++){
                 dsObjPurchaseOrder[i][j] = objPurchaseOrder[j];
-                System.out.print(dsObjPurchaseOrder[i][j] + " ");
+                //System.out.print(dsObjPurchaseOrder[i][j] + " ");
             }
         }
         return dsObjPurchaseOrder;
@@ -118,22 +118,6 @@ public class POManager {
             po.setVat(rs.getFloat("vat"));
             po.setGiaItem(rs.getDouble("tongGia"));
             
-            
-            
-//                rs.getInt("soCT"),
-//                rs.getString("nguoiTao"),
-//                rs.getDate("ngayTao"),
-//                rs.getDate("ngaySua"),
-//                rs.getInt("trangThai"),
-//                rs.getInt("itemLine"),
-//                item,
-//                rs.getLong("giaEst"),
-//                rs.getInt("soLuong")         
-//            );
-            
-            //pr.setTrangThaiStr();
-            
-            //System.out.println(pr);
             dsPO.add(po);
         }
         conn.close();
