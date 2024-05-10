@@ -16,7 +16,7 @@ public class TestConnection {
     public static void main(String[] args) {
         // TODO code application logic here
        // Nhập user, pass
-       SQLConnection s = new SQLConnection("sa", "159753");
+       SQLConnection s = new SQLConnection("sa", "sa");
        
        // Không nhập user, pass
        SQLConnection s2 = new SQLConnection("","");

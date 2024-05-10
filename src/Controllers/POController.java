@@ -6,7 +6,6 @@ package Controllers;
 
 import Models.Item;
 import Models.PurchaseOrder;
-import Models.PurchaseRequest;
 import Models.User;
 import Services.POManager;
 import Views.PRView;
@@ -47,7 +46,7 @@ public class POController {
         this.model = poModel;
         this.view = poView;
         this.view.btnLoadActionListener(new LoadActionListener());
-//        this.view.btnSearchActionListener(new SearchActionListener());
+        this.view.btnSearchActionListener(new SearchActionListener());
 //        this.view.btnCalItemPriceActionListener(new CalItemPriceActionListener());
 //        this.view.btnAddActionListener(new AddActionListener());
 //        this.view.btnDialogAddTimItemActionListener(new DialogTimIemActionListener());
@@ -101,6 +100,17 @@ public class POController {
             } catch (SQLException ex) {
                 Logger.getLogger(POController.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+    
+    private class SearchActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnSearch is clicked");
+            String[] paramSearch = view.getSearchParams();
+            Object[][] trackObjPO;
+            trackObjPO = view.getTableERP().searchByCriteria(paramSearch, new int[]{0, 1});
+            view.getTableERP().setDataSearch(trackObjPO, PurchaseOrder.columns, view.getTbPO());
         }
     }
 
@@ -571,72 +581,8 @@ public class POController {
 //    }
 //    
 
-//        
-//    private Object[][] searchPRbyCriteria(POManager pRManager, String[] paramSearch) throws SQLException{
-//        if (paramSearch[0].isBlank() && paramSearch[1].isBlank()){
-//            JOptionPane.showMessageDialog(view, "Vui lòng nhập từ khoá tìm kiếm");
-//            return null;
-//        }
-//        int trackSoCT; String trackUser;
-//        ArrayList<PurchaseRequest> loadData = model.loadData_DB();
-//        ArrayList<PurchaseRequest> trackResult = new ArrayList();
-//        if (!paramSearch[0].isBlank()){
-//            try {
-//                trackSoCT = Integer.parseInt(paramSearch[0]);
-//                for (PurchaseRequest pr : loadData){
-//                    if (pr.getSoCT() == trackSoCT && pr.getTrangThai() == 0){
-//                        trackResult.add(pr);
-//                        break;
-//                    }
-//                }         
-//            } catch (NumberFormatException numE) {
-//                JOptionPane.showMessageDialog(view, "Mã NCC phải ở định dạng số");
-//                return null;
-//            }
-//
-//        }
-//        else {
-//            if (!paramSearch[1].isBlank()){
-//                trackUser = paramSearch[1];
-//                for (PurchaseRequest pr : loadData){
-//                    if (pr.getUser().equals(trackUser)){
-//                        trackResult.add(pr);
-//                    }
-//                }
-//            }
-//        }
-//
-//        if (trackResult.isEmpty()){
-//            JOptionPane.showMessageDialog(view, "Không tìm thấy");
-//            return null;
-//        }
-//        int row = trackResult.size();
-//        Object[][] trackObjPR2D = new Object[row][PurchaseRequest.getColumns().length];
-//        for (int i = 0; i < row; i++){
-//            Object[] objPR = trackResult.get(i).getObjPR();
-//            for (int j = 0; j < objPR.length; j++){
-//                trackObjPR2D[i][j] = objPR[j];
-//            }
-//        }
-//        return trackObjPR2D;
-//    }
-//
-//    private class SearchActionListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            System.out.println("btnSearch is clicked");
-//            String[] paramSearch = view.getSearchParams();
-//            Object[][] trackObjPR2D;
-//            try {
-//                trackObjPR2D = searchPRbyCriteria(model, paramSearch);
-//                view.setColumn(PurchaseRequest.getColumns());
-//                view.setData(trackObjPR2D);
-//                view.loadData();
-//            } catch (SQLException ex) {
-//                Logger.getLogger(POController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-//    }
+
+
 
 
 //    private class DialogUpdateActionListener implements ActionListener {

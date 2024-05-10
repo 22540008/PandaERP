@@ -932,7 +932,7 @@
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="333" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="381" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
           </Group>
@@ -970,6 +970,7 @@
                 <Column editable="true" title="T&#x1ed5;ng gi&#xe1;" type="java.lang.Double"/>
               </Table>
             </Property>
+            <Property name="autoResizeMode" type="int" value="0"/>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
@@ -1090,9 +1091,9 @@
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="fieldSearchUser" pref="134" max="32767" attributes="0"/>
-                  <EmptySpace pref="73" max="32767" attributes="0"/>
-                  <Component id="btnSearch" pref="149" max="32767" attributes="0"/>
+                  <Component id="fieldSearchUser" pref="207" max="32767" attributes="0"/>
+                  <EmptySpace pref="147" max="32767" attributes="0"/>
+                  <Component id="btnSearch" pref="222" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -1152,7 +1153,7 @@
                   <Component id="btnTotalItemPrice" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="fieldTotalPrice" min="-2" pref="98" max="-2" attributes="0"/>
-                  <EmptySpace pref="39" max="32767" attributes="0"/>
+                  <EmptySpace pref="259" max="32767" attributes="0"/>
                   <Component id="btnDelete" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnUpdate" min="-2" max="-2" attributes="0"/>

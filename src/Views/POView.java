@@ -1011,6 +1011,7 @@ public class POView extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
+        tbPO.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tbPO.setMinimumSize(new java.awt.Dimension(400, 80));
         tbPO.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tbPO);
@@ -1035,9 +1036,9 @@ public class POView extends javax.swing.JPanel {
                 .addGap(26, 26, 26)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fieldSearchUser, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                .addComponent(fieldSearchUser, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
+                .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -1077,7 +1078,7 @@ public class POView extends javax.swing.JPanel {
                 .addComponent(btnTotalItemPrice)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fieldTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 259, Short.MAX_VALUE)
                 .addComponent(btnDelete)
                 .addGap(18, 18, 18)
                 .addComponent(btnUpdate)
@@ -1120,7 +1121,7 @@ public class POView extends javax.swing.JPanel {
                 .addGap(22, 22, 22)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1400,6 +1401,11 @@ public class POView extends javax.swing.JPanel {
 //
 //        return pr;
 //    }
+
+    public void setDataSearch(Object[][] trackObjPO, String[] column, JTable table) {
+        TableERP tableERPSearch = new TableERP(trackObjPO, column);
+        table.setModel(tableERPSearch);
+    }
 
     
     

@@ -15,6 +15,8 @@ import Views.MainFrame;
 import Views.POView;
 import Views.PRView;
 import Views.UserView;
+import Views.UserView_add;
+import Views.UserView_update;
 import Views.VendorView;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -34,6 +36,8 @@ public class MainController {
     private UserManager userModel;
     private UserController userController;
     private UserView userView;
+    private UserView_add userView_add; ////
+    private UserView_update userView_update; ////
     private ItemManager itemModel;
     private ItemController itemController;
     private ItemView itemView;
@@ -47,6 +51,7 @@ public class MainController {
     private POController poController;
     private POView poView;
     
+    
 
     
     public MainController(User loginUser) {
@@ -57,6 +62,11 @@ public class MainController {
         userModel = new UserManager();
         userView = new UserView();
         userController = new UserController(userModel, userView); 
+        // UserView_add & UserView_update
+//        UserView_add userView_add = new UserView_add(view, true, userController);
+//        UserView_update userView_update = new UserView_update(view, true, userController, rowData);
+        
+        
         // Khởi tạo Item component
         itemModel = new ItemManager();
         itemView = new ItemView();

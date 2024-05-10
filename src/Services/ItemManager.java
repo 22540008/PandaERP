@@ -68,7 +68,7 @@ public class ItemManager {
         // ArrayList<Item> dsItem = new ArrayList<>();
         dsItem = new ArrayList(); // Khởi tạo lại dsItem như một ArrayList mới (xoá data cũ) trước khi lấy dữ liệu từ SQL
         // đối tượng s kết nối SQL Server
-        SQLConnection conn = new SQLConnection("sa", "159753");
+        SQLConnection conn = new SQLConnection("sa", "sa");
         // Chuỗi truy vấn SQL q
         String q = "SELECT * FROM Item";
         PreparedStatement stmt = conn.getConnection().prepareStatement(q);
@@ -94,7 +94,7 @@ public class ItemManager {
         // ArrayList<Item> dsItem = new ArrayList<>();
         Item item = null; // Khởi tạo lại dsItem như một ArrayList mới (xoá data cũ) trước khi lấy dữ liệu từ SQL
         // đối tượng s kết nối SQL Server
-        SQLConnection conn = new SQLConnection("sa", "159753");
+        SQLConnection conn = new SQLConnection("sa", "sa");
         // Chuỗi truy vấn SQL q
         String sql1 = "SELECT * FROM Item WHERE maHang = ?";
         PreparedStatement stmt = conn.getConnection().prepareStatement(sql1);
@@ -122,13 +122,13 @@ public class ItemManager {
         // đối tượng s kết nối SQL Server
         SQLConnection conn = new SQLConnection("", "");
         // Chuỗi truy vấn SQL q cho bảng Items
-        String sql = "INSERT INTO Item (maHang, tenHang, dvt, donGia, vat, trangThai) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Item (maHang, tenHang, dvt, donGia, trangThai) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.getConnection().prepareStatement(sql)) {
             stmt.setInt(1, item.getMaHang());
             stmt.setString(2, item.getTenHang());
             stmt.setString(3, item.getDvt());
             stmt.setLong(4, item.getDonGia());
-            stmt.setInt(6, item.getTrangThai());
+            stmt.setInt(5, item.getTrangThai());
 
             rowEffect = stmt.executeUpdate();
         }
@@ -143,13 +143,13 @@ public class ItemManager {
         // đối tượng s kết nối SQL Server
         SQLConnection conn = new SQLConnection("", "");
         // Chuỗi truy vấn SQL q cho bảng Items
-        String sql1 = "UPDATE Item SET tenHang = ?, dvt = ?, donGia = ?, vat = ?, trangThai = ? WHERE maHang = ?";
+        String sql1 = "UPDATE Item SET tenHang = ?, dvt = ?, donGia = ?, trangThai = ? WHERE maHang = ?";
         try (PreparedStatement stmt = conn.getConnection().prepareStatement(sql1)) {
             stmt.setString(1, item.getTenHang());
             stmt.setString(2, item.getDvt());
             stmt.setLong(3, item.getDonGia());
-            stmt.setInt(5, item.getTrangThai());
-            stmt.setInt(6, item.getMaHang());
+            stmt.setInt(4, item.getTrangThai());
+            stmt.setInt(5, item.getMaHang());
 
             rowEffect = stmt.executeUpdate();
         }

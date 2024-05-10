@@ -32,7 +32,7 @@ public class SQLConnection {
         }
         
         if (pass.isBlank()) {
-            this.pass = "159753";
+            this.pass = "sa";
         }
         else {
             this.pass = pass;
@@ -41,7 +41,7 @@ public class SQLConnection {
         ds = new SQLServerDataSource();
         
         //ds.setUser("sa");
-        //ds.setPassword("159753");
+        //ds.setPassword("sa");
         ds.setServerName("localhost");
         ds.setPortNumber(Integer.parseInt("1433"));
         ds.setDatabaseName("PandaERP");

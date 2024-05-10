@@ -67,7 +67,7 @@ public class UserManager {
         // ArrayList<User> dsUser = new ArrayList<>();
         dsUser = new ArrayList(); // Khởi tạo lại dsUser như một ArrayList mới (xoá data cũ) trước khi lấy dữ liệu từ SQL
         // đối tượng s kết nối SQL Server
-        SQLConnection conn = new SQLConnection("sa", "159753");
+        SQLConnection conn = new SQLConnection("sa", "sa");
         // Chuỗi truy vấn SQL q
         String q = """
             SELECT maNV, Users.tenTK, matKhau, systemRoles, trangThai, ho, ten, chucVu, phongBan, diaChi, soDT FROM Users JOIN NhanVien ON Users.tenTK = NhanVien.tenTK

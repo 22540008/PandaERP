@@ -76,7 +76,7 @@ public class POManager {
 
         dsPO = new ArrayList(); // Khởi tạo lại dsPurchaseOrder như một ArrayList mới (xoá data cũ) trước khi lấy dữ liệu từ SQL
         // đối tượng s kết nối SQL Server
-        SQLConnection conn = new SQLConnection("sa", "159753");
+        SQLConnection conn = new SQLConnection("sa", "sa");
         // Chuỗi truy vấn SQL q
         String q = """
                     SELECT *, PurchaseOrder.soCT_line AS soPO_line

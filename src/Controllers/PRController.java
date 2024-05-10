@@ -586,7 +586,6 @@ public class PRController {
                 for (PurchaseRequest pr : loadData){
                     if (pr.getSoCT() == trackSoCT && pr.getTrangThai() == 0){
                         trackResult.add(pr);
-                        break;
                     }
                 }         
             } catch (NumberFormatException numE) {

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import javax.swing.table.DefaultTableModel;
@@ -124,8 +125,45 @@ public class TableERP extends DefaultTableModel {
         return total;
     }
     
-
+    // Tìm kiếm theo 2 trường: "soCT", "tài khoản user"
+    public Object[][] searchByCriteria(String[] paramSearch, int[] columnSearch){
+        if (paramSearch[0].isBlank() && paramSearch[1].isBlank()){
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập từ khoá tìm kiếm"); //// null
+            return null;
+        }
+        
+        int rowCount = this.getRowCount();
+        int columnCount = this.getColumnCount();
+        Object[][] result = new Object[rowCount][columnCount];
+        int count = 0; // số sample kiếm được thoả criteria
+        String criteria = "";
+        for (int i = 0; i < paramSearch.length; i++){
+            criteria = paramSearch[i];
+            for (int j = 0; j < rowCount; j++){
+                String cellValue = String.valueOf(this.getValueAt(j, columnSearch[i]));
+                if (cellValue.equals(criteria)){
+                    for (int k = 0; k < columnCount; k++){
+                        result[count][k] = this.getValueAt(j, k);
+                    }
+                    count++;
+                }
+            }
+        }
+        return result;   
+    }
+    
+    // Lấy data2D đưa lên JTable chỉ định
+    public void setDataSearch(Object[][] trackObjPO, String[] column, JTable table) {
+        TableERP tableERPSearch = new TableERP(trackObjPO, column);
+        table.setModel(tableERPSearch);
+    }
+    
 }
+
+
+
+
+
 
 /*
 // Thiết lập kiểu dữ liệu

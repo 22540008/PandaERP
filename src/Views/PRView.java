@@ -1290,8 +1290,9 @@ public class PRView extends javax.swing.JPanel {
         //tablePRdraft.addEditableColumn(3); // không edit vì sẽ VND format
         tablePRdraft.addEditableColumn(4);
         tablePRdraft.setColumnType(0, Integer.class);
-        tablePRdraft.setColumnType(4, Long.class);
-        tablePRdraft.setColumnType(5, Integer.class);
+        tablePRdraft.setColumnType(3, Long.class);
+        tablePRdraft.setColumnType(4, Integer.class);
+        tablePRdraft.setColumnType(5, Double.class);
         tbPRdraft.setModel(tablePRdraft);
         tbPRdraft.getColumnModel().getColumn(3).setCellRenderer(new CurrencyRenderer()); // VND format
         tbPRdraft.getColumnModel().getColumn(5).setCellRenderer(new CurrencyRenderer());
@@ -1394,6 +1395,8 @@ public class PRView extends javax.swing.JPanel {
 
         return pr;
     }
+
+
 
     
     

@@ -320,7 +320,7 @@ public class ItemView extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder("Quản lý danh mục hàng hoá - dịch vụ"));
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Quản lý danh mục hàng hoá - dịch vụ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm"));
 
@@ -416,7 +416,7 @@ public class ItemView extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLoad)
