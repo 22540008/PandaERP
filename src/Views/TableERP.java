@@ -77,6 +77,36 @@ public class TableERP extends DefaultTableModel {
         }
     }
     
+    // Lấy 1 số cột chỉ định (nếu remove là false), Lấy dữ liệu đã xoá 1 số cột chỉ định (nếu remove là true)
+    public Object[][] filter(int[] columns, boolean remove){
+        int rowCount = this.getRowCount();
+        Object[][] dsUnmatchCol = new Object[rowCount][this.getColumnCount() - columns.length];
+        Object[][] dsMatchCol = new Object[rowCount][columns.length];
+        for (int i = 0; i < rowCount; i++){
+            int columnUnmatch = 0; int columnMatch = 0;
+            System.out.println();
+            for (int j = 0; j < this.getColumnCount(); j++){
+                boolean find = false;
+                for (int num : columns){
+                    if (num == j){
+                        dsMatchCol[i][columnMatch] = this.getValueAt(i, j);
+                        columnMatch++;
+                        find = true;
+                        break;
+                    }
+                }
+                if (find == false){
+                    dsUnmatchCol[i][columnUnmatch] = this.getValueAt(i, j);
+                    columnUnmatch++;
+                }
+            }
+        }
+        if (remove == true){
+            return dsUnmatchCol;
+        }
+        return dsMatchCol;
+    }
+    
     
     public void setColumnType(int column, Class<?> type) {
         columnTypes.put(column, type);
