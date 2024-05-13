@@ -42,7 +42,7 @@ public class PRManager {
    
     
     public Object[][] getObjDsPR(){
-        int column = PurchaseRequest.getColumns().length;
+        int column = PurchaseRequest.columns.length;
         ArrayList<PurchaseRequest> dsPRActive = filterActivePR();
         Object[][] dsObjPurchaseRequest = new Object[dsPRActive.size()][column];
         //System.out.println("Convert to Object[][]");
@@ -70,8 +70,6 @@ public class PRManager {
     
     // Phương thức import data từ CSDL
     public ArrayList<PurchaseRequest> loadData_DB() throws SQLException{
-//        private static final String[] columns = {"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Mã hàng", "Tên hàng", "ĐVT", 
-//        "Số lượng", "Giá Est", "Tổng giá"};
         dsPR = new ArrayList(); // Khởi tạo lại dsPurchaseRequest như một ArrayList mới (xoá data cũ) trước khi lấy dữ liệu từ SQL
         // đối tượng s kết nối SQL Server
         SQLConnection conn = new SQLConnection("sa", "sa");
@@ -84,7 +82,6 @@ public class PRManager {
 
         ResultSet rs = stmt.executeQuery();
         while (rs.next()){
-//            Item item = itemManager.loadData_DB(rs.getInt("maHang"));
             Item item = new Item();
             item.setMaHang(rs.getInt("maHang")); // đúng cho truy vấn cột maHang đầu tiên
             item.setTenHang(rs.getString("tenHang"));
@@ -102,14 +99,48 @@ public class PRManager {
                 rs.getLong("giaEst"),
                 rs.getInt("soLuong")         
             );
-            
-            //pr.setTrangThaiStr();
-            
-            //System.out.println(pr);
             dsPR.add(pr);
         }
         conn.close();
         return dsPR;
+    }
+    
+    public ArrayList<PurchaseRequest> loadData_DB(int trangThai) throws SQLException {
+        dsPR = new ArrayList(); // Khởi tạo lại dsPurchaseRequest như một ArrayList mới (xoá data cũ) trước khi lấy dữ liệu từ SQL
+        // đối tượng s kết nối SQL Server
+        SQLConnection conn = new SQLConnection("sa", "sa");
+        // Chuỗi truy vấn SQL q
+        String q = """
+                   SELECT *
+                   FROM PurchaseRequest JOIN Item ON PurchaseRequest.maHang = Item.maHang WHERE PurchaseRequest.trangThai = ?
+                   """;
+        PreparedStatement stmt = conn.getConnection().prepareStatement(q);
+        stmt.setInt(1, trangThai);
+
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()){
+            Item item = new Item();
+            item.setMaHang(rs.getInt("maHang")); // đúng cho truy vấn cột maHang đầu tiên
+            item.setTenHang(rs.getString("tenHang"));
+            item.setDvt(rs.getString("dvt"));
+            item.setDonGia(rs.getLong("donGia"));
+            
+            PurchaseRequest pr = new PurchaseRequest(
+                rs.getInt("soCT"),
+                rs.getString("nguoiTao"),
+                rs.getDate("ngayTao"),
+                rs.getDate("ngaySua"),
+                rs.getInt("trangThai"),
+                rs.getInt("itemLine"),
+                item,
+                rs.getLong("giaEst"),
+                rs.getInt("soLuong")         
+            );
+            dsPR.add(pr);
+        }
+        conn.close();
+        return dsPR;
+        
     }
                
     // Add 1 sample từ JAVA về CSDL
@@ -213,6 +244,8 @@ public class PRManager {
         conn.close();    
         return rowEffect;
     }
+
+    
     
     
     

@@ -87,7 +87,7 @@ public class MainController {
         
         // Set các Model tương quan
         prController.setOtherModel(loginUser, itemController);
-        poController.setOtherModel(loginUser, itemController, vendorController);
+        poController.setOtherModel(loginUser, itemController, vendorController, prController);
         
 
         

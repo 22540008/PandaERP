@@ -60,7 +60,6 @@ public class PurchaseOrder extends Transaction {
     public String toString() {
         return super.toString() + "PurchaseOrder{" + "purchaseRequests=" + pr + ", vendor=" + vendor + ", giaDonHang=" + giaDonHang + '}';
     }
-
     
     //public static final String[] columns = {"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PR", "PR line", "Mã hàng", 
     //    "Tên hàng", "ĐVT", "Mã NCC", "Tên NCC", "Giá", "Số lượng", "VAT", "Tổng giá"};

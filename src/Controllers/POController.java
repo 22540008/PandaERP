@@ -6,6 +6,7 @@ package Controllers;
 
 import Models.Item;
 import Models.PurchaseOrder;
+import Models.PurchaseRequest;
 import Models.User;
 import Services.POManager;
 import Views.PRView;
@@ -41,6 +42,7 @@ public class POController {
 //    private ItemManager modelItem;
     private ItemController itemCtl;
     private VendorController vendorCtl;
+    private PRController prCtl;
     
     public POController(POManager poModel, POView poView) {
         this.model = poModel;
@@ -49,7 +51,12 @@ public class POController {
         this.view.btnSearchActionListener(new SearchActionListener());
         this.view.btnCalItemPriceActionListener(new CalItemPriceActionListener());
         this.view.btnAddActionListener(new AddActionListener());
-//        this.view.btnDialogAddTimItemActionListener(new DialogTimIemActionListener());
+        this.view.btnDiagTimPRaddActionListener(new TimPRaddActionListener());
+        this.view.btnLoadPRActionListener(new LoadPRActionListener());
+        this.view.btnSearchPRActionListener(new SearchPRActionListener());
+        
+        this.view.btnSelectAddActionListener(new SelectAddActionListener());
+        
 //        this.view.btnLoadItemActionListener(new LoadFindItemActionListener());
 //        this.view.btnSearchItemActionListener(new SearchItemActionListener());
 //        this.view.btnAddItemInfoActionListener(new AddItemInfoActionListener());
@@ -76,17 +83,18 @@ public class POController {
         this.model = model;
     }
 
-    public void setOtherModel(User loginUser, ItemController itemController, VendorController vendorController){
+    public void setOtherModel(User loginUser, ItemController itemController, VendorController vendorController, PRController pRController){
         this.loginUser = loginUser;
         this.itemCtl = itemController;  
         this.vendorCtl = vendorController;
+        this.prCtl = pRController;
     }
 
     public POView getView() {
         return view;
     }
     
-    
+    // Action khi nút Load ở panel "danh sách PO" được nhấn
     private class LoadActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -157,6 +165,83 @@ public class POController {
             view.initTablePOdraft();
             view.getDialogAdd().pack(); // giúp Dialog khởi tạo các thành phần bên trong hoàn toàn, điều chỉnh kích thước... -> tránh lỗi hiển thị.
             view.getDialogAdd().setVisible(true);
+        }
+    }
+    
+    // Action khi nút "Tìm PR" của Dialog "PO draft" dược nhấn
+    private class TimPRaddActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnTimPR_add is click");
+            view.getDialogTimPR().pack();
+            view.getDialogTimPR().setVisible(true);
+            
+        }
+    }
+    
+    // Action khi nút "Load" của Dialog "Tìm PR" được nhấn
+    private class LoadPRActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnLoadPR is clicked");
+            ArrayList<PurchaseRequest> listPendingPR = new ArrayList();
+            try {
+                listPendingPR = prCtl.getModel().loadData_DB(0);
+            } catch (SQLException ex) {
+                Logger.getLogger(POController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            if (view.getTablePOdraft() != null){
+                ArrayList<PurchaseRequest> listPRleftover = new ArrayList<>(listPendingPR);
+                int rowCount = view.getTablePOdraft().getRowCount();
+                for (int i = 0; i < rowCount; i++){
+                    for (PurchaseRequest pr : listPRleftover){
+                        if ( String.valueOf(pr.getSoCT()).equals(String.valueOf(view.getTablePR().getValueAt(i, 0))) && String.valueOf(pr.getItemLine()).equals(String.valueOf(view.getTablePR().getValueAt(i, 1))) ){
+                            listPRleftover.remove(i);
+                        }
+                    }
+                }
+                
+                listPendingPR = listPRleftover;
+            }
+            Object[][] dsObjPR = prCtl.getModel().getObjDsPR();               
+            view.setColumnPR(PurchaseRequest.columns);
+            view.setDataPR(dsObjPR);
+            view.loadDataPR();
+            view.getDialogTimPR().setVisible(true);
+        }
+    }
+    
+    // Action Tìm PR theo điều kiện trong danh sách pending list trong Dialog "Tìm PR"
+    private class SearchPRActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnSearchPR is clicked");
+            String[] paramSearch = view.getSearchParamPR();
+            Object[][] trackObjPR;
+            trackObjPR = view.getTablePR().searchByCriteria(paramSearch, new int[]{0, 1});
+            view.getTablePR().setDataSearch(trackObjPR, PurchaseRequest.columns, view.getTbPR());
+
+        }
+    }
+    
+    // Action khi nút "Tìm" ở Dialog "Draft PO" được nhấn
+    private class SelectAddActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnSelect_add is clicked");
+            int[] selRows = view.getTbPR().getSelectedRows();
+            for (int i = 0; i < selRows.length; i++){
+                System.out.println("\ni = " + i);
+                Vector<Object> rowDataVector = (Vector<Object>) view.getTablePR().getDataVector().elementAt(i);
+//                Object[] objData = rowDataVector.toArray(new Object[0]);
+//                for (Object obj : objData){
+//                    System.out.print(obj + " ");
+//                }
+                
+                view.getTablePOdraft().addRow(rowDataVector);
+            }
+            view.getDialogTimPR().dispose();
         }
     }
 

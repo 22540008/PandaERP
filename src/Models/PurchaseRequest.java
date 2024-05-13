@@ -21,7 +21,7 @@ public class PurchaseRequest extends Transaction {
     private float vat;
     
 
-    private static final String[] columns = {"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Mã hàng", "Tên hàng", "ĐVT", 
+    public static final String[] columns = {"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Mã hàng", "Tên hàng", "ĐVT", 
         "Giá Est", "Số lượng", "Tổng giá"};
 
     public PurchaseRequest() {
@@ -40,9 +40,6 @@ public class PurchaseRequest extends Transaction {
         this.giaItem = 0f;
     }
 
-    public static String[] getColumns() {
-        return columns;
-    }
 
     public Item getItem() {
         return item;

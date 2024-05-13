@@ -563,7 +563,7 @@ public class PRController {
             try {
                 model.loadData_DB();
                 Object[][] dsObjPR = model.getObjDsPR();               
-                view.setColumn(PurchaseRequest.getColumns());
+                view.setColumn(PurchaseRequest.columns);
                 view.setData(dsObjPR);
                 view.loadData();   
             } catch (SQLException ex) {
@@ -610,7 +610,7 @@ public class PRController {
             return null;
         }
         int row = trackResult.size();
-        Object[][] trackObjPR2D = new Object[row][PurchaseRequest.getColumns().length];
+        Object[][] trackObjPR2D = new Object[row][PurchaseRequest.columns.length];
         for (int i = 0; i < row; i++){
             Object[] objPR = trackResult.get(i).getObjPR();
             for (int j = 0; j < objPR.length; j++){
@@ -628,7 +628,7 @@ public class PRController {
             Object[][] trackObjPR2D;
             try {
                 trackObjPR2D = searchPRbyCriteria(model, paramSearch);
-                view.setColumn(PurchaseRequest.getColumns());
+                view.setColumn(PurchaseRequest.columns);
                 view.setData(trackObjPR2D);
                 view.loadData();
             } catch (SQLException ex) {
