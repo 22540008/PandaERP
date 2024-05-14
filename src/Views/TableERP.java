@@ -88,13 +88,7 @@ public class TableERP extends DefaultTableModel {
             }
             this.addRow(newRow);
         }
-        Object[][] result = new Object[this.getRowCount()][this.getColumnCount()];
-        for (int i = 0; i < this.getRowCount(); i++){
-            for (int j = 0; j < this.getColumnCount(); j++){
-                result[i][j] = this.getValueAt(i, j);
-            }
-        }
-        return result;
+        return this.exportObjData();
     }
     
     
@@ -111,6 +105,20 @@ public class TableERP extends DefaultTableModel {
         for (int i=0; i < this.getColumnCount(); i++){
             this.setValueAt(rowData[i], rowIndex, i);
         }
+    }
+    
+    /**
+     * Loại bỏ các hàng được chỉ định từ bảng.
+     *
+     * @param selRows Mảng chứa các chỉ số của các hàng cần loại bỏ.
+     * @return Mảng hai chiều chứa các hàng đã bị loại bỏ. Mỗi hàng là một mảng Object chứa các giá trị của các cột trong hàng đó.
+     * @throws IndexOutOfBoundsException Nếu một trong các chỉ số hàng không hợp lệ (ví dụ: nếu nó âm hoặc lớn hơn hoặc bằng số hàng trong bảng).
+     */
+    public Object[][] removeRow(int [] selRows){
+        for (int i = selRows.length-1; i >= 0; i--){
+            this.removeRow(selRows[i]);
+        }
+        return this.exportObjData();
     }
     
     // Lấy 1 số cột chỉ định (nếu remove là false), Lấy dữ liệu đã xoá 1 số cột chỉ định (nếu remove là true)
@@ -274,6 +282,17 @@ public class TableERP extends DefaultTableModel {
         Vector<Object> rowDataVector = (Vector<Object>) this.getDataVector().elementAt(row);
         Object[] objData = rowDataVector.toArray(new Object[0]);
         return objData;
+    }
+    
+    
+    public Object[][] exportObjData(){
+        Object[][] result = new Object[this.getRowCount()][this.getColumnCount()];
+        for (int i = 0; i < this.getRowCount(); i++){
+            for (int j = 0; j < this.getColumnCount(); j++){
+                result[i][j] = this.getValueAt(i, j);
+            }
+        }
+        return result;
     }
     
     // Xuất mảng Object[][] chỉ định

@@ -170,5 +170,31 @@ public class TableERPTest {
                             {105, null, null, "f", "g"}};
         assertArrayEquals(expected, result);
     }
+
+    @Test
+    public void testRemoveRow() {
+        int [] selRows = new int[] {1, 2};
+        Object[][] result = this.tableERP1.removeRow(selRows);
+        Object[][] expected = new Object[][]
+                             {{1, 2, 3, 4, 5},
+                            {"e", "f", "g", "h", "f"}};
+        assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void testSetData_3args() {
+    }
+
+    @Test
+    public void testSetData_JTable() {
+    }
+
+    @Test
+    public void testExportObjData_0args() {
+    }
+
+    @Test
+    public void testSetColumnVisible() {
+    }
     
 }

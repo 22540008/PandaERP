@@ -478,7 +478,7 @@ public class POView extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tbPOdraft = new javax.swing.JTable();
         btnCreate = new javax.swing.JButton();
-        btnDelete_add = new javax.swing.JButton();
+        btnRemove_add = new javax.swing.JButton();
         btnTinhTongPO = new javax.swing.JButton();
         fieldTongPR = new javax.swing.JTextField();
         DialogTimItem = new javax.swing.JDialog();
@@ -520,10 +520,22 @@ public class POView extends javax.swing.JPanel {
         jLabel22 = new javax.swing.JLabel();
         fieldSearchSoCTPR = new javax.swing.JTextField();
         jPanel14 = new javax.swing.JPanel();
-        btnSelect_add = new javax.swing.JButton();
+        btnSelectPR_add = new javax.swing.JButton();
         btnTotalItemPrice2 = new javax.swing.JButton();
         fieldTotalPrice2 = new javax.swing.JTextField();
         btnLoadPR = new javax.swing.JButton();
+        DialogTimVendor = new javax.swing.JDialog();
+        jPanel11 = new javax.swing.JPanel();
+        fieldSearchTenNCC = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        btnSearchVendor = new javax.swing.JButton();
+        jLabel20 = new javax.swing.JLabel();
+        fieldSearchMaNCC = new javax.swing.JTextField();
+        jPanel12 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tbVendor = new javax.swing.JTable();
+        btnLoadVendor = new javax.swing.JButton();
+        btnAddVendor = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPO = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
@@ -714,7 +726,7 @@ public class POView extends javax.swing.JPanel {
 
         btnCreate.setText("Tạo PO");
 
-        btnDelete_add.setText("Xoá Item");
+        btnRemove_add.setText("Xoá Item");
 
         btnTinhTongPO.setText("Tính tổng");
 
@@ -733,7 +745,7 @@ public class POView extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(fieldTongPR, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDelete_add)
+                        .addComponent(btnRemove_add)
                         .addGap(18, 18, 18)
                         .addComponent(btnCreate)))
                 .addContainerGap())
@@ -746,7 +758,7 @@ public class POView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTinhTongPO)
-                    .addComponent(btnDelete_add)
+                    .addComponent(btnRemove_add)
                     .addComponent(btnCreate)
                     .addComponent(fieldTongPR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
@@ -1132,7 +1144,7 @@ public class POView extends javax.swing.JPanel {
 
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        btnSelect_add.setText("Thêm");
+        btnSelectPR_add.setText("Thêm");
 
         btnTotalItemPrice2.setText("Tính tổng giá");
         btnTotalItemPrice2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -1151,7 +1163,7 @@ public class POView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fieldTotalPrice2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSelect_add)
+                .addComponent(btnSelectPR_add)
                 .addGap(18, 18, 18)
                 .addComponent(btnLoadPR))
         );
@@ -1162,7 +1174,7 @@ public class POView extends javax.swing.JPanel {
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(fieldTotalPrice2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnSelect_add)
+                        .addComponent(btnSelectPR_add)
                         .addComponent(btnLoadPR))
                     .addComponent(btnTotalItemPrice2)))
         );
@@ -1187,6 +1199,118 @@ public class POView extends javax.swing.JPanel {
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm"));
+
+        jLabel19.setText("Mã NCC");
+
+        btnSearchVendor.setText("Tìm kiếm");
+
+        jLabel20.setText("Tên NCC");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fieldSearchMaNCC, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
+                .addComponent(jLabel20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fieldSearchTenNCC, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSearchVendor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(fieldSearchMaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearchVendor)
+                    .addComponent(jLabel20)
+                    .addComponent(fieldSearchTenNCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder("Bảng Ds NCC"));
+
+        tbVendor.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Mã NCC", "Tên NCC", "Địa chỉ", "MST", "VAT"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tbVendor.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tbVendor.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane5.setViewportView(tbVendor);
+
+        btnLoadVendor.setText("Load");
+
+        btnAddVendor.setText("Thêm");
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAddVendor)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLoadVendor)))
+                .addContainerGap())
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLoadVendor)
+                    .addComponent(btnAddVendor)))
+        );
+
+        javax.swing.GroupLayout DialogTimVendorLayout = new javax.swing.GroupLayout(DialogTimVendor.getContentPane());
+        DialogTimVendor.getContentPane().setLayout(DialogTimVendorLayout);
+        DialogTimVendorLayout.setHorizontalGroup(
+            DialogTimVendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DialogTimVendorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(DialogTimVendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        DialogTimVendorLayout.setVerticalGroup(
+            DialogTimVendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DialogTimVendorLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Đơn hàng (PO)"));
@@ -1332,22 +1456,26 @@ public class POView extends javax.swing.JPanel {
     private javax.swing.JDialog DialogAdd;
     private javax.swing.JDialog DialogTimItem;
     private javax.swing.JDialog DialogTimPR;
+    private javax.swing.JDialog DialogTimVendor;
     private javax.swing.JDialog DialogUpdate;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnAddItemInfo;
+    private javax.swing.JButton btnAddVendor;
     private javax.swing.JButton btnAdd_add;
     private javax.swing.JButton btnChonNCC_add;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnDelete_add;
     private javax.swing.JButton btnLoad;
     private javax.swing.JButton btnLoadItem_add;
     private javax.swing.JButton btnLoadPR;
+    private javax.swing.JButton btnLoadVendor;
+    private javax.swing.JButton btnRemove_add;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSearchItem;
     private javax.swing.JButton btnSearchPR;
-    private javax.swing.JButton btnSelect_add;
+    private javax.swing.JButton btnSearchVendor;
+    private javax.swing.JButton btnSelectPR_add;
     private javax.swing.JButton btnTimPR_add;
     private javax.swing.JButton btnTinhTongPO;
     private javax.swing.JButton btnTinhTongPR1;
@@ -1361,9 +1489,11 @@ public class POView extends javax.swing.JPanel {
     private javax.swing.JTextField fieldDonGia_add;
     private javax.swing.JTextField fieldMaHang_add;
     private javax.swing.JTextField fieldSearchMaHang;
+    private javax.swing.JTextField fieldSearchMaNCC;
     private javax.swing.JTextField fieldSearchSoCT;
     private javax.swing.JTextField fieldSearchSoCTPR;
     private javax.swing.JTextField fieldSearchTenHang;
+    private javax.swing.JTextField fieldSearchTenNCC;
     private javax.swing.JTextField fieldSearchUser;
     private javax.swing.JTextField fieldSearchUserPR;
     private javax.swing.JTextField fieldSoCT_add;
@@ -1385,7 +1515,9 @@ public class POView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
@@ -1397,6 +1529,8 @@ public class POView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
@@ -1410,6 +1544,7 @@ public class POView extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private com.toedter.components.JSpinField spinFieldSL_add;
     private javax.swing.JTable tbItem;
@@ -1417,6 +1552,7 @@ public class POView extends javax.swing.JPanel {
     private javax.swing.JTable tbPOdraft;
     private javax.swing.JTable tbPR;
     private javax.swing.JTable tbPRupdate;
+    private javax.swing.JTable tbVendor;
     // End of variables declaration//GEN-END:variables
 
     public void btnLoadActionListener(ActionListener listener){
@@ -1488,7 +1624,7 @@ public class POView extends javax.swing.JPanel {
     
     
     public void btnSelectAddActionListener(ActionListener listener){
-        btnSelect_add.addActionListener(listener);
+        btnSelectPR_add.addActionListener(listener);
     }
     
 //    public String[] getSearchParamItem() {
@@ -1591,8 +1727,8 @@ public class POView extends javax.swing.JPanel {
         return addItem;
     }
     
-    public void btnDelete_addActionListener(ActionListener listener){
-        btnDelete_add.addActionListener(listener);
+    public void btnRemove_addActionListener(ActionListener listener){
+        btnRemove_add.addActionListener(listener);
     }
     
     public void btnTinhTongPRActionListener(ActionListener listener){

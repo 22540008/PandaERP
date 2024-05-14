@@ -26,6 +26,7 @@ import java.awt.event.MouseListener;
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
@@ -54,14 +55,14 @@ public class POController {
         this.view.btnDiagTimPRaddActionListener(new TimPRaddActionListener());
         this.view.btnLoadPRActionListener(new LoadPRActionListener());
         this.view.btnSearchPRActionListener(new SearchPRActionListener());
-        
         this.view.btnSelectAddActionListener(new SelectAddActionListener());
+        this.view.btnRemove_addActionListener(new RemoveAddActionListener());
         
 //        this.view.btnLoadItemActionListener(new LoadFindItemActionListener());
 //        this.view.btnSearchItemActionListener(new SearchItemActionListener());
 //        this.view.btnAddItemInfoActionListener(new AddItemInfoActionListener());
 //        this.view.btnAddItem_addActionListener(new AddItem_addActionListener());
-//        this.view.btnDelete_addActionListener(new Delete_addActionListener());
+        
 //        this.view.btnTinhTongPRActionListener(new TinhTongActionListener());
 //        this.view.btnCreateActionListener(new CreateActionListener());
 //        this.view.btnUpdateActionListener(new UpdateActionListener());
@@ -173,6 +174,9 @@ public class POController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("btnTimPR_add is click");
+            if (view.getTablePR() != null){
+                view.getTablePR().setRowCount(0); // Xoá tất cả dữ liệu cũ để tránh đã add PR vào PO draft rồi vẫn hiện lại ds cũ.
+            }
             view.getDialogTimPR().pack();
             view.getDialogTimPR().setVisible(true);
             
@@ -184,30 +188,37 @@ public class POController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("btnLoadPR is clicked");
-            ArrayList<PurchaseRequest> listPendingPR = new ArrayList();
+            ArrayList<PurchaseRequest> listPRleftover = new ArrayList();
             try {
-                listPendingPR = prCtl.getModel().loadData_DB(0);
+                listPRleftover = prCtl.getModel().loadData_DB(0); // Lấy các PR có đang có trạng thái active (0)
             } catch (SQLException ex) {
                 Logger.getLogger(POController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
             if (view.getTablePOdraft() != null){
-                ArrayList<PurchaseRequest> listPRleftover = new ArrayList<>(listPendingPR);
                 int rowCount = view.getTablePOdraft().getRowCount();
                 for (int i = 0; i < rowCount; i++){
-                    for (PurchaseRequest pr : listPRleftover){
-                        if ( String.valueOf(pr.getSoCT()).equals(String.valueOf(view.getTablePR().getValueAt(i, 0))) && String.valueOf(pr.getItemLine()).equals(String.valueOf(view.getTablePR().getValueAt(i, 1))) ){
-                            listPRleftover.remove(i);
+                    Iterator<PurchaseRequest> iterator = listPRleftover.iterator();
+                    while (iterator.hasNext()) {
+                        PurchaseRequest pr = iterator.next();
+                        //if ( String.valueOf(pr.getSoCT()).equals(String.valueOf(view.getTablePOdraft().getValueAt(i, 0))) && String.valueOf(pr.getItemLine()).equals(String.valueOf(view.getTablePOdraft().getValueAt(i, 1))) ){
+                        if ( String.valueOf(pr.getSoCT()).equals(String.valueOf(view.getTablePOdraft().getValueAt(i, 0))) && String.valueOf(pr.getItemLine()).equals(String.valueOf(view.getTablePOdraft().getValueAt(i, 1))) ){
+                            System.out.println("iterator: " + iterator.toString());
+                            iterator.remove();
+                            break;
                         }
                     }
                 }
                 
-                listPendingPR = listPRleftover;
+                prCtl.getModel().setDsPR(listPRleftover);
             }
-            Object[][] dsObjPR = prCtl.getModel().getObjDsPR();               
+            
+            Object[][] dsObjPR = prCtl.getModel().getObjDsPR();
+            System.out.println("leftover prlist Object: " + dsObjPR.length);
             view.setColumnPR(PurchaseRequest.columns);
             view.setDataPR(dsObjPR);
             view.loadDataPR();
+            //view.getTablePR().setRowCount(0);
             view.getDialogTimPR().setVisible(true);
         }
     }
@@ -229,7 +240,7 @@ public class POController {
     private class SelectAddActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("btnSelect_add is clicked");
+            System.out.println("btnSelectPR_add is clicked");
             int[] selRows = view.getTbPR().getSelectedRows();
             boolean selRow = true;
             int[] selColumns = new int[] {0, 5, 6, 7, 8, 9, 10, 11}; // soCT, itemLine, maHang, tenHang, dvt, donGia, soLuong, itemPrice
@@ -238,6 +249,21 @@ public class POController {
             view.getTablePOdraft().add(new int[]{0, 1, 2, 3, 6, 7, 8, 10}, listObjData, new int[]{0, 1, 2, 3, 4, 5, 6, 7});
             view.getTablePOdraft().setData(view.getTbPOdraft());
             view.getDialogTimPR().dispose(); 
+        }
+    }
+    
+    //Action khi nút "Xoá Item" của Dialog "Tạo draft PO" được nhấn
+    private class RemoveAddActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnRemove_add is clicked");
+            if (view.getTbPOdraft().getSelectedRow() == -1){
+                JOptionPane.showMessageDialog(null, "Vui lòng chọn dòng PR cần bỏ ra");
+                return;
+            }
+            int[] selRows = view.getTbPOdraft().getSelectedRows();
+            view.getTablePOdraft().removeRow(selRows);
+            view.getTablePOdraft().setData(view.getTbPOdraft());
         }
     }
 
@@ -525,20 +551,7 @@ public class POController {
 //        }
 //    }
     
-//    //Action khi nút "Xoá Item" của Dialog "Tạo PR" được nhấn
-//    private class Delete_addActionListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            System.out.println("btnDelete_add is clicked");
-//            if (view.getTbPOdraft().getSelectedRow() == -1){
-//                JOptionPane.showMessageDialog(view, "Vui lòng chọn dòng Vendor cần sửa");
-//                return;
-//            }
-//            int selRow = view.getTbPOdraft().getSelectedRow();
-//            view.getTablePRdraft().removeRow(selRow);
-//            view.updateTbPRdraft();
-//        }
-//    }
+
 
 //    // Action khi nút "Thêm" của Dialog "Tạo PR" được nhấn
 //    private class AddItem_addActionListener implements ActionListener {
