@@ -152,6 +152,8 @@ public class VendorView extends javax.swing.JPanel {
         fieldMST_add = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         btnDialogAdd = new javax.swing.JButton();
+        fieldVAT_add = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         DialogUpdate = new javax.swing.JDialog();
         jLabel12 = new javax.swing.JLabel();
         fieldMaNCC_update = new javax.swing.JTextField();
@@ -163,6 +165,8 @@ public class VendorView extends javax.swing.JPanel {
         fieldMST_update = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         btnDialogUpdate = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        fieldVAT_update = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         fieldSearchTenNCC = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -198,29 +202,34 @@ public class VendorView extends javax.swing.JPanel {
 
         btnDialogAdd.setText("Thêm");
 
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("VAT");
+
         javax.swing.GroupLayout DialogAddLayout = new javax.swing.GroupLayout(DialogAdd.getContentPane());
         DialogAdd.getContentPane().setLayout(DialogAddLayout);
         DialogAddLayout.setHorizontalGroup(
             DialogAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DialogAddLayout.createSequentialGroup()
                 .addGroup(DialogAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DialogAddLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDialogAdd))
                     .addGroup(DialogAddLayout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addGroup(DialogAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(DialogAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(DialogAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel8)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(jLabel10))
+                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(DialogAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fieldTenNCC_add, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(fieldMaNCC_add)
                             .addComponent(fieldMST_add, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(fieldDiaChi_add)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DialogAddLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDialogAdd)))
+                            .addComponent(fieldDiaChi_add)
+                            .addComponent(fieldVAT_add))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DialogAddLayout.createSequentialGroup()
                 .addGap(0, 58, Short.MAX_VALUE)
@@ -251,7 +260,11 @@ public class VendorView extends javax.swing.JPanel {
                 .addGroup(DialogAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(fieldMST_add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(DialogAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fieldVAT_add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(btnDialogAdd)
                 .addContainerGap())
         );
@@ -277,29 +290,34 @@ public class VendorView extends javax.swing.JPanel {
 
         btnDialogUpdate.setText("Cập nhật");
 
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("VAT");
+
         javax.swing.GroupLayout DialogUpdateLayout = new javax.swing.GroupLayout(DialogUpdate.getContentPane());
         DialogUpdate.getContentPane().setLayout(DialogUpdateLayout);
         DialogUpdateLayout.setHorizontalGroup(
             DialogUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DialogUpdateLayout.createSequentialGroup()
                 .addGroup(DialogUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DialogUpdateLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDialogUpdate))
                     .addGroup(DialogUpdateLayout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addGroup(DialogUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(DialogUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(DialogUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel12)
-                                .addComponent(jLabel13)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(jLabel15))
+                                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(DialogUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(fieldTenNCC_update)
                             .addComponent(fieldMaNCC_update, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fieldMST_update)
-                            .addComponent(fieldDiaChi_update, javax.swing.GroupLayout.Alignment.LEADING)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DialogUpdateLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDialogUpdate)))
+                            .addComponent(fieldDiaChi_update, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fieldVAT_update))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DialogUpdateLayout.createSequentialGroup()
                 .addGap(0, 67, Short.MAX_VALUE)
@@ -330,7 +348,11 @@ public class VendorView extends javax.swing.JPanel {
                 .addGroup(DialogUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(fieldMST_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(DialogUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fieldVAT_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(btnDialogUpdate)
                 .addContainerGap())
         );
@@ -379,17 +401,17 @@ public class VendorView extends javax.swing.JPanel {
 
         tbVendor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã NCC", "Tên NCC", "Địa chỉ", "MST"
+                "Mã NCC", "Tên NCC", "Địa chỉ", "MST", "VAT"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -476,7 +498,8 @@ public class VendorView extends javax.swing.JPanel {
         String maNCCStr = fieldMaNCC_add.getText();
         String tenNCCStr = fieldTenNCC_add.getText();
         String diaChiStr = fieldDiaChi_add.getText();
-        String  mstStr = fieldMST_add.getText();
+        String mstStr = fieldMST_add.getText();
+        String vatStr = fieldVAT_add.getText();
         System.out.println("Ma NCC: " + maNCCStr);
 
         // Kiểm tra các trường nếu để rỗng
@@ -486,8 +509,16 @@ public class VendorView extends javax.swing.JPanel {
         }
 
         int maNCC = Integer.parseInt(maNCCStr);
+        float vat = 0f;
+        if (vatStr.matches("0\\.\\d+")){
+            vat = Float.parseFloat(vatStr);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập vào số có định dạng 0.x");
+            return null;
+        }
 
-        Vendor vendor = new Vendor(maNCC, tenNCCStr, diaChiStr, mstStr, 0);
+        Vendor vendor = new Vendor(maNCC, tenNCCStr, diaChiStr, mstStr, vat, 0);
         return vendor;   
     }
     
@@ -503,7 +534,8 @@ public class VendorView extends javax.swing.JPanel {
         String maNCCStr = fieldMaNCC_update.getText();
         String tenNCCStr = fieldTenNCC_update.getText();
         String diaChiStr = fieldDiaChi_update.getText();
-        String  mstStr = fieldMST_update.getText();
+        String mstStr = fieldMST_update.getText();
+        String vatStr = fieldVAT_update.getText();
 
         // Kiểm tra các trường nếu để rỗng
         if (tenNCCStr.isEmpty() || diaChiStr.isEmpty() || mstStr.isEmpty()) {
@@ -512,8 +544,16 @@ public class VendorView extends javax.swing.JPanel {
         }
 
         int maNCC = Integer.parseInt(maNCCStr);
+        float vat = 0f;
+        if (vatStr.matches("0\\.\\d+")){
+            vat = Float.parseFloat(vatStr);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập vào số có định dạng 0.x");
+            return null;
+        }
 
-        Vendor vendor = new Vendor(maNCC, tenNCCStr, diaChiStr, mstStr, 0);
+        Vendor vendor = new Vendor(maNCC, tenNCCStr, diaChiStr, mstStr, vat, 0);
         System.out.println(vendor);
         return vendor;   
     }
@@ -555,6 +595,8 @@ public class VendorView extends javax.swing.JPanel {
     private javax.swing.JTextField fieldSearchTenNCC;
     private javax.swing.JTextField fieldTenNCC_add;
     private javax.swing.JTextField fieldTenNCC_update;
+    private javax.swing.JTextField fieldVAT_add;
+    private javax.swing.JTextField fieldVAT_update;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -564,6 +606,8 @@ public class VendorView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -595,7 +639,7 @@ public class VendorView extends javax.swing.JPanel {
         fieldTenNCC_update.setText((String) tbVendor.getValueAt(selRow, 1));
         fieldDiaChi_update.setText((String) tbVendor.getValueAt(selRow, 2));
         fieldMST_update.setText(String.valueOf(tbVendor.getValueAt(selRow, 3)));
-        
+        fieldVAT_update.setText(String.valueOf(tbVendor.getValueAt(selRow, 4)));
     }
 
     public int selectRow() {

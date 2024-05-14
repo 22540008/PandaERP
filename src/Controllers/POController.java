@@ -117,8 +117,8 @@ public class POController {
             System.out.println("btnSearch is clicked");
             String[] paramSearch = view.getSearchParams();
             Object[][] trackObjPO;
-            trackObjPO = view.getTableERP().searchByCriteria(paramSearch, new int[]{0, 1});
-            view.getTableERP().setDataSearch(trackObjPO, PurchaseOrder.columns, view.getTbPO());
+            trackObjPO = view.getTableERP().searchByCriteria(paramSearch, new int[]{0, 1}, "match");
+            view.getTableERP().setData(trackObjPO, PurchaseOrder.columns, view.getTbPO());
         }
     }
     
@@ -219,29 +219,25 @@ public class POController {
             System.out.println("btnSearchPR is clicked");
             String[] paramSearch = view.getSearchParamPR();
             Object[][] trackObjPR;
-            trackObjPR = view.getTablePR().searchByCriteria(paramSearch, new int[]{0, 1});
-            view.getTablePR().setDataSearch(trackObjPR, PurchaseRequest.columns, view.getTbPR());
+            trackObjPR = view.getTablePR().searchByCriteria(paramSearch, new int[]{0, 1}, "match");
+            view.getTablePR().setData(trackObjPR, PurchaseRequest.columns, view.getTbPR());
 
         }
     }
     
-    // Action khi nút "Tìm" ở Dialog "Draft PO" được nhấn
+    // Action khi nút "Thêm" ở Dialog "Danh sách pending PR" được nhấn
     private class SelectAddActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("btnSelect_add is clicked");
             int[] selRows = view.getTbPR().getSelectedRows();
-            for (int i = 0; i < selRows.length; i++){
-                System.out.println("\ni = " + i);
-                Vector<Object> rowDataVector = (Vector<Object>) view.getTablePR().getDataVector().elementAt(i);
-//                Object[] objData = rowDataVector.toArray(new Object[0]);
-//                for (Object obj : objData){
-//                    System.out.print(obj + " ");
-//                }
-                
-                view.getTablePOdraft().addRow(rowDataVector);
-            }
-            view.getDialogTimPR().dispose();
+            boolean selRow = true;
+            int[] selColumns = new int[] {0, 5, 6, 7, 8, 9, 10, 11}; // soCT, itemLine, maHang, tenHang, dvt, donGia, soLuong, itemPrice
+            boolean selCol = true;
+            Object[][] listObjData = view.getTablePR().filter(selRows, selRow, selColumns, selCol);
+            view.getTablePOdraft().add(new int[]{0, 1, 2, 3, 6, 7, 8, 10}, listObjData, new int[]{0, 1, 2, 3, 4, 5, 6, 7});
+            view.getTablePOdraft().setData(view.getTbPOdraft());
+            view.getDialogTimPR().dispose(); 
         }
     }
 

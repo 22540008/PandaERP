@@ -1554,6 +1554,7 @@ public class POView extends javax.swing.JPanel {
         tbPOdraft.setModel(tablePOdraft);
         tbPOdraft.getColumnModel().getColumn(7).setCellRenderer(new CurrencyRenderer()); // VND format cột đơn giá
         tbPOdraft.getColumnModel().getColumn(10).setCellRenderer(new CurrencyRenderer()); // cột tổng giá item
+        tablePOdraft.setColumnVisible(tbPOdraft, new String[]{"Mã NCC", "Tên NCC"}, false);
     }
     
     public void initTablePRUpdate() {

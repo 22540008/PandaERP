@@ -13,18 +13,20 @@ public class Vendor {
     private String tenNCC;
     private String diaChi;
     private String mST;
+    private float vat;
     private int trangThai; // 0: active; 1: deleted; 2: inactive
-    private static final String[] columns = {"Mã NCC", "Tên NCC", "Địa chỉ", "MST"};
+    private static final String[] columns = {"Mã NCC", "Tên NCC", "Địa chỉ", "MST", "VAT"};
 
     public Vendor() {
         this.trangThai = 0;
     }
     
-    public Vendor(int maNCC, String tenNCC, String diaChi, String mST, int trangThai) {
+    public Vendor(int maNCC, String tenNCC, String diaChi, String mST, float vat, int trangThai) {
         this.maNCC = maNCC;
         this.tenNCC = tenNCC;
         this.diaChi = diaChi;
         this.mST = mST;
+        this.vat = vat;
         this.trangThai = trangThai;
     }
 
@@ -72,13 +74,21 @@ public class Vendor {
         this.trangThai = trangThai;
     }
 
+    public float getVat() {
+        return vat;
+    }
+
+    public void setVat(float vat) {
+        this.vat = vat;
+    }
+    
     @Override
     public String toString() {
-        return "Vendor{" + "maNCC=" + maNCC + ", tenNCC=" + tenNCC + ", diaChi=" + diaChi + ", mST=" + mST + ", trangThai=" + trangThai + '}';
+        return "Vendor{" + "maNCC=" + maNCC + ", tenNCC=" + tenNCC + ", diaChi=" + diaChi + ", mST=" + mST + ", vat=" + vat + ", trangThai=" + trangThai + '}';
     }
     
     public Object[] getObjectVendor(){
-        return new Object[] {maNCC, tenNCC, diaChi, mST};
+        return new Object[] {maNCC, tenNCC, diaChi, mST, vat};
     }
     
 

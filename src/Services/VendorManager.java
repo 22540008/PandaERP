@@ -80,6 +80,7 @@ public class VendorManager {
                     rs.getString("tenNCC"),
                     rs.getString("diaChi"),
                     rs.getString("mST"),
+                    rs.getFloat("vat"),
                     rs.getInt("trangThai"));
             System.out.println(vendor);
             dsVendor.add(vendor);
@@ -104,6 +105,7 @@ public class VendorManager {
                 rs.getString("tenNCC"),
                 rs.getString("diaChi"),
                 rs.getString("mST"),
+                rs.getFloat("vat"),
                 rs.getInt("trangThai"));
         System.out.println(vendor);
         conn.close();
@@ -116,13 +118,14 @@ public class VendorManager {
         // đối tượng s kết nối SQL Server
         SQLConnection conn = new SQLConnection("", "");
         // Chuỗi truy vấn SQL q cho bảng Vendors
-        String sql = "INSERT INTO Vendor (maNCC, tenNCC, diaChi, mST, trangThai) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Vendor (maNCC, tenNCC, diaChi, mST, vat, trangThai) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.getConnection().prepareStatement(sql)) {
             stmt.setInt(1, vendor.getMaNCC());
             stmt.setString(2, vendor.getTenNCC());
             stmt.setString(3, vendor.getDiaChi());
             stmt.setString(4, vendor.getmST());
-            stmt.setInt(5, vendor.getTrangThai());
+            stmt.setFloat(5, vendor.getVat());
+            stmt.setInt(6, vendor.getTrangThai());
 
             rowEffect = stmt.executeUpdate();
         }
@@ -137,13 +140,14 @@ public class VendorManager {
         // đối tượng s kết nối SQL Server
         SQLConnection conn = new SQLConnection("", "");
         // Chuỗi truy vấn SQL q cho bảng Vendors
-        String sql1 = "UPDATE Vendor SET tenNCC = ?, diaChi = ?, mST = ?, trangThai = ? WHERE maNCC = ?";
+        String sql1 = "UPDATE Vendor SET tenNCC = ?, diaChi = ?, mST = ?, vat = ?, trangThai = ? WHERE maNCC = ?";
         try (PreparedStatement stmt = conn.getConnection().prepareStatement(sql1)) {
             stmt.setString(1, vendor.getTenNCC());
             stmt.setString(2, vendor.getDiaChi());
             stmt.setString(3, vendor.getmST());
-            stmt.setInt(4, vendor.getTrangThai());
-            stmt.setInt(5, vendor.getMaNCC());
+            stmt.setFloat(4, vendor.getVat());
+            stmt.setInt(5, vendor.getTrangThai());
+            stmt.setInt(6, vendor.getMaNCC());
 
             rowEffect = stmt.executeUpdate();
         }
