@@ -79,10 +79,12 @@ public class POManager {
         SQLConnection conn = new SQLConnection("sa", "sa");
         // Chuỗi truy vấn SQL q
         String q = """
-                    SELECT *, PurchaseOrder.soCT_line AS soPO_line
-                    FROM PurchaseOrder JOIN PurchaseRequest ON PurchaseOrder.soPR_line = PurchaseRequest.soCT_line
-                    JOIN Item ON PurchaseOrder.maHang = Item.maHang
-                    JOIN Vendor ON PurchaseOrder.maNCC = Vendor.maNCC
+                    SELECT *
+                    FROM PurchaseOrder JOIN PO_PR ON PurchaseOrder.soCT_line = PO_PR.soPO_line
+                        JOIN PurchaseRequest ON PO_PR.soPR_line = PurchaseRequest.soCT_line
+                        JOIN Item ON PurchaseRequest.maHang = Item.maHang
+                        JOIN Vendor ON PurchaseOrder.maNCC = Vendor.maNCC
+                    WHERE PurchaseOrder.trangThai NOT IN (1);
                    """;
         PreparedStatement stmt = conn.getConnection().prepareStatement(q);
 
@@ -93,7 +95,6 @@ public class POManager {
             item.setMaHang(rs.getInt("maHang")); // đúng cho truy vấn cột maHang đầu tiên
             item.setTenHang(rs.getString("tenHang"));
             item.setDvt(rs.getString("dvt"));
-            item.setDonGia(rs.getLong("donGia"));
             
             Vendor vendor = new Vendor();
             vendor.setMaNCC(rs.getInt("maNCC"));
@@ -114,8 +115,9 @@ public class POManager {
             po.setItemLine(rs.getInt("itemLine"));
             po.setPr(pr);
             po.setVendor(vendor);
-            po.setDonGia(rs.getInt("gia"));
-            po.setVat(rs.getFloat("vat"));
+            po.setDonGia(rs.getLong("gia"));
+            po.setSoLuong(rs.getInt("soLuong"));
+            po.setVat(rs.getFloat("vat") * 100);
             po.setGiaItem(rs.getDouble("tongGia"));
             
             dsPO.add(po);
@@ -125,37 +127,37 @@ public class POManager {
     }
                
 //    // Add 1 sample từ JAVA về CSDL
-//    public int addDB(ArrayList<PurchaseOrder> prList) throws SQLException{
+//    public int addDB(ArrayList<PurchaseOrder> poList) throws SQLException{
 //        int rowEffect = 0;
 //        // đối tượng s kết nối SQL Server
 //        SQLConnection conn = new SQLConnection("", "");
 //        String sql = "INSERT INTO PurchaseOrder (soCT_line, soCT, NguoiTao, ngayTao, ngaySua, trangThai, itemLine, maHang, giaEst, soLuong, tongGia) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 //        PreparedStatement stmt = conn.getConnection().prepareStatement(sql);
 //
-//        for (PurchaseOrder pr : prList){
-//            String soCT_line = pr.getSoCT() + "_" + pr.getItemLine();
+//        for (PurchaseOrder po : poList){
+//            String soCT_line = po.getSoCT() + "_" + po.getItemLine();
 //            stmt.setString(1, soCT_line);
-//            stmt.setInt(2, pr.getSoCT());
-//            stmt.setString(3, pr.getUser());
+//            stmt.setInt(2, po.getSoCT());
+//            stmt.setString(3, po.getUser());
 //            //stmt.setDate(4, (Date) pr.getNgayTao());
-//            Date ngayTao = pr.getNgayTao();
+//            Date ngayTao = po.getNgayTao();
 //            stmt.setDate(4, new java.sql.Date(ngayTao.getTime()));
 //            //stmt.setDate(5, (Date) pr.getNgaySua());
-//            Date ngaySua = pr.getNgaySua();
+//            Date ngaySua = po.getNgaySua();
 //            stmt.setDate(5, new java.sql.Date(ngaySua.getTime()));
-//            stmt.setInt(6, pr.getTrangThai());
-//            stmt.setInt(7, pr.getItemLine());
-//            stmt.setInt(8, pr.getItem().getMaHang());
-//            stmt.setLong(9, pr.getDonGia());
-//            stmt.setInt(10, pr.getSoLuong());
-//            stmt.setDouble(11, pr.getGiaItem());
+//            stmt.setInt(6, po.getTrangThai());
+//            stmt.setInt(7, po.getItemLine());
+//            stmt.setInt(8, po.getItem().getMaHang());
+//            stmt.setLong(9, po.getDonGia());
+//            stmt.setInt(10, po.getSoLuong());
+//            stmt.setDouble(11, po.getGiaItem());
 //            
 //            rowEffect += stmt.executeUpdate();
 //        }
 //        conn.close();      
 //        return rowEffect;
 //    }
-//    
+    
 //    // Update Array<DataType> từ JAVA về CSDL
 //    public int updateDB(ArrayList<PurchaseOrder> prList) throws SQLException{
 //        int rowEffect = 0;

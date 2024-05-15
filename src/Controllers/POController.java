@@ -63,10 +63,11 @@ public class POController {
         this.view.btnSearchVendorActionListener(new SearchVendorActionListener());
         this.view.btnSelVendorActionListener(new SelVendorActionListener());
         this.view.btnTinhTongPOdraftActionListener (new TinhTongPOdraftActionListener());
+        this.view.btnCreateActionListener(new CreateActionListener());
         
         
 
-//        this.view.btnCreateActionListener(new CreateActionListener());
+        
 //        this.view.btnUpdateActionListener(new UpdateActionListener());
 //        this.view.DialogUpdateActionListener(new DialogUpdateActionListener());
 //        this.view.btnCloseActionListener(new CloseActionListener());
@@ -341,6 +342,87 @@ public class POController {
             view.getFieldTongPOdraft().setText(CurrencyUtils.format(String.valueOf(tong)));
         }
     }
+    
+    // Action khi nút "Tạo PO" của Dialog "Tạo PO" được nhấn
+    private class CreateActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnCreate is clicked");
+            int rowCount = view.getTbPOdraft().getRowCount();
+            if (rowCount == 0){
+                JOptionPane.showMessageDialog(null, "Không có PR được chọn");
+                return;
+            }
+            ArrayList<PurchaseOrder> newPOlist = new ArrayList();
+            for (int i = 0; i < rowCount; i++){
+                int soCT = Integer.parseInt(String.valueOf(view.getFieldSoCT_add().getText()));
+                int maNCC = Integer.parseInt(String.valueOf(view.getFieldMaNCC_add().getText()));
+                PurchaseOrder po = new PurchaseOrder();
+                po.setSoCT(soCT);
+                po.setUser(view.getFieldUser_add().getText());
+                po.setNgayTao(view.getDate_add().getDate());
+                po.setNgaySua(view.getDate_add().getDate());
+                po.setTrangThai(0);
+                po.setItemLine(i);
+                po.setSoPR((int)(view.getTablePOdraft().getValueAt(i, 6)));
+                po.setItemLine((int)(view.getTablePOdraft().getValueAt(i, 7)));
+                po.setMaHang((int)(view.getTablePOdraft().getValueAt(i, 8)));
+                po.setTenHang(String.valueOf(view.getTablePOdraft().getValueAt(i, 9)));
+                po.setDvt(String.valueOf(view.getTablePOdraft().getValueAt(i, 10)));
+                po.setMaNCC(maNCC);
+                po.setTenNCC(view.getFieldTenNCC_add().getText());
+                po.setDonGia((long)view.getTablePOdraft().getValueAt(i, 13));
+                po.setSoLuong((int)view.getTablePOdraft().getValueAt(i, 14));
+                if (String.valueOf(view.getTablePOdraft().getValueAt(i, 15)).isBlank()){
+                    po.setVat(Float.parseFloat(String.valueOf(view.getFieldVAT_add().getText())));
+                }
+                else {
+                    po.setVat((float) view.getTablePOdraft().getValueAt(i, 15));
+                }
+                po.setGiaItem((double) view.getTablePOdraft().getValueAt(i, 16));
+
+//                int maHang = (int) view.getTbPOdraft().getValueAt(i, 0);
+//                Item item = new Item();
+//                item.setMaHang(maHang);
+//                
+//                PurchaseRequest pr = new PurchaseRequest();
+//                pr.setSoCT(Integer.parseInt(view.getFieldSoCT_add().getText()));
+//                pr.setUser(view.getFieldUser_add().getText());
+//                pr.setNgayTao(view.getDate_add().getDate());
+//                pr.setNgaySua(view.getDate_add().getDate()); // Ngày sửa = ngày tạo khi tạo mới PR.
+//                pr.setItemLine(i+1);
+//                pr.setItem(item);
+//                pr.setDonGia((long)view.getTbPOdraft().getValueAt(i, 3));
+//                pr.setSoLuong((int)view.getTbPOdraft().getValueAt(i, 4));
+//                if (view.getTbPOdraft().getValueAt(i, 5) != null){
+//                    //pr.setGiaItem(0);
+//                    pr.setGiaItem((double)view.getTbPOdraft().getValueAt(i, 5));
+//                }
+//                else {
+//                    //pr.setGiaItem((double)view.getTbPOdraft().getValueAt(i, 5));
+//                    pr.setGiaItem(0);
+//                }
+                
+                
+                newPOlist.add(po);
+            }
+            
+//            try {
+//                model.addDB(newPRlist);
+//            } catch (SQLException ex) {
+//                Logger.getLogger(POController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+            
+            for (PurchaseRequest pr : newPRlist){
+                Object[] objPR = pr.getObjPR();
+                view.getTableERP().addRow(objPR);
+            }
+            view.updateTbPR();
+            JOptionPane.showMessageDialog(view.getDialogAdd(), "Vui lòng \"Load\" lại dữ liệu để cập nhật mới nhất");
+            view.getDialogAdd().setVisible(false);
+        }
+    }
+
 
 
 
@@ -555,55 +637,6 @@ public class POController {
 //        }
 //    }
 
-//    //Action khi nút "Tạo PR" của Dialog "Tạo PR" được nhấn
-//    private class CreateActionListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            System.out.println("btnCreate is clicked");
-//            int rowCount = view.getTbPOdraft().getRowCount();
-//            ArrayList<PurchaseRequest> newPRlist = new ArrayList();
-//            for (int i = 0; i < rowCount; i++){
-//                int maHang = (int) view.getTbPOdraft().getValueAt(i, 0);
-//                Item item = new Item();
-//                item.setMaHang(maHang);
-//                
-//                PurchaseRequest pr = new PurchaseRequest();
-//                pr.setSoCT(Integer.parseInt(view.getFieldSoCT_add().getText()));
-//                pr.setUser(view.getFieldUser_add().getText());
-//                pr.setNgayTao(view.getDate_add().getDate());
-//                pr.setNgaySua(view.getDate_add().getDate()); // Ngày sửa = ngày tạo khi tạo mới PR.
-//                pr.setItemLine(i+1);
-//                pr.setItem(item);
-//                pr.setDonGia((long)view.getTbPOdraft().getValueAt(i, 3));
-//                pr.setSoLuong((int)view.getTbPOdraft().getValueAt(i, 4));
-//                if (view.getTbPOdraft().getValueAt(i, 5) != null){
-//                    //pr.setGiaItem(0);
-//                    pr.setGiaItem((double)view.getTbPOdraft().getValueAt(i, 5));
-//                }
-//                else {
-//                    //pr.setGiaItem((double)view.getTbPOdraft().getValueAt(i, 5));
-//                    pr.setGiaItem(0);
-//                }
-//                
-//                
-//                newPRlist.add(pr);
-//            }
-//            
-//            try {
-//                model.addDB(newPRlist);
-//            } catch (SQLException ex) {
-//                Logger.getLogger(POController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            
-//            for (PurchaseRequest pr : newPRlist){
-//                Object[] objPR = pr.getObjPR();
-//                view.getTableERP().addRow(objPR);
-//            }
-//            view.updateTbPR();
-//            JOptionPane.showMessageDialog(view.getDialogAdd(), "Vui lòng \"Load\" lại dữ liệu để cập nhật mới nhất");
-//            view.getDialogAdd().setVisible(false);
-//        }
-//    }
 
     
    

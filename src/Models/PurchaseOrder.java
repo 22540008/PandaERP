@@ -20,13 +20,19 @@ public class PurchaseOrder extends Transaction {
     private double giaDonHang;
     
     public static final String[] columns = {"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PR", "PR line", "Mã hàng", "Tên hàng", "ĐVT", "Mã NCC", "Tên NCC",
-        "Giá", "Số lượng", "VAT", "Tổng giá"};
+        "Giá", "Số lượng", "VAT%", "Tổng giá"};
 
     public PurchaseOrder() {
+        pr = new PurchaseRequest();
+        vendor = new Vendor();
+        giaDonHang = 0f;
     }
 
     public PurchaseOrder(int soCT, String user, Date ngayTao, Date ngaySua, int trangThai, int itemLine) {
         super(soCT, user, ngayTao, ngaySua, trangThai, itemLine);
+        pr = new PurchaseRequest();
+        vendor = new Vendor();
+        giaDonHang = 0f;
     }
     
 
@@ -137,9 +143,17 @@ public class PurchaseOrder extends Transaction {
     public int getPRline() {
         return this.getPr().getItemLine();
     }
+    
+    public void setPRline(int itemLine) {
+        this.getPr().setItemLine(itemLine);
+    }
 
     public int getSoPR() {
         return this.getPr().getSoCT();
+    }
+    
+     public void setSoPR(int soPR) {
+        this.getPr().setSoCT(soCT);
     }
 
     public String getTenHang() {
@@ -158,8 +172,12 @@ public class PurchaseOrder extends Transaction {
         this.getPr().getItem().setMaHang(maHang);
     }
 
-    private String getDvt() {
+    public String getDvt() {
         return this.pr.getItem().getDvt();
+    }
+    
+    public void setDvt(String dvt) {
+        this.pr.getItem().setDvt(dvt);
     }
        
 }

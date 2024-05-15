@@ -90,6 +90,30 @@ public class TableERP extends DefaultTableModel {
         }
         return this.exportObjData();
     }
+
+    /**
+     * Thêm dữ liệu vào các cột tương ứng của TableModel.
+     * Mỗi phần tử trong mảng data sẽ được đặt làm giá trị cho toàn bộ cột tương ứng trong TableModel.
+     *
+     * @param tbColumn Mảng chứa các chỉ số cột cần thêm dữ liệu.
+     * @param data Mảng chứa dữ liệu cần thêm vào các cột.
+     * @return Mảng hai chiều chứa dữ liệu của TableModel sau khi thêm.
+     * @throws IllegalArgumentException Nếu số lượng cột trong tbColumn không khớp với số lượng phần tử trong data.
+     */
+    public Object[][] add(int[] tbColumn, Object[] data){
+        if (tbColumn.length != data.length) {
+            throw new IllegalArgumentException("Số lượng cột không khớp");
+        }
+    
+        int rowCount = this.getRowCount();
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < tbColumn.length; j++) {
+                this.setValueAt(data[j], i, tbColumn[j]);
+            }
+        }
+    
+        return this.exportObjData();
+    }
     
     
     // Kiểm tra hàng nằm trong phạm vi bảng, số lượng cột khớp. Nêu đúng, cập nhật mỗi cột trong hàng với giá trị tương ứng từ rowData.

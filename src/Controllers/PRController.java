@@ -131,9 +131,6 @@ public class PRController {
         }
     }
 
-   
-    
-
     private class DialogUpdateActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {

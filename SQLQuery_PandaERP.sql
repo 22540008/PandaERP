@@ -151,8 +151,6 @@ CREATE TABLE PurchaseOrder (
     ngaySua DATE,
 	trangThai INT,
 	itemLine INT,
-	soPR_line VARCHAR(13),
-    maHang INT,
 	maNCC INT,
 	gia MONEY,
 	soLuong INT,
@@ -161,21 +159,48 @@ CREATE TABLE PurchaseOrder (
 );
 
 -- Thêm dữ liệu mẫu vào bảng PurchaseRequest
-INSERT INTO PurchaseOrder (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine, soPR_line, maHang, maNCC, gia, soLuong, vat, tongGia) VALUES
-('2190001_1', 2190001, N'tqhung', '01/01/2022', '01/02/2022', 0, 1, '1190001_1', 100001, 1001, 0, 5, 0.1, 0),
-('2190002_1', 2190002, N'ptnam', '01-01-2022', '01-02-2022', 0, 1, '1190002_1', 100002, 1002, 0, 8, 0.1, 0),
-('2190003_1', 2190003, N'admin', '01/01/2022', '01/02/2022', 0, 1, '1190003_1', 100003, 1003, 0, 10, 0.1, 0);
+INSERT INTO PurchaseOrder (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine, maNCC, gia, soLuong, vat, tongGia) VALUES
+('2190001_1', 2190001, N'tqhung', '01/01/2022', '01/02/2022', 0, 1, 1001, 0, 5, 0.1, 0),
+('2190002_1', 2190002, N'ptnam', '01-01-2022', '01-02-2022', 0, 1, 1002, 0, 8, 0.1, 0),
+('2190003_1', 2190003, N'admin', '01/01/2022', '01/02/2022', 0, 1, 1003, 0, 10, 0.1, 0);
+
+
+-- Bảng PO_PR
+CREATE TABLE PO_PR (
+    soPO_line VARCHAR(13),
+    soPR_line VARCHAR(13),
+    --FOREIGN KEY (soPO_line) REFERENCES PurchaseOrder(soCT),
+    --FOREIGN KEY (soPR_line) REFERENCES PurchaseRequest(soCT),
+    PRIMARY KEY (soPO_line, soPR_line)
+);
+
+-- Thêm dữ liệu mẫu vào bảng PO-PR
+INSERT INTO PO_PR (soPO_line, soPR_line) VALUES
+('2190001_1', '1190001_1'),
+('2190002_1', '1190002_1'),
+('2190003_1', '1190003_1');
 
 SELECT * FROM PurchaseOrder;
-SELECT PurchaseRequest.*, Item.*, PurchaseRequest.maHang AS PR_maHang, Item.maHang AS Item_maHang
-FROM PurchaseRequest JOIN Item ON PurchaseRequest.maHang = Item.maHang;
+SELECT * FROM PO_PR;
 SELECT *
 FROM PurchaseRequest JOIN Item ON PurchaseRequest.maHang = Item.maHang;
 UPDATE PurchaseRequest SET trangThai = 0 WHERE soCT =  1240001 AND itemLine = 1;
 UPDATE PurchaseRequest SET trangThai = 0, soLuong = 33 WHERE SoCT = 1240009 AND itemLine = 1;
 
-SELECT *, PurchaseOrder.soCT_line AS soPO_line
-FROM PurchaseOrder JOIN PurchaseRequest ON PurchaseOrder.soPR_line = PurchaseRequest.soCT_line
+SELECT *
+FROM PurchaseOrder JOIN PO_PR ON PurchaseOrder.soCT_line = PO_PR.soPO_line
+	JOIN PurchaseRequest ON PO_PR.soPR_line = PurchaseRequest.soCT_line
+	JOIN Item ON PurchaseRequest.maHang = Item.maHang
+	JOIN Vendor ON PurchaseOrder.maNCC = Vendor.maNCC
+WHERE PurchaseOrder.trangThai NOT IN (1);
+
+
+
+
+
+
+
+PurchaseRequest ON PurchaseOrder.soPR_line = PurchaseRequest.soCT_line
 JOIN Item ON PurchaseOrder.maHang = Item.maHang
 JOIN Vendor ON PurchaseOrder.maNCC = Vendor.maNCC
 
