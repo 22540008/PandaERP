@@ -33,11 +33,11 @@
                   <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jPanel3" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                  <Component id="jPanel4" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -140,7 +140,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="T&#xec;m Item"/>
+                <TitledBorder title="T&#xec;m"/>
               </Border>
             </Property>
           </Properties>
@@ -149,48 +149,30 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="btnTimPR_add" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="fieldMaHang_add" alignment="1" pref="87" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="fieldTenHang_add" pref="88" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                  <Component id="fieldDVT_add" pref="87" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="fieldDonGia_add" alignment="0" pref="87" max="32767" attributes="0"/>
-                                  <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                                  <Component id="spinFieldSL_add" pref="87" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="btnTimNCC_add" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="fieldMaNCC_add" min="-2" pref="112" max="-2" attributes="0"/>
+                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="btnChonNCC_add" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="btnAdd_add" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="203" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="fieldTenNCC_add" alignment="1" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                          <Component id="fieldVAT_add" min="-2" pref="115" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -201,44 +183,40 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="btnTimPR_add" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="btnTimPR_add" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="spinFieldSL_add" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="fieldMaHang_add" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="fieldTenHang_add" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="fieldDVT_add" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="fieldDonGia_add" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="0" pref="29" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="fieldVAT_add" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldTenNCC_add" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldMaNCC_add" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnTimNCC_add" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnAdd_add" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnChonNCC_add" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JTextField" name="fieldDVT_add">
+            <Component class="javax.swing.JTextField" name="fieldVAT_add">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
-                <Property name="text" type="java.lang.String" value="T&#xea;n h&#xe0;ng"/>
+                <Property name="text" type="java.lang.String" value="T&#xea;n NCC"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnTimPR_add">
@@ -248,47 +226,25 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#x110;VT"/>
-              </Properties>
-            </Component>
-            <Component class="com.toedter.components.JSpinField" name="spinFieldSL_add">
-              <Properties>
-                <Property name="minimum" type="int" value="1"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnAdd_add">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
+                <Property name="text" type="java.lang.String" value="VAT%"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
-                <Property name="text" type="java.lang.String" value="M&#xe3; h&#xe0;ng"/>
+                <Property name="text" type="java.lang.String" value="M&#xe3; NCC"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel9">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&#x110;&#x1a1;n gi&#xe1; (VND)"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="fieldTenHang_add">
+            <Component class="javax.swing.JTextField" name="fieldTenNCC_add">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="fieldMaHang_add">
+            <Component class="javax.swing.JTextField" name="fieldMaNCC_add">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="fieldDonGia_add">
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel10">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnChonNCC_add">
+            <Component class="javax.swing.JButton" name="btnTimNCC_add">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n NCC"/>
               </Properties>
@@ -310,11 +266,11 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnTinhTongPO" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" alignment="0" pref="586" max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="btnTinhTongPOdraft" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="fieldTongPR" min="-2" pref="75" max="-2" attributes="0"/>
+                              <Component id="fieldTongPOdraft" min="-2" pref="75" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnRemove_add" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -327,16 +283,17 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="182" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" pref="243" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnTinhTongPO" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnRemove_add" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnCreate" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="fieldTongPR" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnRemove_add" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="fieldTongPOdraft" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnTinhTongPOdraft" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -352,7 +309,13 @@
                 <Component class="javax.swing.JTable" name="tbPOdraft">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="11" rowCount="4">
+                      <Table columnCount="17" rowCount="4">
+                        <Column editable="true" title="S&#x1ed1; CT" type="java.lang.Integer"/>
+                        <Column editable="true" title="Ng&#x1b0;&#x1edd;i t&#x1ea1;o" type="java.lang.String"/>
+                        <Column editable="true" title="Ng&#xe0;y t&#x1ea1;o" type="java.lang.String"/>
+                        <Column editable="true" title="Ng&#xe0;y s&#x1eed;a" type="java.lang.String"/>
+                        <Column editable="true" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.Integer"/>
+                        <Column editable="true" title="ItemLine" type="java.lang.Integer"/>
                         <Column editable="true" title="S&#x1ed1; PR" type="java.lang.Integer"/>
                         <Column editable="true" title="PR Line" type="java.lang.Integer"/>
                         <Column editable="true" title="M&#xe3; h&#xe0;ng" type="java.lang.Integer"/>
@@ -362,12 +325,42 @@
                         <Column editable="true" title="&#x110;VT" type="java.lang.String"/>
                         <Column editable="true" title="&#x110;&#x1a1;n gi&#xe1;" type="java.lang.Long"/>
                         <Column editable="true" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng" type="java.lang.Integer"/>
-                        <Column editable="true" title="VAT" type="java.lang.Float"/>
+                        <Column editable="true" title="VAT (%)" type="java.lang.Float"/>
                         <Column editable="true" title="T&#x1ed5;ng gi&#xe1;" type="java.lang.Double"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
@@ -442,12 +435,12 @@
                 <Property name="text" type="java.lang.String" value="Xo&#xe1; Item"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnTinhTongPO">
+            <Component class="javax.swing.JButton" name="btnTinhTongPOdraft">
               <Properties>
                 <Property name="text" type="java.lang.String" value="T&#xed;nh t&#x1ed5;ng"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="fieldTongPR">
+            <Component class="javax.swing.JTextField" name="fieldTongPOdraft">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
@@ -1154,14 +1147,10 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnTotalItemPrice2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="fieldTotalPrice2" min="-2" pref="98" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnSelectPR_add" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnLoadPR" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnSelectPR" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1169,35 +1158,18 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                              <Component id="fieldTotalPrice2" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="btnSelectPR_add" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnLoadPR" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="btnTotalItemPrice2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnSelectPR" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnLoadPR" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="btnSelectPR_add">
+            <Component class="javax.swing.JButton" name="btnSelectPR">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnTotalItemPrice2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="T&#xed;nh t&#x1ed5;ng gi&#xe1;"/>
-                <Property name="horizontalAlignment" type="int" value="2"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="fieldTotalPrice2">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="SansSerif" size="12" style="0"/>
-                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnLoadPR">
@@ -1210,6 +1182,9 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JDialog" name="DialogTimVendor">
+      <Properties>
+        <Property name="modal" type="boolean" value="true"/>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -1315,15 +1290,17 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane5" alignment="0" pref="584" max="32767" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jScrollPane5" pref="584" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="btnAddVendor" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnLoadVendor" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btnSelectVendor" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1335,7 +1312,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnLoadVendor" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnAddVendor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnSelectVendor" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -1361,6 +1338,35 @@
                       </Table>
                     </Property>
                     <Property name="autoResizeMode" type="int" value="4"/>
+                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                      <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                      </TableColumnModel>
+                    </Property>
                     <Property name="selectionMode" type="int" value="0"/>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -1374,9 +1380,9 @@
                 <Property name="text" type="java.lang.String" value="Load"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnAddVendor">
+            <Component class="javax.swing.JButton" name="btnSelectVendor">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
+                <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n"/>
               </Properties>
             </Component>
           </SubComponents>

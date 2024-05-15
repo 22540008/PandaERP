@@ -8,6 +8,7 @@ import Models.Item;
 import Models.PurchaseOrder;
 import Models.PurchaseRequest;
 import Models.User;
+import Models.Vendor;
 import Services.POManager;
 import Views.PRView;
 import java.awt.event.ActionEvent;
@@ -55,15 +56,16 @@ public class POController {
         this.view.btnDiagTimPRaddActionListener(new TimPRaddActionListener());
         this.view.btnLoadPRActionListener(new LoadPRActionListener());
         this.view.btnSearchPRActionListener(new SearchPRActionListener());
-        this.view.btnSelectAddActionListener(new SelectAddActionListener());
+        this.view.btnSelectPRActionListener(new SelectPRActionListener());
         this.view.btnRemove_addActionListener(new RemoveAddActionListener());
+        this.view.btnDiagTimNCCaddActionListener(new TimNCCaddActionListener());
+        this.view.btnLoadVendorActionListener(new LoadVendorActionListener());
+        this.view.btnSearchVendorActionListener(new SearchVendorActionListener());
+        this.view.btnSelVendorActionListener(new SelVendorActionListener());
+        this.view.btnTinhTongPOdraftActionListener (new TinhTongPOdraftActionListener());
         
-//        this.view.btnLoadItemActionListener(new LoadFindItemActionListener());
-//        this.view.btnSearchItemActionListener(new SearchItemActionListener());
-//        this.view.btnAddItemInfoActionListener(new AddItemInfoActionListener());
-//        this.view.btnAddItem_addActionListener(new AddItem_addActionListener());
         
-//        this.view.btnTinhTongPRActionListener(new TinhTongActionListener());
+
 //        this.view.btnCreateActionListener(new CreateActionListener());
 //        this.view.btnUpdateActionListener(new UpdateActionListener());
 //        this.view.DialogUpdateActionListener(new DialogUpdateActionListener());
@@ -94,7 +96,8 @@ public class POController {
     public POView getView() {
         return view;
     }
-    
+
+
     // Action khi nút Load ở panel "danh sách PO" được nhấn
     private class LoadActionListener implements ActionListener {
         @Override
@@ -160,8 +163,8 @@ public class POController {
             view.getFieldSoCT_add().setText(String.valueOf(maxSoCT + 1));
             view.getDate_add().setDate(new Date()); // set ngày PR hiện tại
             view.getFieldUser_add().setText(loginUser.getTenTK()); // set người tạo PR là tài khoản đang dùng
-
-            view.setColumnPOdraft(new String[] {"Số PR", "PR line", "Mã hàng", "Tên hàng", "Mã NCC", "Tên NCC", "ĐVT", "Đơn giá", "Số lượng", "VAT", "Tổng giá"});
+            //view.setColumnPOdraft(new String[] {"Số PR", "PR line", "Mã hàng", "Tên hàng", "Mã NCC", "Tên NCC", "ĐVT", "Đơn giá", "Số lượng", "VAT", "Tổng giá"});
+            view.setColumnPOdraft(PurchaseOrder.columns);
             view.setDataPOdraft(new Object[0][0]);
             view.initTablePOdraft();
             view.getDialogAdd().pack(); // giúp Dialog khởi tạo các thành phần bên trong hoàn toàn, điều chỉnh kích thước... -> tránh lỗi hiển thị.
@@ -201,7 +204,6 @@ public class POController {
                     Iterator<PurchaseRequest> iterator = listPRleftover.iterator();
                     while (iterator.hasNext()) {
                         PurchaseRequest pr = iterator.next();
-                        //if ( String.valueOf(pr.getSoCT()).equals(String.valueOf(view.getTablePOdraft().getValueAt(i, 0))) && String.valueOf(pr.getItemLine()).equals(String.valueOf(view.getTablePOdraft().getValueAt(i, 1))) ){
                         if ( String.valueOf(pr.getSoCT()).equals(String.valueOf(view.getTablePOdraft().getValueAt(i, 0))) && String.valueOf(pr.getItemLine()).equals(String.valueOf(view.getTablePOdraft().getValueAt(i, 1))) ){
                             System.out.println("iterator: " + iterator.toString());
                             iterator.remove();
@@ -228,6 +230,9 @@ public class POController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("btnSearchPR is clicked");
+            if (view.getTablePR()== null){
+                JOptionPane.showMessageDialog(null, "Vui lòng Load dữ liệu trước");
+            }
             String[] paramSearch = view.getSearchParamPR();
             Object[][] trackObjPR;
             trackObjPR = view.getTablePR().searchByCriteria(paramSearch, new int[]{0, 1}, "match");
@@ -237,16 +242,16 @@ public class POController {
     }
     
     // Action khi nút "Thêm" ở Dialog "Danh sách pending PR" được nhấn
-    private class SelectAddActionListener implements ActionListener {
+    private class SelectPRActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("btnSelectPR_add is clicked");
+            System.out.println("btnSelectPR is clicked");
             int[] selRows = view.getTbPR().getSelectedRows();
             boolean selRow = true;
             int[] selColumns = new int[] {0, 5, 6, 7, 8, 9, 10, 11}; // soCT, itemLine, maHang, tenHang, dvt, donGia, soLuong, itemPrice
             boolean selCol = true;
             Object[][] listObjData = view.getTablePR().filter(selRows, selRow, selColumns, selCol);
-            view.getTablePOdraft().add(new int[]{0, 1, 2, 3, 6, 7, 8, 10}, listObjData, new int[]{0, 1, 2, 3, 4, 5, 6, 7});
+            view.getTablePOdraft().add(new int[]{6, 7, 8, 9, 10, 13, 14, 16}, listObjData, new int[]{0, 1, 2, 3, 4, 5, 6, 7});
             view.getTablePOdraft().setData(view.getTbPOdraft());
             view.getDialogTimPR().dispose(); 
         }
@@ -266,6 +271,78 @@ public class POController {
             view.getTablePOdraft().setData(view.getTbPOdraft());
         }
     }
+    
+    // Action khi nút "Chọn NCC" ở Dialog "Tạo đơn hàng (PO)" được nhấn
+    private class TimNCCaddActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnTimNCC_add is clicked");
+            view.getDialogTimVendor().pack();
+            view.getDialogTimVendor().setVisible(true);
+        }
+    }
+    
+    // Action khi nút "Load" của Dialog "Tìm NCC" được nhấn
+    private class LoadVendorActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnLoadVendor is clicked");
+            try {
+                vendorCtl.getModel().loadData_DB();
+            } catch (SQLException ex) {
+                Logger.getLogger(POController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Object[][] dsObjVendor = vendorCtl.getModel().getObjDsVendor();               
+            view.setColumnVendor(Vendor.columns);
+            view.setDataVendor(dsObjVendor);
+            view.loadDataVendor();   
+        }
+    }
+    
+    // Action khi nút "Tìm" của Dialog "DS NCC" được nhấn
+    private class SearchVendorActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnSearchVendor is clicked");
+            if (view.getTableVendor() == null){
+                JOptionPane.showMessageDialog(null, "Vui lòng Load dữ liệu trước");
+            }
+            String[] paramSearch = view.getSearchParamVendor();
+            Object[][] trackObjVendor;
+            trackObjVendor = view.getTableVendor().searchByCriteria(paramSearch, new int[]{0, 1}, "match");
+            view.getTableVendor().setData(trackObjVendor, Vendor.columns, view.getTbVendor());
+            
+        }
+    }
+
+    private class SelVendorActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnSelectVendor is clicked");
+            view.getVendorInfo();
+            view.getDialogTimVendor().dispose(); 
+        }
+    }
+    
+    //Action khi nút "Tính tổng" của Dialog PO draft được nhấn
+    private class TinhTongPOdraftActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnTinhTongPOdraft is clicked");
+            if (view.getTbPOdraft().isEditing()){
+                view.getTbPOdraft().getCellEditor().stopCellEditing(); // tắt edit để lưu data vào TableModel
+            }
+            float vat = Float.parseFloat(view.getFieldVAT_add().getText());
+            for (int i = 0; i < view.getTablePOdraft().getRowCount(); i++){
+                view.getTablePOdraft().setValueAt(vat, i, 15);
+            }
+            
+            double tong = view.getTablePOdraft().capNhatTongGia(13, 14, 16, 15);
+            view.getFieldTongPOdraft().setText(CurrencyUtils.format(String.valueOf(tong)));
+        }
+    }
+
+
 
 //    private class CloseActionListener implements ActionListener {
 //        @Override
@@ -529,27 +606,7 @@ public class POController {
 //    }
 
     
-    
-
-//    //Action khi nút "Tính tổng" của Dialog Action PR được nhấn
-//    private class TinhTongActionListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            System.out.println("btnTinhTongPR is clicked");
-//            int rowCount = view.getTablePRdraft().getRowCount();
-//            for (int i = 0; i < rowCount; i++){
-//                double value = (long)view.getTablePRdraft().getValueAt(i, 3) * (int)view.getTablePRdraft().getValueAt(i, 4);
-//                view.getTablePRdraft().setValueAt(value, i, 5);
-//            }
-//            double tong = 0;
-//            for (int i = 0; i < rowCount; i++){
-//                tong += (double) view.getTablePRdraft().getValueAt(i, 5);
-//            }
-//            view.updateTbPRdraft();
-//            //view.getFieldTongPR().setText(String.valueOf(tong));
-//            view.getFieldTongPR().setText(CurrencyUtils.format(String.valueOf(tong)));
-//        }
-//    }
+   
     
 
 

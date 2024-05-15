@@ -106,7 +106,7 @@ public class PurchaseRequest extends Transaction {
     }
     
     public double tinhGiaItem() {
-        return this.giaItem = this.item.getDonGia() * this.soLuong * (1 + this.vat);
+        return this.giaItem = this.item.getDonGia() * this.soLuong * (1 + this.vat / 100);
     }
     
     

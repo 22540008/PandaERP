@@ -97,11 +97,11 @@ CREATE TABLE Vendor (
 
 -- Thêm dữ liệu vào bảng Vendor
 INSERT INTO Vendor (maNCC, tenNCC, diaChi, mST, vat, trangThai) VALUES
-(1001, 'Vendor 1', '123 First Ave', '123456', 0.1, 0),
-(1002, 'Vendor 2', '456 Second St', '789012', 0.1, 0),
-(1003, 'Vendor 3', '789 Third Rd', '345678', 0.1, 0),
-(1004, 'Vinamilk', 'VN', '084', 0.08, 0),
-(1005, 'Umbrella', 'America', '000-001', 0.05, 0);
+(1001, 'Vendor 1', '123 First Ave', '123456', 10, 0),
+(1002, 'Vendor 2', '456 Second St', '789012', 10, 0),
+(1003, 'Vendor 3', '789 Third Rd', '345678', 10, 0),
+(1004, 'Vinamilk', 'VN', '084', 8, 0),
+(1005, 'Umbrella', 'America', '000-001', 5, 0);
 
 SELECT * FROM Vendor
 SELECT * FROM Vendor WHERE maNCC = 1002

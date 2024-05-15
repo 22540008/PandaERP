@@ -15,7 +15,7 @@ public class Vendor {
     private String mST;
     private float vat;
     private int trangThai; // 0: active; 1: deleted; 2: inactive
-    private static final String[] columns = {"Mã NCC", "Tên NCC", "Địa chỉ", "MST", "VAT"};
+    public static final String[] columns = {"Mã NCC", "Tên NCC", "Địa chỉ", "MST", "VAT%"};
 
     public Vendor() {
         this.trangThai = 0;

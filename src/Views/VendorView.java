@@ -203,7 +203,7 @@ public class VendorView extends javax.swing.JPanel {
         btnDialogAdd.setText("Thêm");
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("VAT");
+        jLabel3.setText("VAT%");
 
         javax.swing.GroupLayout DialogAddLayout = new javax.swing.GroupLayout(DialogAdd.getContentPane());
         DialogAdd.getContentPane().setLayout(DialogAddLayout);
@@ -291,7 +291,7 @@ public class VendorView extends javax.swing.JPanel {
         btnDialogUpdate.setText("Cập nhật");
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("VAT");
+        jLabel4.setText("VAT%");
 
         javax.swing.GroupLayout DialogUpdateLayout = new javax.swing.GroupLayout(DialogUpdate.getContentPane());
         DialogUpdate.getContentPane().setLayout(DialogUpdateLayout);
@@ -407,7 +407,7 @@ public class VendorView extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Mã NCC", "Tên NCC", "Địa chỉ", "MST", "VAT"
+                "Mã NCC", "Tên NCC", "Địa chỉ", "MST", "VAT%"
             }
         ) {
             Class[] types = new Class [] {
@@ -514,7 +514,7 @@ public class VendorView extends javax.swing.JPanel {
             vat = Float.parseFloat(vatStr);
         }
         else {
-            JOptionPane.showMessageDialog(null, "Vui lòng nhập vào số có định dạng 0.x");
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập vào số có định dạng dd.ff (VD: 10.00");
             return null;
         }
 

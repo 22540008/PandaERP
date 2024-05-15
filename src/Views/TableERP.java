@@ -200,7 +200,7 @@ public class TableERP extends DefaultTableModel {
         return total;
     }
     
-    public double capNhatTongGia(int colSoLuong, int colDonGia, int colTongSub, int colVAT) {
+    public double capNhatTongGia(int colDonGia, int colSoLuong, int colTongSub, int colVAT) {
         double total = 0;
         for (int i = 0; i < getRowCount(); i++) {
             Object soLuongObj = getValueAt(i, colSoLuong);
@@ -210,7 +210,7 @@ public class TableERP extends DefaultTableModel {
                 long soLuong = ((Number) soLuongObj).longValue();
                 long donGia = ((Number) donGiaObj).longValue();
                 float vat = ((Number) vatObj).floatValue();
-                double giaItem = (long) (soLuong * donGia * (1 + vat));
+                double giaItem = (long) (soLuong * donGia * (1 + vat / 100));
                 setValueAt(giaItem, i, colTongSub);
                 total += giaItem;
             }

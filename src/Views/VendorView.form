@@ -137,7 +137,7 @@
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
-            <Property name="text" type="java.lang.String" value="VAT"/>
+            <Property name="text" type="java.lang.String" value="VAT%"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -275,7 +275,7 @@
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
-            <Property name="text" type="java.lang.String" value="VAT"/>
+            <Property name="text" type="java.lang.String" value="VAT%"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="fieldVAT_update">
@@ -454,7 +454,7 @@
                     <Column editable="true" title="T&#xea;n NCC" type="java.lang.String"/>
                     <Column editable="true" title="&#x110;&#x1ecb;a ch&#x1ec9;" type="java.lang.String"/>
                     <Column editable="true" title="MST" type="java.lang.String"/>
-                    <Column editable="true" title="VAT" type="java.lang.Float"/>
+                    <Column editable="true" title="VAT%" type="java.lang.Float"/>
                   </Table>
                 </Property>
                 <Property name="autoResizeMode" type="int" value="4"/>
