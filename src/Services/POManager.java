@@ -115,9 +115,9 @@ public class POManager {
             po.setItemLine(rs.getInt("itemLine"));
             po.setPr(pr);
             po.setVendor(vendor);
-            po.setDonGia(rs.getLong("gia"));
+            po.setGia(rs.getLong("gia"));
             po.setSoLuong(rs.getInt("soLuong"));
-            po.setVat(rs.getFloat("vat") * 100);
+            po.setVat(rs.getFloat("vat"));
             po.setGiaItem(rs.getDouble("tongGia"));
             
             dsPO.add(po);
@@ -126,37 +126,58 @@ public class POManager {
         return dsPO;
     }
                
-//    // Add 1 sample từ JAVA về CSDL
-//    public int addDB(ArrayList<PurchaseOrder> poList) throws SQLException{
-//        int rowEffect = 0;
-//        // đối tượng s kết nối SQL Server
-//        SQLConnection conn = new SQLConnection("", "");
-//        String sql = "INSERT INTO PurchaseOrder (soCT_line, soCT, NguoiTao, ngayTao, ngaySua, trangThai, itemLine, maHang, giaEst, soLuong, tongGia) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-//        PreparedStatement stmt = conn.getConnection().prepareStatement(sql);
-//
-//        for (PurchaseOrder po : poList){
-//            String soCT_line = po.getSoCT() + "_" + po.getItemLine();
-//            stmt.setString(1, soCT_line);
-//            stmt.setInt(2, po.getSoCT());
-//            stmt.setString(3, po.getUser());
-//            //stmt.setDate(4, (Date) pr.getNgayTao());
-//            Date ngayTao = po.getNgayTao();
-//            stmt.setDate(4, new java.sql.Date(ngayTao.getTime()));
-//            //stmt.setDate(5, (Date) pr.getNgaySua());
-//            Date ngaySua = po.getNgaySua();
-//            stmt.setDate(5, new java.sql.Date(ngaySua.getTime()));
-//            stmt.setInt(6, po.getTrangThai());
-//            stmt.setInt(7, po.getItemLine());
-//            stmt.setInt(8, po.getItem().getMaHang());
-//            stmt.setLong(9, po.getDonGia());
-//            stmt.setInt(10, po.getSoLuong());
-//            stmt.setDouble(11, po.getGiaItem());
-//            
-//            rowEffect += stmt.executeUpdate();
-//        }
-//        conn.close();      
-//        return rowEffect;
-//    }
+    // Add new PO từ JAVA về CSDL
+    public int addDB(ArrayList<PurchaseOrder> poList) throws SQLException{
+        int rowEffect = 0;
+        // đối tượng s kết nối SQL Server
+        SQLConnection conn = new SQLConnection("", "");
+        String sql1 = "INSERT INTO PurchaseOrder (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine,"
+                + "maNCC, gia, soLuong, vat, tongGia) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement stmt = conn.getConnection().prepareStatement(sql1);
+
+        for (PurchaseOrder po : poList){
+            String soCT_line = po.getSoCT() + "_" + po.getItemLine();
+            stmt.setString(1, soCT_line);
+            stmt.setInt(2, po.getSoCT());
+            stmt.setString(3, po.getUser());
+            Date ngayTao = po.getNgayTao();
+            stmt.setDate(4, new java.sql.Date(ngayTao.getTime()));
+            Date ngaySua = po.getNgaySua();
+            stmt.setDate(5, new java.sql.Date(ngaySua.getTime()));
+            stmt.setInt(6, po.getTrangThai());
+            stmt.setInt(7, po.getItemLine());
+            stmt.setInt(8, po.getMaNCC());
+            stmt.setLong(9, po.getGia());
+            stmt.setInt(10, po.getSoLuong());
+            stmt.setFloat(11, po.getVat());
+            stmt.setDouble(12, po.getGiaItem());
+            
+            rowEffect += stmt.executeUpdate();
+        }
+        
+        String sql2 = "INSERT INTO PO_PR (soPO_line, soPR_line) VALUES (?, ?)";
+        stmt = conn.getConnection().prepareStatement(sql2);
+        for (PurchaseOrder po : poList){
+            String soPO_line = po.getSoCT() + "_" + po.getItemLine();
+            String soPR_line = po.getSoPR() + "_" + po.getPRline();
+            stmt.setString(1, soPO_line);
+            stmt.setString(2, soPR_line);
+            
+            rowEffect += stmt.executeUpdate();
+        }
+        
+        String sql3 = "UPDATE PurchaseRequest SET trangThai = 3 WHERE soCT = ? AND itemLine = ?;";
+        stmt = conn.getConnection().prepareStatement(sql3);
+        for (PurchaseOrder po : poList){
+            stmt.setInt(1, po.getSoPR());
+            stmt.setInt(2, po.getPRline());
+            
+            rowEffect += stmt.executeUpdate();
+        }
+                      
+        conn.close();      
+        return rowEffect;
+    }
     
 //    // Update Array<DataType> từ JAVA về CSDL
 //    public int updateDB(ArrayList<PurchaseOrder> prList) throws SQLException{

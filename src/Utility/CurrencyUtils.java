@@ -62,6 +62,15 @@ public class CurrencyUtils {
     }
 
     // Chuyển VN-currency format về number format
+    public static Integer parseToInt(String value) {
+        try {
+            Number number = VN_FORMAT.parse(value);
+            return number.intValue();
+        } catch (ParseException e) {
+            throw new IllegalArgumentException("Invalid currency format: " + value, e);
+        }
+    }
+    
     public static Long parseToLong(String value) {
         try {
             Number number = VN_FORMAT.parse(value);
@@ -71,10 +80,10 @@ public class CurrencyUtils {
         }
     }
 
-    public static Integer parseToInt(String value) {
+    public static Double parseToDouble(String value) {
         try {
             Number number = VN_FORMAT.parse(value);
-            return number.intValue();
+            return number.doubleValue();
         } catch (ParseException e) {
             throw new IllegalArgumentException("Invalid currency format: " + value, e);
         }

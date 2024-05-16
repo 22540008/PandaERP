@@ -137,8 +137,9 @@ public class POController {
                 JOptionPane.showMessageDialog(view, "Vui lòng Load dữ liệu trước");
                 return;
             }
-            double totalPrice = view.getTableERP().capNhatTongGia(9, 10, 11);
-            view.updateTbPR();
+            double totalPrice = view.getTableERP().capNhatTongGia(13, 14, 16, 15);
+            System.out.println("totalPrice: " + totalPrice);
+            view.updateTbPO();
             view.getFieldTotalPrice().setText(CurrencyUtils.VN_FORMAT.format(totalPrice));    
         }
     }
@@ -363,15 +364,15 @@ public class POController {
                 po.setNgayTao(view.getDate_add().getDate());
                 po.setNgaySua(view.getDate_add().getDate());
                 po.setTrangThai(0);
-                po.setItemLine(i);
+                po.setItemLine(i+1);
                 po.setSoPR((int)(view.getTablePOdraft().getValueAt(i, 6)));
-                po.setItemLine((int)(view.getTablePOdraft().getValueAt(i, 7)));
+                po.setPRline((int)(view.getTablePOdraft().getValueAt(i, 7)));
                 po.setMaHang((int)(view.getTablePOdraft().getValueAt(i, 8)));
                 po.setTenHang(String.valueOf(view.getTablePOdraft().getValueAt(i, 9)));
                 po.setDvt(String.valueOf(view.getTablePOdraft().getValueAt(i, 10)));
                 po.setMaNCC(maNCC);
                 po.setTenNCC(view.getFieldTenNCC_add().getText());
-                po.setDonGia((long)view.getTablePOdraft().getValueAt(i, 13));
+                po.setGia((long)view.getTablePOdraft().getValueAt(i, 13));
                 po.setSoLuong((int)view.getTablePOdraft().getValueAt(i, 14));
                 if (String.valueOf(view.getTablePOdraft().getValueAt(i, 15)).isBlank()){
                     po.setVat(Float.parseFloat(String.valueOf(view.getFieldVAT_add().getText())));
@@ -380,46 +381,29 @@ public class POController {
                     po.setVat((float) view.getTablePOdraft().getValueAt(i, 15));
                 }
                 po.setGiaItem((double) view.getTablePOdraft().getValueAt(i, 16));
-
-//                int maHang = (int) view.getTbPOdraft().getValueAt(i, 0);
-//                Item item = new Item();
-//                item.setMaHang(maHang);
-//                
-//                PurchaseRequest pr = new PurchaseRequest();
-//                pr.setSoCT(Integer.parseInt(view.getFieldSoCT_add().getText()));
-//                pr.setUser(view.getFieldUser_add().getText());
-//                pr.setNgayTao(view.getDate_add().getDate());
-//                pr.setNgaySua(view.getDate_add().getDate()); // Ngày sửa = ngày tạo khi tạo mới PR.
-//                pr.setItemLine(i+1);
-//                pr.setItem(item);
-//                pr.setDonGia((long)view.getTbPOdraft().getValueAt(i, 3));
-//                pr.setSoLuong((int)view.getTbPOdraft().getValueAt(i, 4));
-//                if (view.getTbPOdraft().getValueAt(i, 5) != null){
-//                    //pr.setGiaItem(0);
-//                    pr.setGiaItem((double)view.getTbPOdraft().getValueAt(i, 5));
-//                }
-//                else {
-//                    //pr.setGiaItem((double)view.getTbPOdraft().getValueAt(i, 5));
-//                    pr.setGiaItem(0);
-//                }
+                double giaPO = CurrencyUtils.parseToDouble(view.getFieldTongPOdraft().getText());
+                po.setGiaDonHang(giaPO);
                 
-                
+                //System.out.println(po);
                 newPOlist.add(po);
             }
             
-//            try {
-//                model.addDB(newPRlist);
-//            } catch (SQLException ex) {
-//                Logger.getLogger(POController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-            
-            for (PurchaseRequest pr : newPRlist){
-                Object[] objPR = pr.getObjPR();
-                view.getTableERP().addRow(objPR);
+            try {
+                model.addDB(newPOlist);
+            } catch (SQLException ex) {
+                Logger.getLogger(POController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            view.updateTbPR();
-            JOptionPane.showMessageDialog(view.getDialogAdd(), "Vui lòng \"Load\" lại dữ liệu để cập nhật mới nhất");
-            view.getDialogAdd().setVisible(false);
+            
+            for (PurchaseOrder po : newPOlist){
+                Object[] objPO = po.getObjPO();
+                view.getTableERP().addRow(objPO);
+            }
+            
+            view.getDialogAdd().dispose();
+            //view.updateTbPO();
+            //JOptionPane.showMessageDialog(view.getDialogAdd(), "Vui lòng \"Load\" lại dữ liệu để cập nhật mới nhất");
+            //view.getDialogAdd().setVisible(false);
+            
         }
     }
 
@@ -495,7 +479,7 @@ public class POController {
 ////                System.out.println();
 ////            }
 //            
-//            view.updateTbPR();
+//            view.updateTbPO();
 //            view.setVisible(true);
 //            int soCT = Integer.parseInt(view.getFieldSoCT_update().getText());
 //            String user = view.getFieldUser_update().getText();
@@ -545,7 +529,7 @@ public class POController {
 //            }
 //            //Object[] rowData = updateItem.getObjectItem();
 //            //view.getTableERP().sua(view.getSelRow(), rowData);
-//            view.updateTbPR();
+//            view.updateTbPO();
 //            view.getDialogUpdate().dispose();
 //            
 //        }
@@ -631,7 +615,7 @@ public class POController {
 //            }
 //            
 //            view.getTableERP().removeRow(selRow);
-//            view.updateTbPR();
+//            view.updateTbPO();
 //            JOptionPane.showMessageDialog(view, "Đã xoá thành công!");
 //            
 //        }
@@ -658,7 +642,7 @@ public class POController {
 //            }
 //            
 //            view.getTablePRdraft().addRow(newItem);
-//            view.updateTbPRdraft();
+//            view.updateTbPOdraft();
 //            
 //        }
 //    }

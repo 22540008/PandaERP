@@ -18,17 +18,18 @@ public class PurchaseRequest extends Transaction {
     private long donGia;
     private int soLuong;
     private double giaItem;
-    private float vat;
     
 
     public static final String[] columns = {"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Mã hàng", "Tên hàng", "ĐVT", 
         "Giá Est", "Số lượng", "Tổng giá"};
 
     public PurchaseRequest() {
+        item = new Item();
     }
     
     public PurchaseRequest(int soCT, String user, Date ngayTao, Date ngaySua, int trangThai, int itemLine) {
         super(soCT, user, ngayTao, ngaySua, trangThai, itemLine);
+        item = new Item();
     }
     
     public PurchaseRequest(int soCT, String user, Date ngayTao, Date ngaySua, int trangThai, int itemLine, Item item, long giaEst, int soLuong) {
@@ -73,20 +74,11 @@ public class PurchaseRequest extends Transaction {
         this.giaItem = giaItem;
     }
 
-    public float getVat() {
-        return vat;
-    }
-
-    public void setVat(float vat) {
-        this.vat = vat;
-    }
-
-
     @Override
     public String toString() {
-        return super.toString() + "PurchaseRequest{" + "item=" + item + ", giaEst=" + donGia + ", soLuong=" + soLuong + ", giaItem=" + giaItem + '}';
+        return super.toString() + "PurchaseRequest{" + "item=" + item + ", donGia=" + donGia + ", soLuong=" + soLuong + ", giaItem=" + giaItem + '}';
     }
-    
+
     public Object[] getObjPR(){
         Object[] objPR =  new Object[]{this.getSoCT(), 
             this.getUser(), 
@@ -106,7 +98,7 @@ public class PurchaseRequest extends Transaction {
     }
     
     public double tinhGiaItem() {
-        return this.giaItem = this.item.getDonGia() * this.soLuong * (1 + this.vat / 100);
+        return this.giaItem = this.item.getDonGia() * this.soLuong;
     }
     
     

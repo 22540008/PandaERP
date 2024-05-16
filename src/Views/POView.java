@@ -1618,7 +1618,7 @@ public class POView extends javax.swing.JPanel {
         tbPOdraft.setModel(tablePOdraft);
         tbPOdraft.getColumnModel().getColumn(13).setCellRenderer(new CurrencyRenderer()); // VND format cột đơn giá
         tbPOdraft.getColumnModel().getColumn(16).setCellRenderer(new CurrencyRenderer()); // cột tổng giá item
-        //tablePOdraft.setColumnVisible(tbPOdraft, new String[]{"Mã NCC", "Tên NCC"}, false);
+        tablePOdraft.setColumnVisible(tbPOdraft, new String[]{"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Mã NCC", "Tên NCC"}, false);
     }
     
     public void btnAddActionListener(ActionListener listener){
@@ -1758,11 +1758,11 @@ public class POView extends javax.swing.JPanel {
         btnUpdate_update.addActionListener(listener);
     }
 
-    public void updateTbPRdraft() {
+    public void updateTbPOdraft() {
         tbPOdraft.setModel(tablePOdraft);
     }
 
-    public void updateTbPR() {
+    public void updateTbPO() {
         tbPO.setModel(tableERP);
     }
     

@@ -158,7 +158,7 @@ CREATE TABLE PurchaseOrder (
 	tongGia MONEY
 );
 
--- Thêm dữ liệu mẫu vào bảng PurchaseRequest
+-- Thêm dữ liệu mẫu vào bảng PurchaseOrder
 INSERT INTO PurchaseOrder (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine, maNCC, gia, soLuong, vat, tongGia) VALUES
 ('2190001_1', 2190001, N'tqhung', '01/01/2022', '01/02/2022', 0, 1, 1001, 0, 5, 0.1, 0),
 ('2190002_1', 2190002, N'ptnam', '01-01-2022', '01-02-2022', 0, 1, 1002, 0, 8, 0.1, 0),
@@ -194,6 +194,11 @@ FROM PurchaseOrder JOIN PO_PR ON PurchaseOrder.soCT_line = PO_PR.soPO_line
 	JOIN Vendor ON PurchaseOrder.maNCC = Vendor.maNCC
 WHERE PurchaseOrder.trangThai NOT IN (1);
 
+
+INSERT INTO PurchaseOrder (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine, maNCC, gia, soLuong, vat, tongGia) VALUES
+('2240001_1', 2240001, N'tqhung', '01/01/2022', '01/02/2022', 0, 0, 1001, 0, 5, 0.1, 0);
+
+INSERT INTO PO_PR (soPO_line, soPR_line) VALUES ('2240001_1', '1190001_1');
 
 
 

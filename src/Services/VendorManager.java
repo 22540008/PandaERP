@@ -82,7 +82,7 @@ public class VendorManager {
                     rs.getString("mST"),
                     rs.getFloat("vat"),
                     rs.getInt("trangThai"));
-            System.out.println(vendor);
+            //System.out.println(vendor);
             dsVendor.add(vendor);
         }
         conn.close();

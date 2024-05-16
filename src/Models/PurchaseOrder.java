@@ -17,6 +17,10 @@ public class PurchaseOrder extends Transaction {
     
     private PurchaseRequest pr;
     private Vendor vendor;
+    private long gia;
+    private int soLuong;
+    private float vat;
+    private double giaItem;
     private double giaDonHang;
     
     public static final String[] columns = {"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PR", "PR line", "Mã hàng", "Tên hàng", "ĐVT", "Mã NCC", "Tên NCC",
@@ -59,14 +63,12 @@ public class PurchaseOrder extends Transaction {
     public void setGiaDonHang(double giaDonHang) {
         this.giaDonHang = giaDonHang;
     }
-    
-    
-    
+
     @Override
     public String toString() {
-        return super.toString() + "PurchaseOrder{" + "purchaseRequests=" + pr + ", vendor=" + vendor + ", giaDonHang=" + giaDonHang + '}';
+        return super.toString() + "PurchaseOrder{" + "pr=" + pr + ", vendor=" + vendor + ", gia=" + gia + ", soLuong=" + soLuong + ", vat=" + vat + ", giaItem=" + giaItem + ", giaDonHang=" + giaDonHang + '}';
     }
-    
+
     //public static final String[] columns = {"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PR", "PR line", "Mã hàng", 
     //    "Tên hàng", "ĐVT", "Mã NCC", "Tên NCC", "Giá", "Số lượng", "VAT", "Tổng giá"};
     
@@ -84,7 +86,7 @@ public class PurchaseOrder extends Transaction {
             getDvt(),
             getMaNCC(),
             getTenNCC(),
-            getDonGia(),
+            getGia(),
             getSoLuong(),
             getVat(),
             getGiaItem()};
@@ -109,35 +111,35 @@ public class PurchaseOrder extends Transaction {
     }
 
     public double getGiaItem() {
-        return this.getPr().getGiaItem();
+        return this.giaItem;
     }
     
     public void setGiaItem(double giaItem) {
-        this.getPr().setGiaItem(giaItem);
+        this.giaItem = giaItem;
     }
 
     public float getVat() {
-        return this.getPr().getVat();
+        return this.vat;
     }
     
     public void setVat(float vat){
-        this.getPr().setVat(vat);
+        this.vat = vat;
     }
 
     public int getSoLuong() {
-        return this.getPr().getSoLuong();
+        return this.soLuong;
     }
     
     public void setSoLuong(int soLuong){
-        this.getPr().setSoLuong(soLuong);
+        this.soLuong = soLuong;
     }
 
-    public long getDonGia() {
-        return this.getPr().getDonGia();
+    public long getGia() {
+        return this.gia;
     }
     
-    public void setDonGia(long donGia){
-        this.getPr().setDonGia(donGia);
+    public void setGia(long gia){
+        this.gia = gia;
     }
 
     public int getPRline() {
@@ -153,7 +155,7 @@ public class PurchaseOrder extends Transaction {
     }
     
      public void setSoPR(int soPR) {
-        this.getPr().setSoCT(soCT);
+        this.pr.setSoCT(soPR);
     }
 
     public String getTenHang() {
@@ -178,6 +180,10 @@ public class PurchaseOrder extends Transaction {
     
     public void setDvt(String dvt) {
         this.pr.getItem().setDvt(dvt);
+    }
+    
+    public double tinhGiaItem() {
+        return this.giaItem = this.gia * this.soLuong * (1 + this.vat / 100);
     }
        
 }
