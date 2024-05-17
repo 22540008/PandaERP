@@ -224,9 +224,9 @@ CREATE TABLE GoodsReceipt (
 
 -- Thêm dữ liệu mẫu vào bảng PurchaseOrder
 INSERT INTO  GoodsReceipt (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine, soPO_line, slNhan) VALUES
-('2190001_1', 2190001, N'tqhung', '01/01/2022', '01/02/2022', 0, 1, '2190001_1', 0),
-('2190002_1', 2190002, N'ptnam', '01-01-2022', '01-02-2022', 0, 1, '2190002_1', 0),
-('2190003_1', 2190003, N'admin', '01/01/2022', '01/02/2022', 0, 1, '2190003_1', 0);
+('3190001_1', 3190001, N'tqhung', '01/01/2022', '01/02/2022', 0, 1, '2190001_1', 0),
+('3190002_1', 3190002, N'ptnam', '01-01-2022', '01-02-2022', 0, 1, '2190002_1', 0),
+('3190003_1', 3190003, N'admin', '01/01/2022', '01/02/2022', 0, 1, '2190003_1', 0);
 
 
 SELECT * FROM  GoodsReceipt;
