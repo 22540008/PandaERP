@@ -118,7 +118,7 @@ public class POManager {
             po.setGia(rs.getLong("gia"));
             po.setSoLuong(rs.getInt("soLuong"));
             po.setVat(rs.getFloat("vat"));
-            po.setGiaItem(rs.getDouble("tongGia"));
+            po.setGiaItem(rs.getDouble("giaTong"));
             
             dsPO.add(po);
         }
@@ -132,7 +132,7 @@ public class POManager {
         // đối tượng s kết nối SQL Server
         SQLConnection conn = new SQLConnection("", "");
         String sql1 = "INSERT INTO PurchaseOrder (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine,"
-                + "maNCC, gia, soLuong, vat, tongGia) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "maNCC, gia, soLuong, vat, giaTong) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement stmt = conn.getConnection().prepareStatement(sql1);
 
         for (PurchaseOrder po : poList){
@@ -179,35 +179,35 @@ public class POManager {
         return rowEffect;
     }
     
-//    // Update Array<DataType> từ JAVA về CSDL
-//    public int updateDB(ArrayList<PurchaseOrder> prList) throws SQLException{
-//        int rowEffect = 0;
-//        // đối tượng s kết nối SQL Server
-//        SQLConnection conn = new SQLConnection("", "");
-//        // Chuỗi truy vấn SQL q cho bảng PurchaseOrders
-//        String sql1 = "UPDATE PurchaseOrder SET ngaySua = ?, trangThai = ?, giaESt = ?, soLuong = ? WHERE soCT = ? AND itemLine = ?";
-////        String sql1 = "UPDATE PurchaseOrder SET trangThai = 0, soLuong = 1 WHERE soCT = 1240009 AND itemLine = 1";
-////        String sql1 = "UPDATE PurchaseOrder SET soLuong = ? WHERE soCT = ?";
-//        PreparedStatement stmt = conn.getConnection().prepareStatement(sql1);
-//        System.out.print("Số lượng data sẽ update trong SQL: " + prList.size());
-//        for (PurchaseOrder pr : prList){
-//            System.out.print(pr);
-//            Date ngaySua = pr.getNgaySua();
-//            stmt.setDate(1, new java.sql.Date(ngaySua.getTime()));
-//            stmt.setInt(2, pr.getTrangThai());
-//            stmt.setLong(3, pr.getDonGia());
-//            stmt.setInt(4, pr.getSoLuong());
-//            stmt.setInt(5, pr.getSoCT());
-//            stmt.setInt(6, pr.getItemLine());
-//
-//            rowEffect += stmt.executeUpdate();
-//        }
-//        
-//        conn.close();    
-//        return rowEffect;
-//        
-//    }
-//    
+    // Update Array<DataType> từ JAVA về CSDL
+    public int updateDB(ArrayList<PurchaseOrder> poList) throws SQLException{
+        int rowEffect = 0;
+        // đối tượng s kết nối SQL Server
+        SQLConnection conn = new SQLConnection("", "");
+        // Chuỗi truy vấn SQL q cho bảng PurchaseOrders
+        String sql1 = "UPDATE PurchaseOrder SET ngaySua = ?, maNCC = ?, gia = ?, soLuong = ?, vat = ?, giaTong = ? WHERE soCT_line = ?";
+        PreparedStatement stmt = conn.getConnection().prepareStatement(sql1);
+        System.out.print("Số lượng data sẽ update trong SQL: " + poList.size());
+        for (PurchaseOrder po : poList){
+            Date ngaySua = po.getNgaySua();
+            stmt.setDate(1, new java.sql.Date(ngaySua.getTime()));
+            stmt.setInt(2, po.getMaNCC());
+            stmt.setLong(3, po.getGia());
+            stmt.setInt(4, po.getSoLuong());
+            stmt.setFloat(5, po.getVat());
+            stmt.setDouble(6, po.getGiaItem());
+            String soCT_line = po.getSoCT() + "_" + po.getItemLine();
+            stmt.setString(7, soCT_line);
+
+            
+            rowEffect += stmt.executeUpdate();
+        }
+        
+        conn.close();    
+        return rowEffect;
+        
+    }
+    
 //    //  Update Hiden status cho sample từ JAVA về CSDL
 //    public int updateDB(int deleteSoCT, int deleteItemLine) throws SQLException{
 //        int rowEffect = 0;

@@ -21,25 +21,24 @@ public class PurchaseOrder extends Transaction {
     private int soLuong;
     private float vat;
     private double giaItem;
-    private double giaDonHang;
+    //private double giaDonHang;
     
     public static final String[] columns = {"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PR", "PR line", "Mã hàng", "Tên hàng", "ĐVT", "Mã NCC", "Tên NCC",
-        "Giá", "Số lượng", "VAT%", "Tổng giá"};
+        "Giá", "Số lượng", "VAT%", "Giá tổng"};
 
     public PurchaseOrder() {
         pr = new PurchaseRequest();
         vendor = new Vendor();
-        giaDonHang = 0f;
+        //giaDonHang = 0f;
     }
 
     public PurchaseOrder(int soCT, String user, Date ngayTao, Date ngaySua, int trangThai, int itemLine) {
         super(soCT, user, ngayTao, ngaySua, trangThai, itemLine);
         pr = new PurchaseRequest();
         vendor = new Vendor();
-        giaDonHang = 0f;
+        //giaDonHang = 0f;
     }
     
-
     public PurchaseRequest getPr() {
         return pr;
     }
@@ -56,17 +55,17 @@ public class PurchaseOrder extends Transaction {
         this.vendor = vendor;
     }
 
-    public double getGiaDonHang() {
-        return giaDonHang;
-    }
-
-    public void setGiaDonHang(double giaDonHang) {
-        this.giaDonHang = giaDonHang;
-    }
+//    public double getGiaDonHang() {
+//        return giaDonHang;
+//    }
+//
+//    public void setGiaDonHang(double giaDonHang) {
+//        this.giaDonHang = giaDonHang;
+//    }
 
     @Override
     public String toString() {
-        return super.toString() + "PurchaseOrder{" + "pr=" + pr + ", vendor=" + vendor + ", gia=" + gia + ", soLuong=" + soLuong + ", vat=" + vat + ", giaItem=" + giaItem + ", giaDonHang=" + giaDonHang + '}';
+        return super.toString() + "PurchaseOrder{" + "pr=" + pr + ", vendor=" + vendor + ", gia=" + gia + ", soLuong=" + soLuong + ", vat=" + vat + ", giaItem=" + giaItem + '}';
     }
 
     //public static final String[] columns = {"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PR", "PR line", "Mã hàng", 

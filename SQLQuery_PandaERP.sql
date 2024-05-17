@@ -123,11 +123,11 @@ CREATE TABLE PurchaseRequest (
     maHang INT,
 	giaEst MONEY,
 	soLuong INT,
-	tongGia MONEY
+	giaTong MONEY
 );
 
 -- Thêm dữ liệu mẫu vào bảng PurchaseRequest
-INSERT INTO PurchaseRequest (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, ItemLine, maHang, giaEst, soLuong, tongGia) VALUES
+INSERT INTO PurchaseRequest (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, ItemLine, maHang, giaEst, soLuong, giaTong) VALUES
 ('1190001_1', 1190001, 'Nguyen Van A', '01/01/2022', '01/02/2022', 0, 1, 100001, 0, 5, 0),
 ('1190002_1', 1190002, 'Nguyen Van B', '01-01-2022', '01-02-2022', 0, 1, 100002, 0, 8, 0),
 ('1190003_1', 1190003, 'Nguyen Van C', '01/01/2022', '01/02/2022', 0, 1, 100003, 0, 10, 0);
@@ -155,11 +155,11 @@ CREATE TABLE PurchaseOrder (
 	gia MONEY,
 	soLuong INT,
 	vat NUMERIC(4,2),
-	tongGia MONEY
+	giaTong MONEY
 );
 
 -- Thêm dữ liệu mẫu vào bảng PurchaseOrder
-INSERT INTO PurchaseOrder (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine, maNCC, gia, soLuong, vat, tongGia) VALUES
+INSERT INTO PurchaseOrder (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine, maNCC, gia, soLuong, vat, giaTong) VALUES
 ('2190001_1', 2190001, N'tqhung', '01/01/2022', '01/02/2022', 0, 1, 1001, 0, 5, 0.1, 0),
 ('2190002_1', 2190002, N'ptnam', '01-01-2022', '01-02-2022', 0, 1, 1002, 0, 8, 0.1, 0),
 ('2190003_1', 2190003, N'admin', '01/01/2022', '01/02/2022', 0, 1, 1003, 0, 10, 0.1, 0);
@@ -195,10 +195,11 @@ FROM PurchaseOrder JOIN PO_PR ON PurchaseOrder.soCT_line = PO_PR.soPO_line
 WHERE PurchaseOrder.trangThai NOT IN (1);
 
 
-INSERT INTO PurchaseOrder (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine, maNCC, gia, soLuong, vat, tongGia) VALUES
+INSERT INTO PurchaseOrder (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine, maNCC, gia, soLuong, vat, giaTong) VALUES
 ('2240001_1', 2240001, N'tqhung', '01/01/2022', '01/02/2022', 0, 0, 1001, 0, 5, 0.1, 0);
-
 INSERT INTO PO_PR (soPO_line, soPR_line) VALUES ('2240001_1', '1190001_1');
+
+UPDATE PurchaseOrder SET ngaySua = N'17-05-2024', maNCC = 10002, gia = 1000, soLuong = 10, vat = 10, giaTong = 010000 WHERE soCT_line = '2190001_1';
 
 
 

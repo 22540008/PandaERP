@@ -148,7 +148,7 @@ public class PRManager {
         int rowEffect = 0;
         // đối tượng s kết nối SQL Server
         SQLConnection conn = new SQLConnection("", "");
-        String sql = "INSERT INTO PurchaseRequest (soCT_line, soCT, NguoiTao, ngayTao, ngaySua, trangThai, itemLine, maHang, giaEst, soLuong, tongGia) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO PurchaseRequest (soCT_line, soCT, NguoiTao, ngayTao, ngaySua, trangThai, itemLine, maHang, giaEst, soLuong, giaTong) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement stmt = conn.getConnection().prepareStatement(sql);
 
         for (PurchaseRequest pr : prList){

@@ -45,6 +45,8 @@ public class POController {
     private ItemController itemCtl;
     private VendorController vendorCtl;
     private PRController prCtl;
+    private int[] updateIndex; // mảng lưu các rowIndex khi edit PO
+    private Object[][] updateListObjPO; // mảng lưu các 
     
     public POController(POManager poModel, POView poView) {
         this.model = poModel;
@@ -61,19 +63,19 @@ public class POController {
         this.view.btnDiagTimNCCaddActionListener(new TimNCCaddActionListener());
         this.view.btnLoadVendorActionListener(new LoadVendorActionListener());
         this.view.btnSearchVendorActionListener(new SearchVendorActionListener());
-        this.view.btnSelVendorActionListener(new SelVendorActionListener());
+        //this.view.btnSelVendorActionListener(new SelVendorActionListener());
         this.view.btnTinhTongPOdraftActionListener (new TinhTongPOdraftActionListener());
         this.view.btnCreateActionListener(new CreateActionListener());
-        
-        
+        this.view.btnEditActionListener(new EditActionListener());
+        this.view.btnDiagTimNCCupdateActionListener(new TimNCCaddActionListener());
+        this.view.btnUpdateActionListener(new UpdateActionListener());
 
         
-//        this.view.btnUpdateActionListener(new UpdateActionListener());
-//        this.view.DialogUpdateActionListener(new DialogUpdateActionListener());
+        
+        
 //        this.view.btnCloseActionListener(new CloseActionListener());
 //        this.view.btnDialogAddActionListener(new DialogAddActionListener());
-//        this.view.btnUpdateActionListener(new UpdateActionListener());
-//        this.view.btnDialogUpdateActionListener(new DialogUpdateActionListener());
+
 //        this.view.btnDeleteActionListener(new DeleteActionListener());
         
         
@@ -97,7 +99,15 @@ public class POController {
     public POView getView() {
         return view;
     }
-
+    
+    public void setupButtonAction(String action){
+        if (action.equals("add")){
+            this.view.btnSelVendorActionListener(new AddVendorActionListener());
+        }
+        if (action.equals("update")){
+            this.view.btnSelVendorActionListener(new UpdateVendorActionListener());
+        }
+    }
 
     // Action khi nút Load ở panel "danh sách PO" được nhấn
     private class LoadActionListener implements ActionListener {
@@ -150,6 +160,8 @@ public class POController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("btnAdd is clicked");
+            setupButtonAction("add"); // kích hoạt nút "Chọn" nhà cung cấp ở chế độ add
+            
             if (view.getTableERP() == null){
                 JOptionPane.showMessageDialog(view, "Vui lòng Load dữ liệu trước");
                 return;
@@ -317,11 +329,11 @@ public class POController {
         }
     }
 
-    private class SelVendorActionListener implements ActionListener {
+    private class AddVendorActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("btnSelectVendor is clicked");
-            view.getVendorInfo();
+            view.addVendorInfo();
             view.getDialogTimVendor().dispose(); 
         }
     }
@@ -382,7 +394,7 @@ public class POController {
                 }
                 po.setGiaItem((double) view.getTablePOdraft().getValueAt(i, 16));
                 double giaPO = CurrencyUtils.parseToDouble(view.getFieldTongPOdraft().getText());
-                po.setGiaDonHang(giaPO);
+                //po.setGiaDonHang(giaPO);
                 
                 //System.out.println(po);
                 newPOlist.add(po);
@@ -400,13 +412,92 @@ public class POController {
             }
             
             view.getDialogAdd().dispose();
-            //view.updateTbPO();
-            //JOptionPane.showMessageDialog(view.getDialogAdd(), "Vui lòng \"Load\" lại dữ liệu để cập nhật mới nhất");
-            //view.getDialogAdd().setVisible(false);
+        }
+    }
+    
+    // Action khi nút "Sửa" của quản lý PO được nhấn   
+    private class EditActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnEdit is clicked");
+            setupButtonAction("update"); // kích hoạt nút "Chọn" nhà cung cấp ở chế độ update
+            
+            if (view.getTableERP() == null){
+                JOptionPane.showMessageDialog(view, "Vui lòng Load dữ liệu trước");
+                return;
+            }
+            if (view.getTbPO().getSelectedRow() == -1){
+                JOptionPane.showMessageDialog(view, "Vui lòng chọn PO cần sửa");
+                return;
+            }
+            
+            view.setColumPOupdate(PurchaseOrder.columns);
+            
+            int selRow = view.getTbPO().getSelectedRow();
+            String selSoCT = String.valueOf(view.getTbPO().getValueAt(selRow, 0));
+            view.getFieldSoCT_update().setText(selSoCT);
+            view.getDate_update().setDate(new Date()); // set ngày PR hiện tại
+            view.getFieldUser_update().setText(loginUser.getTenTK()); // set người tạo PR là tài khoản đang dùng
+               
+            int rowCount = view.getTbPO().getRowCount();
+            int soCTitemCount = 0;
+            updateIndex = view.getTableERP().mapRow(0, selSoCT);  // tạo mới các vị trí sẽ Edit
+            updateListObjPO  = view.getTableERP().exportObjData(updateIndex); // lấy các data của PO cần edit
+
+            view.setDataPOupdate(updateListObjPO);
+            view.initTablePOUpdate();
+            view.getDialogUpdate().pack(); // giúp Dialog khởi tạo các thành phần bên trong hoàn toàn, điều chỉnh kích thước... -> tránh lỗi hiển thị.
+            view.getDialogUpdate().setVisible(true);
+        }
+    }
+    
+    // Action khi nút chọn Dialog "DS nhà cung cấp" được nhấn
+    private class UpdateVendorActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnSelectVendor is clicked");
+            view.updateVendorInfo();
+            view.getDialogTimVendor().dispose(); 
+        }
+    }
+    
+    // Action khi nút "Cập nhật" của Dialog "Sửa PO" được nhấn
+    private class UpdateActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnUpdate is clicked");
+            // Phải stop edit JTable thì mới lưu dữ liệu vào bảng được.
+            if (view.getTbPOupdate().isEditing())
+                view.getTbPOupdate().getCellEditor().stopCellEditing();
+            double totalPrice = view.getTablePOupdate().capNhatTongGia(13, 14, 16, 15); // Cập nhật giaTong ở mỗi item
+            ArrayList<PurchaseOrder> listPOupdate = new ArrayList();
+            for (int i = 0; i < updateListObjPO.length; i++){
+                PurchaseOrder po = view.getUpdatePOinfo(i);
+                listPOupdate.add(po);
+                updateListObjPO[i] = view.getTablePOupdate().exportObjData(i);
+            }
+            
+            try {
+                model.updateDB(listPOupdate);
+            } catch (SQLException ex) {
+                Logger.getLogger(POController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            for (int i = 0; i < updateListObjPO.length; i++){
+                String tableERPsoCT = String.valueOf(view.getTableERP().getValueAt(updateIndex[i], 0));
+                String objDataSoCT = String.valueOf(updateListObjPO[i][0]);
+                if (!tableERPsoCT.equals(objDataSoCT)){
+                    JOptionPane.showMessageDialog(null, "vị trí update không khớp: " + tableERPsoCT + " - " + objDataSoCT);
+                    return;
+                }
+                
+                view.getTableERP().sua(updateIndex[i], updateListObjPO[i]);
+            }
+            view.updateTbPO();
+            view.getDialogUpdate().dispose();
             
         }
     }
-
 
 
 
@@ -454,138 +545,8 @@ public class POController {
    
     
 
-//    private class DialogUpdateActionListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            System.out.println("btnUpdate_update is clicked");
-//            // Phải stop edit JTable thì mới lưu dữ liệu vào bảng được.
-//            if (view.getTbPRupdate().isEditing())
-//                view.getTbPRupdate().getCellEditor().stopCellEditing();
-//
-////            // Print out the data in the JTable
-////            for (int row = 0; row < view.getTbPRupdate().getRowCount(); row++) {
-////                for (int col = 0; col < view.getTbPRupdate().getColumnCount(); col++) {
-////                    System.out.print(view.getTbPRupdate().getValueAt(row, col) + " ");
-////                }
-////                System.out.println();
-////            }
-////
-////            // Print out the data in the TableModel
-////            TableModel modelTable = view.getTbPRupdate().getModel();
-////            for (int row = 0; row < modelTable.getRowCount(); row++) {
-////                for (int col = 0; col < modelTable.getColumnCount(); col++) {
-////                    System.out.print(modelTable.getValueAt(row, col) + " ");
-////                }
-////                System.out.println();
-////            }
-//            
-//            view.updateTbPO();
-//            view.setVisible(true);
-//            int soCT = Integer.parseInt(view.getFieldSoCT_update().getText());
-//            String user = view.getFieldUser_update().getText();
-//            Date date = view.getDate_update().getDate();
-//            //System.out.println(date.toString());
-//            ArrayList<PurchaseRequest> prList = new ArrayList();
-//            int rowCount = view.getTbPRupdate().getRowCount();
-//            for (int i = 0; i < rowCount; i++){
-//                PurchaseRequest updatePR = view.getUpdatePRinfo(i);
-//                updatePR.setSoCT(soCT);
-//                updatePR.setUser(user);
-//                updatePR.setNgaySua(date);
-//                updatePR.setNgayTao(date);
-//
-//                prList.add(updatePR);
-//            }
-//            
-////            for (PurchaseRequest pr: prList){
-////                System.out.println(pr);
-////            }
-//            System.out.println("số lượng pr sẽ update: " + prList.size());
-//            
-//            try {
-//                model.updateDB(prList);
-//            } catch (SQLException ex) {
-//                Logger.getLogger(POController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            for (PurchaseRequest pr : prList){
-//                Object[] objPR = pr.getObjPR();
-//                int tbERProwCount = view.getTableERP().getRowCount();
-//                for (int i = 0; i < tbERProwCount; i++){
-//                    String tbPRsoCT = String.valueOf(view.getTableERP().getValueAt(i, 0));
-//                    String tbPRitemLine = String.valueOf(view.getTableERP().getValueAt(i, 5));
-//                    if (tbPRsoCT.equals(String.valueOf(objPR[0])) && tbPRitemLine.equals(String.valueOf(objPR[5]))){
-//                        view.getTableERP().sua(i, objPR);
-//                        for (int k = 0; k < objPR.length; k++){
-//                            System.out.println(tbPRsoCT + String.valueOf(objPR[0]));
-//                            System.out.println(tbPRitemLine + String.valueOf(objPR[5]));
-//                            System.out.print(objPR[k]);
-//                        }
-//                    }
-//                    else {
-//                        //System.out.println("Khong map: " + tbPRsoCT + "\t" + tbPRitemLine);
-//                    }
-//                }
-//               
-//            }
-//            //Object[] rowData = updateItem.getObjectItem();
-//            //view.getTableERP().sua(view.getSelRow(), rowData);
-//            view.updateTbPO();
-//            view.getDialogUpdate().dispose();
-//            
-//        }
-//    }
 
-//    // Action khi nút "Sửa" của quản lý PR được nhấn   
-//    private class UpdateActionListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            System.out.println("btnUpdate is clicked");
-//            if (view.getTableERP() == null){
-//                JOptionPane.showMessageDialog(view, "Vui lòng Load dữ liệu trước");
-//                return;
-//            }
-//            if (view.getTbPO().getSelectedRow() == -1){
-//                JOptionPane.showMessageDialog(view, "Vui lòng chọn PR cần sửa");
-//                return;
-//            }
-//            
-//            String[] columPRupdate = {"Trạng thái", "ItemLine", "Mã hàng", "Tên hàng", "ĐVT", "Giá est", "Số lượng", "Tổng giá"};
-//            view.setColumPRupdate(columPRupdate);
-//            
-//            
-//            int selRow = view.getTbPO().getSelectedRow();
-//            String selSoCT = String.valueOf(view.getTbPO().getValueAt(selRow, 0));
-//            view.getFieldSoCT_update().setText(selSoCT);
-//            view.getDate_update().setDate(new Date()); // set ngày PR hiện tại
-//            view.getFieldUser_update().setText(loginUser.getTenTK()); // set người tạo PR là tài khoản đang dùng
-//               
-//            int rowCount = view.getTbPO().getRowCount();
-//            int soCTitemCount = 0;
-//            for (int i = 0; i < rowCount; i++){
-//                if (selSoCT.equals(String.valueOf(view.getTableERP().getValueAt(i, 0)))){
-//                    soCTitemCount++;
-//                }
-//            }
-//            
-//            Object[][] selData = new Object[soCTitemCount][columPRupdate.length];
-//            int selSoCTitems = 0;
-//            for (int i = 0; i < rowCount; i++){
-//                if (String.valueOf(view.getTableERP().getValueAt(i, 0)).equals(selSoCT)){
-//                    System.out.println("Khớp " + view.getTbPO().getValueAt(i, 0));
-//                    Object[] data = view.getTableERP().getDataVector().get(i).toArray();
-//                    for (int j = 0; j < columPRupdate.length; j++){
-//                        selData[selSoCTitems][j] = data[j+4]; // [j+4] vì bỏ 4 cột đầu: soCT, nguoiTao, ngày tạo/sửa
-//                        //System.out.print(selData[selSoCTitems][j] + "\t");    
-//                    }
-//                    selSoCTitems++;
-//                }
-//            }
-//            view.setDataPRupdate(selData);
-//            view.initTablePRUpdate();
-//            view.getDialogUpdate().pack(); // giúp Dialog khởi tạo các thành phần bên trong hoàn toàn, điều chỉnh kích thước... -> tránh lỗi hiển thị.
-//            view.getDialogUpdate().setVisible(true);
-//        }
-//    }
+
 
 //    //Action khi nút "Xoá" của màn hình quản lý danh sách PR được nhấn
 //    private class DeleteActionListener implements ActionListener {
@@ -624,85 +585,7 @@ public class POController {
 
     
    
-    
 
-
-//    // Action khi nút "Thêm" của Dialog "Tạo PR" được nhấn
-//    private class AddItem_addActionListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            System.out.println("btnAdd_add is clicked");
-//            //int rowCount = view.getTbPOdraft().getRowCount();     
-//            Object[] newItem = view.addNewItem();
-//            for (int i = 0; i < view.getTablePRdraft().getRowCount(); i++){
-//                if (String.valueOf(view.getTablePRdraft().getValueAt(i, 0)).equals(String.valueOf(newItem[0])) ){
-//                    JOptionPane.showMessageDialog(view.getDialogAdd(), "Trùng mã item, vui lòng chọn lại");
-//                    return;
-//                }
-//            }
-//            
-//            view.getTablePRdraft().addRow(newItem);
-//            view.updateTbPOdraft();
-//            
-//        }
-//    }
-
-//    // Action khi nút "Thêm" của Dialog "Tìm Item" được nhấn
-//    private class AddItemInfoActionListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            System.out.println("btnAddItemInfo is clicked");
-//            view.getItemInfo();
-//            view.getDialogTimItem().setVisible(false);
-//            
-//        }
-//    }
-//
-//    // Action khi nút "Tìm kiếm" của Dialog "Tìm item" được nhấn.
-//    private class SearchItemActionListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            System.out.println("btnSearchItem is clicked");
-//            
-//            String[] paramSearch = view.getSearchParamItem();
-//            Object[][] trackObjItem2D;
-//            try {
-//                trackObjItem2D = itemCtl.SearchItembyCriteria(itemCtl.getModel(), paramSearch);
-//                view.setColumnItem(Item.getColumns());
-//                view.setDataItem(trackObjItem2D);
-//                view.loadDataItem();
-//            } catch (SQLException ex) {
-//                Logger.getLogger(POController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-//    }
-
-//    // Action khi nút Load của Dialog "Tìm Item" được click
-//    private class LoadFindItemActionListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            System.out.println("btnLoadItem_add is clicked");
-//            try {
-//                itemCtl.getModel().loadData_DB();
-//                Object[][] dsObjItem = itemCtl.getModel().getObjDsItem();
-//                view.setColumnItem(Item.getColumns());
-//                view.setDataItem(dsObjItem);
-//                view.loadDataItem();
-//            } catch (SQLException ex) {
-//                Logger.getLogger(POController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-//    }
-//    
-//    // Action khi nút Tìm của Dialog "Tìm Item" được click
-//    private class DialogTimIemActionListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            view.getDialogTimItem().pack();
-//            view.getDialogTimItem().setVisible(true);
-//        }
-//    }
-    
 
     
     

@@ -161,15 +161,7 @@ public class POView extends javax.swing.JPanel {
     public JDialog getDialogAdd() {
         return DialogAdd;
     }
-
-    public JDialog getDialogTimItem() {
-        return DialogTimItem;
-    }
-
-    public void setDialogTimItem(JDialog DialogTimItem) {
-        this.DialogTimItem = DialogTimItem;
-    }
-
+    
     public JDateChooser getDate_add() {
         return date_add;
     }
@@ -195,28 +187,12 @@ public class POView extends javax.swing.JPanel {
         this.fieldMaNCC_add = fieldMaHang_add;
     }
 
-    public JTextField getFieldSearchMaHang() {
-        return fieldSearchMaHang;
-    }
-
-    public void setFieldSearchMaHang(JTextField fieldSearchMaHang) {
-        this.fieldSearchMaHang = fieldSearchMaHang;
-    }
-
     public JTextField getFieldSearchSoCT() {
         return fieldSearchSoCT;
     }
 
     public void setFieldSearchSoCT(JTextField fieldSearchSoCT) {
         this.fieldSearchSoCT = fieldSearchSoCT;
-    }
-
-    public JTextField getFieldSearchTenHang() {
-        return fieldSearchTenHang;
-    }
-
-    public void setFieldSearchTenHang(JTextField fieldSearchTenHang) {
-        this.fieldSearchTenHang = fieldSearchTenHang;
     }
 
     public JTextField getFieldSearchUser() {
@@ -253,14 +229,6 @@ public class POView extends javax.swing.JPanel {
 
     public void setFieldUser_add(JTextField fieldUser_add) {
         this.fieldUser_add = fieldUser_add;
-    }
-
-    public JTable getTbItem() {
-        return tbItem;
-    }
-
-    public void setTbItem(JTable tbItem) {
-        this.tbItem = tbItem;
     }
 
     public JTable getTbPOdraft() {
@@ -343,12 +311,12 @@ public class POView extends javax.swing.JPanel {
         this.dataPOupdate = dataPOupdate;
     }
 
-    public JTable getTbPRupdate() {
-        return tbPRupdate;
+    public JTable getTbPOupdate() {
+        return tbPOupdate;
     }
 
-    public void setTbPRupdate(JTable tbPRupdate) {
-        this.tbPRupdate = tbPRupdate;
+    public void setTbPOupdate(JTable tbPOupdate) {
+        this.tbPOupdate = tbPOupdate;
     }
 
     public JDateChooser getDate_update() {
@@ -488,15 +456,15 @@ public class POView extends javax.swing.JPanel {
     public void setFieldTongPOdraft(JTextField fieldTongPOdraft) {
         this.fieldTongPOdraft = fieldTongPOdraft;
     }
-    
-    
-    
-    
-    
 
-   
-
+    public JTextField getFieldTongPOupdate() {
+        return fieldTongPOupdate;
+    }
     
+    
+    
+    
+      
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -532,19 +500,6 @@ public class POView extends javax.swing.JPanel {
         btnRemove_add = new javax.swing.JButton();
         btnTinhTongPOdraft = new javax.swing.JButton();
         fieldTongPOdraft = new javax.swing.JTextField();
-        DialogTimItem = new javax.swing.JDialog();
-        jPanel6 = new javax.swing.JPanel();
-        fieldSearchTenHang = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        btnSearchItem = new javax.swing.JButton();
-        jLabel13 = new javax.swing.JLabel();
-        fieldSearchMaHang = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        btnAddItemInfo = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tbItem = new javax.swing.JTable();
-        btnLoadItem_add = new javax.swing.JButton();
         DialogUpdate = new javax.swing.JDialog();
         jLabel15 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -556,11 +511,19 @@ public class POView extends javax.swing.JPanel {
         date_update = new com.toedter.calendar.JDateChooser();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        tbPRupdate = new javax.swing.JTable();
-        btnUpdate_update = new javax.swing.JButton();
+        tbPOupdate = new javax.swing.JTable();
+        btnUpdate = new javax.swing.JButton();
         btnTinhTongPR1 = new javax.swing.JButton();
-        fieldTongPR1 = new javax.swing.JTextField();
+        fieldTongPOupdate = new javax.swing.JTextField();
         btnClose = new javax.swing.JButton();
+        jPanel9 = new javax.swing.JPanel();
+        fieldVAT_update = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        fieldTenNCC_update = new javax.swing.JTextField();
+        fieldMaNCC_update = new javax.swing.JTextField();
+        btnTimNCC_update = new javax.swing.JButton();
         DialogTimPR = new javax.swing.JDialog();
         jScrollPane6 = new javax.swing.JScrollPane();
         tbPR = new javax.swing.JTable();
@@ -596,7 +559,7 @@ public class POView extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         btnLoad = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         btnTotalItemPrice = new javax.swing.JButton();
         fieldTotalPrice = new javax.swing.JTextField();
@@ -734,11 +697,11 @@ public class POView extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PR", "PR Line", "Mã hàng", "Tên hàng", "Mã NCC", "Tên NCC", "ĐVT", "Đơn giá", "Số lượng", "VAT (%)", "Tổng giá"
+                "Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PR", "PR Line", "Mã hàng", "Tên hàng", "ĐVT", "Mã NCC", "Tên NCC", "Đơn giá", "Số lượng", "VAT (%)", "Tổng giá"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Long.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Double.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -817,132 +780,10 @@ public class POView extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        DialogTimItem.setModal(true);
-
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm"));
-
-        jLabel12.setText("Mã hàng");
-
-        btnSearchItem.setText("Tìm kiếm");
-
-        jLabel13.setText("Tên hàng");
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fieldSearchMaHang)
-                .addGap(26, 26, 26)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fieldSearchTenHang)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSearchItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(fieldSearchMaHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearchItem)
-                    .addComponent(jLabel13)
-                    .addComponent(fieldSearchTenHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel14.setText("TÌM ITEM");
-        jLabel14.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Bảng Item"));
-
-        btnAddItemInfo.setText("Chọn");
-
-        tbItem.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Mã hàng", "Tên hàng", "Đơn vị", "Đơn giá (VND)"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        tbItem.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        tbItem.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane3.setViewportView(tbItem);
-
-        btnLoadItem_add.setText("Load");
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAddItemInfo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnLoadItem_add))
-                    .addComponent(jScrollPane3)))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLoadItem_add)
-                    .addComponent(btnAddItemInfo))
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout DialogTimItemLayout = new javax.swing.GroupLayout(DialogTimItem.getContentPane());
-        DialogTimItem.getContentPane().setLayout(DialogTimItemLayout);
-        DialogTimItemLayout.setHorizontalGroup(
-            DialogTimItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DialogTimItemLayout.createSequentialGroup()
-                .addContainerGap(254, Short.MAX_VALUE)
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(248, 248, 248))
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        DialogTimItemLayout.setVerticalGroup(
-            DialogTimItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DialogTimItemLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(9, 9, 9))
-        );
-
         DialogUpdate.setModal(true);
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel15.setText("SỬA ĐỀ NGHỊ MUA HÀNG (PR)");
+        jLabel15.setText("SỬA ĐƠN HÀNG (PO)");
 
         jLabel16.setText("Ngày sửa");
 
@@ -997,34 +838,35 @@ public class POView extends javax.swing.JPanel {
 
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Sửa PR"));
 
-        tbPRupdate.setModel(new javax.swing.table.DefaultTableModel(
+        tbPOupdate.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Trạng thái", "ItemLine", "Mã hàng", "Tên hàng", "DVT", "Giá Est", "Số lượng", "Tổng giá"
+                "Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PR", "PR Line", "Mã hàng", "Tên hàng", "DVT", "Mã NCC", "Tên NCC", "Giá Est", "Số lượng", "VAT%", "Tổng giá"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Long.class, java.lang.Integer.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Long.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Double.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(tbPRupdate);
+        tbPOupdate.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jScrollPane4.setViewportView(tbPOupdate);
 
-        btnUpdate_update.setText("Cập nhật");
+        btnUpdate.setText("Cập nhật");
 
         btnTinhTongPR1.setText("Tính tổng");
 
-        fieldTongPR1.setEditable(false);
+        fieldTongPOupdate.setEditable(false);
 
-        btnClose.setText("Đóng (Inactive PR)");
+        btnClose.setText("Đóng (Inactive PO)");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -1037,24 +879,79 @@ public class POView extends javax.swing.JPanel {
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addComponent(btnTinhTongPR1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fieldTongPR1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(fieldTongPOupdate, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnClose)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnUpdate_update)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnUpdate)))
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTinhTongPR1)
-                    .addComponent(btnUpdate_update)
-                    .addComponent(fieldTongPR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdate)
+                    .addComponent(fieldTongPOupdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnClose)))
+        );
+
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Sửa nhà cung cấp"));
+
+        fieldVAT_update.setEditable(false);
+
+        jLabel9.setText("Tên NCC");
+
+        jLabel10.setText("VAT%");
+
+        jLabel23.setText("Mã NCC");
+
+        fieldTenNCC_update.setEditable(false);
+
+        fieldMaNCC_update.setEditable(false);
+
+        btnTimNCC_update.setText("Sửa NCC");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(btnTimNCC_update)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(fieldMaNCC_update, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(0, 213, Short.MAX_VALUE))
+                    .addComponent(fieldTenNCC_update, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(fieldVAT_update, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fieldVAT_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fieldTenNCC_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fieldMaNCC_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTimNCC_update))
+                .addGap(5, 5, 5))
         );
 
         javax.swing.GroupLayout DialogUpdateLayout = new javax.swing.GroupLayout(DialogUpdate.getContentPane());
@@ -1069,7 +966,8 @@ public class POView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(DialogUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         DialogUpdateLayout.setVerticalGroup(
@@ -1079,7 +977,9 @@ public class POView extends javax.swing.JPanel {
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1338,7 +1238,7 @@ public class POView extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PR", "PR line", "Mã hàng", "Tên hàng", "Mã NCC", "Tên NCC", "ĐVT", "Giá Est (VND)", "Số lượng", "vat", "Tổng giá"
+                "Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PR", "PR line", "Mã hàng", "Tên hàng", "ĐVT", "Mã NCC", "Tên NCC", "Giá Est (VND)", "Số lượng", "vat", "Tổng giá"
             }
         ) {
             Class[] types = new Class [] {
@@ -1399,7 +1299,7 @@ public class POView extends javax.swing.JPanel {
 
         btnDelete.setText("Xoá");
 
-        btnUpdate.setText("Sửa");
+        btnEdit.setText("Sửa");
 
         btnAdd.setText("Thêm");
 
@@ -1420,7 +1320,7 @@ public class POView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 259, Short.MAX_VALUE)
                 .addComponent(btnDelete)
                 .addGap(18, 18, 18)
-                .addComponent(btnUpdate)
+                .addComponent(btnEdit)
                 .addGap(18, 18, 18)
                 .addComponent(btnAdd)
                 .addGap(18, 18, 18)
@@ -1436,7 +1336,7 @@ public class POView extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnLoad)
                         .addComponent(btnDelete)
-                        .addComponent(btnUpdate)
+                        .addComponent(btnEdit)
                         .addComponent(btnAdd)
                         .addComponent(btnTotalItemPrice))))
         );
@@ -1469,58 +1369,54 @@ public class POView extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog DialogAdd;
-    private javax.swing.JDialog DialogTimItem;
     private javax.swing.JDialog DialogTimPR;
     private javax.swing.JDialog DialogTimVendor;
     private javax.swing.JDialog DialogUpdate;
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnAddItemInfo;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnLoad;
-    private javax.swing.JButton btnLoadItem_add;
     private javax.swing.JButton btnLoadPR;
     private javax.swing.JButton btnLoadVendor;
     private javax.swing.JButton btnRemove_add;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton btnSearchItem;
     private javax.swing.JButton btnSearchPR;
     private javax.swing.JButton btnSearchVendor;
     private javax.swing.JButton btnSelectPR;
     private javax.swing.JButton btnSelectVendor;
     private javax.swing.JButton btnTimNCC_add;
+    private javax.swing.JButton btnTimNCC_update;
     private javax.swing.JButton btnTimPR_add;
     private javax.swing.JButton btnTinhTongPOdraft;
     private javax.swing.JButton btnTinhTongPR1;
     private javax.swing.JButton btnTotalItemPrice;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JButton btnUpdate_update;
     private com.toedter.calendar.JDateChooser date_add;
     private com.toedter.calendar.JDateChooser date_update;
     private javax.swing.JTextField fieldMaNCC_add;
-    private javax.swing.JTextField fieldSearchMaHang;
+    private javax.swing.JTextField fieldMaNCC_update;
     private javax.swing.JTextField fieldSearchMaNCC;
     private javax.swing.JTextField fieldSearchSoCT;
     private javax.swing.JTextField fieldSearchSoCTPR;
-    private javax.swing.JTextField fieldSearchTenHang;
     private javax.swing.JTextField fieldSearchTenNCC;
     private javax.swing.JTextField fieldSearchUser;
     private javax.swing.JTextField fieldSearchUserPR;
     private javax.swing.JTextField fieldSoCT_add;
     private javax.swing.JTextField fieldSoCT_update;
     private javax.swing.JTextField fieldTenNCC_add;
+    private javax.swing.JTextField fieldTenNCC_update;
     private javax.swing.JTextField fieldTongPOdraft;
-    private javax.swing.JTextField fieldTongPR1;
+    private javax.swing.JTextField fieldTongPOupdate;
     private javax.swing.JTextField fieldTotalPrice;
     private javax.swing.JTextField fieldUser_add;
     private javax.swing.JTextField fieldUser_update;
     private javax.swing.JTextField fieldVAT_add;
+    private javax.swing.JTextField fieldVAT_update;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -1530,12 +1426,14 @@ public class POView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -1546,20 +1444,17 @@ public class POView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTable tbItem;
     private javax.swing.JTable tbPO;
     private javax.swing.JTable tbPOdraft;
+    private javax.swing.JTable tbPOupdate;
     private javax.swing.JTable tbPR;
-    private javax.swing.JTable tbPRupdate;
     private javax.swing.JTable tbVendor;
     // End of variables declaration//GEN-END:variables
 
@@ -1679,7 +1574,7 @@ public class POView extends javax.swing.JPanel {
         btnSearchVendor.addActionListener(listener);
     }
     
-    public void getVendorInfo(){ 
+    public void addVendorInfo(){ 
         int selRow = tbVendor.getSelectedRow();
         String maNCCStr = String.valueOf(tableVendor.getValueAt(selRow, 0));
         String tenNCCStr = String.valueOf(tableVendor.getValueAt(selRow, 1));
@@ -1707,56 +1602,93 @@ public class POView extends javax.swing.JPanel {
     }
     
     
-
-
-    
-    public void initTablePRUpdate() {
+    public void initTablePOUpdate() {
         tablePOupdate = new TableERP(dataPOupdate, columPOupdate);
         tablePOupdate.setEditable(true);
-        //tablePRupdate.addEditableColumn(3);
-        //tablePRupdate.addEditableColumn(4);
-        tablePOupdate.addEditableColumn(5);
-        tablePOupdate.addEditableColumn(6);
+        tablePOupdate.addEditableColumn(13); // Giá
+        tablePOupdate.addEditableColumn(14); // Số lượng
+        tablePOupdate.addEditableColumn(15); // VAT%
         // thiết lập các giá trị đặc biệt và cột xét để không cho edit
         Set<Object> specialValues = new HashSet<>();
         specialValues.add("Đã đóng");
         specialValues.add("Đã được xử lý");
         tablePOupdate.setSpecialValues(specialValues, 0);
         // Thiết lập kiểu giá trị cho các cột
-        tablePOupdate.setColumnType(1, Integer.class);
-        tablePOupdate.setColumnType(5, Long.class);
-        tablePOupdate.setColumnType(6, Integer.class);
-        tbPRupdate.setModel(tablePOupdate);
-        tbPRupdate.getColumnModel().getColumn(5).setCellRenderer(new CurrencyRenderer()); // VND format
-        tbPRupdate.getColumnModel().getColumn(7).setCellRenderer(new CurrencyRenderer());
-    }
-
-    // Chèm item mới vào bảng PRdraft
-    public Object[] addNewItem() {
-        Object[] addItem;
-        addItem = new Object[]{Integer.valueOf(fieldMaNCC_add.getText()),
-                fieldTenNCC_add.getText(),
-                fieldVAT_add.getText(),
-                        };
-        return addItem;
+        tablePOupdate.setColumnType(6, Integer.class); // Số PR
+        tablePOupdate.setColumnType(7, Integer.class); // PR line
+        tablePOupdate.setColumnType(8, Integer.class); // Mã hàng
+        tablePOupdate.setColumnType(10, Integer.class); // Mã vendor
+        tablePOupdate.setColumnType(13, Long.class); // Đơn giá
+        tablePOupdate.setColumnType(14, Integer.class); // Số lượng
+        tablePOupdate.setColumnType(15, Float.class); // VAT
+        tablePOupdate.setColumnType(16, Double.class); // Tổng giá item
+        tbPOupdate.setModel(tablePOupdate);
+        tbPOupdate.getColumnModel().getColumn(13).setCellRenderer(new CurrencyRenderer()); // VND format cột đơn giá
+        tbPOupdate.getColumnModel().getColumn(16).setCellRenderer(new CurrencyRenderer()); // cột tổng giá item
+        //tablePOdraft.setColumnVisible(tbPOdraft, new String[]{"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Mã NCC", "Tên NCC"}, false);
     }
     
-
+    public void btnDiagTimNCCupdateActionListener(ActionListener listener){
+        btnTimNCC_update.addActionListener(listener);
+    }
+    
+    public void updateVendorInfo() {
+        int selRow = tbVendor.getSelectedRow();
+        String maNCCStr = String.valueOf(tableVendor.getValueAt(selRow, 0));
+        String tenNCCStr = String.valueOf(tableVendor.getValueAt(selRow, 1));
+        String vatStr = String.valueOf(tableVendor.getValueAt(selRow, 4));
+        fieldMaNCC_update.setText(maNCCStr);
+        fieldTenNCC_update.setText(tenNCCStr);
+        fieldVAT_update.setText(vatStr);
+        for (int i = 0; i < tablePOupdate.getRowCount(); i++){
+            tablePOupdate.setValueAt(Integer.parseInt(maNCCStr), i, 11);
+            tablePOupdate.setValueAt(tenNCCStr, i, 12);
+            tablePOupdate.setValueAt(Float.parseFloat(vatStr), i, 15);
+        }
+        
+    }
+    
+    public PurchaseOrder getUpdatePOinfo(int row) {
+        PurchaseOrder po = new PurchaseOrder();
+        po.setSoCT((int) tablePOupdate.getValueAt(row, 0));
+        po.setNgaySua(date_update.getDate());
+        po.setItemLine((int) tablePOupdate.getValueAt(row, 5));
+        String maNCCstr = fieldMaNCC_update.getText();
+        if (maNCCstr.isBlank()){
+            po.setMaNCC((int)tablePOupdate.getValueAt(row, 11));
+        }
+        else {
+            po.setMaNCC(Integer.parseInt(maNCCstr));
+        }
+        po.setGia((long)tablePOupdate.getValueAt(row, 13));
+        po.setSoLuong((int)tablePOupdate.getValueAt(row, 14));
+        po.setVat((float)tablePOupdate.getValueAt(row, 15));
+        po.setGiaItem((double)tablePOupdate.getValueAt(row, 16));
+        
+        System.out.println(po);
+        return po;
+    }
+    
+ 
+    
+    public void btnUpdateActionListener(ActionListener listener){
+        btnUpdate.addActionListener(listener);
+    }
+    
+    
     public void btnDeleteActionListener(ActionListener listener){
         btnDelete.addActionListener(listener);
     }
     
-    public void btnUpdateActionListener(ActionListener listener){
-        btnUpdate.addActionListener(listener);
+    public void btnEditActionListener(ActionListener listener){
+        btnEdit.addActionListener(listener);
     }
     
     public void btnCloseActionListener(ActionListener listener){
         btnClose.addActionListener(listener);
     }
     
-    public void DialogUpdateActionListener(ActionListener listener){
-        btnUpdate_update.addActionListener(listener);
-    }
+
 
     public void updateTbPOdraft() {
         tbPOdraft.setModel(tablePOdraft);
@@ -1794,6 +1726,8 @@ public class POView extends javax.swing.JPanel {
         TableERP tableERPSearch = new TableERP(trackObjPO, column);
         table.setModel(tableERPSearch);
     }
+
+
 
     
 

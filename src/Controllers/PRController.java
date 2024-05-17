@@ -139,23 +139,6 @@ public class PRController {
             if (view.getTbPRupdate().isEditing())
                 view.getTbPRupdate().getCellEditor().stopCellEditing();
 
-//            // Print out the data in the JTable
-//            for (int row = 0; row < view.getTbPRupdate().getRowCount(); row++) {
-//                for (int col = 0; col < view.getTbPRupdate().getColumnCount(); col++) {
-//                    System.out.print(view.getTbPRupdate().getValueAt(row, col) + " ");
-//                }
-//                System.out.println();
-//            }
-//
-//            // Print out the data in the TableModel
-//            TableModel modelTable = view.getTbPRupdate().getModel();
-//            for (int row = 0; row < modelTable.getRowCount(); row++) {
-//                for (int col = 0; col < modelTable.getColumnCount(); col++) {
-//                    System.out.print(modelTable.getValueAt(row, col) + " ");
-//                }
-//                System.out.println();
-//            }
-            
             view.updateTbPR();
             view.setVisible(true);
             int soCT = Integer.parseInt(view.getFieldSoCT_update().getText());
@@ -192,11 +175,11 @@ public class PRController {
                     String tbPRitemLine = String.valueOf(view.getTableERP().getValueAt(i, 5));
                     if (tbPRsoCT.equals(String.valueOf(objPR[0])) && tbPRitemLine.equals(String.valueOf(objPR[5]))){
                         view.getTableERP().sua(i, objPR);
-                        for (int k = 0; k < objPR.length; k++){
-                            System.out.println(tbPRsoCT + String.valueOf(objPR[0]));
-                            System.out.println(tbPRitemLine + String.valueOf(objPR[5]));
-                            System.out.print(objPR[k]);
-                        }
+//                        for (int k = 0; k < objPR.length; k++){
+//                            System.out.println(tbPRsoCT + String.valueOf(objPR[0]));
+//                            System.out.println(tbPRitemLine + String.valueOf(objPR[5]));
+//                            System.out.print(objPR[k]);
+//                        }
                     }
                     else {
                         //System.out.println("Khong map: " + tbPRsoCT + "\t" + tbPRitemLine);

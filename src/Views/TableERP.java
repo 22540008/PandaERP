@@ -68,6 +68,31 @@ public class TableERP extends DefaultTableModel {
     }
     
     /**
+    * Tìm các vị trí mà một chuỗi cụ thể xuất hiện trong một cột cụ thể của bảng.
+    *
+    * @param colIndex chỉ số của cột cần kiểm tra.
+    * @param str chuỗi cần tìm vị trí xuất hiện.
+    * @return một mảng int[] chứa các vị trí mà chuỗi xuất hiện trong cột.
+    * @throws IllegalArgumentException nếu colIndex nằm ngoài phạm vi của bảng.
+    */
+    public int[] mapRow(int colIndex, String str) {
+        if (colIndex < 0 || colIndex >= this.getColumnCount()) {
+            throw new IllegalArgumentException("colIndex nằm ngoài phạm vi của bảng");
+        }
+
+        ArrayList<Integer> positions = new ArrayList<>();
+        for (int i = 0; i < this.getRowCount(); i++) {
+            String cellValueStr = String.valueOf(this.getValueAt(i, colIndex));
+            if (str.equals(cellValueStr)) {
+                positions.add(i);
+                System.out.println(i + " : " + cellValueStr);
+            }
+        }
+        return positions.stream().mapToInt(i -> i).toArray();
+    }
+    
+    
+    /**
      * Thêm dữ liệu từ một mảng hai chiều vào TableModel tại các cột được chỉ định.
      *
      * @param tbColumn Mảng chứa các chỉ số cột trong TableModel mà dữ liệu sẽ được thêm vào.
@@ -116,7 +141,13 @@ public class TableERP extends DefaultTableModel {
     }
     
     
-    // Kiểm tra hàng nằm trong phạm vi bảng, số lượng cột khớp. Nêu đúng, cập nhật mỗi cột trong hàng với giá trị tương ứng từ rowData.
+    /**
+     * Cập nhật một hàng trong bảng với dữ liệu mới.
+     *
+     * @param rowIndex chỉ số của hàng cần cập nhật.
+     * @param rowData mảng chứa dữ liệu mới cho mỗi cột trong hàng. Số lượng phần tử trong mảng phải khớp với số lượng cột trong bảng.
+     * @throws IllegalArgumentException nếu rowIndex nằm ngoài phạm vi của bảng hoặc nếu số lượng phần tử trong rowData không khớp với số lượng cột trong bảng.
+     */
     public void sua(int rowIndex, Object[] rowData) {
      
         if (rowIndex < 0 || rowIndex >= this.getRowCount()){
@@ -124,12 +155,13 @@ public class TableERP extends DefaultTableModel {
             throw new IllegalArgumentException("Dòng sửa nằm ngoài phạm vi dữ liệu của bảng");
         }
         if (rowData == null || rowData.length != this.getColumnCount()){
-            throw new IllegalArgumentException("Dữ liệu thay đổi có số cột (thuộc tính) không khớp");
+            throw new IllegalArgumentException("Dữ liệu thay đổi có số cột (thuộc tính) không khớp. Bảng: " + this.getColumnCount() + " . rowData: " + rowData.length);
         }
         for (int i=0; i < this.getColumnCount(); i++){
             this.setValueAt(rowData[i], rowIndex, i);
         }
     }
+    
     
     /**
      * Loại bỏ các hàng được chỉ định từ bảng.
@@ -208,7 +240,7 @@ public class TableERP extends DefaultTableModel {
         return super.getColumnClass(columnIndex);
     }
     
-    public double capNhatTongGia(int colSoLuong, int colDonGia, int colTongSub) {
+    public double capNhatTongGia(int colDonGia, int colSoLuong, int colTongSub) {
         double total = 0;
         for (int i = 0; i < getRowCount(); i++) {
             Object soLuongObj = getValueAt(i, colSoLuong);
@@ -252,7 +284,7 @@ public class TableERP extends DefaultTableModel {
         int columnCount = this.getColumnCount();
         //Object[][] result = new Object[rowCount][columnCount];
         Vector<Object> resultVector = new Vector();
-        //int count = 0; // số sample kiếm được thoả criteria
+        //int mapRow = 0; // số sample kiếm được thoả criteria
         String criteria = "";
         for (int i = 0; i < paramSearch.length; i++){
             criteria = paramSearch[i];
