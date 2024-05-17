@@ -128,9 +128,9 @@ CREATE TABLE PurchaseRequest (
 
 -- Thêm dữ liệu mẫu vào bảng PurchaseRequest
 INSERT INTO PurchaseRequest (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, ItemLine, maHang, giaEst, soLuong, giaTong) VALUES
-('1190001_1', 1190001, 'Nguyen Van A', '01/01/2022', '01/02/2022', 0, 1, 100001, 0, 5, 0),
-('1190002_1', 1190002, 'Nguyen Van B', '01-01-2022', '01-02-2022', 0, 1, 100002, 0, 8, 0),
-('1190003_1', 1190003, 'Nguyen Van C', '01/01/2022', '01/02/2022', 0, 1, 100003, 0, 10, 0);
+('1190001_1', 1190001, 'Nguyen Van A', '01/01/2022', '01/02/2022', 3, 1, 100001, 0, 5, 0),
+('1190002_1', 1190002, 'Nguyen Van B', '01-01-2022', '01-02-2022', 3, 1, 100002, 0, 8, 0),
+('1190003_1', 1190003, 'Nguyen Van C', '01/01/2022', '01/02/2022', 3, 1, 100003, 0, 10, 0);
 
 
 SELECT * FROM PurchaseRequest;
@@ -143,6 +143,7 @@ UPDATE PurchaseRequest SET trangThai = 0, soLuong = 33 WHERE SoCT = 1240009 AND 
 
 -- Bảng PurchaseOrders
 DROP TABLE PurchaseOrder;
+
 CREATE TABLE PurchaseOrder (
     soCT_line VARCHAR(13) PRIMARY KEY,
     soCT INT,
@@ -160,9 +161,9 @@ CREATE TABLE PurchaseOrder (
 
 -- Thêm dữ liệu mẫu vào bảng PurchaseOrder
 INSERT INTO PurchaseOrder (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine, maNCC, gia, soLuong, vat, giaTong) VALUES
-('2190001_1', 2190001, N'tqhung', '01/01/2022', '01/02/2022', 0, 1, 1001, 0, 5, 0.1, 0),
-('2190002_1', 2190002, N'ptnam', '01-01-2022', '01-02-2022', 0, 1, 1002, 0, 8, 0.1, 0),
-('2190003_1', 2190003, N'admin', '01/01/2022', '01/02/2022', 0, 1, 1003, 0, 10, 0.1, 0);
+('2190001_1', 2190001, N'tqhung', '01/01/2022', '01/02/2022', 0, 1, 1001, 1000, 5, 10, 0),
+('2190002_1', 2190002, N'ptnam', '01-01-2022', '01-02-2022', 0, 1, 1002, 2000, 8, 10, 0),
+('2190003_1', 2190003, N'admin', '01/01/2022', '01/02/2022', 0, 1, 1003, 3000, 10, 10, 0);
 
 
 -- Bảng PO_PR
@@ -203,17 +204,42 @@ UPDATE PurchaseOrder SET ngaySua = N'17-05-2024', maNCC = 10002, gia = 1000, soL
 
 
 
+-- Bảng GoodsReceipt
+DROP TABLE GoodsReceipt;
+
+CREATE TABLE GoodsReceipt (
+    soCT_line VARCHAR(13) PRIMARY KEY,
+    soCT INT,
+    nguoiTao VARCHAR(255),
+    ngayTao DATE,
+    ngaySua DATE,
+	trangThai INT,
+	itemLine INT,
+	soPO_line VARCHAR(13),
+	--soPR_line VARCHAR(13),
+	--soLuong INT,
+	slNhan INT,
+
+);
+
+-- Thêm dữ liệu mẫu vào bảng PurchaseOrder
+INSERT INTO  GoodsReceipt (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine, soPO_line, slNhan) VALUES
+('2190001_1', 2190001, N'tqhung', '01/01/2022', '01/02/2022', 0, 1, '2190001_1', 0),
+('2190002_1', 2190002, N'ptnam', '01-01-2022', '01-02-2022', 0, 1, '2190002_1', 0),
+('2190003_1', 2190003, N'admin', '01/01/2022', '01/02/2022', 0, 1, '2190003_1', 0);
+
+
+SELECT * FROM  GoodsReceipt;
 
 
 
-PurchaseRequest ON PurchaseOrder.soPR_line = PurchaseRequest.soCT_line
-JOIN Item ON PurchaseOrder.maHang = Item.maHang
-JOIN Vendor ON PurchaseOrder.maNCC = Vendor.maNCC
 
-SELECT *, PurchaseOrder.soCT_line AS soPO_line
-FROM PurchaseOrder JOIN PurchaseRequest ON PurchaseOrder.soPR_line = PurchaseRequest.soCT_line
-JOIN Item ON PurchaseOrder.maHang = Item.maHang
-JOIN Vendor ON PurchaseOrder.maNCC = Vendor.maNCC
+
+
+
+
+
+
 
 
 

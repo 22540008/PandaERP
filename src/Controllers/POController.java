@@ -7,6 +7,7 @@ package Controllers;
 import Models.Item;
 import Models.PurchaseOrder;
 import Models.PurchaseRequest;
+import Models.Transaction;
 import Models.User;
 import Models.Vendor;
 import Services.POManager;
@@ -69,15 +70,11 @@ public class POController {
         this.view.btnEditActionListener(new EditActionListener());
         this.view.btnDiagTimNCCupdateActionListener(new TimNCCaddActionListener());
         this.view.btnUpdateActionListener(new UpdateActionListener());
-
+        this.view.btnCloseActionListener(new CloseActionListener());
+        this.view.btnDeleteActionListener(new DeleteActionListener());
         
-        
-        
-//        this.view.btnCloseActionListener(new CloseActionListener());
 //        this.view.btnDialogAddActionListener(new DialogAddActionListener());
-
-//        this.view.btnDeleteActionListener(new DeleteActionListener());
-        
+ 
         
     }
 
@@ -501,93 +498,98 @@ public class POController {
 
 
 
-//    private class CloseActionListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            System.out.println("btnClose is clicked");
-//            int confirmResult = JOptionPane.showConfirmDialog(view.getDialogUpdate(), "Vui lòng xác nhận chắc chắn muốn đóng PR.", "Xác nhận", JOptionPane.YES_NO_OPTION);
-//            if(confirmResult == JOptionPane.NO_OPTION){
-//                return;
-//            }
-//            int rowCount = view.getTablePRupdate().getRowCount();
-//            ArrayList<PurchaseRequest> prList = new ArrayList();
-//            for (int i = 0; i < rowCount; i++){
-//                PurchaseRequest pr = new PurchaseRequest();
-//                String trangThaiStr = String.valueOf(view.getTablePRupdate().getValueAt(i, 0));
-//                System.out.println(trangThaiStr);
-//                if (trangThaiStr.equals("Đang xử lý")){
-//                    pr.setTrangThai(2); // 2: Đóng (inactive)
-//                }
-//                else {
-//                    pr.encodeTrangThai(trangThaiStr);
-//                }
-//                pr.setSoCT(Integer.parseInt(view.getFieldSoCT_update().getText()));
-//                pr.setNgaySua(view.getDate_update().getDate());
-//                pr.setItemLine((int) view.getTablePRupdate().getValueAt(i, 1));
-//                
-//                prList.add(pr);
-//            }
-//            
-//            try {
-//                model.updateDBClose(prList);
-//            } catch (SQLException ex) {
-//                Logger.getLogger(POController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            
-//            for (int i = 0; i < rowCount; i++){
-//                view.getTablePRupdate().setValueAt(prList.get(i).getTrangThaiStr(), i, 0);
-//            }
-//                
-//
-//        }
-//    }
+    private class CloseActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnClose is clicked");
+            int confirmResult = JOptionPane.showConfirmDialog(view.getDialogUpdate(), "Vui lòng xác nhận chắc chắn muốn đóng PR. Sau khi đóng, bạn sẽ không thể chỉnh/sửa được nữa", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if(confirmResult == JOptionPane.NO_OPTION){
+                return;
+            }
 
-   
-    
+            int rowCount = view.getTablePOupdate().getRowCount();
+            ArrayList<PurchaseOrder> listPOupdate = new ArrayList();
+            for (int i = 0; i < rowCount; i++){
+                PurchaseOrder po = new PurchaseOrder();
+                String trangThaiStr = String.valueOf(view.getTablePOupdate().getValueAt(i, 4));
+                //System.out.println(trangThaiStr);
+                if (trangThaiStr.equals("Đang xử lý")){
+                    view.getTablePOupdate().setValueAt("Đã đóng", i, 4);
+                    po.setTrangThai(2); // 2: Đóng (inactive)
+                    updateListObjPO[i][4] = Transaction.status.get(2);
+                }
+                else {
+                    po.encodeTrangThai(trangThaiStr); // giữ nguyên trạng thái & encode về số
+                }
+                po.setSoCT(Integer.parseInt(view.getFieldSoCT_update().getText()));
+                po.setNgaySua(view.getDate_update().getDate());
+                po.setItemLine((int) view.getTablePOupdate().getValueAt(i, 5));
+                
+                listPOupdate.add(po);
+            }
+            
+            try {
+                model.updateDBClose(listPOupdate);
+            } catch (SQLException ex) {
+                Logger.getLogger(POController.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
+            for (int i = 0; i < updateIndex.length; i++){
+                view.getTableERP().sua(updateIndex[i], updateListObjPO[i]);
+            }
+            
+            //view.updateTbPOupdate();
 
-
-
-//    //Action khi nút "Xoá" của màn hình quản lý danh sách PR được nhấn
-//    private class DeleteActionListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            System.out.println("btnDelete is clicked");
-//            if (view.getTableERP() == null){
-//                JOptionPane.showMessageDialog(view, "Vui lòng Load dữ liệu trước");
-//                return;
-//            }
-//            if (view.getTbPO().getSelectedRow() == -1){
-//                JOptionPane.showMessageDialog(view, "Vui lòng chọn dòng PR cần xoá");
-//                return;
-//            }
-//            int confirmResult = JOptionPane.showConfirmDialog(null, "Vui lòng xác nhận chắc chắn muốn xoá", "Xác nhận", JOptionPane.YES_NO_OPTION);
-//            if(confirmResult == JOptionPane.NO_OPTION){
-//                return;
-//            }
-//            int selRow = view.getTbPO().getSelectedRow();
-//            int deleteSoCT = (int)view.getTbPO().getValueAt(selRow, 0);
-//            int deleteItemLine = (int)view.getTbPO().getValueAt(selRow, 5);
-//            
-//            try {
-//                model.updateDB(deleteSoCT, deleteItemLine);
-//            } catch (SQLException ex) {
-//                Logger.getLogger(POController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            
-//            view.getTableERP().removeRow(selRow);
-//            view.updateTbPO();
-//            JOptionPane.showMessageDialog(view, "Đã xoá thành công!");
-//            
-//        }
-//    }
+        }
+    }
 
 
-    
-   
+    //Action khi nút "Xoá" của màn hình quản lý danh sách PO được nhấn
+    private class DeleteActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnDelete is clicked");
+            if (view.getTableERP() == null){
+                JOptionPane.showMessageDialog(view, "Vui lòng Load dữ liệu trước");
+                return;
+            }
+            if (view.getTbPO().getSelectedRow() == -1){
+                JOptionPane.showMessageDialog(view, "Vui lòng chọn dòng PR cần xoá");
+                return;
+            }
+            int selRow = view.getTbPO().getSelectedRow();
+            if (!String.valueOf(view.getTableERP().getValueAt(selRow, 4)).equals("Đang xử lý")){
+                JOptionPane.showMessageDialog(null, "Bạn chỉ có thể xoá khi transaction ở trạng thái \"Đang xử lý\" ");
+                return;
+            }
+            
+            int confirmResult = JOptionPane.showConfirmDialog(null, "Vui lòng xác nhận chắc chắn muốn xoá", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (confirmResult == JOptionPane.NO_OPTION){
+                return;
+            }
+            
+            
+            int deleteSoCT = (int)view.getTbPO().getValueAt(selRow, 0);
+            int deleteItemLine = (int)view.getTbPO().getValueAt(selRow, 5);
+            String soPO_line = deleteSoCT + "_" + deleteItemLine;
+            int deleteSoPR = (int)view.getTbPO().getValueAt(selRow, 6);
+            int deletePRline = (int)view.getTbPO().getValueAt(selRow, 7);
+            String soPR_line= deleteSoPR + "_" + deletePRline;
+            
+            try {
+                model.updateDB(soPO_line, soPR_line);
+            } catch (SQLException ex) {
+                Logger.getLogger(POController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            view.getTableERP().removeRow(selRow);
+            view.updateTbPO();
+            JOptionPane.showMessageDialog(view, "Đã xoá thành công!");
+            
+        }
+    }
 
 
-    
     
     
     //    private class DialogAddActionListener implements ActionListener {

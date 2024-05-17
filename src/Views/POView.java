@@ -1674,21 +1674,12 @@ public class POView extends javax.swing.JPanel {
     public void btnUpdateActionListener(ActionListener listener){
         btnUpdate.addActionListener(listener);
     }
+
     
-    
-    public void btnDeleteActionListener(ActionListener listener){
-        btnDelete.addActionListener(listener);
-    }
     
     public void btnEditActionListener(ActionListener listener){
         btnEdit.addActionListener(listener);
     }
-    
-    public void btnCloseActionListener(ActionListener listener){
-        btnClose.addActionListener(listener);
-    }
-    
-
 
     public void updateTbPOdraft() {
         tbPOdraft.setModel(tablePOdraft);
@@ -1696,6 +1687,14 @@ public class POView extends javax.swing.JPanel {
 
     public void updateTbPO() {
         tbPO.setModel(tableERP);
+    }
+    
+    public void btnCloseActionListener(ActionListener listener){
+        btnClose.addActionListener(listener);
+    }
+    
+    public void btnDeleteActionListener(ActionListener listener){
+        btnDelete.addActionListener(listener);
     }
     
     
@@ -1727,6 +1726,9 @@ public class POView extends javax.swing.JPanel {
         table.setModel(tableERPSearch);
     }
 
+    public void updateTbPOupdate() {
+        tbPOupdate.setModel(tablePOupdate);
+    }
 
 
     

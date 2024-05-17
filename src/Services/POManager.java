@@ -208,46 +208,54 @@ public class POManager {
         
     }
     
-//    //  Update Hiden status cho sample từ JAVA về CSDL
-//    public int updateDB(int deleteSoCT, int deleteItemLine) throws SQLException{
-//        int rowEffect = 0;
-//        // đối tượng s kết nối SQL Server
-//        SQLConnection conn = new SQLConnection("", "");
-//        // Chuỗi truy vấn SQL q cho bảng PurchaseOrders
-//        String sql1 = "UPDATE PurchaseOrder SET trangThai = 1 WHERE soCT = ? AND itemLine = ?";
-//        try (PreparedStatement stmt = conn.getConnection().prepareStatement(sql1)) {
-//            stmt.setInt(1, deleteSoCT);
-//            stmt.setInt(2, deleteItemLine);
-//          
-//            rowEffect = stmt.executeUpdate();
-//        }
-//
-//        conn.close();    
-//        return rowEffect;
-//    }
-//
-//    public int updateDBClose(ArrayList<PurchaseOrder> prList) throws SQLException {
-//        int rowEffect = 0;
-//        // đối tượng s kết nối SQL Server
-//        SQLConnection conn = new SQLConnection("", "");
-//        // Chuỗi truy vấn SQL q cho bảng PurchaseOrders
-//        String sql1 = "UPDATE PurchaseOrder SET ngaySua = ?, trangThai = ? WHERE soCT = ? AND itemLine = ?";
-//        PreparedStatement stmt = conn.getConnection().prepareStatement(sql1);
-//        System.out.print("Số lượng data sẽ update trong SQL: " + prList.size());
-//        for (PurchaseOrder pr : prList){
-//            System.out.print(pr);
-//            Date ngaySua = pr.getNgaySua();
-//            stmt.setDate(1, new java.sql.Date(ngaySua.getTime()));
-//            stmt.setInt(2, pr.getTrangThai());
-//            stmt.setInt(3, pr.getSoCT());
-//            stmt.setInt(4, pr.getItemLine());
-//
-//            rowEffect += stmt.executeUpdate();
-//        }
-//        
-//        conn.close();    
-//        return rowEffect;
-//    }
+    public int updateDBClose(ArrayList<PurchaseOrder> listPO) throws SQLException {
+        int rowEffect = 0;
+        // đối tượng s kết nối SQL Server
+        SQLConnection conn = new SQLConnection("", "");
+        // Chuỗi truy vấn SQL q cho bảng PurchaseOrders
+        String sql1 = "UPDATE PurchaseOrder SET ngaySua = ?, trangThai = ? WHERE soCT_line = ?";
+        PreparedStatement stmt = conn.getConnection().prepareStatement(sql1);
+        System.out.print("Số lượng data sẽ update trong SQL: " + listPO.size());
+        for (PurchaseOrder po : listPO){
+            System.out.println(po);
+            String soCT_line = po.getSoCT() + "_" + po.getItemLine();
+            System.out.println(soCT_line);
+            Date ngaySua = po.getNgaySua();
+            stmt.setDate(1, new java.sql.Date(ngaySua.getTime()));
+            stmt.setInt(2, po.getTrangThai());
+            stmt.setString(3, soCT_line);
+
+            rowEffect += stmt.executeUpdate();
+        }
+        
+        conn.close();    
+        return rowEffect;
+    }
+    
+    
+    //  Update Hiden status cho sample từ JAVA về CSDL
+    public int updateDB(String soPO_line, String soPR_line) throws SQLException{
+        int rowEffect = 0;
+        // đối tượng s kết nối SQL Server
+        SQLConnection conn = new SQLConnection("", "");
+        // Chuỗi truy vấn SQL q cho bảng PurchaseOrders
+        String sql1 = "UPDATE PurchaseOrder SET trangThai = 1 WHERE soCT_line = ?";
+        try (PreparedStatement stmt = conn.getConnection().prepareStatement(sql1)) {
+            stmt.setString(1, soPO_line);
+            rowEffect += stmt.executeUpdate();
+        }
+        
+        String sql2 = "UPDATE PurchaseRequest SET trangThai = 0 WHERE soCT_line = ?";
+        try (PreparedStatement stmt = conn.getConnection().prepareStatement(sql2)){
+            stmt.setString(1, soPR_line);
+            rowEffect += stmt.executeUpdate();
+        }
+      
+        conn.close();    
+        return rowEffect;
+    }
+
+
     
     
     
