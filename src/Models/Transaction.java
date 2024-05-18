@@ -18,7 +18,7 @@ public class Transaction {
     protected String user;
     protected Date ngayTao;
     protected Date ngaySua;
-    protected int trangThai; // 0: active; 1: deleted; 2: inactive
+    protected int trangThai; // 0: active; 1: deleted; 2: inactive; 3: done
     //protected String trangThaiStr;
     protected int itemLine;
     

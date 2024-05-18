@@ -219,19 +219,25 @@ CREATE TABLE GoodsReceipt (
 	--soPR_line VARCHAR(13),
 	--soLuong INT,
 	slNhan INT,
-
+	luuKho INT,
 );
 
--- Thêm dữ liệu mẫu vào bảng PurchaseOrder
-INSERT INTO  GoodsReceipt (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine, soPO_line, slNhan) VALUES
-('3190001_1', 3190001, N'tqhung', '01/01/2022', '01/02/2022', 0, 1, '2190001_1', 0),
-('3190002_1', 3190002, N'ptnam', '01-01-2022', '01-02-2022', 0, 1, '2190002_1', 0),
-('3190003_1', 3190003, N'admin', '01/01/2022', '01/02/2022', 0, 1, '2190003_1', 0);
+-- Thêm dữ liệu mẫu vào bảng GoodsReceipt
+INSERT INTO  GoodsReceipt (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine, soPO_line, slNhan, luuKho) VALUES
+('3190001_1', 3190001, N'tqhung', '01/01/2022', '01/02/2022', 0, 1, '2190001_1', 0, 0),
+('3190002_1', 3190002, N'ptnam', '01-01-2022', '01-02-2022', 0, 1, '2190002_1', 0, 1),
+('3190003_1', 3190003, N'admin', '01/01/2022', '01/02/2022', 0, 1, '2190003_1', 0, 1);
 
 
 SELECT * FROM  GoodsReceipt;
 
-
+SELECT *
+FROM GoodsReceipt JOIN PurchaseOrder ON GoodsReceipt.soPO_line = PurchaseOrder.soCT_line
+	JOIN PO_PR ON PurchaseOrder.soCT_line = PO_PR.soPO_line
+	JOIN PurchaseRequest ON PO_PR.soPR_line = PurchaseRequest.soCT_line
+	JOIN Item ON PurchaseRequest.maHang = Item.maHang
+	JOIN Vendor ON PurchaseOrder.maNCC = Vendor.maNCC
+WHERE GoodsReceipt.trangThai NOT IN (1);
 
 
 
