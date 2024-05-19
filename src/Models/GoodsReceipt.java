@@ -7,6 +7,7 @@ package Models;
 import Utility.DateUtils;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  *
@@ -20,9 +21,12 @@ public class GoodsReceipt extends Transaction {
     private int luuKho; // 0: không lưu kho; 1: lưu kho
     private boolean nhanLanCuoi;
     
+    private final static HashMap<Integer, Boolean> inventory = new HashMap<Integer, Boolean>(){{
+        put(0, false);
+        put(1, true);
+                }};
 
-    
-    public static final String[] columns = {"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PR", "PR line", "Số PO", "PO line", 
+    public final static String[] columns = {"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PO", "PO line", "Số PR", "PR line", 
         "Mã hàng", "Tên hàng", "ĐVT", "Mã NCC", "Tên NCC", "Số chưa nhận", "Số lượng nhận", "Lưu kho", "Nhận Lần Cuối"};
 
     public GoodsReceipt() {
@@ -73,20 +77,28 @@ public class GoodsReceipt extends Transaction {
         this.luuKho = luuKho;
     }
     
+    public boolean getLuuKhoBool() {
+        return GoodsReceipt.inventory.get(this.luuKho);
+    }
+    
 
     public PurchaseRequest getPr() {
         return po.getPr();
     }
 
     public void setPr(PurchaseRequest pr) {
-        this.po.setPr(pr);;
+        this.po.setPr(pr);
     }
 
     public Vendor getVendor() {
         return po.getVendor();
     }
 
-
+    @Override
+    public String toString() {
+        return super.toString() + "GoodsReceipt{" + "po=" + po + ", slNhan=" + slNhan + ", luuKho=" + luuKho + ", nhanLanCuoi=" + nhanLanCuoi + '}';
+    }
+    
     public Object[] getObjPO(){
         Object[] objPO =  new Object[]{this.getSoCT(), 
             this.getUser(), 
@@ -104,8 +116,9 @@ public class GoodsReceipt extends Transaction {
             getMaNCC(),
             getTenNCC(),
             po.getSlChoNhan(),
+            //0, // số lượng chờ nhận
             getSlNhan(),
-            this.luuKho,
+            getLuuKhoBool(),
             this.nhanLanCuoi
         };
                    
@@ -126,10 +139,6 @@ public class GoodsReceipt extends Transaction {
     
     public void setMaNCC(int maNCC){
         po.getVendor().setMaNCC(maNCC);
-    }
-
-    public int getSoLuong() {
-        return po.getSoLuong();
     }
 
     public int getPRline() {
@@ -184,6 +193,16 @@ public class GoodsReceipt extends Transaction {
         int slChoNhan = po.getSlChoNhan() - this.slNhan;
         this.po.setSlChoNhan(slChoNhan);
         return slChoNhan;
+    }
+    
+    public int encodeLuuKho(Integer luuKho){
+        HashMap<Boolean, Integer> mapConvert = new HashMap<>();
+        for (Integer i : inventory.keySet()){
+            mapConvert.put(inventory.get(i), i);
+            //System.out.println(status.get(i) + " " + i);
+        }
+        this.luuKho =  mapConvert.get(luuKho);
+        return this.trangThai;
     }
 
 }

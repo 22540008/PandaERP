@@ -58,11 +58,11 @@ public class GRController {
         this.view.btnSearchActionListener(new SearchActionListener());
         this.view.btnCalItemPriceActionListener(new CalItemPriceActionListener());
         this.view.btnAddActionListener(new AddActionListener());
-        this.view.btnDiagTimPRaddActionListener(new TimPRaddActionListener());
-        this.view.btnLoadPRActionListener(new LoadPRActionListener());
-//        this.view.btnSearchPRActionListener(new SearchPRActionListener());
-//        this.view.btnSelectPRActionListener(new SelectPRActionListener());
-//        this.view.btnRemove_addActionListener(new RemoveAddActionListener());
+        this.view.btnDiagTimPOAddActionListener(new TimPOAddActionListener());
+        this.view.btnLoadPOActionListener(new LoadPOActionListener());
+//        this.view.btnSearchPOActionListener(new SearchPOActionListener());
+        this.view.btnSelectPORActionListener(new SelectPOActionListener());
+        this.view.btnRemoveAddActionListener(new RemoveAddActionListener());
 //        this.view.btnDiagTimNCCaddActionListener(new TimNCCaddActionListener());
 //        this.view.btnLoadVendorActionListener(new LoadVendorActionListener());
 //        this.view.btnSearchVendorActionListener(new SearchVendorActionListener());
@@ -98,14 +98,6 @@ public class GRController {
         return view;
     }
     
-//    public void setupButtonAction(String action){
-//        if (action.equals("add")){
-//            this.view.btnSelVendorActionListener(new AddVendorActionListener());
-//        }
-//        if (action.equals("update")){
-//            this.view.btnSelVendorActionListener(new UpdateVendorActionListener());
-//        }
-//    }
 
     // Action khi nút Load ở panel "danh sách PO" được nhấn
     private class LoadActionListener implements ActionListener {
@@ -114,9 +106,9 @@ public class GRController {
             System.out.println("btnLoad is clicked");
             try {
                 model.loadData_DB();
-                Object[][] dsObjPO = model.getObjDsGR();   
-                view.setColumn(PurchaseOrder.columns);
-                view.setData(dsObjPO);
+                Object[][] dsObjGR = model.getObjDsGR();   
+                view.setColumn(GoodsReceipt.columns);
+                view.setData(dsObjGR);
                 view.loadData();   
             } catch (SQLException ex) {
                 Logger.getLogger(GRController.class.getName()).log(Level.SEVERE, null, ex);
@@ -158,15 +150,14 @@ public class GRController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("btnAdd is clicked");
-            //setupButtonAction("add"); // kích hoạt nút "Chọn" nhà cung cấp ở chế độ add
             
             if (view.getTableERP() == null){
                 JOptionPane.showMessageDialog(view, "Vui lòng Load dữ liệu trước");
                 return;
             }
-            // Tìm số PO lớn nhất hoặc theo format (6 chữ số): 2 (đại diện PO) + YY (2 số cuối của năm) + 0000
+            // Tìm số GR lớn nhất hoặc theo format (6 chữ số): 2 (đại diện PO) + YY (2 số cuối của năm) + 0000
             String lastYear2Digit = String.valueOf(Year.now().getValue() % 100);
-            int maxSoCT = Integer.parseInt("2" + lastYear2Digit + "0000");
+            int maxSoCT = Integer.parseInt("3" + lastYear2Digit + "0000");
             for (GoodsReceipt gr : model.getDsGR()){
                 if (gr.getSoCT() > maxSoCT){
                     maxSoCT = gr.getSoCT();
@@ -175,48 +166,55 @@ public class GRController {
             view.getFieldSoCT_add().setText(String.valueOf(maxSoCT + 1));
             view.getDate_add().setDate(new Date()); // set ngày PR hiện tại
             view.getFieldUser_add().setText(loginUser.getTenTK()); // set người tạo PR là tài khoản đang dùng
-            //view.setColumnPOdraft(new String[] {"Số PR", "PR line", "Mã hàng", "Tên hàng", "Mã NCC", "Tên NCC", "ĐVT", "Đơn giá", "Số lượng", "VAT", "Tổng giá"});
-            view.setColumnPOdraft(PurchaseOrder.columns);
-            view.setDataPOdraft(new Object[0][0]);
-            view.initTablePOdraft();
+            view.setColumnGRdraft(GoodsReceipt.columns);
+            view.setDataGRdraft(new Object[0][0]);
+            view.initTableGRdraft();
             view.getDialogAdd().pack(); // giúp Dialog khởi tạo các thành phần bên trong hoàn toàn, điều chỉnh kích thước... -> tránh lỗi hiển thị.
             view.getDialogAdd().setVisible(true);
         }
     }
     
     // Action khi nút "Tìm PR" của Dialog "PO draft" dược nhấn
-    private class TimPRaddActionListener implements ActionListener {
+    private class TimPOAddActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("btnTimPR_add is click");
-            if (view.getTablePR() != null){
-                view.getTablePR().setRowCount(0); // Xoá tất cả dữ liệu cũ để tránh đã add PR vào PO draft rồi vẫn hiện lại ds cũ.
+            System.out.println("btnTimPO_add is click");
+            if (view.getTablePO() != null){
+                view.getTablePO().setRowCount(0); // Xoá tất cả dữ liệu cũ để tránh đã add PR vào PO draft rồi vẫn hiện lại ds cũ.
             }
-            view.getDialogTimPR().pack();
-            view.getDialogTimPR().setVisible(true);
+            view.getDialogTimPO().pack();
+            view.getDialogTimPO().setVisible(true);
             
         }
     }
     
     // Action khi nút "Load" của Dialog "Tìm PR" được nhấn
-    private class LoadPRActionListener implements ActionListener {
+    private class LoadPOActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("btnLoadPR is clicked");
-            ArrayList<PurchaseRequest> listPRleftover = new ArrayList();
+            System.out.println("btnLoadPO is clicked");
+            //String[] paramSearch = view.getSearchParamPO();
+            String soPOStr = view.getFieldSearchSoCTPO().getText();
+            if (soPOStr.isBlank()){
+                JOptionPane.showMessageDialog(null, "Vui lòng nhập số PO");
+            }
+            
+            ArrayList<PurchaseOrder> listPOleftover = new ArrayList();
             try {
-                listPRleftover = prCtl.getModel().loadData_DB(0); // Lấy các PR có đang có trạng thái active (0)
+                listPOleftover = poCtl.getModel().loadData_DB(Integer.parseInt(soPOStr)); // Lấy các PO có đang có trạng thái active, processed (0, 3)
             } catch (SQLException ex) {
                 Logger.getLogger(GRController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            if (view.getTablePOdraft() != null){
-                int rowCount = view.getTablePOdraft().getRowCount();
+            // Remove các dòng pending PO mà đã thêm vào GR draft thông qua soPO
+            if (view.getTableGRdraft() != null){
+                int rowCount = view.getTableGRdraft().getRowCount();
                 for (int i = 0; i < rowCount; i++){
-                    Iterator<PurchaseRequest> iterator = listPRleftover.iterator();
+                    Iterator<PurchaseOrder> iterator = listPOleftover.iterator();
                     while (iterator.hasNext()) {
-                        PurchaseRequest pr = iterator.next();
-                        if ( String.valueOf(pr.getSoCT()).equals(String.valueOf(view.getTablePOdraft().getValueAt(i, 0))) && String.valueOf(pr.getItemLine()).equals(String.valueOf(view.getTablePOdraft().getValueAt(i, 1))) ){
+                        PurchaseOrder po = iterator.next();
+                        // So khớp cột 6 (số PO) và cột 7 (PO line) của tbGR draft, nếu trùng thì loại bỏ ra kết quả pending GR
+                        if ( String.valueOf(po.getSoCT()).equals(String.valueOf(view.getTableGRdraft().getValueAt(i, 6))) && String.valueOf(po.getItemLine()).equals(String.valueOf(view.getTableGRdraft().getValueAt(i, 7))) ){
                             System.out.println("iterator: " + iterator.toString());
                             iterator.remove();
                             break;
@@ -224,66 +222,65 @@ public class GRController {
                     }
                 }
                 
-                prCtl.getModel().setDsPR(listPRleftover);
+                poCtl.getModel().setDsPO(listPOleftover);
             }
             
-            Object[][] dsObjPR = prCtl.getModel().getObjDsPR();
-            System.out.println("leftover prlist Object: " + dsObjPR.length);
-            view.setColumnPR(PurchaseRequest.columns);
-            view.setDataPR(dsObjPR);
-            view.loadDataPR();
-            //view.getTablePR().setRowCount(0);
-            view.getDialogTimPR().setVisible(true);
+            Object[][] dsObjPO = poCtl.getModel().getObjDsPO();
+            System.out.println("leftover polist Object: " + dsObjPO.length);
+            view.setColumnPO(PurchaseOrder.columns);
+            view.setDataPO(dsObjPO);
+            view.loadDataPO();
+            view.getDialogTimPO().setVisible(true);
         }
     }
     
 //    // Action Tìm PR theo điều kiện trong danh sách pending list trong Dialog "Tìm PR"
-//    private class SearchPRActionListener implements ActionListener {
+//    private class SearchPOActionListener implements ActionListener {
 //        @Override
 //        public void actionPerformed(ActionEvent e) {
 //            System.out.println("btnSearchPR is clicked");
-//            if (view.getTablePR()== null){
-//                JOptionPane.showMessageDialog(null, "Vui lòng Load dữ liệu trước");
-//            }
-//            String[] paramSearch = view.getSearchParamPR();
-//            Object[][] trackObjPR;
-//            trackObjPR = view.getTablePR().searchByCriteria(paramSearch, new int[]{0, 1}, "match");
-//            view.getTablePR().setData(trackObjPR, PurchaseRequest.columns, view.getTbPR());
+////            if (view.getTablePO()== null){
+////                JOptionPane.showMessageDialog(null, "Vui lòng Load dữ liệu trước");
+////            }
+//            String[] paramSearch = view.getSearchParamPO();
+//            Object[][] trackObjPO;
+//            trackObjPO = view.getTablePO().searchByCriteria(paramSearch, new int[]{0}, "match");
+//            view.getTablePO().setData(trackObjPO, PurchaseRequest.columns, view.getTbPR());
 //
 //        }
 //    }
-//    
-//    // Action khi nút "Thêm" ở Dialog "Danh sách pending PR" được nhấn
-//    private class SelectPRActionListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            System.out.println("btnSelectPR is clicked");
-//            int[] selRows = view.getTbPR().getSelectedRows();
-//            boolean selRow = true;
-//            int[] selColumns = new int[] {0, 5, 6, 7, 8, 9, 10, 11}; // soCT, itemLine, maHang, tenHang, dvt, donGia, soLuong, itemPrice
-//            boolean selCol = true;
-//            Object[][] listObjData = view.getTablePR().filter(selRows, selRow, selColumns, selCol);
-//            view.getTablePOdraft().add(new int[]{6, 7, 8, 9, 10, 13, 14, 16}, listObjData, new int[]{0, 1, 2, 3, 4, 5, 6, 7});
-//            view.getTablePOdraft().setData(view.getTbPOdraft());
-//            view.getDialogTimPR().dispose(); 
-//        }
-//    }
-//    
-//    //Action khi nút "Xoá Item" của Dialog "Tạo draft PO" được nhấn
-//    private class RemoveAddActionListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            System.out.println("btnRemove_add is clicked");
-//            if (view.getTbPOdraft().getSelectedRow() == -1){
-//                JOptionPane.showMessageDialog(null, "Vui lòng chọn dòng PR cần bỏ ra");
-//                return;
-//            }
-//            int[] selRows = view.getTbPOdraft().getSelectedRows();
-//            view.getTablePOdraft().removeRow(selRows);
-//            view.getTablePOdraft().setData(view.getTbPOdraft());
-//        }
-//    }
-//    
+    
+    // Action khi nút "Thêm" ở Dialog "Danh sách pending PR" được nhấn
+    private class SelectPOActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnSelectPR is clicked");
+            int[] selRows = view.getTbPR().getSelectedRows();
+            boolean selRow = true;
+            int[] selColumns = new int[] {0, 5, 6, 7, 8, 9, 10, 11, 12, 17}; // soPO, PoLine, soPR, PrLine, maHang, tenHang, dvt, maNCC, tenNCC, pending qty
+            boolean selCol = true;
+            Object[][] listObjData = view.getTablePO().filter(selRows, selRow, selColumns, selCol);
+            view.getTableGRdraft().add(new int[]{6, 7, 8, 9, 10, 11, 12, 13, 14, 15}, listObjData, new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
+            view.getTableGRdraft().setData(view.getTbGRdraft());
+            view.getDialogTimPO().dispose(); 
+        }
+    }
+    
+    //Action khi nút "Xoá Item" của Dialog "Tạo draft PO" được nhấn
+    private class RemoveAddActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnRemove_add is clicked");
+            if (view.getTbGRdraft().getSelectedRow() == -1){
+                JOptionPane.showMessageDialog(null, "Vui lòng chọn dòng PR cần bỏ ra");
+                return;
+            }
+            int[] selRows = view.getTbGRdraft().getSelectedRows();
+            view.getTableGRdraft().removeRow(selRows);
+            view.getTableGRdraft().setData(view.getTbGRdraft());
+        }
+    }
+    
 //    // Action khi nút "Chọn NCC" ở Dialog "Tạo đơn hàng (PO)" được nhấn
 //    private class TimNCCaddActionListener implements ActionListener {
 //        @Override
@@ -341,8 +338,8 @@ public class GRController {
 //        @Override
 //        public void actionPerformed(ActionEvent e) {
 //            System.out.println("btnTinhTongPOdraft is clicked");
-//            if (view.getTbPOdraft().isEditing()){
-//                view.getTbPOdraft().getCellEditor().stopCellEditing(); // tắt edit để lưu data vào TableModel
+//            if (view.getTbGRdraft().isEditing()){
+//                view.getTbGRdraft().getCellEditor().stopCellEditing(); // tắt edit để lưu data vào TableModel
 //            }
 //            float vat = Float.parseFloat(view.getFieldVAT_add().getText());
 //            for (int i = 0; i < view.getTablePOdraft().getRowCount(); i++){
@@ -359,7 +356,7 @@ public class GRController {
 //        @Override
 //        public void actionPerformed(ActionEvent e) {
 //            System.out.println("btnCreate is clicked");
-//            int rowCount = view.getTbPOdraft().getRowCount();
+//            int rowCount = view.getTbGRdraft().getRowCount();
 //            if (rowCount == 0){
 //                JOptionPane.showMessageDialog(null, "Không có PR được chọn");
 //                return;

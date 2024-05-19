@@ -51,6 +51,7 @@ public class GRManager {
         //System.out.println("Convert to Object[][]");
         for (int i = 0; i < dsPOActive.size(); i++){
             Object[] objGoodsReceipt = dsPOActive.get(i).getObjPO();
+            System.out.println(dsPOActive.get(i));
             //System.out.println();
             for (int j=0; j < column; j++){
                 dsObjGoodsReceipt[i][j] = objGoodsReceipt[j];
@@ -112,6 +113,7 @@ public class GRManager {
             String[] soPO_line = rs.getString("soPO_line").split("_");
             po.setSoCT(Integer.parseInt(soPO_line[0]));
             po.setItemLine(Integer.parseInt(soPO_line[1]));
+            po.setSlChoNhan(rs.getInt("slChoNhan"));
             
             GoodsReceipt gr = new GoodsReceipt();
             gr.setSoCT(rs.getInt("soCT"));
@@ -123,7 +125,8 @@ public class GRManager {
             gr.setPo(po);
             gr.setPr(pr);
             gr.setVendor(vendor);
-            gr.setSoLuong(rs.getInt("soLuong"));
+            gr.setSlNhan(rs.getInt("slNhan"));
+            gr.setLuuKho(rs.getInt("luuKho"));
             
             dsGR.add(gr);
         }

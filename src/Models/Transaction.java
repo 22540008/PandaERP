@@ -18,15 +18,16 @@ public class Transaction {
     protected String user;
     protected Date ngayTao;
     protected Date ngaySua;
-    protected int trangThai; // 0: active; 1: deleted; 2: inactive; 3: done
+    protected int trangThai; // 0: active; 1: deleted; 2: inactive; 3: processed; 4: duyệt
     //protected String trangThaiStr;
     protected int itemLine;
     
     public final static HashMap<Integer, String> status = new HashMap<Integer, String>(){{
         put(0, "Đang xử lý");
-        put(1, "Đã xoá");
-        put(2, "Đã đóng");
+        put(1, "Đã xoá"); 
+        put(2, "Đã huỷ");
         put(3, "Đã được xử lý");
+        put(4, "Duyệt"); // kết thúc chứng từ, không có step tiếp theo, nhưng vẫn có thể "đóng" lại
                 }};
 
     public Transaction() {
@@ -106,11 +107,11 @@ public class Transaction {
     
     
     public int encodeTrangThai(String trangThaiStr){
-        System.out.println(trangThai);
+        //System.out.println(trangThai);
         HashMap<String, Integer> mapConvert = new HashMap<>();
         for (Integer i : status.keySet()){
             mapConvert.put(status.get(i), i);
-//            System.out.println(status.get(i) + " " + i);
+            //System.out.println(status.get(i) + " " + i);
         }
         this.trangThai =  mapConvert.get(trangThaiStr);
         return this.trangThai;

@@ -36,25 +36,25 @@ public class GRView extends javax.swing.JPanel {
     private String[] column;
     private Object[][] data;
     
-    private TableERP tableItem;
-    private String[] columnItem;
-    private Object[][] dataItem;
+//    private TableERP tableItem;
+//    private String[] columnItem;
+//    private Object[][] dataItem;
     
-    private TableERP tablePOdraft;
-    private String[] columnPOdraft;
-    private Object[][] dataPOdraft;
+    private TableERP tableGRdraft;
+    private String[] columnGRdraft;
+    private Object[][] dataGRdraft;
     
-    private TableERP tablePOupdate;
-    private String[] columPOupdate;
-    private Object[][] dataPOupdate;
+//    private TableERP tablePOupdate;
+//    private String[] columPOupdate;
+//    private Object[][] dataPOupdate;
     
-    private TableERP tablePR;
-    private String[] columnPR;
-    private Object[][] dataPR;
+    private TableERP tablePO;
+    private String[] columnPO;
+    private Object[][] dataPO;
     
-    private TableERP tableVendor;
-    private String[] columnVendor;
-    private Object[][] dataVendor;
+//    private TableERP tableVendor;
+//    private String[] columnVendor;
+//    private Object[][] dataVendor;
     
 
 
@@ -63,8 +63,9 @@ public class GRView extends javax.swing.JPanel {
      */
     public GRView() {
         
-        
         initComponents();
+        btnEdit.setVisible(false); // ẩn đi nút Sửa GR, không cho sử dụng
+
         // Thiết lập mỗi lần chỉ Edit được 1 trường Search
         fieldSearchSoCT.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -123,11 +124,11 @@ public class GRView extends javax.swing.JPanel {
     }
 
     public JTable getTbPO() {
-        return tbPO;
+        return tbGR;
     }
 
     public void setTbPO(JTable tbPO) {
-        this.tbPO = tbPO;
+        this.tbGR = tbPO;
     }
     
     public void setColumn(String[] columns) {
@@ -170,23 +171,6 @@ public class GRView extends javax.swing.JPanel {
         this.date_add = date_add;
     }
 
-    public JTextField getFieldDVT_add() {
-        return fieldVAT_add;
-    }
-
-    public void setFieldDVT_add(JTextField fieldDVT_add) {
-        this.fieldVAT_add = fieldDVT_add;
-    }
-
-
-    public JTextField getFieldMaHang_add() {
-        return fieldMaNCC_add;
-    }
-
-    public void setFieldMaHang_add(JTextField fieldMaHang_add) {
-        this.fieldMaNCC_add = fieldMaHang_add;
-    }
-
     public JTextField getFieldSearchSoCT() {
         return fieldSearchSoCT;
     }
@@ -211,17 +195,6 @@ public class GRView extends javax.swing.JPanel {
         this.fieldSoCT_add = fieldSoCT_add;
     }
 
-    public JTextField getFieldTenHang_add() {
-        return fieldTenNCC_add;
-    }
-
-    public void setFieldTenHang_add(JTextField fieldTenHang_add) {
-        this.fieldTenNCC_add = fieldTenHang_add;
-    }
-
-    public void setFieldTongPO(JTextField fieldTongPO) {
-        this.fieldTongPOdraft = fieldTongPO;
-    }
 
     public JTextField getFieldUser_add() {
         return fieldUser_add;
@@ -231,60 +204,60 @@ public class GRView extends javax.swing.JPanel {
         this.fieldUser_add = fieldUser_add;
     }
 
-    public JTable getTbPOdraft() {
-        return tbPOdraft;
+    public JTable getTbGRdraft() {
+        return tbGRdraft;
     }
 
     public void setTbPOdraft(JTable tbPOdraft) {
-        this.tbPOdraft = tbPOdraft;
+        this.tbGRdraft = tbPOdraft;
     }
 
-    public TableERP getTableItem() {
-        return tableItem;
+//    public TableERP getTableItem() {
+//        return tableItem;
+//    }
+//
+//    public void setTableItem(TableERP tableItem) {
+//        this.tableItem = tableItem;
+//    }
+//
+//    public String[] getColumnItem() {
+//        return columnItem;
+//    }
+//
+//    public void setColumnItem(String[] columnItem) {
+//        this.columnItem = columnItem;
+//    }
+//
+//    public Object[][] getDataItem() {
+//        return dataItem;
+//    }
+//
+//    public void setDataItem(Object[][] dataItem) {
+//        this.dataItem = dataItem;
+//    }
+
+    public TableERP getTableGRdraft() {
+        return tableGRdraft;
     }
 
-    public void setTableItem(TableERP tableItem) {
-        this.tableItem = tableItem;
+    public void setTableGRdraft(TableERP tableGRdraft) {
+        this.tableGRdraft = tableGRdraft;
     }
 
-    public String[] getColumnItem() {
-        return columnItem;
+    public String[] getColumnGRdraft() {
+        return columnGRdraft;
     }
 
-    public void setColumnItem(String[] columnItem) {
-        this.columnItem = columnItem;
+    public void setColumnGRdraft(String[] columnPOdraft) {
+        this.columnGRdraft = columnPOdraft;
     }
 
-    public Object[][] getDataItem() {
-        return dataItem;
+    public Object[][] getDataGRdraft() {
+        return dataGRdraft;
     }
 
-    public void setDataItem(Object[][] dataItem) {
-        this.dataItem = dataItem;
-    }
-
-    public TableERP getTablePOdraft() {
-        return tablePOdraft;
-    }
-
-    public void setTablePOdraft(TableERP tablePOdraft) {
-        this.tablePOdraft = tablePOdraft;
-    }
-
-    public String[] getColumnPOdraft() {
-        return columnPOdraft;
-    }
-
-    public void setColumnPOdraft(String[] columnPOdraft) {
-        this.columnPOdraft = columnPOdraft;
-    }
-
-    public Object[][] getDataPOdraft() {
-        return dataPOdraft;
-    }
-
-    public void setDataPOdraft(Object[][] dataPOdraft) {
-        this.dataPOdraft = dataPOdraft;
+    public void setDataGRdraft(Object[][] dataPOdraft) {
+        this.dataGRdraft = dataPOdraft;
     }
 
     public JDialog getDialogUpdate() {
@@ -295,21 +268,21 @@ public class GRView extends javax.swing.JPanel {
         this.DialogUpdate = DialogUpdate;
     }
 
-    public TableERP getTablePOupdate() {
-        return tablePOupdate;
-    }
-
-    public void setTablePOupdate(TableERP tablePOupdate) {
-        this.tablePOupdate = tablePOupdate;
-    }
-
-    public Object[][] getDataPOupdate() {
-        return dataPOupdate;
-    }
-
-    public void setDataPOupdate(Object[][] dataPOupdate) {
-        this.dataPOupdate = dataPOupdate;
-    }
+//    public TableERP getTablePOupdate() {
+//        return tablePOupdate;
+//    }
+//
+//    public void setTablePOupdate(TableERP tablePOupdate) {
+//        this.tablePOupdate = tablePOupdate;
+//    }
+//
+//    public Object[][] getDataPOupdate() {
+//        return dataPOupdate;
+//    }
+//
+//    public void setDataPOupdate(Object[][] dataPOupdate) {
+//        this.dataPOupdate = dataPOupdate;
+//    }
 
     public JTable getTbPOupdate() {
         return tbPOupdate;
@@ -327,13 +300,13 @@ public class GRView extends javax.swing.JPanel {
         this.date_update = date_update;
     }
 
-    public String[] getColumPOupdate() {
-        return columPOupdate;
-    }
-
-    public void setColumPOupdate(String[] columPOupdate) {
-        this.columPOupdate = columPOupdate;
-    }
+//    public String[] getColumPOupdate() {
+//        return columPOupdate;
+//    }
+//
+//    public void setColumPOupdate(String[] columPOupdate) {
+//        this.columPOupdate = columPOupdate;
+//    }
 
     public JTextField getFieldSoCT_update() {
         return fieldSoCT_update;
@@ -353,109 +326,71 @@ public class GRView extends javax.swing.JPanel {
 
     
     
-    public JDialog getDialogTimPR() {
-        return DialogTimPR;
+    public JDialog getDialogTimPO() {
+        return DialogTimPO;
     }
 
-    public TableERP getTablePR() {
-        return tablePR;
+    public TableERP getTablePO() {
+        return tablePO;
     }
 
-    public void setTablePR(TableERP tablePR) {
-        this.tablePR = tablePR;
+    public void setTablePO(TableERP tablePO) {
+        this.tablePO = tablePO;
     }
 
-    public String[] getColumnPR() {
-        return columnPR;
+    public String[] getColumnPO() {
+        return columnPO;
     }
 
-    public void setColumnPR(String[] columnPR) {
-        this.columnPR = columnPR;
+    public void setColumnPO(String[] columnPO) {
+        this.columnPO = columnPO;
     }
 
-    public Object[][] getDataPR() {
-        return dataPR;
+    public Object[][] getDataPO() {
+        return dataPO;
     }
 
-    public void setDataPR(Object[][] dataPR) {
-        this.dataPR = dataPR;
+    public void setDataPO(Object[][] dataPO) {
+        this.dataPO = dataPO;
     }
 
     public JTable getTbPR() {
-        return tbPR;
+        return tbPO;
     }
 
-    public JDialog getDialogTimVendor() {
-        return DialogTimVendor;
+    public JTextField getFieldSearchSoCTPO() {
+        return fieldSearchSoCTPO;
     }
+    
+    
 
-    public void setDialogTimVendor(JDialog DialogTimVendor) {
-        this.DialogTimVendor = DialogTimVendor;
-    }
 
-    public JTable getTbVendor() {
-        return tbVendor;
-    }
 
-    public void setTbVendor(JTable tbVendor) {
-        this.tbVendor = tbVendor;
-    }
+//    public TableERP getTableVendor() {
+//        return tableVendor;
+//    }
+//
+//    public void setTableVendor(TableERP tableVendor) {
+//        this.tableVendor = tableVendor;
+//    }
+//
+//    public String[] getColumnVendor() {
+//        return columnVendor;
+//    }
+//
+//    public void setColumnVendor(String[] columnVendor) {
+//        this.columnVendor = columnVendor;
+//    }
+//
+//    public Object[] getDataVendor() {
+//        return dataVendor;
+//    }
+//
+//    public void setDataVendor(Object[][] dataVendor) {
+//        this.dataVendor = dataVendor;
+//    }
 
-    public TableERP getTableVendor() {
-        return tableVendor;
-    }
 
-    public void setTableVendor(TableERP tableVendor) {
-        this.tableVendor = tableVendor;
-    }
-
-    public String[] getColumnVendor() {
-        return columnVendor;
-    }
-
-    public void setColumnVendor(String[] columnVendor) {
-        this.columnVendor = columnVendor;
-    }
-
-    public Object[] getDataVendor() {
-        return dataVendor;
-    }
-
-    public void setDataVendor(Object[][] dataVendor) {
-        this.dataVendor = dataVendor;
-    }
-
-    public JTextField getFieldMaNCC_add() {
-        return fieldMaNCC_add;
-    }
-
-    public void setFieldMaNCC_add(JTextField fieldMaNCC_add) {
-        this.fieldMaNCC_add = fieldMaNCC_add;
-    }
-
-    public JTextField getFieldTenNCC_add() {
-        return fieldTenNCC_add;
-    }
-
-    public void setFieldTenNCC_add(JTextField fieldTenNCC_add) {
-        this.fieldTenNCC_add = fieldTenNCC_add;
-    }
-
-    public JTextField getFieldVAT_add() {
-        return fieldVAT_add;
-    }
-
-    public void setFieldVAT_add(JTextField fieldVAT_add) {
-        this.fieldVAT_add = fieldVAT_add;
-    }
-
-    public JTextField getFieldTongPOdraft() {
-        return fieldTongPOdraft;
-    }
-
-    public void setFieldTongPOdraft(JTextField fieldTongPOdraft) {
-        this.fieldTongPOdraft = fieldTongPOdraft;
-    }
 
     public JTextField getFieldTongPOupdate() {
         return fieldTongPOupdate;
@@ -485,21 +420,12 @@ public class GRView extends javax.swing.JPanel {
         fieldSoCT_add = new javax.swing.JTextField();
         date_add = new com.toedter.calendar.JDateChooser();
         jPanel4 = new javax.swing.JPanel();
-        fieldVAT_add = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        btnTimPR_add = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        fieldTenNCC_add = new javax.swing.JTextField();
-        fieldMaNCC_add = new javax.swing.JTextField();
-        btnTimNCC_add = new javax.swing.JButton();
+        btnTimPO_add = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbPOdraft = new javax.swing.JTable();
+        tbGRdraft = new javax.swing.JTable();
         btnCreate = new javax.swing.JButton();
         btnRemove_add = new javax.swing.JButton();
-        btnTinhTongPOdraft = new javax.swing.JButton();
-        fieldTongPOdraft = new javax.swing.JTextField();
         DialogUpdate = new javax.swing.JDialog();
         jLabel15 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -524,32 +450,17 @@ public class GRView extends javax.swing.JPanel {
         fieldTenNCC_update = new javax.swing.JTextField();
         fieldMaNCC_update = new javax.swing.JTextField();
         btnTimNCC_update = new javax.swing.JButton();
-        DialogTimPR = new javax.swing.JDialog();
+        DialogTimPO = new javax.swing.JDialog();
         jScrollPane6 = new javax.swing.JScrollPane();
-        tbPR = new javax.swing.JTable();
-        jPanel13 = new javax.swing.JPanel();
-        fieldSearchUserPR = new javax.swing.JTextField();
-        jLabel21 = new javax.swing.JLabel();
-        btnSearchPR = new javax.swing.JButton();
-        jLabel22 = new javax.swing.JLabel();
-        fieldSearchSoCTPR = new javax.swing.JTextField();
-        jPanel14 = new javax.swing.JPanel();
-        btnSelectPR = new javax.swing.JButton();
-        btnLoadPR = new javax.swing.JButton();
-        DialogTimVendor = new javax.swing.JDialog();
-        jPanel11 = new javax.swing.JPanel();
-        fieldSearchTenNCC = new javax.swing.JTextField();
-        jLabel19 = new javax.swing.JLabel();
-        btnSearchVendor = new javax.swing.JButton();
-        jLabel20 = new javax.swing.JLabel();
-        fieldSearchMaNCC = new javax.swing.JTextField();
-        jPanel12 = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        tbVendor = new javax.swing.JTable();
-        btnLoadVendor = new javax.swing.JButton();
-        btnSelectVendor = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
         tbPO = new javax.swing.JTable();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        fieldSearchSoCTPO = new javax.swing.JTextField();
+        btnLoadPO = new javax.swing.JButton();
+        jPanel14 = new javax.swing.JPanel();
+        btnSelectPO = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbGR = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         fieldSearchUser = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -567,7 +478,7 @@ public class GRView extends javax.swing.JPanel {
         DialogAdd.setModal(true);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel11.setText("TẠO ĐƠN HÀNG (PO)");
+        jLabel11.setText("TẠO PHIẾU NHẬN HÀNG (GR)");
 
         jLabel3.setText("Ngày");
 
@@ -622,74 +533,27 @@ public class GRView extends javax.swing.JPanel {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm"));
 
-        fieldVAT_add.setEditable(false);
-
-        jLabel7.setText("Tên NCC");
-
-        btnTimPR_add.setText("Tìm PR");
-
-        jLabel8.setText("VAT%");
-
-        jLabel6.setText("Mã NCC");
-
-        fieldTenNCC_add.setEditable(false);
-
-        fieldMaNCC_add.setEditable(false);
-
-        btnTimNCC_add.setText("Chọn NCC");
+        btnTimPO_add.setText("Tìm PO");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(btnTimPR_add)
-                        .addGap(15, 15, 15))
-                    .addComponent(btnTimNCC_add, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fieldMaNCC_add, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(0, 203, Short.MAX_VALUE))
-                    .addComponent(fieldTenNCC_add, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(fieldVAT_add, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addComponent(btnTimPO_add)
+                .addContainerGap(522, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(btnTimPR_add)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 29, Short.MAX_VALUE)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(fieldVAT_add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fieldTenNCC_add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fieldMaNCC_add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnTimNCC_add))
-                        .addGap(5, 5, 5))))
+                .addComponent(btnTimPO_add)
+                .addGap(0, 56, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Bản thảo PO"));
 
-        tbPOdraft.setModel(new javax.swing.table.DefaultTableModel(
+        tbGRdraft.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -708,15 +572,11 @@ public class GRView extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tbPOdraft);
+        jScrollPane2.setViewportView(tbGRdraft);
 
-        btnCreate.setText("Tạo PO");
+        btnCreate.setText("Tạo GR");
 
         btnRemove_add.setText("Xoá Item");
-
-        btnTinhTongPOdraft.setText("Tính tổng");
-
-        fieldTongPOdraft.setEditable(false);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -727,9 +587,6 @@ public class GRView extends javax.swing.JPanel {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(btnTinhTongPOdraft)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fieldTongPOdraft, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnRemove_add)
                         .addGap(18, 18, 18)
@@ -744,9 +601,7 @@ public class GRView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreate)
-                    .addComponent(btnRemove_add)
-                    .addComponent(fieldTongPOdraft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTinhTongPOdraft))
+                    .addComponent(btnRemove_add))
                 .addContainerGap())
         );
 
@@ -984,9 +839,9 @@ public class GRView extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        DialogTimPR.setModal(true);
+        DialogTimPO.setModal(true);
 
-        tbPR.setModel(new javax.swing.table.DefaultTableModel(
+        tbPO.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null},
@@ -1005,36 +860,35 @@ public class GRView extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        tbPR.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        tbPR.setMinimumSize(new java.awt.Dimension(400, 80));
-        tbPR.setPreferredSize(new java.awt.Dimension(1080, 600));
-        tbPR.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        jScrollPane6.setViewportView(tbPR);
-        if (tbPR.getColumnModel().getColumnCount() > 0) {
-            tbPR.getColumnModel().getColumn(0).setPreferredWidth(60);
-            tbPR.getColumnModel().getColumn(1).setMinWidth(60);
-            tbPR.getColumnModel().getColumn(1).setPreferredWidth(60);
-            tbPR.getColumnModel().getColumn(1).setMaxWidth(60);
-            tbPR.getColumnModel().getColumn(2).setPreferredWidth(15);
-            tbPR.getColumnModel().getColumn(3).setPreferredWidth(15);
-            tbPR.getColumnModel().getColumn(4).setPreferredWidth(10);
-            tbPR.getColumnModel().getColumn(5).setPreferredWidth(10);
-            tbPR.getColumnModel().getColumn(6).setPreferredWidth(10);
-            tbPR.getColumnModel().getColumn(7).setMinWidth(100);
-            tbPR.getColumnModel().getColumn(7).setPreferredWidth(100);
-            tbPR.getColumnModel().getColumn(8).setPreferredWidth(10);
-            tbPR.getColumnModel().getColumn(9).setPreferredWidth(10);
-            tbPR.getColumnModel().getColumn(10).setPreferredWidth(20);
-            tbPR.getColumnModel().getColumn(11).setPreferredWidth(20);
+        tbPO.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tbPO.setMinimumSize(new java.awt.Dimension(400, 80));
+        tbPO.setPreferredSize(new java.awt.Dimension(1080, 600));
+        tbPO.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jScrollPane6.setViewportView(tbPO);
+        if (tbPO.getColumnModel().getColumnCount() > 0) {
+            tbPO.getColumnModel().getColumn(0).setPreferredWidth(60);
+            tbPO.getColumnModel().getColumn(1).setMinWidth(60);
+            tbPO.getColumnModel().getColumn(1).setPreferredWidth(60);
+            tbPO.getColumnModel().getColumn(1).setMaxWidth(60);
+            tbPO.getColumnModel().getColumn(2).setPreferredWidth(15);
+            tbPO.getColumnModel().getColumn(3).setPreferredWidth(15);
+            tbPO.getColumnModel().getColumn(4).setPreferredWidth(10);
+            tbPO.getColumnModel().getColumn(5).setPreferredWidth(10);
+            tbPO.getColumnModel().getColumn(6).setPreferredWidth(10);
+            tbPO.getColumnModel().getColumn(7).setMinWidth(100);
+            tbPO.getColumnModel().getColumn(7).setPreferredWidth(100);
+            tbPO.getColumnModel().getColumn(8).setPreferredWidth(10);
+            tbPO.getColumnModel().getColumn(9).setPreferredWidth(10);
+            tbPO.getColumnModel().getColumn(10).setPreferredWidth(20);
+            tbPO.getColumnModel().getColumn(11).setPreferredWidth(20);
         }
 
         jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm"));
 
-        jLabel21.setText("Số CT");
+        jLabel21.setText("Số PO");
 
-        btnSearchPR.setText("Tìm kiếm");
-
-        jLabel22.setText("Người tạo");
+        btnLoadPO.setText("Tìm PO");
+        btnLoadPO.setToolTipText("");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -1044,14 +898,10 @@ public class GRView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fieldSearchSoCTPR, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jLabel22)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fieldSearchUserPR, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addComponent(btnSearchPR, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(fieldSearchSoCTPO, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnLoadPO)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1059,18 +909,14 @@ public class GRView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
-                    .addComponent(fieldSearchSoCTPR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearchPR)
-                    .addComponent(jLabel22)
-                    .addComponent(fieldSearchUserPR))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(fieldSearchSoCTPO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLoadPO))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        btnSelectPR.setText("Thêm");
-
-        btnLoadPR.setText("Load");
+        btnSelectPO.setText("Thêm");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -1078,159 +924,40 @@ public class GRView extends javax.swing.JPanel {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLoadPR)
-                .addGap(18, 18, 18)
-                .addComponent(btnSelectPR))
+                .addComponent(btnSelectPO))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSelectPR)
-                    .addComponent(btnLoadPR)))
+                .addComponent(btnSelectPO))
         );
 
-        javax.swing.GroupLayout DialogTimPRLayout = new javax.swing.GroupLayout(DialogTimPR.getContentPane());
-        DialogTimPR.getContentPane().setLayout(DialogTimPRLayout);
-        DialogTimPRLayout.setHorizontalGroup(
-            DialogTimPRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DialogTimPRLayout.createSequentialGroup()
+        javax.swing.GroupLayout DialogTimPOLayout = new javax.swing.GroupLayout(DialogTimPO.getContentPane());
+        DialogTimPO.getContentPane().setLayout(DialogTimPOLayout);
+        DialogTimPOLayout.setHorizontalGroup(
+            DialogTimPOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DialogTimPOLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(DialogTimPRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(DialogTimPOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane6)))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)))
         );
-        DialogTimPRLayout.setVerticalGroup(
-            DialogTimPRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DialogTimPRLayout.createSequentialGroup()
+        DialogTimPOLayout.setVerticalGroup(
+            DialogTimPOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DialogTimPOLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        DialogTimVendor.setModal(true);
+        setBorder(javax.swing.BorderFactory.createTitledBorder("Phiếu nhận hàng (GR)"));
 
-        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm"));
-
-        jLabel19.setText("Mã NCC");
-
-        btnSearchVendor.setText("Tìm kiếm");
-
-        jLabel20.setText("Tên NCC");
-
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel19)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fieldSearchMaNCC, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-                .addGap(26, 26, 26)
-                .addComponent(jLabel20)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fieldSearchTenNCC, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSearchVendor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(fieldSearchMaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearchVendor)
-                    .addComponent(jLabel20)
-                    .addComponent(fieldSearchTenNCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder("Bảng Ds NCC"));
-
-        tbVendor.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Mã NCC", "Tên NCC", "Địa chỉ", "MST", "VAT"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        tbVendor.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        tbVendor.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane5.setViewportView(tbVendor);
-
-        btnLoadVendor.setText("Load");
-
-        btnSelectVendor.setText("Chọn");
-
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnLoadVendor)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSelectVendor))))
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLoadVendor)
-                    .addComponent(btnSelectVendor)))
-        );
-
-        javax.swing.GroupLayout DialogTimVendorLayout = new javax.swing.GroupLayout(DialogTimVendor.getContentPane());
-        DialogTimVendor.getContentPane().setLayout(DialogTimVendorLayout);
-        DialogTimVendorLayout.setHorizontalGroup(
-            DialogTimVendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DialogTimVendorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(DialogTimVendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        DialogTimVendorLayout.setVerticalGroup(
-            DialogTimVendorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DialogTimVendorLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        setBorder(javax.swing.BorderFactory.createTitledBorder("Đơn hàng (PO)"));
-
-        tbPO.setModel(new javax.swing.table.DefaultTableModel(
+        tbGR.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -1238,22 +965,22 @@ public class GRView extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PR", "PR line", "PO line", "Số PO", "Mã hàng", "Tên hàng", "ĐVT", "Mã NCC", "Tên NCC", "SL chưa nhận", "SL nhận", "Lưu kho", "Nhận lần cuối"
+                "Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PO", "PO line", "Số PR", "PR line", "Mã hàng", "Tên hàng", "ĐVT", "Mã NCC", "Tên NCC", "SL chưa nhận", "SL nhận", "Lưu kho", "Nhận lần cuối"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Boolean.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        tbPO.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        tbPO.setMinimumSize(new java.awt.Dimension(400, 80));
-        tbPO.setPreferredSize(new java.awt.Dimension(1080, 400));
-        tbPO.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(tbPO);
+        tbGR.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tbGR.setMinimumSize(new java.awt.Dimension(400, 80));
+        tbGR.setPreferredSize(new java.awt.Dimension(1080, 400));
+        tbGR.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(tbGR);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm"));
 
@@ -1369,8 +1096,7 @@ public class GRView extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog DialogAdd;
-    private javax.swing.JDialog DialogTimPR;
-    private javax.swing.JDialog DialogTimVendor;
+    private javax.swing.JDialog DialogTimPO;
     private javax.swing.JDialog DialogUpdate;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnClose;
@@ -1378,41 +1104,28 @@ public class GRView extends javax.swing.JPanel {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnLoad;
-    private javax.swing.JButton btnLoadPR;
-    private javax.swing.JButton btnLoadVendor;
+    private javax.swing.JButton btnLoadPO;
     private javax.swing.JButton btnRemove_add;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton btnSearchPR;
-    private javax.swing.JButton btnSearchVendor;
-    private javax.swing.JButton btnSelectPR;
-    private javax.swing.JButton btnSelectVendor;
-    private javax.swing.JButton btnTimNCC_add;
+    private javax.swing.JButton btnSelectPO;
     private javax.swing.JButton btnTimNCC_update;
-    private javax.swing.JButton btnTimPR_add;
-    private javax.swing.JButton btnTinhTongPOdraft;
+    private javax.swing.JButton btnTimPO_add;
     private javax.swing.JButton btnTinhTongPR1;
     private javax.swing.JButton btnTotalItemPrice;
     private javax.swing.JButton btnUpdate;
     private com.toedter.calendar.JDateChooser date_add;
     private com.toedter.calendar.JDateChooser date_update;
-    private javax.swing.JTextField fieldMaNCC_add;
     private javax.swing.JTextField fieldMaNCC_update;
-    private javax.swing.JTextField fieldSearchMaNCC;
     private javax.swing.JTextField fieldSearchSoCT;
-    private javax.swing.JTextField fieldSearchSoCTPR;
-    private javax.swing.JTextField fieldSearchTenNCC;
+    private javax.swing.JTextField fieldSearchSoCTPO;
     private javax.swing.JTextField fieldSearchUser;
-    private javax.swing.JTextField fieldSearchUserPR;
     private javax.swing.JTextField fieldSoCT_add;
     private javax.swing.JTextField fieldSoCT_update;
-    private javax.swing.JTextField fieldTenNCC_add;
     private javax.swing.JTextField fieldTenNCC_update;
-    private javax.swing.JTextField fieldTongPOdraft;
     private javax.swing.JTextField fieldTongPOupdate;
     private javax.swing.JTextField fieldTotalPrice;
     private javax.swing.JTextField fieldUser_add;
     private javax.swing.JTextField fieldUser_update;
-    private javax.swing.JTextField fieldVAT_add;
     private javax.swing.JTextField fieldVAT_update;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1421,23 +1134,15 @@ public class GRView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
@@ -1449,13 +1154,11 @@ public class GRView extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTable tbGR;
+    private javax.swing.JTable tbGRdraft;
     private javax.swing.JTable tbPO;
-    private javax.swing.JTable tbPOdraft;
     private javax.swing.JTable tbPOupdate;
-    private javax.swing.JTable tbPR;
-    private javax.swing.JTable tbVendor;
     // End of variables declaration//GEN-END:variables
 
     public void btnLoadActionListener(ActionListener listener){
@@ -1464,22 +1167,19 @@ public class GRView extends javax.swing.JPanel {
     
     public void loadData() {
         tableERP = new TableERP(data, column);
-        tableERP.setColumnType(0, Integer.class);
-        tableERP.setColumnType(5, Integer.class);
-        tableERP.setColumnType(6, Integer.class);
-        tableERP.setColumnType(7, Integer.class);
-        tableERP.setColumnType(8, Integer.class);
-        tableERP.setColumnType(11, Integer.class);
-        tableERP.setColumnType(13, Long.class);
-        tableERP.setColumnType(14, Integer.class);
-        tableERP.setColumnType(15, Float.class);
-        tableERP.setColumnType(16, Double.class);
-        tableERP.setColumnType(17, Integer.class);
-        tbPO.setModel(tableERP);
-        
-        tbPO.getColumnModel().getColumn(13).setCellRenderer(new CurrencyRenderer()); // format VND
-        tbPO.getColumnModel().getColumn(16).setCellRenderer(new CurrencyRenderer());
-        
+        tableERP.setColumnType(0, Integer.class); // Số CT
+        tableERP.setColumnType(5, Integer.class); // ItemLine
+        tableERP.setColumnType(6, Integer.class); // số PO
+        tableERP.setColumnType(7, Integer.class); // Po line
+        tableERP.setColumnType(8, Integer.class); // số PR
+        tableERP.setColumnType(9, Integer.class); // Pr line
+        tableERP.setColumnType(10, Integer.class); // Mã hàng
+        tableERP.setColumnType(13, Integer.class); // Mã NCC
+        tableERP.setColumnType(15, Integer.class); // Số lượng chưa nhận
+        tableERP.setColumnType(16, Integer.class); // Số lượng nhận
+        tableERP.setColumnType(17, Boolean.class); // Lưu kho
+        tableERP.setColumnType(18, Boolean.class); // Nhận lần cuối
+        tbGR.setModel(tableERP);
     } 
     
     public String[] getSearchParams() {
@@ -1497,180 +1197,123 @@ public class GRView extends javax.swing.JPanel {
         btnTotalItemPrice.addActionListener(listener);
     }
     
-    public void initTablePOdraft() {
-        tablePOdraft = new TableERP(dataPOdraft, columnPOdraft);
-        tablePOdraft.setEditable(true);
-        tablePOdraft.addEditableColumn(13); // Edit đơn giá
-        tablePOdraft.addEditableColumn(14); // số lượng
-        tablePOdraft.addEditableColumn(15); // VAT
-        tablePOdraft.setColumnType(6, Integer.class); // Số PR
-        tablePOdraft.setColumnType(7, Integer.class); // PR line
-        tablePOdraft.setColumnType(8, Integer.class); // Mã hàng
-        tablePOdraft.setColumnType(10, Integer.class); // Mã vendor
-        tablePOdraft.setColumnType(13, Long.class); // Đơn giá
-        tablePOdraft.setColumnType(14, Integer.class); // Số lượng
-        tablePOdraft.setColumnType(15, Float.class); // VAT
-        tablePOdraft.setColumnType(16, Double.class); // Tổng giá item
-        tablePOdraft.setColumnType(17, Integer.class); // sl chờ nhận
-        tbPOdraft.setModel(tablePOdraft);
-        tbPOdraft.getColumnModel().getColumn(13).setCellRenderer(new CurrencyRenderer()); // VND format cột đơn giá
-        tbPOdraft.getColumnModel().getColumn(16).setCellRenderer(new CurrencyRenderer()); // cột tổng giá item
-        tablePOdraft.setColumnVisible(tbPOdraft, new String[]{"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Mã NCC", "Tên NCC"}, false);
+    public void initTableGRdraft() {
+        tableGRdraft = new TableERP(dataGRdraft, columnGRdraft);
+        tableGRdraft.setEditable(true);
+        tableGRdraft.addEditableColumn(16); // cho phép Edit số lượng nhận
+        tableGRdraft.addEditableColumn(17); // lưu kho
+        tableGRdraft.addEditableColumn(18); // nhân lần cuối
+        tableGRdraft.setColumnType(0, Integer.class); // Số CT
+        tableGRdraft.setColumnType(5, Integer.class); // ItemLine
+        tableGRdraft.setColumnType(6, Integer.class); // số PO
+        tableGRdraft.setColumnType(7, Integer.class); // Po line
+        tableGRdraft.setColumnType(8, Integer.class); // số PR
+        tableGRdraft.setColumnType(9, Integer.class); // Pr line
+        tableGRdraft.setColumnType(10, Integer.class); // Mã hàng
+        tableGRdraft.setColumnType(13, Integer.class); // Mã NCC
+        tableGRdraft.setColumnType(15, Integer.class); // Số lượng chưa nhận
+        tableGRdraft.setColumnType(16, Integer.class); // Số lượng nhận
+        tableGRdraft.setColumnType(17, Boolean.class); // Lưu kho
+        tableGRdraft.setColumnType(18, Boolean.class); // Nhận lần cuối
+        tbGRdraft.setModel(tableGRdraft);
+        //tableGRdraft.setColumnVisible(tbGRdraft, new String[]{"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Mã NCC", "Tên NCC"}, false);
     }
     
     public void btnAddActionListener(ActionListener listener){
         btnAdd.addActionListener(listener);
     }
     
-    public void btnDiagTimPRaddActionListener(ActionListener listener){
-        btnTimPR_add.addActionListener(listener);   
+    public void btnDiagTimPOAddActionListener(ActionListener listener){
+        btnTimPO_add.addActionListener(listener);   
     }
     
-    public void loadDataPR() {
-        tablePR = new TableERP(dataPR, columnPR);
-        tbPR.setModel(tablePR);
+    public void loadDataPO() {
+        tablePO = new TableERP(dataPO, columnPO);
+        tbPO.setModel(tablePO);
     }
     
-    public String[] getSearchParamPR() {
-        String[] searchParams = new String[2];
-        searchParams[0] = fieldSearchSoCTPR.getText();
-        searchParams[1] = fieldSearchUserPR.getText();
-        return searchParams;
+//    public String[] getSearchParamPO() {
+//        String[] searchParams = new String[1];
+//        searchParams[0] = fieldSearchSoCTPO.getText();
+//        return searchParams;
+//    }
+    
+    public void btnLoadPOActionListener(ActionListener listener){
+        btnLoadPO.addActionListener(listener);
     }
     
-    public void btnLoadPRActionListener(ActionListener listener){
-        btnLoadPR.addActionListener(listener);
+//    public void btnSearchPOActionListener(ActionListener listener){
+//        btnSearchPO.addActionListener(listener);
+//    }
+    
+    public void btnSelectPORActionListener(ActionListener listener){
+        btnSelectPO.addActionListener(listener);
     }
     
-    public void btnSearchPRActionListener(ActionListener listener){
-        btnSearchPR.addActionListener(listener);
-    }
     
-    public void btnSelectPRActionListener(ActionListener listener){
-        btnSelectPR.addActionListener(listener);
-    }
-    
-    public void btnDiagTimNCCaddActionListener(ActionListener listener){
-        btnTimNCC_add.addActionListener(listener);
-    }
-    
-    public void loadDataVendor() {
-        tableVendor = new TableERP(dataVendor, columnVendor);
-        tableVendor.setColumnType(0, Integer.class);
-        tableVendor.setColumnType(4, Float.class);
-        tbVendor.setModel(tableVendor);
-    }
-
-    public void btnLoadVendorActionListener(ActionListener listener){
-        btnLoadVendor.addActionListener(listener);
-    }
-    
-    public String[] getSearchParamVendor() {
-        String[] searchParams = new String[2];
-        searchParams[0] = fieldSearchMaNCC.getText();
-        searchParams[1] = fieldSearchTenNCC.getText();
-        return searchParams;
-    }
-    
-    public void btnSearchVendorActionListener(ActionListener listener){
-        btnSearchVendor.addActionListener(listener);
-    }
-    
-    public void addVendorInfo(){ 
-        int selRow = tbVendor.getSelectedRow();
-        String maNCCStr = String.valueOf(tableVendor.getValueAt(selRow, 0));
-        String tenNCCStr = String.valueOf(tableVendor.getValueAt(selRow, 1));
-        String vatStr = String.valueOf(tableVendor.getValueAt(selRow, 4));
-        fieldMaNCC_add.setText(maNCCStr);
-        fieldTenNCC_add.setText(tenNCCStr);
-        fieldVAT_add.setText(vatStr);
-    }
-    
-    public void btnSelVendorActionListener(ActionListener listener){
-        btnSelectVendor.addActionListener(listener);
-    }
-    
-    public void btnRemove_addActionListener(ActionListener listener){
+    public void btnRemoveAddActionListener(ActionListener listener){
         btnRemove_add.addActionListener(listener);
     }
     
     
-    public void btnTinhTongPOdraftActionListener(ActionListener listener){
-        btnTinhTongPOdraft.addActionListener(listener);
-    }
     
     public void btnCreateActionListener(ActionListener listener){
         btnCreate.addActionListener(listener);
     }
     
     
-    public void initTablePOUpdate() {
-        tablePOupdate = new TableERP(dataPOupdate, columPOupdate);
-        tablePOupdate.setEditable(true);
-        tablePOupdate.addEditableColumn(13); // Giá
-        tablePOupdate.addEditableColumn(14); // Số lượng
-        tablePOupdate.addEditableColumn(15); // VAT%
-        // thiết lập các giá trị đặc biệt và cột xét để không cho edit
-        Set<Object> specialValues = new HashSet<>();
-        specialValues.add("Đã đóng");
-        specialValues.add("Đã được xử lý");
-        tablePOupdate.setSpecialValues(specialValues, 0);
-        // Thiết lập kiểu giá trị cho các cột
-        tablePOupdate.setColumnType(6, Integer.class); // Số PR
-        tablePOupdate.setColumnType(7, Integer.class); // PR line
-        tablePOupdate.setColumnType(8, Integer.class); // Mã hàng
-        tablePOupdate.setColumnType(10, Integer.class); // Mã vendor
-        tablePOupdate.setColumnType(13, Long.class); // Đơn giá
-        tablePOupdate.setColumnType(14, Integer.class); // Số lượng
-        tablePOupdate.setColumnType(15, Float.class); // VAT
-        tablePOupdate.setColumnType(16, Double.class); // Tổng giá item
-        tablePOupdate.setColumnType(17, Integer.class); // sl chờ nhận
-        tbPOupdate.setModel(tablePOupdate);
-        tbPOupdate.getColumnModel().getColumn(13).setCellRenderer(new CurrencyRenderer()); // VND format cột đơn giá
-        tbPOupdate.getColumnModel().getColumn(16).setCellRenderer(new CurrencyRenderer()); // cột tổng giá item
-        //tablePOdraft.setColumnVisible(tbPOdraft, new String[]{"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Mã NCC", "Tên NCC"}, false);
-    }
+//    public void initTablePOUpdate() {
+//        tablePOupdate = new TableERP(dataPOupdate, columPOupdate);
+//        tablePOupdate.setEditable(true);
+//        tablePOupdate.addEditableColumn(13); // Giá
+//        tablePOupdate.addEditableColumn(14); // Số lượng
+//        tablePOupdate.addEditableColumn(15); // VAT%
+//        // thiết lập các giá trị đặc biệt và cột xét để không cho edit
+//        Set<Object> specialValues = new HashSet<>();
+//        specialValues.add("Đã đóng");
+//        specialValues.add("Đã được xử lý");
+//        tablePOupdate.setSpecialValues(specialValues, 0);
+//        // Thiết lập kiểu giá trị cho các cột
+//        tablePOupdate.setColumnType(6, Integer.class); // Số PR
+//        tablePOupdate.setColumnType(7, Integer.class); // PR line
+//        tablePOupdate.setColumnType(8, Integer.class); // Mã hàng
+//        tablePOupdate.setColumnType(10, Integer.class); // Mã vendor
+//        tablePOupdate.setColumnType(13, Long.class); // Đơn giá
+//        tablePOupdate.setColumnType(14, Integer.class); // Số lượng
+//        tablePOupdate.setColumnType(15, Float.class); // VAT
+//        tablePOupdate.setColumnType(16, Double.class); // Tổng giá item
+//        tablePOupdate.setColumnType(17, Integer.class); // sl chờ nhận
+//        tbPOupdate.setModel(tablePOupdate);
+//        tbPOupdate.getColumnModel().getColumn(13).setCellRenderer(new CurrencyRenderer()); // VND format cột đơn giá
+//        tbPOupdate.getColumnModel().getColumn(16).setCellRenderer(new CurrencyRenderer()); // cột tổng giá item
+//        //tablePOdraft.setColumnVisible(tbPOdraft, new String[]{"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Mã NCC", "Tên NCC"}, false);
+//    }
     
-    public void btnDiagTimNCCupdateActionListener(ActionListener listener){
-        btnTimNCC_update.addActionListener(listener);
-    }
+//    public void btnDiagTimNCCupdateActionListener(ActionListener listener){
+//        btnTimNCC_update.addActionListener(listener);
+//    }
     
-    public void updateVendorInfo() {
-        int selRow = tbVendor.getSelectedRow();
-        String maNCCStr = String.valueOf(tableVendor.getValueAt(selRow, 0));
-        String tenNCCStr = String.valueOf(tableVendor.getValueAt(selRow, 1));
-        String vatStr = String.valueOf(tableVendor.getValueAt(selRow, 4));
-        fieldMaNCC_update.setText(maNCCStr);
-        fieldTenNCC_update.setText(tenNCCStr);
-        fieldVAT_update.setText(vatStr);
-        for (int i = 0; i < tablePOupdate.getRowCount(); i++){
-            tablePOupdate.setValueAt(Integer.parseInt(maNCCStr), i, 11);
-            tablePOupdate.setValueAt(tenNCCStr, i, 12);
-            tablePOupdate.setValueAt(Float.parseFloat(vatStr), i, 15);
-        }
-        
-    }
     
-    public PurchaseOrder getUpdatePOinfo(int row) {
-        PurchaseOrder po = new PurchaseOrder();
-        po.setSoCT((int) tablePOupdate.getValueAt(row, 0));
-        po.setNgaySua(date_update.getDate());
-        po.setItemLine((int) tablePOupdate.getValueAt(row, 5));
-        String maNCCstr = fieldMaNCC_update.getText();
-        if (maNCCstr.isBlank()){
-            po.setMaNCC((int)tablePOupdate.getValueAt(row, 11));
-        }
-        else {
-            po.setMaNCC(Integer.parseInt(maNCCstr));
-        }
-        po.setGia((long)tablePOupdate.getValueAt(row, 13));
-        po.setSoLuong((int)tablePOupdate.getValueAt(row, 14));
-        po.setVat((float)tablePOupdate.getValueAt(row, 15));
-        po.setGiaItem((double)tablePOupdate.getValueAt(row, 16));
-        
-        System.out.println(po);
-        return po;
-    }
+//    public PurchaseOrder getUpdatePOinfo(int row) {
+//        PurchaseOrder po = new PurchaseOrder();
+//        po.setSoCT((int) tablePOupdate.getValueAt(row, 0));
+//        po.setNgaySua(date_update.getDate());
+//        po.setItemLine((int) tablePOupdate.getValueAt(row, 5));
+//        String maNCCstr = fieldMaNCC_update.getText();
+//        if (maNCCstr.isBlank()){
+//            po.setMaNCC((int)tablePOupdate.getValueAt(row, 11));
+//        }
+//        else {
+//            po.setMaNCC(Integer.parseInt(maNCCstr));
+//        }
+//        po.setGia((long)tablePOupdate.getValueAt(row, 13));
+//        po.setSoLuong((int)tablePOupdate.getValueAt(row, 14));
+//        po.setVat((float)tablePOupdate.getValueAt(row, 15));
+//        po.setGiaItem((double)tablePOupdate.getValueAt(row, 16));
+//        
+//        System.out.println(po);
+//        return po;
+//    }
     
  
     
@@ -1685,11 +1328,11 @@ public class GRView extends javax.swing.JPanel {
     }
 
     public void updateTbPOdraft() {
-        tbPOdraft.setModel(tablePOdraft);
+        tbGRdraft.setModel(tableGRdraft);
     }
 
     public void updateTbPO() {
-        tbPO.setModel(tableERP);
+        tbGR.setModel(tableERP);
     }
     
     public void btnCloseActionListener(ActionListener listener){
@@ -1729,9 +1372,9 @@ public class GRView extends javax.swing.JPanel {
         table.setModel(tableERPSearch);
     }
 
-    public void updateTbPOupdate() {
-        tbPOupdate.setModel(tablePOupdate);
-    }
+//    public void updateTbPOupdate() {
+//        tbPOupdate.setModel(tablePOupdate);
+//    }
 
 
     

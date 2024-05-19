@@ -202,6 +202,7 @@ public class POController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("btnLoadPR is clicked");
+            
             ArrayList<PurchaseRequest> listPRleftover = new ArrayList();
             try {
                 listPRleftover = prCtl.getModel().loadData_DB(0); // Lấy các PR có đang có trạng thái active (0)
@@ -211,18 +212,21 @@ public class POController {
             
             if (view.getTablePOdraft() != null){
                 int rowCount = view.getTablePOdraft().getRowCount();
+                System.out.println("rowCount POdraft: " + rowCount);
                 for (int i = 0; i < rowCount; i++){
                     Iterator<PurchaseRequest> iterator = listPRleftover.iterator();
                     while (iterator.hasNext()) {
                         PurchaseRequest pr = iterator.next();
-                        if ( String.valueOf(pr.getSoCT()).equals(String.valueOf(view.getTablePOdraft().getValueAt(i, 0))) && String.valueOf(pr.getItemLine()).equals(String.valueOf(view.getTablePOdraft().getValueAt(i, 1))) ){
+                        // So khớp từng cột 6 số PR và cột 7 Pr line, nếu trùng thì xoá ra
+                        if ( String.valueOf(pr.getSoCT()).equals(String.valueOf(view.getTablePOdraft().getValueAt(i, 6))) && String.valueOf(pr.getItemLine()).equals(String.valueOf(view.getTablePOdraft().getValueAt(i, 7))) ){
                             System.out.println("iterator: " + iterator.toString());
                             iterator.remove();
                             break;
                         }
+
                     }
                 }
-                
+                System.out.println("listPRleftover length: " + listPRleftover.size());
                 prCtl.getModel().setDsPR(listPRleftover);
             }
             

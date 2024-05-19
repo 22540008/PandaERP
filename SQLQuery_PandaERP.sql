@@ -162,12 +162,14 @@ CREATE TABLE PurchaseOrder (
 
 -- Thêm dữ liệu mẫu vào bảng PurchaseOrder
 INSERT INTO PurchaseOrder (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine, maNCC, gia, soLuong, vat, giaTong, slChoNhan) VALUES
-('2190001_1', 2190001, N'tqhung', '01/01/2022', '01/02/2022', 0, 1, 1001, 1000, 15, 10, 0, 15),
-('2190002_1', 2190002, N'ptnam', '01-01-2022', '01-02-2022', 0, 1, 1002, 2000, 18, 10, 0, 18),
-('2190003_1', 2190003, N'admin', '01/01/2022', '01/02/2022', 0, 1, 1003, 3000, 12, 10, 0, 12);
+('2190001_1', 2190001, N'tqhung', '01/01/2022', '01/02/2022', 0, 1, 1001, 1000, 15, 10, 0, 14),
+('2190002_1', 2190002, N'ptnam', '01-01-2022', '01-02-2022', 0, 1, 1002, 2000, 18, 10, 0, 17),
+('2190003_1', 2190003, N'admin', '01/01/2022', '01/02/2022', 0, 1, 1003, 3000, 12, 10, 0, 11);
 
 
 -- Bảng PO_PR
+DROP TABLE PO_PR
+
 CREATE TABLE PO_PR (
     soPO_line VARCHAR(13),
     soPR_line VARCHAR(13),
@@ -225,9 +227,9 @@ CREATE TABLE GoodsReceipt (
 
 -- Thêm dữ liệu mẫu vào bảng GoodsReceipt
 INSERT INTO  GoodsReceipt (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine, soPO_line, slNhan, luuKho) VALUES
-('3190001_1', 3190001, N'tqhung', '01/01/2022', '01/02/2022', 0, 1, '2190001_1', 0, 0),
-('3190002_1', 3190002, N'ptnam', '01-01-2022', '01-02-2022', 0, 1, '2190002_1', 0, 1),
-('3190003_1', 3190003, N'admin', '01/01/2022', '01/02/2022', 0, 1, '2190003_1', 0, 1);
+('3190001_1', 3190001, N'tqhung', '01/01/2022', '01/02/2022', 3, 1, '2190001_1', 1, 0),
+('3190002_1', 3190002, N'ptnam', '01-01-2022', '01-02-2022', 3, 1, '2190002_1', 1, 1),
+('3190003_1', 3190003, N'admin', '01/01/2022', '01/02/2022', 3, 1, '2190003_1', 1, 1);
 
 
 SELECT * FROM  GoodsReceipt;
@@ -240,7 +242,12 @@ FROM GoodsReceipt JOIN PurchaseOrder ON GoodsReceipt.soPO_line = PurchaseOrder.s
 	JOIN Vendor ON PurchaseOrder.maNCC = Vendor.maNCC
 WHERE GoodsReceipt.trangThai NOT IN (1);
 
-
+SELECT *
+FROM PurchaseOrder JOIN PO_PR ON PurchaseOrder.soCT_line = PO_PR.soPO_line
+    JOIN PurchaseRequest ON PO_PR.soPR_line = PurchaseRequest.soCT_line
+    JOIN Item ON PurchaseRequest.maHang = Item.maHang
+    JOIN Vendor ON PurchaseOrder.maNCC = Vendor.maNCC
+WHERE PurchaseOrder.trangThai IN (0, 3);
 
 
 
