@@ -5,11 +5,13 @@
 package Controllers;
 
 import Models.User;
+import Services.GRManager;
 import Services.ItemManager;
 import Services.POManager;
 import Services.PRManager;
 import Services.UserManager;
 import Services.VendorManager;
+import Views.GRView;
 import Views.ItemView;
 import Views.MainFrame;
 import Views.POView;
@@ -50,6 +52,9 @@ public class MainController {
     private POManager poModel;
     private POController poController;
     private POView poView;
+    private GRManager grModel;
+    private GRController grController;
+    private GRView grView;
     
     
 
@@ -83,14 +88,17 @@ public class MainController {
         poModel = new POManager();
         poView = new POView();
         poController = new POController(poModel, poView);
+        // Khởi tạo GR component
+        grModel = new GRManager();
+        grView = new GRView();
+        grController = new GRController(grModel, grView);
         
         
         // Set các Model tương quan
         prController.setOtherModel(loginUser, itemController);
         poController.setOtherModel(loginUser, itemController, vendorController, prController);
-        
+        grController.setOtherModel(loginUser, itemController, vendorController, prController, poController);
 
-        
     }
     
     public void setView(MainFrame view){
@@ -100,6 +108,7 @@ public class MainController {
         view.menuVendorActionListener(new VendorActionListener());
         view.menuPRActionListener(new PRActionListener());
         view.menuPOActionListener(new POActionListener());
+        view.menuGRActionListener(new GRActionListener());
     }
     
     public UserView getUserView() {
@@ -124,6 +133,20 @@ public class MainController {
 
     public Component getPoView() {
         return poView;
+    }
+
+    public Component getGrView() {
+        return grView;
+    }
+
+    private class GRActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("menuGR is clicked");
+            CardLayout cl = (CardLayout) view.getPanelMain().getLayout();
+            cl.show(view.getPanelMain(), "GRView");
+            grController.getView().setVisible(true);
+        }
     }
 
     private class POActionListener implements ActionListener {

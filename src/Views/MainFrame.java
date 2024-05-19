@@ -63,9 +63,8 @@ public class MainFrame extends javax.swing.JFrame {
         panelMain.add(controller.getVendorView(), "VendorView");
         panelMain.add(controller.getPrView(), "PRView");
         panelMain.add(controller.getPoView(), "POView");
-        
+        panelMain.add(controller.getGrView(), "GRView");
 
-       
     }
 
     public JPanel getPanelMain() {
@@ -113,7 +112,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         menuPR = new javax.swing.JMenuItem();
         menuPO = new javax.swing.JMenuItem();
-        jMenuItemGR = new javax.swing.JMenuItem();
+        menuGR = new javax.swing.JMenuItem();
         menuItem = new javax.swing.JMenuItem();
         menuVendor = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
@@ -184,8 +183,8 @@ public class MainFrame extends javax.swing.JFrame {
         menuPO.setText("Đơn hàng");
         jMenu3.add(menuPO);
 
-        jMenuItemGR.setText("Phiếu nhận hàng");
-        jMenu3.add(jMenuItemGR);
+        menuGR.setText("Phiếu nhận hàng");
+        jMenu3.add(menuGR);
 
         jMenu6.add(jMenu3);
 
@@ -204,40 +203,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    public void btnSignoutActionListener(ActionListener listener) {
-        menuSignout.addActionListener(listener); 
-    }
-    
-    public void menuDSTaiKhoanActionListener(ActionListener listner){
-        menuDSTaiKhoan.addActionListener(listner);
-    }
-    
-    public void menuItemActionListener(ActionListener listener){
-        menuItem.addActionListener(listener);
-    }
-    
-    public void menuVendorActionListener(ActionListener listener){
-        menuVendor.addActionListener(listener);
-    }
-    
-    public void menuPRActionListener(ActionListener listener){
-        menuPR.addActionListener(listener);
-    }
-    
-    public void menuPOActionListener(ActionListener listener){
-        menuPO.addActionListener(listener);
-    }
-    
-            
-    
-    
-    
 
     // Variables declaration - do not modify                     
 
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -278,6 +246,36 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
 
+       
+    public void btnSignoutActionListener(ActionListener listener) {
+        menuSignout.addActionListener(listener); 
+    }
+    
+    public void menuDSTaiKhoanActionListener(ActionListener listner){
+        menuDSTaiKhoan.addActionListener(listner);
+    }
+    
+    public void menuItemActionListener(ActionListener listener){
+        menuItem.addActionListener(listener);
+    }
+    
+    public void menuVendorActionListener(ActionListener listener){
+        menuVendor.addActionListener(listener);
+    }
+    
+    public void menuPRActionListener(ActionListener listener){
+        menuPR.addActionListener(listener);
+    }
+    
+    public void menuPOActionListener(ActionListener listener){
+        menuPO.addActionListener(listener);
+    }
+    
+    public void menuGRActionListener(ActionListener listener){
+        menuGR.addActionListener(listener);
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
@@ -287,8 +285,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItemGR;
     private javax.swing.JMenuItem menuDSTaiKhoan;
+    private javax.swing.JMenuItem menuGR;
     private javax.swing.JMenuItem menuItem;
     private javax.swing.JMenuItem menuPO;
     private javax.swing.JMenuItem menuPR;

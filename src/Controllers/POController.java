@@ -363,10 +363,16 @@ public class POController {
                 JOptionPane.showMessageDialog(null, "Không có PR được chọn");
                 return;
             }
+            String maNCCStr = String.valueOf(view.getFieldMaNCC_add().getText());
+            if (maNCCStr.isBlank()){
+                JOptionPane.showMessageDialog(null, "Bạn chưa chọn nhà cung cấp");
+                return;
+            }
+            
             ArrayList<PurchaseOrder> newPOlist = new ArrayList();
             for (int i = 0; i < rowCount; i++){
                 int soCT = Integer.parseInt(String.valueOf(view.getFieldSoCT_add().getText()));
-                int maNCC = Integer.parseInt(String.valueOf(view.getFieldMaNCC_add().getText()));
+                int maNCC = Integer.parseInt(maNCCStr);
                 PurchaseOrder po = new PurchaseOrder();
                 po.setSoCT(soCT);
                 po.setUser(view.getFieldUser_add().getText());
@@ -383,14 +389,22 @@ public class POController {
                 po.setTenNCC(view.getFieldTenNCC_add().getText());
                 po.setGia((long)view.getTablePOdraft().getValueAt(i, 13));
                 po.setSoLuong((int)view.getTablePOdraft().getValueAt(i, 14));
-                if (String.valueOf(view.getTablePOdraft().getValueAt(i, 15)).isBlank()){
+                if (view.getTablePOdraft().getValueAt(i, 15) == null){
                     po.setVat(Float.parseFloat(String.valueOf(view.getFieldVAT_add().getText())));
                 }
                 else {
                     po.setVat((float) view.getTablePOdraft().getValueAt(i, 15));
                 }
                 po.setGiaItem((double) view.getTablePOdraft().getValueAt(i, 16));
-                double giaPO = CurrencyUtils.parseToDouble(view.getFieldTongPOdraft().getText());
+                po.setSlChoNhan((int)view.getTablePOdraft().getValueAt(i, 14));
+                // Nếu ô giá tổng khọng rỗng thì gán giá trị, không thì giá tri là 0
+                if (!view.getFieldTongPOdraft().getText().isBlank()){
+                    double giaPO = CurrencyUtils.parseToDouble(view.getFieldTongPOdraft().getText());
+                }
+                else{
+                    double giaPO = 0f;
+                }
+                
                 //po.setGiaDonHang(giaPO);
                 
                 //System.out.println(po);

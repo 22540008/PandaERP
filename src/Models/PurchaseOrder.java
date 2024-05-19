@@ -22,9 +22,10 @@ public class PurchaseOrder extends Transaction {
     private float vat;
     private double giaItem;
     //private double giaDonHang;
+    private int slChoNhan;
     
     public static final String[] columns = {"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PR", "PR line", "Mã hàng", "Tên hàng", "ĐVT", "Mã NCC", "Tên NCC",
-        "Giá", "Số lượng", "VAT%", "Giá tổng"};
+        "Giá", "Số lượng", "VAT%", "Giá tổng", "SL chờ nhận"};
 
     public PurchaseOrder() {
         pr = new PurchaseRequest();
@@ -63,6 +64,14 @@ public class PurchaseOrder extends Transaction {
 //        this.giaDonHang = giaDonHang;
 //    }
 
+    public int getSlChoNhan() {
+        return slChoNhan;
+    }
+
+    public void setSlChoNhan(int slChoNhan) {
+        this.slChoNhan = slChoNhan;
+    }
+
     @Override
     public String toString() {
         return super.toString() + "PurchaseOrder{" + "pr=" + pr + ", vendor=" + vendor + ", gia=" + gia + ", soLuong=" + soLuong + ", vat=" + vat + ", giaItem=" + giaItem + '}';
@@ -88,7 +97,9 @@ public class PurchaseOrder extends Transaction {
             getGia(),
             getSoLuong(),
             getVat(),
-            getGiaItem()};
+            getGiaItem(),
+            getSlChoNhan()
+        };
                    
         return objPR;
     }

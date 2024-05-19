@@ -119,6 +119,7 @@ public class POManager {
             po.setSoLuong(rs.getInt("soLuong"));
             po.setVat(rs.getFloat("vat"));
             po.setGiaItem(rs.getDouble("giaTong"));
+            po.setSlChoNhan(rs.getInt("slChoNhan"));
             
             dsPO.add(po);
         }
@@ -132,7 +133,7 @@ public class POManager {
         // đối tượng s kết nối SQL Server
         SQLConnection conn = new SQLConnection("", "");
         String sql1 = "INSERT INTO PurchaseOrder (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine,"
-                + "maNCC, gia, soLuong, vat, giaTong) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "maNCC, gia, soLuong, vat, giaTong, slChoNhan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement stmt = conn.getConnection().prepareStatement(sql1);
 
         for (PurchaseOrder po : poList){
@@ -151,6 +152,7 @@ public class POManager {
             stmt.setInt(10, po.getSoLuong());
             stmt.setFloat(11, po.getVat());
             stmt.setDouble(12, po.getGiaItem());
+            stmt.setInt(13, po.getSlChoNhan());
             
             rowEffect += stmt.executeUpdate();
         }
@@ -185,7 +187,7 @@ public class POManager {
         // đối tượng s kết nối SQL Server
         SQLConnection conn = new SQLConnection("", "");
         // Chuỗi truy vấn SQL q cho bảng PurchaseOrders
-        String sql1 = "UPDATE PurchaseOrder SET ngaySua = ?, maNCC = ?, gia = ?, soLuong = ?, vat = ?, giaTong = ? WHERE soCT_line = ?";
+        String sql1 = "UPDATE PurchaseOrder SET ngaySua = ?, maNCC = ?, gia = ?, soLuong = ?, vat = ?, giaTong = ?, slChoNhan = ? WHERE soCT_line = ?";
         PreparedStatement stmt = conn.getConnection().prepareStatement(sql1);
         System.out.print("Số lượng data sẽ update trong SQL: " + poList.size());
         for (PurchaseOrder po : poList){
@@ -196,8 +198,9 @@ public class POManager {
             stmt.setInt(4, po.getSoLuong());
             stmt.setFloat(5, po.getVat());
             stmt.setDouble(6, po.getGiaItem());
+            stmt.setInt(7, po.getSlChoNhan());
             String soCT_line = po.getSoCT() + "_" + po.getItemLine();
-            stmt.setString(7, soCT_line);
+            stmt.setString(8, soCT_line);
 
             
             rowEffect += stmt.executeUpdate();

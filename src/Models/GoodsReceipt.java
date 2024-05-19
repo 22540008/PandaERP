@@ -17,23 +17,27 @@ public class GoodsReceipt extends Transaction {
     
     private PurchaseOrder po;
     private int slNhan;
-    private int slConLai;
     private int luuKho; // 0: không lưu kho; 1: lưu kho
+    private boolean nhanLanCuoi;
+    
 
     
     public static final String[] columns = {"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PR", "PR line", "Số PO", "PO line", 
-        "Mã hàng", "Tên hàng", "ĐVT", "Mã NCC", "Tên NCC", "Số lượng", "Đã nhận", "Số lượng nhận", "Lưu kho"};
+        "Mã hàng", "Tên hàng", "ĐVT", "Mã NCC", "Tên NCC", "Số chưa nhận", "Số lượng nhận", "Lưu kho", "Nhận Lần Cuối"};
 
     public GoodsReceipt() {
         po = new PurchaseOrder();
         slNhan = 0;
-        slConLai = 0;
         luuKho = 0;
+        nhanLanCuoi = false;
     }
 
     public GoodsReceipt(int soCT, String user, Date ngayTao, Date ngaySua, int trangThai, int itemLine) {
         super(soCT, user, ngayTao, ngaySua, trangThai, itemLine);
         po = new PurchaseOrder();
+        slNhan = 0;
+        luuKho = 0;
+        nhanLanCuoi = false;
     }
 
     public PurchaseOrder getPo() {
@@ -60,13 +64,6 @@ public class GoodsReceipt extends Transaction {
         this.slNhan = slNhan;
     }
 
-    public int getSlConLai() {
-        return slConLai;
-    }
-
-    public void setSlConLai(int slConLai) {
-        this.slConLai = slConLai;
-    }
 
     public int getLuuKho() {
         return luuKho;
@@ -76,9 +73,7 @@ public class GoodsReceipt extends Transaction {
         this.luuKho = luuKho;
     }
     
-    
-    
-    
+
     public PurchaseRequest getPr() {
         return po.getPr();
     }
@@ -108,9 +103,10 @@ public class GoodsReceipt extends Transaction {
             getDvt(),
             getMaNCC(),
             getTenNCC(),
-            getSoLuong(),
+            po.getSlChoNhan(),
             getSlNhan(),
-            getLuuKho()
+            this.luuKho,
+            this.nhanLanCuoi
         };
                    
         return objPO;
@@ -184,6 +180,10 @@ public class GoodsReceipt extends Transaction {
         return po.getItemLine();
     }
 
+    private int tinhSLConLai() {
+        int slChoNhan = po.getSlChoNhan() - this.slNhan;
+        this.po.setSlChoNhan(slChoNhan);
+        return slChoNhan;
+    }
 
-       
 }

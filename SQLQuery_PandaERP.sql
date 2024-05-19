@@ -156,14 +156,15 @@ CREATE TABLE PurchaseOrder (
 	gia MONEY,
 	soLuong INT,
 	vat NUMERIC(4,2),
-	giaTong MONEY
+	giaTong MONEY,
+	slChoNhan INT,
 );
 
 -- Thêm dữ liệu mẫu vào bảng PurchaseOrder
-INSERT INTO PurchaseOrder (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine, maNCC, gia, soLuong, vat, giaTong) VALUES
-('2190001_1', 2190001, N'tqhung', '01/01/2022', '01/02/2022', 0, 1, 1001, 1000, 5, 10, 0),
-('2190002_1', 2190002, N'ptnam', '01-01-2022', '01-02-2022', 0, 1, 1002, 2000, 8, 10, 0),
-('2190003_1', 2190003, N'admin', '01/01/2022', '01/02/2022', 0, 1, 1003, 3000, 10, 10, 0);
+INSERT INTO PurchaseOrder (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine, maNCC, gia, soLuong, vat, giaTong, slChoNhan) VALUES
+('2190001_1', 2190001, N'tqhung', '01/01/2022', '01/02/2022', 0, 1, 1001, 1000, 15, 10, 0, 15),
+('2190002_1', 2190002, N'ptnam', '01-01-2022', '01-02-2022', 0, 1, 1002, 2000, 18, 10, 0, 18),
+('2190003_1', 2190003, N'admin', '01/01/2022', '01/02/2022', 0, 1, 1003, 3000, 12, 10, 0, 12);
 
 
 -- Bảng PO_PR
