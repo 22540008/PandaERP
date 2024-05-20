@@ -143,9 +143,6 @@ public class GRView extends javax.swing.JPanel {
         this.poCtl = poCtl;
     }
 
-    public JTextField getFieldTotalPrice() {
-        return fieldTotalPrice;
-    }
 
     public JTextField getFieldUser() {
         return fieldUser_add;
@@ -456,7 +453,7 @@ public class GRView extends javax.swing.JPanel {
         jPanel13 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         fieldSearchSoCTPO = new javax.swing.JTextField();
-        btnLoadPO = new javax.swing.JButton();
+        btnSearchPO = new javax.swing.JButton();
         jPanel14 = new javax.swing.JPanel();
         btnSelectPO = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -472,8 +469,6 @@ public class GRView extends javax.swing.JPanel {
         btnDelete = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
-        btnTotalItemPrice = new javax.swing.JButton();
-        fieldTotalPrice = new javax.swing.JTextField();
 
         DialogAdd.setModal(true);
 
@@ -887,8 +882,8 @@ public class GRView extends javax.swing.JPanel {
 
         jLabel21.setText("Số PO");
 
-        btnLoadPO.setText("Tìm PO");
-        btnLoadPO.setToolTipText("");
+        btnSearchPO.setText("Tìm PO");
+        btnSearchPO.setToolTipText("");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -900,7 +895,7 @@ public class GRView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fieldSearchSoCTPO, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnLoadPO)
+                .addComponent(btnSearchPO)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
@@ -910,7 +905,7 @@ public class GRView extends javax.swing.JPanel {
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
                     .addComponent(fieldSearchSoCTPO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLoadPO))
+                    .addComponent(btnSearchPO))
                 .addContainerGap(7, Short.MAX_VALUE))
         );
 
@@ -1030,21 +1025,12 @@ public class GRView extends javax.swing.JPanel {
 
         btnAdd.setText("Thêm");
 
-        btnTotalItemPrice.setText("Tính tổng giá");
-        btnTotalItemPrice.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-
-        fieldTotalPrice.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnTotalItemPrice)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fieldTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 259, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnDelete)
                 .addGap(18, 18, 18)
                 .addComponent(btnEdit)
@@ -1058,14 +1044,11 @@ public class GRView extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fieldTotalPrice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnLoad)
-                        .addComponent(btnDelete)
-                        .addComponent(btnEdit)
-                        .addComponent(btnAdd)
-                        .addComponent(btnTotalItemPrice))))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLoad)
+                    .addComponent(btnDelete)
+                    .addComponent(btnEdit)
+                    .addComponent(btnAdd)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -1104,14 +1087,13 @@ public class GRView extends javax.swing.JPanel {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnLoad;
-    private javax.swing.JButton btnLoadPO;
     private javax.swing.JButton btnRemove_add;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnSearchPO;
     private javax.swing.JButton btnSelectPO;
     private javax.swing.JButton btnTimNCC_update;
     private javax.swing.JButton btnTimPO_add;
     private javax.swing.JButton btnTinhTongPR1;
-    private javax.swing.JButton btnTotalItemPrice;
     private javax.swing.JButton btnUpdate;
     private com.toedter.calendar.JDateChooser date_add;
     private com.toedter.calendar.JDateChooser date_update;
@@ -1123,7 +1105,6 @@ public class GRView extends javax.swing.JPanel {
     private javax.swing.JTextField fieldSoCT_update;
     private javax.swing.JTextField fieldTenNCC_update;
     private javax.swing.JTextField fieldTongPOupdate;
-    private javax.swing.JTextField fieldTotalPrice;
     private javax.swing.JTextField fieldUser_add;
     private javax.swing.JTextField fieldUser_update;
     private javax.swing.JTextField fieldVAT_update;
@@ -1193,9 +1174,6 @@ public class GRView extends javax.swing.JPanel {
         btnSearch.addActionListener(listener);
     }
     
-    public void btnCalItemPriceActionListener(ActionListener listener){
-        btnTotalItemPrice.addActionListener(listener);
-    }
     
     public void initTableGRdraft() {
         tableGRdraft = new TableERP(dataGRdraft, columnGRdraft);
@@ -1238,8 +1216,8 @@ public class GRView extends javax.swing.JPanel {
 //        return searchParams;
 //    }
     
-    public void btnLoadPOActionListener(ActionListener listener){
-        btnLoadPO.addActionListener(listener);
+    public void btnSearchPOActionListener(ActionListener listener){
+        btnSearchPO.addActionListener(listener);
     }
     
 //    public void btnSearchPOActionListener(ActionListener listener){

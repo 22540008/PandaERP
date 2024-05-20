@@ -18,7 +18,7 @@ public class Transaction {
     protected String user;
     protected Date ngayTao;
     protected Date ngaySua;
-    protected int trangThai; // 0: active; 1: deleted; 2: inactive; 3: processed; 4: duyệt
+    protected int trangThai; // 0: active; 1: deleted; 2: inactive; 3: processed; 4: duyệt (bởi system hoặc approver)
     //protected String trangThaiStr;
     protected int itemLine;
     

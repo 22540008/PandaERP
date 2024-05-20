@@ -19,7 +19,7 @@ public class GoodsReceipt extends Transaction {
     private PurchaseOrder po;
     private int slNhan;
     private int luuKho; // 0: không lưu kho; 1: lưu kho
-    private boolean nhanLanCuoi;
+    private boolean lanCuoi;
     
     private final static HashMap<Integer, Boolean> inventory = new HashMap<Integer, Boolean>(){{
         put(0, false);
@@ -33,7 +33,7 @@ public class GoodsReceipt extends Transaction {
         po = new PurchaseOrder();
         slNhan = 0;
         luuKho = 0;
-        nhanLanCuoi = false;
+        lanCuoi = false;
     }
 
     public GoodsReceipt(int soCT, String user, Date ngayTao, Date ngaySua, int trangThai, int itemLine) {
@@ -41,7 +41,7 @@ public class GoodsReceipt extends Transaction {
         po = new PurchaseOrder();
         slNhan = 0;
         luuKho = 0;
-        nhanLanCuoi = false;
+        lanCuoi = false;
     }
 
     public PurchaseOrder getPo() {
@@ -89,14 +89,25 @@ public class GoodsReceipt extends Transaction {
     public void setPr(PurchaseRequest pr) {
         this.po.setPr(pr);
     }
+    
 
     public Vendor getVendor() {
         return po.getVendor();
     }
 
+    public boolean isLanCuoi() {
+        return lanCuoi;
+    }
+
+    public void setLanCuoi(boolean lanCuoi) {
+        this.lanCuoi = lanCuoi;
+    }
+    
+    
+
     @Override
     public String toString() {
-        return super.toString() + "GoodsReceipt{" + "po=" + po + ", slNhan=" + slNhan + ", luuKho=" + luuKho + ", nhanLanCuoi=" + nhanLanCuoi + '}';
+        return super.toString() + "GoodsReceipt{" + "po=" + po + ", slNhan=" + slNhan + ", luuKho=" + luuKho + ", nhanLanCuoi=" + lanCuoi + '}';
     }
     
     public Object[] getObjPO(){
@@ -119,7 +130,7 @@ public class GoodsReceipt extends Transaction {
             //0, // số lượng chờ nhận
             getSlNhan(),
             getLuuKhoBool(),
-            this.nhanLanCuoi
+            this.lanCuoi
         };
                    
         return objPO;
@@ -146,15 +157,31 @@ public class GoodsReceipt extends Transaction {
     }
     
     public void setPRline(int itemLine) {
-        this.getPr().setItemLine(itemLine);
+        this.po.setPRline(itemLine);
     }
 
     public int getSoPR() {
-        return this.getPr().getSoCT();
+        return this.po.getSoPR();
     }
     
      public void setSoPR(int soPR) {
-        this.po.setSoCT(soPR);
+        this.po.setSoPR(soPR);
+    }
+     
+    public int getPOline() {
+        return this.getPo().getItemLine();
+    }
+    
+    public void setPOline(int itemLine) {
+        this.getPo().setItemLine(itemLine);
+    }
+     
+    public int getSoPO(){
+        return this.getPo().getSoCT();
+    }
+    
+    public void setSoPO(int soPO){
+        this.po.setSoCT(soPO);
     }
 
     public String getTenHang() {
@@ -181,21 +208,14 @@ public class GoodsReceipt extends Transaction {
         this.po.setDvt(dvt);
     }
     
-    private Object getSoPO() {
-        return po.getSoCT();
-    }
 
-    private Object getPOline() {
-        return po.getItemLine();
-    }
-
-    private int tinhSLConLai() {
+    public int tinhSLConLai() {
         int slChoNhan = po.getSlChoNhan() - this.slNhan;
         this.po.setSlChoNhan(slChoNhan);
         return slChoNhan;
     }
     
-    public int encodeLuuKho(Integer luuKho){
+    public int encodeLuuKho(boolean luuKho){
         HashMap<Boolean, Integer> mapConvert = new HashMap<>();
         for (Integer i : inventory.keySet()){
             mapConvert.put(inventory.get(i), i);

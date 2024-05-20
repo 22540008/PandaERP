@@ -127,6 +127,7 @@ public class GRManager {
             gr.setVendor(vendor);
             gr.setSlNhan(rs.getInt("slNhan"));
             gr.setLuuKho(rs.getInt("luuKho"));
+            gr.setLanCuoi(rs.getBoolean("lanCuoi"));
             
             dsGR.add(gr);
         }
@@ -134,69 +135,61 @@ public class GRManager {
         return dsGR;
     }
                
-//    // Add new PO từ JAVA về CSDL
-//    public int addDB(ArrayList<GoodsReceipt> poList) throws SQLException{
-//        int rowEffect = 0;
-//        // đối tượng s kết nối SQL Server
-//        SQLConnection conn = new SQLConnection("", "");
-//        String sql1 = "INSERT INTO GoodsReceipt (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine,"
-//                + "maNCC, gia, soLuong, vat, giaTong) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-//        PreparedStatement stmt = conn.getConnection().prepareStatement(sql1);
-//
-//        for (GoodsReceipt po : poList){
-//            String soCT_line = po.getSoCT() + "_" + po.getItemLine();
-//            stmt.setString(1, soCT_line);
-//            stmt.setInt(2, po.getSoCT());
-//            stmt.setString(3, po.getUser());
-//            Date ngayTao = po.getNgayTao();
-//            stmt.setDate(4, new java.sql.Date(ngayTao.getTime()));
-//            Date ngaySua = po.getNgaySua();
-//            stmt.setDate(5, new java.sql.Date(ngaySua.getTime()));
-//            stmt.setInt(6, po.getTrangThai());
-//            stmt.setInt(7, po.getItemLine());
-//            stmt.setInt(8, po.getMaNCC());
-//            stmt.setLong(9, po.getGia());
-//            stmt.setInt(10, po.getSoLuong());
-//            stmt.setFloat(11, po.getVat());
-//            stmt.setDouble(12, po.getGiaItem());
-//            
-//            rowEffect += stmt.executeUpdate();
-//        }
-//        
-//        String sql2 = "INSERT INTO PO_PR (soPO_line, soPR_line) VALUES (?, ?)";
-//        stmt = conn.getConnection().prepareStatement(sql2);
-//        for (GoodsReceipt po : poList){
-//            String soPO_line = po.getSoCT() + "_" + po.getItemLine();
-//            String soPR_line = po.getSoPR() + "_" + po.getPRline();
-//            stmt.setString(1, soPO_line);
-//            stmt.setString(2, soPR_line);
-//            
-//            rowEffect += stmt.executeUpdate();
-//        }
-//        
-//        String sql3 = "UPDATE PurchaseRequest SET trangThai = 3 WHERE soCT = ? AND itemLine = ?;";
-//        stmt = conn.getConnection().prepareStatement(sql3);
-//        for (GoodsReceipt po : poList){
-//            stmt.setInt(1, po.getSoPR());
-//            stmt.setInt(2, po.getPRline());
-//            
-//            rowEffect += stmt.executeUpdate();
-//        }
-//                      
-//        conn.close();      
-//        return rowEffect;
-//    }
-//    
+    // Add new GR từ JAVA về CSDL
+    public int addDB(ArrayList<GoodsReceipt> grList) throws SQLException{
+        int rowEffect = 0;
+        // đối tượng s kết nối SQL Server
+        SQLConnection conn = new SQLConnection("", "");
+        String sql1 = """
+            INSERT INTO  GoodsReceipt (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine,
+                                       soPO_line, slNhan, luuKho, lanCuoi) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """;
+        PreparedStatement stmt = conn.getConnection().prepareStatement(sql1);
+
+        for (GoodsReceipt gr : grList){
+            String soCT_line = gr.getSoCT() + "_" + gr.getItemLine();
+            String soPO_line = gr.getSoPO() + "_" + gr.getPOline();
+            stmt.setString(1, soCT_line);
+            stmt.setInt(2, gr.getSoCT());
+            stmt.setString(3, gr.getUser());
+            Date ngayTao = gr.getNgayTao();
+            stmt.setDate(4, new java.sql.Date(ngayTao.getTime()));
+            Date ngaySua = gr.getNgaySua();
+            stmt.setDate(5, new java.sql.Date(ngaySua.getTime()));
+            stmt.setInt(6, gr.getTrangThai());
+            stmt.setInt(7, gr.getItemLine());
+            stmt.setString(8, soPO_line);
+            stmt.setInt(9, gr.getSlNhan());
+            stmt.setInt(10, gr.getLuuKho());
+            stmt.setBoolean(11, gr.isLanCuoi());
+            
+            rowEffect += stmt.executeUpdate();
+        }
+        
+        String sql2 = "UPDATE PurchaseOrder SET trangThai = 3, slChoNhan = ? WHERE soCT_line = ?;";
+        stmt = conn.getConnection().prepareStatement(sql2);
+        for (GoodsReceipt gr : grList){
+            String soPO_line = gr.getSoPO() + "_" + gr.getPOline();
+            stmt.setInt(1, gr.getPo().getSlChoNhan());
+            stmt.setString(2, soPO_line);
+            
+            rowEffect += stmt.executeUpdate();
+        }
+                      
+        conn.close();      
+        return rowEffect;
+    }
+    
 //    // Update Array<DataType> từ JAVA về CSDL
-//    public int updateDB(ArrayList<GoodsReceipt> poList) throws SQLException{
+//    public int updateDB(ArrayList<GoodsReceipt> grList) throws SQLException{
 //        int rowEffect = 0;
 //        // đối tượng s kết nối SQL Server
 //        SQLConnection conn = new SQLConnection("", "");
 //        // Chuỗi truy vấn SQL q cho bảng GoodsReceipts
 //        String sql1 = "UPDATE GoodsReceipt SET ngaySua = ?, maNCC = ?, gia = ?, soLuong = ?, vat = ?, giaTong = ? WHERE soCT_line = ?";
 //        PreparedStatement stmt = conn.getConnection().prepareStatement(sql1);
-//        System.out.print("Số lượng data sẽ update trong SQL: " + poList.size());
-//        for (GoodsReceipt po : poList){
+//        System.out.print("Số lượng data sẽ update trong SQL: " + grList.size());
+//        for (GoodsReceipt po : grList){
 //            Date ngaySua = po.getNgaySua();
 //            stmt.setDate(1, new java.sql.Date(ngaySua.getTime()));
 //            stmt.setInt(2, po.getMaNCC());
@@ -215,7 +208,7 @@ public class GRManager {
 //        return rowEffect;
 //        
 //    }
-//    
+    
 //    public int updateDBClose(ArrayList<GoodsReceipt> listPO) throws SQLException {
 //        int rowEffect = 0;
 //        // đối tượng s kết nối SQL Server

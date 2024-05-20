@@ -199,8 +199,8 @@ FROM PurchaseOrder JOIN PO_PR ON PurchaseOrder.soCT_line = PO_PR.soPO_line
 WHERE PurchaseOrder.trangThai NOT IN (1);
 
 
-INSERT INTO PurchaseOrder (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine, maNCC, gia, soLuong, vat, giaTong) VALUES
-('2240001_1', 2240001, N'tqhung', '01/01/2022', '01/02/2022', 0, 0, 1001, 0, 5, 0.1, 0);
+INSERT INTO PurchaseOrder (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine, maNCC, gia, soLuong, vat, giaTong, slChoNhan) VALUES
+('2240001_1', 2240001, N'tqhung', '01/01/2022', '01/02/2022', 0, 0, 1001, 2000, 5, 0.1, 0, 5);
 INSERT INTO PO_PR (soPO_line, soPR_line) VALUES ('2240001_1', '1190001_1');
 
 UPDATE PurchaseOrder SET ngaySua = N'17-05-2024', maNCC = 10002, gia = 1000, soLuong = 10, vat = 10, giaTong = 010000 WHERE soCT_line = '2190001_1';
@@ -223,13 +223,14 @@ CREATE TABLE GoodsReceipt (
 	--soLuong INT,
 	slNhan INT,
 	luuKho INT,
+	lanCuoi BIT
 );
 
 -- Thêm dữ liệu mẫu vào bảng GoodsReceipt
-INSERT INTO  GoodsReceipt (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine, soPO_line, slNhan, luuKho) VALUES
-('3190001_1', 3190001, N'tqhung', '01/01/2022', '01/02/2022', 3, 1, '2190001_1', 1, 0),
-('3190002_1', 3190002, N'ptnam', '01-01-2022', '01-02-2022', 3, 1, '2190002_1', 1, 1),
-('3190003_1', 3190003, N'admin', '01/01/2022', '01/02/2022', 3, 1, '2190003_1', 1, 1);
+INSERT INTO  GoodsReceipt (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine, soPO_line, slNhan, luuKho, lanCuoi) VALUES
+('3190001_1', 3190001, N'tqhung', '01/01/2022', '01/02/2022', 3, 1, '2190001_1', 1, 0, 0),
+('3190002_1', 3190002, N'ptnam', '01-01-2022', '01-02-2022', 3, 1, '2190002_1', 1, 1, 0),
+('3190003_1', 3190003, N'admin', '01/01/2022', '01/02/2022', 3, 1, '2190003_1', 1, 1, 0);
 
 
 SELECT * FROM  GoodsReceipt;
@@ -249,155 +250,10 @@ FROM PurchaseOrder JOIN PO_PR ON PurchaseOrder.soCT_line = PO_PR.soPO_line
     JOIN Vendor ON PurchaseOrder.maNCC = Vendor.maNCC
 WHERE PurchaseOrder.trangThai IN (0, 3);
 
+INSERT INTO  GoodsReceipt (soCT_line, soCT, nguoiTao, ngayTao, ngaySua, trangThai, itemLine, soPO_line, slNhan, luuKho, lanCuoi) VALUES
+('3240001_1', 3240001 , N'tqhung', '19/05/2024', '19/05/2024', 4, 1, '2240001_1', 1, 1, 0);
 
 
 
 
 
-
-
-
-
-
-
-
-
-
--- WARNING: KHÔNG ĐỤNG, KHÔNG XÀI GÌ ĐẾN TỪ KHÚC NÀY --
-
--- Bảng PurchaseItem
-CREATE TABLE PurchaseItem (
-    maItem INT PRIMARY KEY,
-    maHang INT,
-    maNCC INT,
-    soLuong INT,
-    gia MONEY,
-	dvTienTe NVARCHAR(10),
-    thue FLOAT,
-    maChiPhi NVARCHAR(20),
-    tongNhan INT,
-    slConLai INT,
-    giaItem MONEY,
-    FOREIGN KEY (maHang) REFERENCES Item(maHang),
-    FOREIGN KEY (maNCC) REFERENCES Vendor(maNCC)
-);
-
--- Bảng PurchaseRequest
-CREATE TABLE PurchaseRequest (
-    soCT INT PRIMARY KEY,
-    maNV INT,
-    ngayTao DATE,
-    ngaySua DATE,
-	trangThai NVARCHAR(20),
-    FOREIGN KEY (maNV) REFERENCES Users(maNV)
-);
-
--- Bảng PR_PurchaseItem
-CREATE TABLE PR_PurchaseItem (
-    soCT INT,
-    maItem INT,
-    FOREIGN KEY (soCT) REFERENCES PurchaseRequest(soCT),
-    FOREIGN KEY (maItem) REFERENCES PurchaseItem(maItem),
-    PRIMARY KEY (soCT, maItem)
-);
-
--- Bảng PurchaseOrders
-CREATE TABLE PurchaseOrder (
-    soCT INT PRIMARY KEY,
-    giaDonHang MONEY,
-    ngayTao DATE,
-    ngaySua DATE,
-	trangThai NVARCHAR(20)
-);
-
--- Bảng PO_PurchaseItem
-CREATE TABLE PO_PurchaseItem (
-    soCT INT,
-    maItem INT,
-    FOREIGN KEY (soCT) REFERENCES PurchaseOrder(soCT),
-    FOREIGN KEY (maItem) REFERENCES PurchaseItem(maItem),
-    PRIMARY KEY (soCT, maItem)
-);
-
--- Bảng PO_PR
-CREATE TABLE PO_PR (
-    soCT_PurchaseOrder INT,
-    soCT_PurchaseRequest INT,
-    FOREIGN KEY (soCT_PurchaseOrder) REFERENCES PurchaseOrder(soCT),
-    FOREIGN KEY (soCT_PurchaseRequest) REFERENCES PurchaseRequest(soCT),
-    PRIMARY KEY (soCT_PurchaseOrder, soCT_PurchaseRequest)
-);
-
--- Bảng GoodsReceipts
-CREATE TABLE GoodsReceipt (
-    soCT INT PRIMARY KEY,
-    maNV INT,
-    ngayTao DATE,
-    ngaySua DATE,
-	trangThai NVARCHAR(20),
-    soCT_PurchaseOrder INT,
-    FOREIGN KEY (maNV) REFERENCES Users(maNV),
-    FOREIGN KEY (soCT_PurchaseOrder) REFERENCES PurchaseOrder(soCT)
-);
-
--------------------------------------------------------------------------
--- Dữ liệu mẫu:
--- Thêm dữ liệu vào bảng Users
-INSERT INTO Users (maNV, MatKhau, ho, ten, chucVu, phongBan, diaChi, soDT, systemRole, roleDetail) VALUES
-(1, '123456', 'John', 'Doe', 'Manager', 'Purchase', '123 Main Street', '1234567890', 'Admin', 'Manage Purchase Requests'),
-(2, '123456', 'Jane', 'Doe', 'Clerk', 'Sales', '456 Elm Street', '9876543210', 'User', 'Make Purchase Orders'),
-(3, '123456', 'Bob', 'Smith', 'Clerk', 'IT', '789 Oak Street', '5551234567', 'User', 'View Purchase Orders');
-
--- Thêm dữ liệu vào bảng Vendor
-INSERT INTO Vendor (maNCC, tenNCC, diaChi, mST, anThongTin) VALUES
-(1, 'Vendor 1', '123 First Ave', '123456', 0),
-(2, 'Vendor 2', '456 Second St', '789012', 0),
-(3, 'Vendor 3', '789 Third Rd', '345678', 0);
-
--- Thêm dữ liệu vào bảng Item
-INSERT INTO Item (maHang, tenHang, dvt, anThongTin) VALUES
-(1, 'Item 1', 'pcs', 0),
-(2, 'Item 2', 'box', 0);
-
--- Thêm dữ liệu vào bảng PurchaseItem
-INSERT INTO PurchaseItem (maItem, maHang, maNCC, soLuong, gia, dvTienTe, thue, maChiPhi, tongNhan, slConLai, giaItem) VALUES
-(1, 1, 1, 100, 10, N'đồng', 0.05, 'CP123', 50, 50, 1050),
-(2, 2, 2, 200, 20, N'đồng', 0.1, 'CP456', 150, 50, 4400);
-
--- Thêm dữ liệu vào bảng PurchaseRequests
-INSERT INTO PurchaseRequest (soCT, maNV, ngayTao, ngaySua, trangThai) VALUES
-(1, 1, '2024-04-01', '2024-04-02', N'Mở'),
-(2, 2, '2024-04-03', '2024-04-04', N'Mở');
-
--- Thêm dữ liệu vào bảng PurchaseOrders
-INSERT INTO PurchaseOrder (soCT, giaDonHang, ngayTao, ngaySua, trangThai) VALUES
-(3, 5000, '2024-04-05', '2024-04-06', N'Mở'),
-(4, 6000, '2024-04-07', '2024-04-08', N'Mở');
-
--- Thêm dữ liệu vào bảng GoodsReceipts
-INSERT INTO GoodsReceipt (soCT, maNV, ngayTao, ngaySua, trangThai, soCT_PurchaseOrder) VALUES
-(5, 3, '2024-04-09', '2024-04-10', N'Mở', 3),
-(6, 1, '2024-04-11', '2024-04-12', N'Mở', 4);
-
--- Thêm dữ liệu vào bảng PO_PR
-INSERT INTO PO_PR (soCT_PurchaseOrder, soCT_PurchaseRequest) VALUES
-(3, 1),
-(3, 2),
-(4, 1),
-(4, 2);
-
-
--- Thêm dữ liệu vào bảng PO_PurchaseItem
-INSERT INTO PO_PurchaseItem (soCT, maItem) VALUES
-(3, 1),
-(4, 2);
-
--- Thêm dữ liệu vào bảng PR_PurchaseItem
-INSERT INTO PR_PurchaseItem (soCT, maItem) VALUES
-(1, 1),
-(2, 2);
-
-
--- Truy vấn dữ liệu
-SELECT * FROM Users
-SELECT * FROM Users WHERE tenTK = 'tqhung' AND MatKhau = '123456'
