@@ -32,7 +32,7 @@ public class Main {
         
         // Chế độ test, skip sign in step
         User user = new User();
-        user.setTenTK("tqhung");
+        user.setTenTK("TQHUNG");
         MainController mainFrameCtl = new MainController(user);
         MainFrame mainFrameView = new MainFrame(mainFrameCtl);
         mainFrameCtl.setView(mainFrameView);
