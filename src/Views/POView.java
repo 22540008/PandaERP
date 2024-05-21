@@ -708,6 +708,7 @@ public class POView extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
+        tbPOdraft.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane2.setViewportView(tbPOdraft);
 
         btnCreate.setText("Tạo PO");
@@ -1251,7 +1252,6 @@ public class POView extends javax.swing.JPanel {
         });
         tbPO.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tbPO.setMinimumSize(new java.awt.Dimension(400, 80));
-        tbPO.setPreferredSize(new java.awt.Dimension(1080, 400));
         tbPO.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tbPO);
 
@@ -1515,7 +1515,7 @@ public class POView extends javax.swing.JPanel {
         tbPOdraft.setModel(tablePOdraft);
         tbPOdraft.getColumnModel().getColumn(13).setCellRenderer(new CurrencyRenderer()); // VND format cột đơn giá
         tbPOdraft.getColumnModel().getColumn(16).setCellRenderer(new CurrencyRenderer()); // cột tổng giá item
-        tablePOdraft.setColumnVisible(tbPOdraft, new String[]{"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Mã NCC", "Tên NCC"}, false);
+        tablePOdraft.setColumnVisible(tbPOdraft, new String[]{"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Mã NCC", "Tên NCC", "SL chờ nhận"}, false);
     }
     
     public void btnAddActionListener(ActionListener listener){
@@ -1614,7 +1614,7 @@ public class POView extends javax.swing.JPanel {
         Set<Object> specialValues = new HashSet<>();
         specialValues.add("Đã đóng");
         specialValues.add("Đã được xử lý");
-        tablePOupdate.setSpecialValues(specialValues, 0);
+        tablePOupdate.setSpecialValues(specialValues, 4);
         // Thiết lập kiểu giá trị cho các cột
         tablePOupdate.setColumnType(6, Integer.class); // Số PR
         tablePOupdate.setColumnType(7, Integer.class); // PR line

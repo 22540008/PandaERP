@@ -15,20 +15,23 @@ public class TableERPTest {
     TableERP tableERP1, tableERP2;
     
     public TableERPTest() {
+        String[] column1 = new String[] {"0", "1", "2", "3", "4"};
         Object[][] data1 = new Object[][]
                 {{1, 2, 3, 4, 5},
                 {5, 6, 7, 8, 9},
                 {"a", "b", "c", "d", "e"},
                 {"e", "f", "g", "h", "f"}};
-        String[] column1 = new String[] {"0", "1", "2", "3", "4"};
+        
         tableERP1 = new TableERP(data1, column1);
         
+        String[] column2 = new String[]{"soCT", "username", "data1", "data2", "data3"};
         Object[][] data2 = new Object[][]
                             {{101, "user1", "a", "b", "c"},
                             {102, "user2", "b", "c", "d"},
-                            {103, "user3", "c", "d", "e"}};
-        String[] column2 = new String[]{"soCT", "username", "data1", "data2", "data3"};
+                            {113, "user13", "bc", "cd", "e"},
+                            {102, "user2", "e", "f", "g"}};
         tableERP2 = new TableERP(data2, column2);
+
     }
 
     @Test
@@ -98,19 +101,19 @@ public class TableERPTest {
         int[] columSearch = new int[]{0, 1};
         String searchType = "match";
         Object[][] result = tableERP2.searchByCriteria(paramSearch, columSearch, searchType);
-        Object[][] expected = new Object[][]{{102, "user2", "b", "c", "d"}};
+        Object[][] expected = new Object[][]{{102, "user2", "b", "c", "d"},
+                                            {102, "user2", "e", "f", "g"}};
         assertArrayEquals(expected, result);
     }
     
     @Test
     public void testSearchByCriteria2() {
-        String[] paramSearch = new String[]{"", "user"};
+        String[] paramSearch = new String[]{"", "user1"};
         int[] columSearch = new int[]{0, 1};
         String searchType = "contain";
         Object[][] result = tableERP2.searchByCriteria(paramSearch, columSearch, searchType);
         Object[][] expected = new Object[][]{{101, "user1", "a", "b", "c"},
-                                            {102, "user2", "b", "c", "d"},
-                                            {103, "user3", "c", "d", "e"}};
+                                            {113, "user13", "bc", "cd", "e"}};
         assertArrayEquals(expected, result);
     }
 
@@ -147,7 +150,7 @@ public class TableERPTest {
         boolean selCol = true;
         Object[][] result = tableERP2.filter(rows, selRow, colums, selCol);
         Object[][] exptected = new Object[][]{{"b", "c", "d"},
-                                            {"c", "d", "e"}};
+                                            {"bc", "cd", "e"}};
         assertArrayEquals(exptected, result);
     }
 
@@ -165,7 +168,8 @@ public class TableERPTest {
         Object[][] expected =  new Object[][]
                             {{101, "user1", "a", "b", "c"},
                             {102, "user2", "b", "c", "d"},
-                            {103, "user3", "c", "d", "e"},
+                            {113, "user13", "bc", "cd", "e"},
+                            {102, "user2", "e", "f", "g"},
                             {104, null, null, "e", "f"},
                             {105, null, null, "f", "g"}};
         assertArrayEquals(expected, result);
@@ -195,6 +199,32 @@ public class TableERPTest {
 
     @Test
     public void testSetColumnVisible() {
+    }
+
+    @Test
+    public void testMapRow_int_String() {
+        int colIndex = 1;
+        String str = "user13";
+        int[] result = tableERP2.mapRow(colIndex, str);
+        int[] expected = new int[]{2};
+        assertArrayEquals(result, expected);
+    }
+
+    @Test
+    public void testMapRow_intArr_StringArr() {
+        int[] colIndex = new int[] {0, 1};
+        String[] str = new String[] {"102", "user2"};
+        int[] result = tableERP2.mapRow(colIndex, str);
+        int[] expected = new int[]{1, 3};
+        assertArrayEquals(result, expected);
+    }
+
+    @Test
+    public void testAdd_3args() {
+    }
+
+    @Test
+    public void testAdd_intArr_ObjectArr() {
     }
     
 }

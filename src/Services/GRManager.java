@@ -232,33 +232,33 @@ public class GRManager {
 //        conn.close();    
 //        return rowEffect;
 //    }
-//    
-//    
-//    //  Update Hiden status cho sample từ JAVA về CSDL
-//    public int updateDB(String soPO_line, String soPR_line) throws SQLException{
-//        int rowEffect = 0;
-//        // đối tượng s kết nối SQL Server
-//        SQLConnection conn = new SQLConnection("", "");
-//        // Chuỗi truy vấn SQL q cho bảng GoodsReceipts
-//        String sql1 = "UPDATE GoodsReceipt SET trangThai = 1 WHERE soCT_line = ?";
-//        try (PreparedStatement stmt = conn.getConnection().prepareStatement(sql1)) {
-//            stmt.setString(1, soPO_line);
-//            rowEffect += stmt.executeUpdate();
-//        }
-//        
-//        String sql2 = "UPDATE PurchaseRequest SET trangThai = 0 WHERE soCT_line = ?";
-//        try (PreparedStatement stmt = conn.getConnection().prepareStatement(sql2)){
-//            stmt.setString(1, soPR_line);
-//            rowEffect += stmt.executeUpdate();
-//        }
-//      
-//        conn.close();    
-//        return rowEffect;
-//    }
+    
+    
+    //  Update Hiden status cho sample từ JAVA về CSDL
+    public int updateDB(GoodsReceipt deleteGR) throws SQLException{
+        int rowEffect = 0;
+        // đối tượng s kết nối SQL Server
+        SQLConnection conn = new SQLConnection("", "");
+        // Chuỗi truy vấn SQL q cho bảng GoodsReceipts
+        String soGR_line = deleteGR.getSoCT() + "_" + deleteGR.getItemLine();
+        String soPO_line = deleteGR.getSoPO() + "_" + deleteGR.getPOline();
+        String sql1 = "UPDATE GoodsReceipt SET trangThai = 1 WHERE soCT_line = ?";
+        try (PreparedStatement stmt = conn.getConnection().prepareStatement(sql1)) {
+            stmt.setString(1, soGR_line);
+            rowEffect += stmt.executeUpdate();
+        }
+        
+        String sql2 = "UPDATE PurchaseOrder SET slChoNhan = slChoNhan + ?  WHERE soCT_line = ?";
+        try (PreparedStatement stmt = conn.getConnection().prepareStatement(sql2)){
+            stmt.setInt(1, deleteGR.getSlNhan());
+            stmt.setString(2, soPO_line);
+            rowEffect += stmt.executeUpdate();
+        }
+      
+        conn.close();    
+        return rowEffect;
+    }
 
 
-    
-    
-    
     
 }

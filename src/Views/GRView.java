@@ -123,12 +123,12 @@ public class GRView extends javax.swing.JPanel {
         this.tableERP = tableERP;
     }
 
-    public JTable getTbPO() {
+    public JTable getTbGR() {
         return tbGR;
     }
 
-    public void setTbPO(JTable tbPO) {
-        this.tbGR = tbPO;
+    public void setTbGR(JTable tbGR) {
+        this.tbGR = tbGR;
     }
     
     public void setColumn(String[] columns) {
@@ -567,6 +567,9 @@ public class GRView extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
+        tbGRdraft.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tbGRdraft.setMinimumSize(null);
+        tbGRdraft.setPreferredSize(null);
         jScrollPane2.setViewportView(tbGRdraft);
 
         btnCreate.setText("Tạo GR");
@@ -582,7 +585,6 @@ public class GRView extends javax.swing.JPanel {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnRemove_add)
                         .addGap(18, 18, 18)
                         .addComponent(btnCreate)))
@@ -732,7 +734,7 @@ public class GRView extends javax.swing.JPanel {
                         .addComponent(fieldTongPOupdate, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnClose)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(btnUpdate)))
                 .addContainerGap())
         );
@@ -952,6 +954,8 @@ public class GRView extends javax.swing.JPanel {
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Phiếu nhận hàng (GR)"));
 
+        jScrollPane1.setPreferredSize(null);
+
         tbGR.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -964,7 +968,7 @@ public class GRView extends javax.swing.JPanel {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Boolean.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -972,8 +976,8 @@ public class GRView extends javax.swing.JPanel {
             }
         });
         tbGR.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        tbGR.setMinimumSize(new java.awt.Dimension(400, 80));
-        tbGR.setPreferredSize(new java.awt.Dimension(1080, 400));
+        tbGR.setMinimumSize(null);
+        tbGR.setPreferredSize(null);
         tbGR.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tbGR);
 
@@ -1030,11 +1034,11 @@ public class GRView extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(351, Short.MAX_VALUE)
                 .addComponent(btnDelete)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEdit)
-                .addGap(18, 18, 18)
+                .addGap(146, 146, 146)
                 .addComponent(btnAdd)
                 .addGap(18, 18, 18)
                 .addComponent(btnLoad)
@@ -1043,7 +1047,7 @@ public class GRView extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(9, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLoad)
                     .addComponent(btnDelete)
@@ -1060,7 +1064,7 @@ public class GRView extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
@@ -1161,6 +1165,7 @@ public class GRView extends javax.swing.JPanel {
         tableERP.setColumnType(17, Boolean.class); // Lưu kho
         tableERP.setColumnType(18, Boolean.class); // Nhận lần cuối
         tbGR.setModel(tableERP);
+        
     } 
     
     public String[] getSearchParams() {
@@ -1309,7 +1314,7 @@ public class GRView extends javax.swing.JPanel {
         tbGRdraft.setModel(tableGRdraft);
     }
 
-    public void updateTbPO() {
+    public void updateTbGR() {
         tbGR.setModel(tableERP);
     }
     

@@ -8,6 +8,7 @@ import Utility.DateUtils;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -211,6 +212,9 @@ public class GoodsReceipt extends Transaction {
 
     public int tinhSLConLai() {
         int slChoNhan = po.getSlChoNhan() - this.slNhan;
+        if (slChoNhan < 0){
+            return -1;
+        }
         this.po.setSlChoNhan(slChoNhan);
         return slChoNhan;
     }

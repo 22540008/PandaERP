@@ -139,7 +139,7 @@ public class POManager {
                         JOIN PurchaseRequest ON PO_PR.soPR_line = PurchaseRequest.soCT_line
                         JOIN Item ON PurchaseRequest.maHang = Item.maHang
                         JOIN Vendor ON PurchaseOrder.maNCC = Vendor.maNCC
-                    WHERE PurchaseOrder.trangThai IN (0, 3) AND PurchaseOrder.soCT = ?;
+                    WHERE PurchaseOrder.trangThai IN (0, 3) AND PurchaseOrder.soCT = ? AND slChoNhan > 0;
                    """;
         PreparedStatement stmt = conn.getConnection().prepareStatement(q);
         stmt.setInt(1, soPO);

@@ -91,6 +91,41 @@ public class TableERP extends DefaultTableModel {
         return positions.stream().mapToInt(i -> i).toArray();
     }
     
+    /**
+    * Tìm các vị trí mà một chuỗi cụ thể xuất hiện trong một cột cụ thể của bảng.
+    *
+    * @param colIndex mảng int[] chứa các chỉ số của cột cần kiểm tra.
+    * @param str mảng String[] chứa các chuỗi cần tìm vị trí xuất hiện.
+    * @return một mảng int[] chứa các vị trí mà chuỗi xuất hiện trong cột.
+    * @throws IllegalArgumentException nếu colIndex nằm ngoài phạm vi của bảng.
+    */
+    public int[] mapRow(int[] colIndex, String[] str) {
+        if (colIndex.length != str.length){
+            throw new IllegalArgumentException("Số cột của bảng và số phần tử cần tìm không khớp: " + colIndex.length + " - " + str.length);
+        }
+        for (int row : colIndex){
+            if (row < 0 || row >= this.getColumnCount()) {
+                throw new IllegalArgumentException("colIndex nằm ngoài phạm vi của bảng");
+            }
+        }
+
+        ArrayList<Integer> positions = new ArrayList<>();
+        for (int row = 0; row < this.getRowCount(); row++) {
+            String searchStr = "";
+            String cellsValueStr = "";
+            for (int col=0; col < colIndex.length; col++){
+                searchStr += str[col];
+                cellsValueStr += String.valueOf(this.getValueAt(row, colIndex[col]));
+            }
+            //String cellsValueStr = String.valueOf(this.getValueAt(row, colIndex));
+            if (searchStr.equals(cellsValueStr)) {
+                positions.add(row);
+                System.out.println(row + " : " + cellsValueStr);
+            }
+        }
+        return positions.stream().mapToInt(i -> i).toArray(); // Chuyển ArrayList về mảng int[]
+    }
+    
     
     /**
      * Thêm dữ liệu từ một mảng hai chiều vào TableModel tại các cột được chỉ định.

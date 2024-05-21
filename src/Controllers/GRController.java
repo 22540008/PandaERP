@@ -21,11 +21,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import Utility.CurrencyUtils;
+import Utility.DateUtils;
 import Views.GRView;
 import Views.TableERP;
+import com.toedter.calendar.DateUtil;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.Date;
@@ -62,17 +65,13 @@ public class GRController {
 //        this.view.btnSearchPOActionListener(new SearchPOActionListener());
         this.view.btnSelectPORActionListener(new SelectPOActionListener());
         this.view.btnRemoveAddActionListener(new RemoveAddActionListener());
-//        this.view.btnDiagTimNCCaddActionListener(new TimNCCaddActionListener());
-//        this.view.btnLoadVendorActionListener(new LoadVendorActionListener());
-//        this.view.btnSearchVendorActionListener(new SearchVendorActionListener());
-//        //this.view.btnSelVendorActionListener(new SelVendorActionListener());
-//        this.view.btnTinhTongPOdraftActionListener (new TinhTongPOdraftActionListener());
         this.view.btnCreateActionListener(new CreateActionListener());
+        this.view.btnDeleteActionListener(new DeleteActionListener());
 //        this.view.btnEditActionListener(new EditActionListener());
 //        this.view.btnDiagTimNCCupdateActionListener(new TimNCCaddActionListener());
 //        this.view.btnUpdateActionListener(new UpdateActionListener());
 //        this.view.btnCloseActionListener(new CloseActionListener());
-//        this.view.btnDeleteActionListener(new DeleteActionListener());
+       
  
         
     }
@@ -122,7 +121,7 @@ public class GRController {
             String[] paramSearch = view.getSearchParams();
             Object[][] trackObjPO;
             trackObjPO = view.getTableERP().searchByCriteria(paramSearch, new int[]{0, 1}, "match");
-            view.getTableERP().setData(trackObjPO, PurchaseOrder.columns, view.getTbPO());
+            view.getTableERP().setData(trackObjPO, PurchaseOrder.columns, view.getTbGR());
         }
     }
     
@@ -284,6 +283,11 @@ public class GRController {
                 }
 
                 System.out.println("Số lượng chờ nhận còn lại: " + slConLai);
+                if (slConLai < 0){
+                    JOptionPane.showMessageDialog(null, "Số nhận lớn hơn hơn số có thể nhận của đơn hàng");
+                    return;
+                }
+                
                 if (view.getTableGRdraft().getValueAt(i, 17) != null){
                     gr.encodeLuuKho((boolean)view.getTableGRdraft().getValueAt(i, 17));
                 }
@@ -316,6 +320,70 @@ public class GRController {
         }
     }
     
+    //Action khi nút "Xoá" của màn hình quản lý danh sách PO được nhấn
+    private class DeleteActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnDelete is clicked");
+            if (view.getTableERP() == null){
+                JOptionPane.showMessageDialog(view, "Vui lòng Load dữ liệu trước");
+                return;
+            }
+            if (view.getTbGR().getSelectedRow() == -1){
+                JOptionPane.showMessageDialog(view, "Vui lòng chọn dòng PR cần xoá");
+                return;
+            }
+            int selRow = view.getTbGR().getSelectedRow();
+            if (!String.valueOf(view.getTableERP().getValueAt(selRow, 4)).equals("Duyệt")){
+                JOptionPane.showMessageDialog(null, "Bạn chỉ có thể xoá khi transaction ở trạng thái \"Duyệt\" ");
+                return;
+            }
+            String unDeleteSoPOStr = String.valueOf(view.getTbGR().getValueAt(selRow, 6));
+            String unDeletePoLineStr = String.valueOf(view.getTbGR().getValueAt(selRow, 7));
+            int[] PoLineMap = view.getTableERP().mapRow(new int[]{6,7}, new String[]{unDeleteSoPOStr, unDeletePoLineStr});
+            for (int i= 0; i < PoLineMap.length; i++){
+                if (Boolean.TRUE.equals(view.getTableERP().getValueAt(i, 18))){
+                    JOptionPane.showMessageDialog(null, "Không thể xoá vì item đã đóng lại do đã \"nhận lần cuối\" ");
+                    return;
+                }
+                
+                int soGR = Integer.parseInt(String.valueOf(view.getTableERP().getValueAt(i, 0)));
+                int selSoGR = Integer.parseInt(String.valueOf(view.getTableERP().getValueAt(selRow, 0)));
+                if (soGR < selSoGR){
+                    JOptionPane.showMessageDialog(null, "Tồn tại GR khác được tạo trước đó cho PO item tương ứng, nên không thể xoá được");
+                    return;
+                }
+            }
+            
+            int confirmResult = JOptionPane.showConfirmDialog(null, "Vui lòng xác nhận chắc chắn muốn xoá", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (confirmResult == JOptionPane.NO_OPTION){
+                return;
+            }   
+            
+            int deleteSoCT = (int)view.getTbGR().getValueAt(selRow, 0);
+            int deleteItemLine = (int)view.getTbGR().getValueAt(selRow, 5);
+            //String soGR_line = deleteSoCT + "_" + deleteItemLine;
+            //String soPO_line= unDeleteSoPOStr + "_" + unDeletePoLineStr;
+            GoodsReceipt deleteGR = new GoodsReceipt();
+            deleteGR.setSoCT(deleteSoCT);
+            deleteGR.setItemLine(deleteItemLine);
+            deleteGR.setSoPO(Integer.parseInt(unDeleteSoPOStr));
+            deleteGR.setPOline(Integer.parseInt(unDeletePoLineStr));
+            deleteGR.setSlNhan(Integer.parseInt(String.valueOf(view.getTableERP().getValueAt(selRow, 16))));
+            
+            try {
+                model.updateDB(deleteGR);
+            } catch (SQLException ex) {
+                Logger.getLogger(GRController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            view.getTableERP().removeRow(selRow);
+            view.updateTbGR();
+            JOptionPane.showMessageDialog(view, "Đã xoá thành công!");
+            
+        }
+    }
+    
 //    // Action khi nút "Sửa" của quản lý PO được nhấn   
 //    private class EditActionListener implements ActionListener {
 //        @Override
@@ -327,20 +395,20 @@ public class GRController {
 //                JOptionPane.showMessageDialog(view, "Vui lòng Load dữ liệu trước");
 //                return;
 //            }
-//            if (view.getTbPO().getSelectedRow() == -1){
+//            if (view.getTbGR().getSelectedRow() == -1){
 //                JOptionPane.showMessageDialog(view, "Vui lòng chọn PO cần sửa");
 //                return;
 //            }
 //            
 //            view.setColumPOupdate(PurchaseOrder.columns);
 //            
-//            int selRow = view.getTbPO().getSelectedRow();
-//            String selSoCT = String.valueOf(view.getTbPO().getValueAt(selRow, 0));
+//            int selRow = view.getTbGR().getSelectedRow();
+//            String selSoCT = String.valueOf(view.getTbGR().getValueAt(selRow, 0));
 //            view.getFieldSoCT_update().setText(selSoCT);
 //            view.getDate_update().setDate(new Date()); // set ngày PR hiện tại
 //            view.getFieldUser_update().setText(loginUser.getTenTK()); // set người tạo PR là tài khoản đang dùng
 //               
-//            int rowCount = view.getTbPO().getRowCount();
+//            int rowCount = view.getTbGR().getRowCount();
 //            int soCTitemCount = 0;
 //            updateIndex = view.getTableERP().mapRow(0, selSoCT);  // tạo mới các vị trí sẽ Edit
 //            updateListObjPO  = view.getTableERP().exportObjData(updateIndex); // lấy các data của PO cần edit
@@ -394,7 +462,7 @@ public class GRController {
 //                
 //                view.getTableERP().sua(updateIndex[i], updateListObjPO[i]);
 //            }
-//            view.updateTbPO();
+//            view.updateTbGR();
 //            view.getDialogUpdate().dispose();
 //            
 //        }
@@ -448,50 +516,7 @@ public class GRController {
 //    }
 //
 //
-//    //Action khi nút "Xoá" của màn hình quản lý danh sách PO được nhấn
-//    private class DeleteActionListener implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            System.out.println("btnDelete is clicked");
-//            if (view.getTableERP() == null){
-//                JOptionPane.showMessageDialog(view, "Vui lòng Load dữ liệu trước");
-//                return;
-//            }
-//            if (view.getTbPO().getSelectedRow() == -1){
-//                JOptionPane.showMessageDialog(view, "Vui lòng chọn dòng PR cần xoá");
-//                return;
-//            }
-//            int selRow = view.getTbPO().getSelectedRow();
-//            if (!String.valueOf(view.getTableERP().getValueAt(selRow, 4)).equals("Đang xử lý")){
-//                JOptionPane.showMessageDialog(null, "Bạn chỉ có thể xoá khi transaction ở trạng thái \"Đang xử lý\" ");
-//                return;
-//            }
-//            
-//            int confirmResult = JOptionPane.showConfirmDialog(null, "Vui lòng xác nhận chắc chắn muốn xoá", "Xác nhận", JOptionPane.YES_NO_OPTION);
-//            if (confirmResult == JOptionPane.NO_OPTION){
-//                return;
-//            }
-//            
-//            
-//            int deleteSoCT = (int)view.getTbPO().getValueAt(selRow, 0);
-//            int deleteItemLine = (int)view.getTbPO().getValueAt(selRow, 5);
-//            String soPO_line = deleteSoCT + "_" + deleteItemLine;
-//            int deleteSoPR = (int)view.getTbPO().getValueAt(selRow, 6);
-//            int deletePRline = (int)view.getTbPO().getValueAt(selRow, 7);
-//            String soPR_line= deleteSoPR + "_" + deletePRline;
-//            
-//            try {
-//                model.updateDB(soPO_line, soPR_line);
-//            } catch (SQLException ex) {
-//                Logger.getLogger(GRController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            
-//            view.getTableERP().removeRow(selRow);
-//            view.updateTbPO();
-//            JOptionPane.showMessageDialog(view, "Đã xoá thành công!");
-//            
-//        }
-//    }
+
 
     
 }

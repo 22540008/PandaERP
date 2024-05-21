@@ -520,7 +520,7 @@ public class POController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("btnClose is clicked");
-            int confirmResult = JOptionPane.showConfirmDialog(view.getDialogUpdate(), "Vui lòng xác nhận chắc chắn muốn đóng PR. Sau khi đóng, bạn sẽ không thể chỉnh/sửa được nữa", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            int confirmResult = JOptionPane.showConfirmDialog(view.getDialogUpdate(), "Vui lòng xác nhận chắc chắn muốn đóng PO. Sau khi đóng, bạn sẽ không thể chỉnh/sửa được nữa", "Xác nhận", JOptionPane.YES_NO_OPTION);
             if(confirmResult == JOptionPane.NO_OPTION){
                 return;
             }
