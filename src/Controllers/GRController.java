@@ -118,6 +118,9 @@ public class GRController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("btnSearch is clicked");
+            if (view.getTableERP() == null){
+                JOptionPane.showMessageDialog(null, "Vui lòng Load dữ liệu trước");
+            }
             String[] paramSearch = view.getSearchParams();
             Object[][] trackObjPO;
             trackObjPO = view.getTableERP().searchByCriteria(paramSearch, new int[]{0, 1}, "match");

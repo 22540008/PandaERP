@@ -17,8 +17,6 @@ import Views.MainFrame;
 import Views.POView;
 import Views.PRView;
 import Views.UserView;
-import Views.UserView_add;
-import Views.UserView_update;
 import Views.VendorView;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -38,8 +36,6 @@ public class MainController {
     private UserManager userModel;
     private UserController userController;
     private UserView userView;
-    private UserView_add userView_add; ////
-    private UserView_update userView_update; ////
     private ItemManager itemModel;
     private ItemController itemController;
     private ItemView itemView;

@@ -33,7 +33,7 @@ public class User {
     private int trangThai; // 0: active; 1: inactive;
 
     private ArrayList<User> dsUser;
-    private static final String[] columns = {"Mã NV", "Tên tài khoản", "Mật khẩu", "Họ", "Tên", "Chức vụ", "Phòng ban", "Địa chỉ", "Số điện thoại", "Quyền hệ thống"}; // Tên cột trong bảng  
+    public final static String[] columns = {"Mã NV", "Tên tài khoản", "Mật khẩu", "Họ", "Tên", "Chức vụ", "Phòng ban", "Địa chỉ", "Số điện thoại", "Quyền hệ thống"}; // Tên cột trong bảng  
 
     public User(int maNV, String tenTK, String matKhau, String ho, String ten, String chucVu, String phongBan, String diaChi, String soDT, int trangThai) {
         this.maNV = maNV;

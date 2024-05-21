@@ -8,8 +8,6 @@ import Models.User;
 import Services.UserManager;
 import Views.TableERP;
 import Views.UserView;
-import Views.UserView_add;
-import Views.UserView_update;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -25,8 +23,6 @@ import javax.swing.JOptionPane;
 public class UserController {
     private UserManager model;  
     private UserView view;
-    private UserView_add viewAdd;
-    private UserView_update viewUpdate;
 
     public UserController(UserManager model, UserView view) {
         this.model = model;
@@ -34,6 +30,10 @@ public class UserController {
         this.view.btnLoadActionListener(new LoadActionListener());
         this.view.btnDeleteActionListener(new DeleteActionListener());
         this.view.btnSearchActionListener(new SearchActionListener());
+        this.view.btnAddActionListener(new AddActionListener());
+        this.view.btnCreateActionListener(new CreateActionListener());
+        this.view.btnEditActionListener(new EditActionListener());
+        this.view.btnUpdateActionListener(new UpdateActionListener());
     }
     
     public UserController() {
@@ -45,17 +45,6 @@ public class UserController {
     public void setView(UserView view) {
         this.view = view;
     }
-
-    public void setViewAdd(UserView_add viewAdd) {
-        this.viewAdd = viewAdd;
-        this.viewAdd.btnAddAtionListener(new AddActionListener());
-    }
-
-    public void setViewUpdate(UserView_update viewUpdate) {
-        this.viewUpdate = viewUpdate;
-        this.viewUpdate.btnUpdateActionListener(new UpdateActionListener());
-}
-    
 
     public void addUser(int maNV, String tenTK, String matKhau, String ho, String ten, String chucVu, String phongBan, String diaChi, String soDT, String[] systemRoles) throws SQLException {
         User user = new User();
@@ -75,8 +64,9 @@ public class UserController {
         Object[] newRow = new Object[]{maNV, tenTK, matKhau, ho, ten, chucVu, phongBan, diaChi, soDT, systemRolesString};
         view.getTableERP().addRow(newRow);
         //view.addData(newRow);
-        view.updateTable();
+        view.updateTbERP();
     }
+
     
     private class LoadActionListener implements ActionListener {
 
@@ -86,11 +76,6 @@ public class UserController {
             try {
                 model.loadData_DB();
                 Object[][] dsObjUser = model.getObjDsUser();
-//                for (int i = 0; i < dsObjUser.length; i++){
-//                    for (int j = 0; j < model.getColumnns().length; j++){
-//                        System.out.print(dsObjUser[i][j]);
-//                    }
-//                }
                 view.setColumn(model.getColumnns());
                 view.setData(dsObjUser);
                 view.loadData();
@@ -111,62 +96,14 @@ public class UserController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("btnSearch is clicked");
-            try {
-                String[] paramSearch = view.getSearchParams();
-                if (paramSearch[0].isBlank() && paramSearch[1].isBlank()){
-                    JOptionPane.showMessageDialog(view, "Vui lòng nhập từ khoá tìm kiếm");
-                    return;
-                }
-                int trackMaNV; String trackTenTK;
-                ArrayList<User> loadData = model.loadData_DB();
-                User trackResult = new User();
-                trackResult.setMaNV(-1);
-                if (!paramSearch[0].isBlank()){
-                    try {
-                        trackMaNV = Integer.parseInt(paramSearch[0]);
-                        for (User user : loadData){
-                            if (user.getMaNV() == trackMaNV){
-                                trackResult = user;
-                                break;
-                            }
-                        }         
-                    } catch (NumberFormatException numE) {
-                        JOptionPane.showMessageDialog(view, "Mã NV phải là một số");
-                        return;
-                    }
-                              
-                }
-                else {
-                    if (!paramSearch[1].isBlank()){
-                        trackTenTK = paramSearch[1];
-                        for (User user : loadData){
-                            if (user.getTenTK().equals(trackTenTK)){
-                                trackResult = user;
-                                break;
-                            }
-                        }
-                    }
-                }
-                
-                
-                //Object[][] dsObjUser = model.getObjDsUser();
-                if (trackResult.getMaNV() == -1){
-                    JOptionPane.showMessageDialog(view, "Không tìm thấy");
-                    return;
-                }
-                Object[] trackObjUser = trackResult.getObjectUser();
-                Object[][] trackObjUser2D = { trackObjUser };
-                //Object[][] trackObjUser = new Object[1][]
-                //view.setData(dsObjUser);
-                view.setData((Object[][]) trackObjUser2D);
-                view.loadData();
-            } catch (SQLException ex) {
-                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-            }       
-            
+            if (view.getTableERP() == null){
+                JOptionPane.showMessageDialog(null, "Vui lòng Load dữ liệu trước");
+            }
+            String[] paramSearch = view.getSearchParams();
+            Object[][] trackObjUser;
+            trackObjUser = view.getTableERP().searchByCriteria(paramSearch, new int[]{0, 1}, "match");
+            view.getTableERP().setData(trackObjUser, User.columns, view.getTbUser());
         }
-
-        
     }
 
     private class DeleteActionListener implements ActionListener {
@@ -196,56 +133,120 @@ public class UserController {
             try {
                 model.updateDB(deleteUser);
                 JOptionPane.showMessageDialog(view, "Đã xoá thành công");
-                //model.loadData_DB();
-                //Object[][] dsObjUser = model.getObjDsUser();
-                //view.setData(dsObjUser);
                 view.getTableERP().removeRow(deleteRow);
-                view.updateTable();
+                view.updateTbERP();
                 
             } catch (SQLException ex) {
                 Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
             }            
         }  
     }
+    
+    // Tìm Mã nhân viên lớn nhất
+    public int getMaxMaNV() {
+        ArrayList<User> dsUser = model.getDSUser();
+        int rowCount = dsUser.size();       
+        int maxMaNV = 0;
+        for (User user : dsUser){
+            if (maxMaNV < user.getMaNV()){
+                maxMaNV = user.getMaNV();
+            }
+        }
+        return maxMaNV;
+    };
 
     private class AddActionListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("btnAdd is clicked");
-            User newUser = viewAdd.getUserFromFields();
+            if (view.getTableERP() == null){
+                JOptionPane.showMessageDialog(view, "Vui lòng Load dữ liệu trước");
+                return;
+            }
+            // Mã nhân viên mới sẽ = mã lớn nhất của dsActiveUser + 1
+            int maxMaNV = getMaxMaNV();
+            view.getFieldMaNV_add().setText(String.valueOf(maxMaNV + 1));
+            view.getFieldMaNV_add().setEditable(false);
+            view.getDialogAdd().pack(); // giúp Dialog khởi tạo các thành phần bên trong hoàn toàn, điều chỉnh kích thước... -> tránh lỗi hiển thị.
+            view.getDialogAdd().setVisible(true);
+               
+            
+        }   
+    }
+    
+    // Action khi nút "Tạo" của Dialog "Thêm User" được nhấn
+    private class CreateActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnCreate is clicked");
+            String tenTK = view.getFieldTenTK_add().getText();
+            if (isDuplicateTenTK(tenTK)){
+                JOptionPane.showMessageDialog(null, "Tên tài khoản đã tồn tại, vui lòng đặt tên khác");
+                return;
+            };
+            User newUser = view.getNewUserFromFields();
+            newUser.setTenTK(tenTK);
             System.out.println(newUser);
             try {
                 model.addDB(newUser);
-                JOptionPane.showMessageDialog(viewAdd, "Thêm thành công");
-                Object[] newRow = newUser.getObjectUser();
-                view.getTableERP().addRow(newRow);
-                viewAdd.dispose();
             } catch (SQLException ex) {
                 Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }   
+            Object[] newRow = newUser.getObjectUser();
+            view.getTableERP().addRow(newRow);
+            JOptionPane.showMessageDialog(null, "Thêm thành công");
+            view.getDialogAdd().dispose();
+        }
+    }
+    
+    // Action khi nút "Sửa" của cửa sổ quản lý User được nhấn
+    private class EditActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnEdit is clicked");
+            if (view.getTableERP() == null){
+                JOptionPane.showMessageDialog(null, "Vui lòng load dữ liệu trước");
+                return;
+            }
+            int selectedUpdatedRow = view.getTbUser().getSelectedRow();
+            if (selectedUpdatedRow == -1){
+                JOptionPane.showMessageDialog(null, "Vui lòng chọn hàng cần cập nhật");
+                return;
+            }
+            // Lấy dữ liệu từ hàng được chọn
+            Object[] rowData = new Object[User.columns.length];
+            for (int i = 0; i < User.columns.length; i++){
+                rowData[i] = view.getTbUser().getValueAt(selectedUpdatedRow, i);
+            }
+            view.setUpdateFieldData(rowData);
+            view.getDialogUpdate().pack(); // giúp Dialog khởi tạo các thành phần bên trong hoàn toàn, điều chỉnh kích thước... -> tránh lỗi hiển thị.
+            view.getDialogUpdate().setVisible(true);
+        }
     }
 
+    // Action khi nút "Cập nhật" của Dialog Update được nhấn
     private class UpdateActionListener implements ActionListener {
-
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("btnUpdate is clicked");
-            User updatedUser = viewUpdate.getUserFromFields();
+            int selRow = view.getTbUser().getSelectedRow();
+            User updatedUser = view.getUpdateUserFromFields();
             System.out.println(updatedUser);
             try {
                 model.updateDB(updatedUser);
-                JOptionPane.showMessageDialog(viewUpdate, "Update thành công");
-                Object[] rowData = updatedUser.getObjectUser();
-                for (int i = 0; i < rowData.length; i++){
-                    System.out.print(rowData[i] + " ");
-                }
-                view.getTableERP().sua(view.getSelectedUpdatedRow(), rowData);
-                viewUpdate.dispose();
             } catch (SQLException ex) {
                 Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-            }      
+            }
+            
+            JOptionPane.showMessageDialog(null, "Update thành công");
+            Object[] rowData = updatedUser.getObjectUser();
+            for (int i = 0; i < rowData.length; i++){
+                System.out.print(rowData[i] + " ");
+            }
+            //view.getTableERP().sua(view.getSelectedUpdatedRow(), rowData);
+            view.getTableERP().sua(selRow, rowData);
+            view.getDialogUpdate().dispose();
         }  
     }
     
@@ -303,18 +304,7 @@ public class UserController {
         return hasRole(user, "GR");
     }
     
-    // Tìm Mã nhân viên lớn nhất
-    public int getMaxMaNV() {
-        ArrayList<User> dsUser = model.getDSUser();
-        int rowCount = dsUser.size();       
-        int maxMaNV = 0;
-        for (User user : dsUser){
-            if (maxMaNV < user.getMaNV()){
-                maxMaNV = user.getMaNV();
-            }
-        }
-        return maxMaNV;
-    };
+
     
     public boolean isDuplicateTenTK(String tenTK){
         ArrayList<User> dsAciveUser = model.filterActiveUser();
