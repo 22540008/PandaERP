@@ -241,7 +241,7 @@ FROM GoodsReceipt JOIN PurchaseOrder ON GoodsReceipt.soPO_line = PurchaseOrder.s
 	JOIN PurchaseRequest ON PO_PR.soPR_line = PurchaseRequest.soCT_line
 	JOIN Item ON PurchaseRequest.maHang = Item.maHang
 	JOIN Vendor ON PurchaseOrder.maNCC = Vendor.maNCC
-WHERE GoodsReceipt.trangThai NOT IN (1);
+
 
 SELECT *
 FROM PurchaseOrder JOIN PO_PR ON PurchaseOrder.soCT_line = PO_PR.soPO_line

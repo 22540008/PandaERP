@@ -267,7 +267,7 @@ public class POController {
             boolean selCol = true;
             Object[][] listObjData = view.getTablePR().filter(selRows, selRow, selColumns, selCol);
             view.getTablePOdraft().add(new int[]{6, 7, 8, 9, 10, 13, 14, 16}, listObjData, new int[]{0, 1, 2, 3, 4, 5, 6, 7});
-            view.getTablePOdraft().setData(view.getTbPOdraft());
+            view.getTablePOdraft().displayTable(view.getTbPOdraft());
             view.getDialogTimPR().dispose(); 
         }
     }
@@ -283,7 +283,7 @@ public class POController {
             }
             int[] selRows = view.getTbPOdraft().getSelectedRows();
             view.getTablePOdraft().removeRow(selRows);
-            view.getTablePOdraft().setData(view.getTbPOdraft());
+            view.getTablePOdraft().displayTable(view.getTbPOdraft());
         }
     }
     

@@ -176,7 +176,6 @@ public class GRController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("btnSearchPO is clicked");
-            //String[] paramSearch = view.getSearchParamPO();
             String soPOStr = view.getFieldSearchSoCTPO().getText();
             if (soPOStr.isBlank()){
                 JOptionPane.showMessageDialog(null, "Vui lòng nhập số PO");
@@ -191,6 +190,12 @@ public class GRController {
             
             // Remove các dòng pending PO mà đã thêm vào GR draft thông qua soPO
             if (view.getTableGRdraft() != null){
+                if (view.getTableGRdraft().getRowCount() > 0){
+                    String draftGrPoStr = String.valueOf(view.getTableGRdraft().getValueAt(0, 6));
+                    if (!soPOStr.equals(draftGrPoStr)){
+                        JOptionPane.showMessageDialog(null, "1 GR chỉ có thể dùng cho 1 PO");
+                    }
+                }
                 int rowCount = view.getTableGRdraft().getRowCount();
                 for (int i = 0; i < rowCount; i++){
                     Iterator<PurchaseOrder> iterator = listPOleftover.iterator();
@@ -228,7 +233,7 @@ public class GRController {
             boolean selCol = true;
             Object[][] listObjData = view.getTablePO().filter(selRows, selRow, selColumns, selCol);
             view.getTableGRdraft().add(new int[]{6, 7, 8, 9, 10, 11, 12, 13, 14, 15}, listObjData, new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
-            view.getTableGRdraft().setData(view.getTbGRdraft());
+            view.getTableGRdraft().displayTable(view.getTbGRdraft());
             view.getDialogTimPO().dispose(); 
         }
     }
@@ -244,7 +249,7 @@ public class GRController {
             }
             int[] selRows = view.getTbGRdraft().getSelectedRows();
             view.getTableGRdraft().removeRow(selRows);
-            view.getTableGRdraft().setData(view.getTbGRdraft());
+            view.getTableGRdraft().displayTable(view.getTbGRdraft());
         }
     }
     

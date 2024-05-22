@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
@@ -364,18 +365,28 @@ public class TableERP extends DefaultTableModel {
      *
      * @param table Đối tượng JTable chứa dữ liệu cần đặt cho TableModel.
      */
-    public void setData(JTable table){
+    public void displayTable(JTable table){
         table.setModel(this);
     }
     
-    // Xuất mảng Object[] chỉ định
+    /**
+     * Xuất dữ liệu từ hàng được chỉ định của bảng thành một mảng.
+     *
+     * @param row chỉ số hàng cần xuất dữ liệu.
+     * @return mảng chứa dữ liệu của hàng được chỉ định. Mảng này có cùng thứ tự với các cột trong bảng.
+     */
     public Object[] exportObjData(int row){
         Vector<Object> rowDataVector = (Vector<Object>) this.getDataVector().elementAt(row);
         Object[] objData = rowDataVector.toArray(new Object[0]);
         return objData;
     }
     
-    
+    /**
+     * Xuất dữ liệu từ tất cả các hàng của bảng thành một mảng hai chiều.
+     *
+     * @return mảng hai chiều chứa dữ liệu của tất cả các hàng. Mỗi phần tử trong mảng hai chiều
+     *         là một mảng chứa dữ liệu của một hàng. Mảng con này có cùng thứ tự với các cột trong bảng.
+     */
     public Object[][] exportObjData(){
         Object[][] result = new Object[this.getRowCount()][this.getColumnCount()];
         for (int i = 0; i < this.getRowCount(); i++){
@@ -386,7 +397,13 @@ public class TableERP extends DefaultTableModel {
         return result;
     }
     
-    // Xuất mảng Object[][] chỉ định
+    /**
+    * Xuất dữ liệu từ các hàng được chỉ định của bảng thành một mảng hai chiều.
+    *
+    * @param rows mảng các chỉ số hàng cần xuất dữ liệu.
+    * @return mảng hai chiều chứa dữ liệu của các hàng được chỉ định. Mỗi phần tử trong mảng hai chiều
+    *         là một mảng chứa dữ liệu của một hàng. Mảng con này có cùng thứ tự với các cột trong bảng.
+    */
     public Object[][] exportObjData(int[] rows){
         int rowCount = rows.length;
         int colCount = this.getColumnCount();
@@ -425,7 +442,50 @@ public class TableERP extends DefaultTableModel {
         }
     }
     
-   
+    
+    /**
+     * Tính tổng giá trị của cột subExpense cho mỗi giá trị duy nhất trong cột uniqueFilterCol.
+     * Trả về một mảng Object[] chứa tổng giá trị của cột subExpense và một mảng Object[][] chứa các giá trị duy nhất và tổng giá trị tương ứng.
+     * Lưu ý: không nên dùng HashMap vì key không có thứ tự khi thêm vào.
+     * @param uniqueFilterCol chỉ số của cột chứa các giá trị duy nhất để lọc.
+     * @param subExpense chỉ số của cột chứa các giá trị để tính tổng.
+     * @return Mảng Object[] chứa tổng giá trị của cột subExpense (kiểu Double) và một mảng Object[][] chứa các giá trị duy nhất và tổng giá trị tương ứng.
+     */
+    public Object[] filterExpense(int uniqueFilterCol, int descriptionCol, int subExpense) {
+        Map<String, Double> uniqueExpensesMap = new LinkedHashMap<>();
+        double total = 0f;
+
+        for (int i = 0; i < getRowCount(); i++) {
+            Object uniqueValue = getValueAt(i, uniqueFilterCol);
+            String description = "";
+            if (descriptionCol >= 0 && descriptionCol < this.getColumnCount()){
+                description = String.valueOf(getValueAt(i, descriptionCol));
+            }   
+            String key = uniqueValue.toString() + "@" + description;
+            Object expenseValue = getValueAt(i, subExpense);
+            if (expenseValue instanceof Number) {
+                double expense = ((Number) expenseValue).doubleValue();
+                uniqueExpensesMap.put(key, uniqueExpensesMap.getOrDefault(key, 0.0) + expense);
+                total += expense;
+            }
+        }
+
+        Object[][] uniqueExpenses = new Object[uniqueExpensesMap.size()][3];
+        int index = 0;
+        for (Map.Entry<String, Double> entry : uniqueExpensesMap.entrySet()) {
+            uniqueExpenses[index][0] = entry.getKey().split("@")[0];
+            if (descriptionCol >= 0 && descriptionCol < this.getColumnCount()){
+                uniqueExpenses[index][1] = entry.getKey().split("@")[1];
+            }
+            else{
+                uniqueExpenses[index][1] = "";
+            }
+            uniqueExpenses[index][2] = entry.getValue();
+            index++;
+        }
+
+        return new Object[] {total, uniqueExpenses};
+    }
     
 }
 

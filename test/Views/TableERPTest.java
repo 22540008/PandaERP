@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  * @author Ricardo
  */
 public class TableERPTest {
-    TableERP tableERP1, tableERP2;
+    TableERP tableERP1, tableERP2, tableERP3;
     
     public TableERPTest() {
         String[] column1 = new String[] {"0", "1", "2", "3", "4"};
@@ -31,6 +31,15 @@ public class TableERPTest {
                             {113, "user13", "bc", "cd", "e"},
                             {102, "user2", "e", "f", "g"}};
         tableERP2 = new TableERP(data2, column2);
+        
+        String[] column3 = new String[]{"Người yêu cầu", "Người mua hàng", "Mã hàng", "Mã NCC", "Chi phí"};
+        Object[][] data3 = new Object[][]
+                {{"Nguyễn Văn A", "Trần Quang Hùng", 1001, 2002, 50000f},
+                {"Nguyễn Văn B", "Phạm Tiến Nam", 1001, 2001, 30000f},
+                {"Nguyễn Văn A", "Phạm Tiến Nam", 1002, 2003, 60000f},
+                {"Nguyễn Văn C", "Trần Quang Hùng", 1002, 2002, 50000f},
+                {"Nguyễn Văn B", "Trần Quang Hùng", 1003, 2003, 40000f}};
+        tableERP3 = new TableERP(data3,column3);
 
     }
 
@@ -225,6 +234,19 @@ public class TableERPTest {
 
     @Test
     public void testAdd_intArr_ObjectArr() {
+    }
+
+    @Test
+    public void testFilterExpense() {
+        int uniqueFilterCol = 0;
+        int subExpense = 4;
+        Object[] result = tableERP3.filterExpense(0, -1, 4);
+        Object[] expected = new Object[]{230000d,
+            new Object[][] {{"Nguyễn Văn A", "", 110000d},
+                {"Nguyễn Văn B", "",70000d},
+                {"Nguyễn Văn C", "",50000d}}};
+        assertArrayEquals(expected, result);
+        
     }
     
 }

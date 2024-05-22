@@ -1199,7 +1199,7 @@ public class GRView extends javax.swing.JPanel {
         tableGRdraft.setColumnType(17, Boolean.class); // Lưu kho
         tableGRdraft.setColumnType(18, Boolean.class); // Nhận lần cuối
         tbGRdraft.setModel(tableGRdraft);
-        //tableGRdraft.setColumnVisible(tbGRdraft, new String[]{"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Mã NCC", "Tên NCC"}, false);
+        tableGRdraft.setColumnVisible(tbGRdraft, new String[]{"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine"}, false);
     }
     
     public void btnAddActionListener(ActionListener listener){

@@ -16,6 +16,7 @@ import java.util.HashMap;
 public class Transaction {
     protected int soCT;
     protected String user;
+    //protected User user;
     protected Date ngayTao;
     protected Date ngaySua;
     protected int trangThai; // 0: active; 1: deleted; 2: inactive; 3: processed; 4: duyệt (bởi system hoặc approver)
@@ -39,6 +40,8 @@ public class Transaction {
     public Transaction(int soCT, String user, Date ngayTao, Date ngaySua, int trangThai, int itemLine) {
         this.soCT = soCT;
         this.user = user;
+        //this.user = new User();
+        //this.user.setTenTK(user);
         this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
         this.trangThai = trangThai;

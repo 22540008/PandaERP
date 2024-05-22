@@ -64,6 +64,8 @@ public class MainFrame extends javax.swing.JFrame {
         panelMain.add(controller.getPrView(), "PRView");
         panelMain.add(controller.getPoView(), "POView");
         panelMain.add(controller.getGrView(), "GRView");
+        panelMain.add(controller.getExpenseView(), "ExpenseView");
+
 
     }
 
@@ -115,6 +117,9 @@ public class MainFrame extends javax.swing.JFrame {
         menuGR = new javax.swing.JMenuItem();
         menuItem = new javax.swing.JMenuItem();
         menuVendor = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        menuExpenseFilter = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
 
         jLabel1.setText("jLabel1");
@@ -193,6 +198,17 @@ public class MainFrame extends javax.swing.JFrame {
 
         menuVendor.setText("Nhà cung cấp");
         jMenu6.add(menuVendor);
+
+        jMenu7.setText("Báo cáo");
+
+        menuExpenseFilter.setText("Lọc chi tiêu");
+        menuExpenseFilter.setToolTipText("");
+        jMenu7.add(menuExpenseFilter);
+
+        jMenuItem2.setText("jMenuItem2");
+        jMenu7.add(jMenuItem2);
+
+        jMenu6.add(jMenu7);
 
         jMenuBar1.add(jMenu6);
 
@@ -275,6 +291,10 @@ public class MainFrame extends javax.swing.JFrame {
         menuGR.addActionListener(listener);
     }
     
+    public void menuExpenseFilter(ActionListener listener){
+        menuExpenseFilter.addActionListener(listener);
+    }
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -284,8 +304,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem menuDSTaiKhoan;
+    private javax.swing.JMenuItem menuExpenseFilter;
     private javax.swing.JMenuItem menuGR;
     private javax.swing.JMenuItem menuItem;
     private javax.swing.JMenuItem menuPO;

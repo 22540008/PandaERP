@@ -43,7 +43,7 @@ public class GRManager {
         this.dsGR = dsGR;
     }
    
-    
+    // Xuất mảng gr thành Object2D
     public Object[][] getObjDsGR(){
         int column = GoodsReceipt.columns.length;
         ArrayList<GoodsReceipt> dsPOActive = filterActivePO();
@@ -51,6 +51,24 @@ public class GRManager {
         //System.out.println("Convert to Object[][]");
         for (int i = 0; i < dsPOActive.size(); i++){
             Object[] objGoodsReceipt = dsPOActive.get(i).getObjPO();
+            System.out.println(dsPOActive.get(i));
+            //System.out.println();
+            for (int j=0; j < column; j++){
+                dsObjGoodsReceipt[i][j] = objGoodsReceipt[j];
+                //System.out.print(dsObjGoodsReceipt[i][j] + " ");
+            }
+        }
+        return dsObjGoodsReceipt;
+    }
+    
+    // Xuất mảng gr thành Object2D cho Expense Report
+    public Object[][] getObjDsGR(String s){
+        int column = GoodsReceipt.expenseReportCols.length;
+        ArrayList<GoodsReceipt> dsPOActive = filterActivePO();
+        Object[][] dsObjGoodsReceipt = new Object[dsPOActive.size()][column];
+        //System.out.println("Convert to Object[][]");
+        for (int i = 0; i < dsPOActive.size(); i++){
+            Object[] objGoodsReceipt = dsPOActive.get(i).getObjPO("");
             System.out.println(dsPOActive.get(i));
             //System.out.println();
             for (int j=0; j < column; j++){
@@ -87,7 +105,6 @@ public class GRManager {
                     	JOIN PurchaseRequest ON PO_PR.soPR_line = PurchaseRequest.soCT_line
                     	JOIN Item ON PurchaseRequest.maHang = Item.maHang
                     	JOIN Vendor ON PurchaseOrder.maNCC = Vendor.maNCC
-                    WHERE GoodsReceipt.trangThai NOT IN (1);
                    """;
         PreparedStatement stmt = conn.getConnection().prepareStatement(q);
 
@@ -114,6 +131,72 @@ public class GRManager {
             po.setSoCT(Integer.parseInt(soPO_line[0]));
             po.setItemLine(Integer.parseInt(soPO_line[1]));
             po.setSlChoNhan(rs.getInt("slChoNhan"));
+            
+            GoodsReceipt gr = new GoodsReceipt();
+            gr.setSoCT(rs.getInt("soCT"));
+            gr.setUser(rs.getString("nguoiTao"));
+            gr.setNgayTao(rs.getDate("ngayTao"));
+            gr.setNgaySua(rs.getDate("ngaySua"));
+            gr.setTrangThai(rs.getInt("trangThai"));
+            gr.setItemLine(rs.getInt("itemLine"));
+            gr.setPo(po);
+            gr.setPr(pr);
+            gr.setVendor(vendor);
+            gr.setSlNhan(rs.getInt("slNhan"));
+            gr.setLuuKho(rs.getInt("luuKho"));
+            gr.setLanCuoi(rs.getBoolean("lanCuoi"));
+            
+            dsGR.add(gr);
+        }
+        conn.close();
+        return dsGR;
+    }
+    
+    // Phương thức import data từ CSDL cho "Expense Report"
+    public ArrayList<GoodsReceipt> loadData_DB(String s) throws SQLException{
+
+        dsGR = new ArrayList(); // Khởi tạo lại dsGoodsReceipt như một ArrayList mới (xoá data cũ) trước khi lấy dữ liệu từ SQL
+        // đối tượng s kết nối SQL Server
+        SQLConnection conn = new SQLConnection("sa", "sa");
+        // Chuỗi truy vấn SQL q
+        String q = """
+                    SELECT *, PurchaseRequest.nguoiTao AS prCreator, PurchaseOrder.nguoiTao AS poCreator
+                    FROM GoodsReceipt JOIN PurchaseOrder ON GoodsReceipt.soPO_line = PurchaseOrder.soCT_line
+                    	JOIN PO_PR ON PurchaseOrder.soCT_line = PO_PR.soPO_line
+                    	JOIN PurchaseRequest ON PO_PR.soPR_line = PurchaseRequest.soCT_line
+                    	JOIN Item ON PurchaseRequest.maHang = Item.maHang
+                    	JOIN Vendor ON PurchaseOrder.maNCC = Vendor.maNCC
+                   """;
+        PreparedStatement stmt = conn.getConnection().prepareStatement(q);
+
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()){
+//            Item item = itemManager.loadData_DB(rs.getInt("maHang"));
+            Item item = new Item();
+            item.setMaHang(rs.getInt("maHang")); // đúng cho truy vấn cột maHang đầu tiên
+            item.setTenHang(rs.getString("tenHang"));
+            item.setDvt(rs.getString("dvt"));
+            
+            Vendor vendor = new Vendor();
+            vendor.setMaNCC(rs.getInt("maNCC"));
+            vendor.setTenNCC(rs.getString("tenNCC"));
+            
+            PurchaseRequest pr = new PurchaseRequest();
+            String[] soPR_line = rs.getString("soPR_line").split("_");
+            pr.setSoCT(Integer.parseInt(soPR_line[0]));
+            pr.setItemLine(Integer.parseInt(soPR_line[1]));
+            pr.setItem(item);
+            pr.setUser(rs.getString("prCreator")); //
+            
+            PurchaseOrder po = new PurchaseOrder();
+            String[] soPO_line = rs.getString("soPO_line").split("_");
+            po.setSoCT(Integer.parseInt(soPO_line[0]));
+            po.setItemLine(Integer.parseInt(soPO_line[1]));
+            po.setSlChoNhan(rs.getInt("slChoNhan"));
+            po.setUser(rs.getString("poCreator")); //
+            po.setGia(rs.getLong("gia")); //
+            po.setVat(rs.getFloat("vat")); //
+            
             
             GoodsReceipt gr = new GoodsReceipt();
             gr.setSoCT(rs.getInt("soCT"));

@@ -29,6 +29,9 @@ public class GoodsReceipt extends Transaction {
 
     public final static String[] columns = {"Số CT", "Người tạo", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PO", "PO line", "Số PR", "PR line", 
         "Mã hàng", "Tên hàng", "ĐVT", "Mã NCC", "Tên NCC", "Số chưa nhận", "Số lượng nhận", "Lưu kho", "Nhận Lần Cuối"};
+    
+    public final static String[] expenseReportCols = {"Số CT", "Người tạo PR", "Ngày tạo", "Ngày sửa", "Trạng thái", "ItemLine", "Số PO", "PO line", "Người tạo PO", "Họ tên buyer", "Số PR", "PR line",  "Người tạo PR",
+        "Mã hàng", "Tên hàng", "ĐVT", "Mã NCC", "Tên NCC", "Số chưa nhận", "Số lượng nhận", "Lưu kho", "Nhận Lần Cuối", "đơn giá", "vat", "lineValue"};
 
     public GoodsReceipt() {
         po = new PurchaseOrder();
@@ -111,6 +114,7 @@ public class GoodsReceipt extends Transaction {
         return super.toString() + "GoodsReceipt{" + "po=" + po + ", slNhan=" + slNhan + ", luuKho=" + luuKho + ", nhanLanCuoi=" + lanCuoi + '}';
     }
     
+    // Export gr thành Object 2D
     public Object[] getObjPO(){
         Object[] objPO =  new Object[]{this.getSoCT(), 
             this.getUser(), 
@@ -128,10 +132,41 @@ public class GoodsReceipt extends Transaction {
             getMaNCC(),
             getTenNCC(),
             po.getSlChoNhan(),
-            //0, // số lượng chờ nhận
             getSlNhan(),
             getLuuKhoBool(),
             this.lanCuoi
+        };
+                   
+        return objPO;
+    }
+    
+    // Export gr thành Object 2D cho Expense Report
+    public Object[] getObjPO(String s){
+        Object[] objPO =  new Object[]{this.getSoCT(), 
+            this.getUser(), 
+            DateUtils.format(this.getNgayTao()),
+            DateUtils.format(this.getNgaySua()),
+            this.getTrangThaiStr(),
+            this.itemLine,
+            getSoPO(),
+            getPOline(),
+            po.getUser(), // người tạo PO
+ 
+            getSoPR(),
+            getPRline(),
+            po.getPr().getUser(), // người tạo PR
+            getMaHang(),
+            getTenHang(),
+            getDvt(),
+            getMaNCC(),
+            getTenNCC(),
+            po.getSlChoNhan(),
+            getSlNhan(),
+            getLuuKhoBool(),
+            this.lanCuoi,
+            po.getGia(),
+            po.getVat(),
+            0 // giá trị của itemLine
         };
                    
         return objPO;

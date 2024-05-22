@@ -11,6 +11,7 @@ import Services.POManager;
 import Services.PRManager;
 import Services.UserManager;
 import Services.VendorManager;
+import Views.ExpenseFilterView;
 import Views.GRView;
 import Views.ItemView;
 import Views.MainFrame;
@@ -51,6 +52,9 @@ public class MainController {
     private GRManager grModel;
     private GRController grController;
     private GRView grView;
+    private GRManager expenseModel;
+    private ExpenseFilterController expenseController;
+    private ExpenseFilterView expenseView;
     
     
 
@@ -88,12 +92,17 @@ public class MainController {
         grModel = new GRManager();
         grView = new GRView();
         grController = new GRController(grModel, grView);
+        // Khởi tạo Expense Filter component
+        expenseModel = new GRManager();
+        expenseView = new ExpenseFilterView();
+        expenseController = new ExpenseFilterController(expenseModel, expenseView);
         
         
         // Set các Model tương quan
         prController.setOtherModel(loginUser, itemController);
         poController.setOtherModel(loginUser, itemController, vendorController, prController);
         grController.setOtherModel(loginUser, itemController, vendorController, prController, poController);
+        expenseController.setOtherModel(loginUser, itemController, vendorController, prController, poController);
 
     }
     
@@ -105,6 +114,8 @@ public class MainController {
         view.menuPRActionListener(new PRActionListener());
         view.menuPOActionListener(new POActionListener());
         view.menuGRActionListener(new GRActionListener());
+        view.menuExpenseFilter(new ExpenseFilterActionListener());
+        
     }
     
     public UserView getUserView() {
@@ -135,6 +146,20 @@ public class MainController {
         return grView;
     }
 
+    public ExpenseFilterView getExpenseView() {
+        return expenseView;
+    }
+
+    private class ExpenseFilterActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("menuExpenseFilter is clicked");
+            CardLayout cl = (CardLayout) view.getPanelMain().getLayout();
+            cl.show(view.getPanelMain(), "ExpenseView");
+            expenseController.getView().setVisible(true);
+        }
+    }
+    
     private class GRActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
