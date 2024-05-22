@@ -22,6 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import Utility.CurrencyUtils;
+import Utility.FileUtil;
 import Views.ExpenseFilterView;
 import Views.POView;
 import Views.TableERP;
@@ -149,18 +150,19 @@ public class ExpenseFilterController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("btnSave is clicked");
-            // Chọn nơi lưu file
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Xác định tệp để lưu");
-            
-            // Thiết lập file filter để để extension .xls
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("XLS files", "xls");
-            fileChooser.setFileFilter(filter);
-            
-            int userSelection = fileChooser.showSaveDialog(null);
-            
-            if (userSelection == JFileChooser.APPROVE_OPTION){
-                File fileToSave = fileChooser.getSelectedFile();
+//            // Chọn nơi lưu file
+//            JFileChooser fileChooser = new JFileChooser();
+//            fileChooser.setDialogTitle("Xác định tệp để lưu");
+//            
+//            int userSelection = fileChooser.showSaveDialog(null);
+//            if (userSelection == JFileChooser.APPROVE_OPTION){
+//                File fileToSave = fileChooser.getSelectedFile();
+//                // Kiểm tra file có đuôi .xls không để thêm vào
+//                if (!fileToSave.getAbsolutePath().endsWith(".xls")){
+//                    fileToSave = new File(fileToSave.getAbsolutePath() + ".xls");
+//                }
+            File fileToSave = FileUtil.getSaveFileWithExtension("xls");
+            if (fileToSave != null){
                 try{
                     //view.getTableERP().exportToCSV(fileToSave);
                     view.getTableERP().exportToXLS(fileToSave);

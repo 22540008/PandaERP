@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.JButton;
 
 /**
  *
@@ -395,12 +396,12 @@ public class PRView extends javax.swing.JPanel {
     public void setFieldUser_update(JTextField fieldUser_update) {
         this.fieldUser_update = fieldUser_update;
     }
-    
-    
-    
-    
-    
-    
+
+    public JTextField getFieldTongPR_update() {
+        return fieldTongPR_update;
+    }
+
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -466,8 +467,8 @@ public class PRView extends javax.swing.JPanel {
         jScrollPane4 = new javax.swing.JScrollPane();
         tbPRupdate = new javax.swing.JTable();
         btnUpdate_update = new javax.swing.JButton();
-        btnTinhTongPR1 = new javax.swing.JButton();
-        fieldTongPR1 = new javax.swing.JTextField();
+        btnTinhTongPR_update = new javax.swing.JButton();
+        fieldTongPR_update = new javax.swing.JTextField();
         btnClose = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPR = new javax.swing.JTable();
@@ -925,9 +926,9 @@ public class PRView extends javax.swing.JPanel {
 
         btnUpdate_update.setText("Cập nhật");
 
-        btnTinhTongPR1.setText("Tính tổng");
+        btnTinhTongPR_update.setText("Tính tổng");
 
-        fieldTongPR1.setEditable(false);
+        fieldTongPR_update.setEditable(false);
 
         btnClose.setText("Đóng (Inactive PR)");
 
@@ -940,9 +941,9 @@ public class PRView extends javax.swing.JPanel {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(btnTinhTongPR1)
+                        .addComponent(btnTinhTongPR_update)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fieldTongPR1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(fieldTongPR_update, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnClose)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -956,9 +957,9 @@ public class PRView extends javax.swing.JPanel {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTinhTongPR1)
+                    .addComponent(btnTinhTongPR_update)
                     .addComponent(btnUpdate_update)
-                    .addComponent(fieldTongPR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fieldTongPR_update, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnClose)))
         );
 
@@ -1144,7 +1145,7 @@ public class PRView extends javax.swing.JPanel {
     private javax.swing.JButton btnSearchItem;
     private javax.swing.JButton btnTimItem_add;
     private javax.swing.JButton btnTinhTongPR;
-    private javax.swing.JButton btnTinhTongPR1;
+    private javax.swing.JButton btnTinhTongPR_update;
     private javax.swing.JButton btnTotalItemPrice;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnUpdate_update;
@@ -1161,7 +1162,7 @@ public class PRView extends javax.swing.JPanel {
     private javax.swing.JTextField fieldSoCT_update;
     private javax.swing.JTextField fieldTenHang_add;
     private javax.swing.JTextField fieldTongPR;
-    private javax.swing.JTextField fieldTongPR1;
+    private javax.swing.JTextField fieldTongPR_update;
     private javax.swing.JTextField fieldTotalPrice;
     private javax.swing.JTextField fieldUser_add;
     private javax.swing.JTextField fieldUser_update;
@@ -1272,7 +1273,7 @@ public class PRView extends javax.swing.JPanel {
 
     }
     
-    public void btnAddItem_addActionListener(ActionListener listener){
+    public void btnAddItemAddActionListener(ActionListener listener){
         btnAdd_add.addActionListener(listener);
     }
 
@@ -1334,7 +1335,7 @@ public class PRView extends javax.swing.JPanel {
         return addItem;
     }
     
-    public void btnDelete_addActionListener(ActionListener listener){
+    public void btnDeleteAddActionListener(ActionListener listener){
         btnDelete_add.addActionListener(listener);
     }
     
@@ -1359,21 +1360,22 @@ public class PRView extends javax.swing.JPanel {
     }
  
     
-    
-    
-    
     public void DialogUpdateActionListener(ActionListener listener){
         btnUpdate_update.addActionListener(listener);
     }
 
-    public void updateTbPRdraft() {
-        tbPRdraft.setModel(tablePRdraft);
-    }
+//    public void updateTbPRdraft() {
+//        tbPRdraft.setModel(tablePRdraft);
+//    }
+//
+//    public void updateTbPR() {
+//        tbPR.setModel(tableERP);
+//    }
 
-    public void updateTbPR() {
-        tbPR.setModel(tableERP);
+    public void btnTinhTongPrUpdateActionListener(ActionListener listener){
+        btnTinhTongPR_update.addActionListener(listener);
     }
-
+    
     public PurchaseRequest getUpdatePRinfo(int row) {
         PurchaseRequest pr = new PurchaseRequest();
         

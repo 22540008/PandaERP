@@ -13,14 +13,14 @@ import javax.swing.JTextField;
  * @author Ricardo
  */
 public class CurrencyTextField extends JTextField {
-    private NumberFormat formatter;
-    
-    public CurrencyTextField(){
-        formatter = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
-    }
-    
-    public void setVaue(double value){
-        setText(formatter.format(value));
-    }
+//    private NumberFormat formatter;
+//    
+//    public CurrencyTextField(){
+//        formatter = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+//    }
+//    
+//    public void setVaue(double value){
+//        setText(formatter.format(value));
+//    }
     
 }

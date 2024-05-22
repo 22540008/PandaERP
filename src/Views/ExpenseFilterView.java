@@ -203,7 +203,7 @@ public class ExpenseFilterView extends javax.swing.JPanel {
 
         jLabel3.setText("Năm");
 
-        btnExport.setText("Xuất csv");
+        btnExport.setText("Xuất XLS");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

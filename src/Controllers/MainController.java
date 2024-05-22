@@ -23,6 +23,7 @@ import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  * mô hình "singleton" hoặc "shared instance"
@@ -154,6 +155,17 @@ public class MainController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("menuExpenseFilter is clicked");
+            boolean permission = false;
+            for (String role : loginUser.getSystemRoles()){
+                if (role.equals("admin") || role.equals("buyer")){
+                    permission = true;
+                    break;
+                }
+            }
+            if (permission == false){
+                JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào chức năng này");
+                return;
+            }
             CardLayout cl = (CardLayout) view.getPanelMain().getLayout();
             cl.show(view.getPanelMain(), "ExpenseView");
             expenseController.getView().setVisible(true);
@@ -164,6 +176,17 @@ public class MainController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("menuGR is clicked");
+            boolean permission = false;
+            for (String role : loginUser.getSystemRoles()){
+                if (role.equals("admin") || role.equals("requester")){
+                    permission = true;
+                    break;
+                }
+            }
+            if (permission == false){
+                JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào chức năng này");
+                return;
+            }
             CardLayout cl = (CardLayout) view.getPanelMain().getLayout();
             cl.show(view.getPanelMain(), "GRView");
             grController.getView().setVisible(true);
@@ -174,6 +197,17 @@ public class MainController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("menuPO is clicked");
+            boolean permission = false;
+            for (String role : loginUser.getSystemRoles()){
+                if (role.equals("admin") || role.equals("buyer")){
+                    permission = true;
+                    break;
+                }
+            }
+            if (permission == false){
+                JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào chức năng này");
+                return;
+            }
             CardLayout cl = (CardLayout) view.getPanelMain().getLayout();
             cl.show(view.getPanelMain(), "POView");
             poController.getView().setVisible(true);
@@ -184,6 +218,17 @@ public class MainController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("menuPR is clicked");
+            boolean permission = false;
+            for (String role : loginUser.getSystemRoles()){
+                if (role.equals("admin") || role.equals("requester")){
+                    permission = true;
+                    break;
+                }
+            }
+            if (permission == false){
+                JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào chức năng này");
+                return;
+            }
             CardLayout cl = (CardLayout) view.getPanelMain().getLayout();
             cl.show(view.getPanelMain(), "PRView");
             prController.getView().setVisible(true);
@@ -196,6 +241,17 @@ public class MainController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("menuVendor is clicked");
+            boolean permission = false;
+            for (String role : loginUser.getSystemRoles()){
+                if (role.equals("admin") || role.equals("buyer")){
+                    permission = true;
+                    break;
+                }
+            }
+            if (permission == false){
+                JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào chức năng này");
+                return;
+            }
             CardLayout cl = (CardLayout) view.getPanelMain().getLayout();
             cl.show(view.getPanelMain(), "VendorView");
             vendorController.getView().setVisible(true);
@@ -207,6 +263,17 @@ public class MainController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("menuItem is clicked");
+            boolean permission = false;
+            for (String role : loginUser.getSystemRoles()){
+                if (role.equals("admin") || role.equals("buyer")){
+                    permission = true;
+                    break;
+                }
+            }
+            if (permission == false){
+                JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào chức năng này");
+                return;
+            }
             CardLayout cl = (CardLayout) view.getPanelMain().getLayout();
             cl.show(view.getPanelMain(), "ItemView");
             itemController.getView().setVisible(true);
@@ -217,6 +284,17 @@ public class MainController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("menuDSUser is clicked");
+            boolean permission = false;
+            for (String role : loginUser.getSystemRoles()){
+                if (role.equals("admin")){
+                    permission = true;
+                    break;
+                }
+            }
+            if (permission == false){
+                JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào chức năng này");
+                return;
+            }
             CardLayout cl = (CardLayout)(view.getPanelMain().getLayout());
             cl.show(view.getPanelMain(), "UserView");
             userController.getView().setVisible(true);

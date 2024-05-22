@@ -764,9 +764,9 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane4" alignment="0" pref="586" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnTinhTongPR1" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnTinhTongPR_update" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="fieldTongPR1" min="-2" pref="75" max="-2" attributes="0"/>
+                              <Component id="fieldTongPR_update" min="-2" pref="75" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnClose" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -784,9 +784,9 @@
                       <Component id="jScrollPane4" pref="323" max="32767" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnTinhTongPR1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnTinhTongPR_update" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnUpdate_update" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="fieldTongPR1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="fieldTongPR_update" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnClose" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -871,12 +871,12 @@
                 <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnTinhTongPR1">
+            <Component class="javax.swing.JButton" name="btnTinhTongPR_update">
               <Properties>
                 <Property name="text" type="java.lang.String" value="T&#xed;nh t&#x1ed5;ng"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="fieldTongPR1">
+            <Component class="javax.swing.JTextField" name="fieldTongPR_update">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>

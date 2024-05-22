@@ -11,8 +11,10 @@ import java.text.ParseException;
 import java.util.Locale;
 
 /**
- *
- * @author Ricardo
+ * Lớp CurrencyUtils cung cấp các phương thức tiện ích để định dạng các kiểu dữ liệu số thành định dạng tiền tệ của Việt Nam (VNĐ).
+ * 
+ * <p>Đối tượng của lớp này sẽ định dạng các giá trị số thành định dạng tiền tệ 
+ * của Việt Nam (vi-VN) và trả về dưới dạng chuỗi.</p>
  */
 public class CurrencyUtils {
     public static final NumberFormat VN_FORMAT;
@@ -55,10 +57,6 @@ public class CurrencyUtils {
         else {
             throw new IllegalArgumentException("Unsupported type: " + value.getClass().getName());
         }
-    }
-
-    public static void VN_FORMAT(long l) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     // Chuyển VN-currency format về number format

@@ -24,19 +24,20 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        // Chế độ default
-//        User model = new User();
-//        DangNhapView view = new DangNhapView();
-//        view.setVisible(true);
-//        DangNhapController ct1 = new DangNhapController(model, view);
+        // Chế độ Production, yêu cầu phải đăng nhập vào tài khoản
+        User model = new User();
+        DangNhapView view = new DangNhapView();
+        view.setVisible(true);
+        DangNhapController ct1 = new DangNhapController(model, view);
         
-        // Chế độ test, skip sign in step
-        User user = new User();
-        user.setTenTK("TQHUNG");
-        MainController mainFrameCtl = new MainController(user);
-        MainFrame mainFrameView = new MainFrame(mainFrameCtl);
-        mainFrameCtl.setView(mainFrameView);
-        mainFrameView.setVisible(true);
+        // Chế độ development, skip sign in step
+//        User user = new User();
+//        user.setTenTK("TQHUNG");
+//        user.setSystemRoles(new String[]{"admin"});
+//        MainController mainFrameCtl = new MainController(user);
+//        MainFrame mainFrameView = new MainFrame(mainFrameCtl);
+//        mainFrameCtl.setView(mainFrameView);
+//        mainFrameView.setVisible(true);
         
     }
     

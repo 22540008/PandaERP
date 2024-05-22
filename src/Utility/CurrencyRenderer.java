@@ -10,8 +10,12 @@ import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
 
 /**
- *
- * @author Ricardo
+ * Lớp CurrencyRenderer kế thừa từ DefaultTableCellRenderer, 
+ * được sử dụng để định dạng hiển thị của các ô trong một bảng JTable 
+ * khi chúng chứa dữ liệu kiểu số (Number) dưới dạng tiền tệ.
+ * 
+ * <p>Đối tượng của lớp này sẽ định dạng các giá trị số thành định dạng tiền tệ 
+ * của Việt Nam (vi-VN) và căn lề phải cho các ô.</p>
  */
 public class CurrencyRenderer extends DefaultTableCellRenderer {
     private NumberFormat formatter;

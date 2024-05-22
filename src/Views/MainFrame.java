@@ -119,7 +119,6 @@ public class MainFrame extends javax.swing.JFrame {
         menuVendor = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         menuExpenseFilter = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
 
         jLabel1.setText("jLabel1");
@@ -204,9 +203,6 @@ public class MainFrame extends javax.swing.JFrame {
         menuExpenseFilter.setText("Lọc chi tiêu");
         menuExpenseFilter.setToolTipText("");
         jMenu7.add(menuExpenseFilter);
-
-        jMenuItem2.setText("jMenuItem2");
-        jMenu7.add(jMenuItem2);
 
         jMenu6.add(jMenu7);
 
@@ -306,7 +302,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem menuDSTaiKhoan;
     private javax.swing.JMenuItem menuExpenseFilter;
     private javax.swing.JMenuItem menuGR;
