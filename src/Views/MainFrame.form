@@ -14,11 +14,6 @@
             <Property name="text" type="java.lang.String" value="File"/>
           </Properties>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Edit"/>
-          </Properties>
-        </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu5">
           <Properties>
             <Property name="text" type="java.lang.String" value="Account"/>
@@ -27,11 +22,17 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menuDSTaiKhoan">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/Users.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="DS T&#xe0;i kho&#x1ea3;n"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuSignout">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/Exit.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Tho&#xe1;t t&#xe0;i kho&#x1ea3;n"/>
               </Properties>
             </MenuItem>
@@ -44,22 +45,34 @@
           <SubComponents>
             <Menu class="javax.swing.JMenu" name="jMenu3">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/icons8_bill_30px.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="PR-PO-GR"/>
                 <Property name="autoscrolls" type="boolean" value="true"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="menuPR">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/img/List.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Y&#xea;u c&#x1ea7;u mua h&#xe0;ng"/>
                   </Properties>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="menuPO">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/img/Price list.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="&#x110;&#x1a1;n h&#xe0;ng"/>
                   </Properties>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="menuGR">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/img/icons8_agreement_30px.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Phi&#x1ebf;u nh&#x1ead;n h&#xe0;ng"/>
                   </Properties>
                 </MenuItem>
@@ -67,21 +80,33 @@
             </Menu>
             <MenuItem class="javax.swing.JMenuItem" name="menuItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/icons8-categorize-30.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Danh m&#x1ee5;c v&#x1ead;t t&#x1b0;"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuVendor">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/icons8_client_company_30px.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nh&#xe0; cung c&#x1ea5;p"/>
               </Properties>
             </MenuItem>
             <Menu class="javax.swing.JMenu" name="jMenu7">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/img/Best.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="B&#xe1;o c&#xe1;o"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="menuExpenseFilter">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/img/Paomedia-Small-N-Flat-Funnel.24.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="L&#x1ecd;c chi ti&#xea;u"/>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>
@@ -93,6 +118,11 @@
         <Menu class="javax.swing.JMenu" name="jMenu4">
           <Properties>
             <Property name="text" type="java.lang.String" value="Help"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Edit"/>
           </Properties>
         </Menu>
       </SubComponents>

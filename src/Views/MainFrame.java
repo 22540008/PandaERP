@@ -106,7 +106,6 @@ public class MainFrame extends javax.swing.JFrame {
         panelMain = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         menuDSTaiKhoan = new javax.swing.JMenuItem();
         menuSignout = new javax.swing.JMenuItem();
@@ -120,6 +119,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu7 = new javax.swing.JMenu();
         menuExpenseFilter = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         jLabel1.setText("jLabel1");
 
@@ -162,15 +162,14 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
         jMenu5.setText("Account");
         jMenu5.setActionCommand("jMenuAcount");
 
+        menuDSTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Users.png"))); // NOI18N
         menuDSTaiKhoan.setText("DS Tài khoản");
         jMenu5.add(menuDSTaiKhoan);
 
+        menuSignout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Exit.png"))); // NOI18N
         menuSignout.setText("Thoát tài khoản");
         jMenu5.add(menuSignout);
 
@@ -178,28 +177,36 @@ public class MainFrame extends javax.swing.JFrame {
 
         jMenu6.setText("Purchasing");
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_bill_30px.png"))); // NOI18N
         jMenu3.setText("PR-PO-GR");
         jMenu3.setAutoscrolls(true);
 
+        menuPR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/List.png"))); // NOI18N
         menuPR.setText("Yêu cầu mua hàng");
         jMenu3.add(menuPR);
 
+        menuPO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Price list.png"))); // NOI18N
         menuPO.setText("Đơn hàng");
         jMenu3.add(menuPO);
 
+        menuGR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_agreement_30px.png"))); // NOI18N
         menuGR.setText("Phiếu nhận hàng");
         jMenu3.add(menuGR);
 
         jMenu6.add(jMenu3);
 
+        menuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-categorize-30.png"))); // NOI18N
         menuItem.setText("Danh mục vật tư");
         jMenu6.add(menuItem);
 
+        menuVendor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_client_company_30px.png"))); // NOI18N
         menuVendor.setText("Nhà cung cấp");
         jMenu6.add(menuVendor);
 
+        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Best.png"))); // NOI18N
         jMenu7.setText("Báo cáo");
 
+        menuExpenseFilter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Paomedia-Small-N-Flat-Funnel.24.png"))); // NOI18N
         menuExpenseFilter.setText("Lọc chi tiêu");
         menuExpenseFilter.setToolTipText("");
         jMenu7.add(menuExpenseFilter);
@@ -210,6 +217,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         jMenu4.setText("Help");
         jMenuBar1.add(jMenu4);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
