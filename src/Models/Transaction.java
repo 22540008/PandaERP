@@ -15,8 +15,8 @@ import java.util.HashMap;
  */
 public class Transaction {
     protected int soCT;
-    protected String user;
-    //protected User user;
+    //protected String user;
+    protected User user;
     protected Date ngayTao;
     protected Date ngaySua;
     protected int trangThai; // 0: active; 1: deleted; 2: inactive; 3: processed; 4: duyệt (bởi system hoặc approver)
@@ -32,16 +32,17 @@ public class Transaction {
                 }};
 
     public Transaction() {
-        ngayTao = new Date(); // bắt buộc phải khởi tạo. Trống sẽ lỗi bước truy vấn SQL
-        ngaySua = new Date();
+        this.user = new User();
+        this.ngayTao = new Date(); // bắt buộc phải khởi tạo. Trống sẽ lỗi bước truy vấn SQL
+        this.ngaySua = new Date();
     }
 
 
     public Transaction(int soCT, String user, Date ngayTao, Date ngaySua, int trangThai, int itemLine) {
         this.soCT = soCT;
-        this.user = user;
-        //this.user = new User();
-        //this.user.setTenTK(user);
+        //this.user = user;
+        this.user = new User();
+        this.user.setTenTK(user);
         this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
         this.trangThai = trangThai;
@@ -56,12 +57,22 @@ public class Transaction {
         this.soCT = soCT;
     }
 
-    public String getUser() {
-        return user;
+    public String getTenTK() {
+        //return user;
+        return user.getTenTK();
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setTenTK(String tenTK) {
+        //this.user = user;
+        this.user.setTenTK(tenTK);
+    }
+    
+    public String getTen(){
+        return this.user.getTen();
+    }
+    
+    public void setTen(String ten) {
+        this.user.setTen(ten);
     }
 
     public Date getNgayTao() {

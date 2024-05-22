@@ -108,7 +108,7 @@ public class POManager {
             
             PurchaseOrder po = new PurchaseOrder();
             po.setSoCT(rs.getInt("soCT"));
-            po.setUser(rs.getString("nguoiTao"));
+            po.setTenTK(rs.getString("nguoiTao"));
             po.setNgayTao(rs.getDate("ngayTao"));
             po.setNgaySua(rs.getDate("ngaySua"));
             po.setTrangThai(rs.getInt("trangThai"));
@@ -163,7 +163,7 @@ public class POManager {
             
             PurchaseOrder po = new PurchaseOrder();
             po.setSoCT(rs.getInt("soCT"));
-            po.setUser(rs.getString("nguoiTao"));
+            po.setTenTK(rs.getString("nguoiTao"));
             po.setNgayTao(rs.getDate("ngayTao"));
             po.setNgaySua(rs.getDate("ngaySua"));
             po.setTrangThai(rs.getInt("trangThai"));
@@ -195,7 +195,7 @@ public class POManager {
             String soCT_line = po.getSoCT() + "_" + po.getItemLine();
             stmt.setString(1, soCT_line);
             stmt.setInt(2, po.getSoCT());
-            stmt.setString(3, po.getUser());
+            stmt.setString(3, po.getTenTK());
             Date ngayTao = po.getNgayTao();
             stmt.setDate(4, new java.sql.Date(ngayTao.getTime()));
             Date ngaySua = po.getNgaySua();

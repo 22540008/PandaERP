@@ -94,6 +94,8 @@ public class User {
     public void setTenTK(String tenTK) {
         this.tenTK = tenTK;
     }
+    
+
             
     public String getMatKhau() {
         return this.matKhau;

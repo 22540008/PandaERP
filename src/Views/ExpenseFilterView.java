@@ -46,8 +46,14 @@ public class ExpenseFilterView extends javax.swing.JPanel {
      * Creates new form PRView
      */
     public ExpenseFilterView() {
+        listCombobox = new String[] {"Người mua hàng", "Mã hàng", "Mã NCC"};
+        comboBoxModel = new DefaultComboBoxModel(listCombobox);
         
         initComponents();
+        cboxFilter.setModel(comboBoxModel);
+        // set fieldyear mặc định là năm hiện tại
+        int currentYear = LocalDate.now().getYear();
+        fieldYear.setText(String.valueOf(currentYear));
         
     }
     
@@ -59,7 +65,7 @@ public class ExpenseFilterView extends javax.swing.JPanel {
         this.tableERP = tableERP;
     }
 
-    public JTable getTbGR() {
+    public JTable getTbFilter() {
         return tbFilter;
     }
 
@@ -127,14 +133,6 @@ public class ExpenseFilterView extends javax.swing.JPanel {
         this.fieldTotalExpense = fieldTotalExpense;
     }
 
-    public JTable getTbFilter() {
-        return tbFilter;
-    }
-
-    public void setTbFilter(JTable tbFilter) {
-        this.tbFilter = tbFilter;
-    }
-
     public JTextField getFieldYear() {
         return fieldYear;
     }
@@ -162,6 +160,7 @@ public class ExpenseFilterView extends javax.swing.JPanel {
         cboxFilter = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         fieldYear = new javax.swing.JTextField();
+        btnExport = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         fieldTotalExpense = new javax.swing.JTextField();
@@ -189,6 +188,8 @@ public class ExpenseFilterView extends javax.swing.JPanel {
         });
         tbFilter.setToolTipText("");
         tbFilter.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tbFilter.setMinimumSize(null);
+        tbFilter.setPreferredSize(null);
         tbFilter.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tbFilter);
 
@@ -202,6 +203,8 @@ public class ExpenseFilterView extends javax.swing.JPanel {
 
         jLabel3.setText("Năm");
 
+        btnExport.setText("Xuất csv");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -211,12 +214,14 @@ public class ExpenseFilterView extends javax.swing.JPanel {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fieldYear, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cboxFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnExport))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,7 +232,8 @@ public class ExpenseFilterView extends javax.swing.JPanel {
                     .addComponent(btnFilter)
                     .addComponent(cboxFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(fieldYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fieldYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExport))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -244,7 +250,7 @@ public class ExpenseFilterView extends javax.swing.JPanel {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fieldTotalExpense, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(333, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,7 +278,7 @@ public class ExpenseFilterView extends javax.swing.JPanel {
                 .addGap(22, 22, 22)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -282,8 +288,20 @@ public class ExpenseFilterView extends javax.swing.JPanel {
         btnFilter.addActionListener(listener);
     }
     
+    public void loadData() {
+        tableERP = new TableERP(data, column);
+        tableERP.setColumnType(2, Double.class);
+        tbFilter.setModel(tableERP);
+        tbFilter.getColumnModel().getColumn(2).setCellRenderer(new CurrencyRenderer()); // format VND
+    }
+    
+    public void btnExportActionListener(ActionListener listener){
+        btnExport.addActionListener(listener);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnExport;
     private javax.swing.JButton btnFilter;
     private javax.swing.JComboBox<String> cboxFilter;
     private javax.swing.JTextField fieldTotalExpense;
@@ -296,6 +314,8 @@ public class ExpenseFilterView extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbFilter;
     // End of variables declaration//GEN-END:variables
+
+    
 
  
 

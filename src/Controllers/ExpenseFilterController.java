@@ -28,12 +28,16 @@ import Views.TableERP;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Vector;
+import javax.swing.JFileChooser;
 import javax.swing.JTable;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableModel;
 
 
@@ -50,14 +54,15 @@ public class ExpenseFilterController {
     private PRController prCtl;
     private POController poCtl;
     
-    private String[] filterType;
+    //private String[] filterType;
     
     
     public ExpenseFilterController(GRManager grModel, ExpenseFilterView expenseView) {
         this.model = grModel;
         this.view = expenseView;
-        this.filterType = new String[] {"Người mua hàng", "Mã hàng", "Mã NCC"};
+        //this.filterType = new String[] {"Người mua hàng", "Mã hàng", "Mã NCC"};
         this.view.btnFilterActionListener(new FilterActionListener());
+        this.view.btnExportActionListener(new ExportActionListener());
 
     }
 
@@ -96,7 +101,7 @@ public class ExpenseFilterController {
             
             
             try {
-                model.loadData_DB("");
+                model.loadData_DB(selYear);
             } catch (SQLException ex) {
                 Logger.getLogger(ExpenseFilterController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -110,39 +115,64 @@ public class ExpenseFilterController {
             }
             
             TableERP tableGR = new TableERP(dsObjGR, GoodsReceipt.expenseReportCols);
-            tableGR.capNhatTongGia(18, 21, 23, 22); // 18: slNhan; 21: donGia; 23:itemValue; 22: vat
+            tableGR.capNhatTongGia(19, 22, 24, 23); // 19: slNhan; 22: donGia; 24:itemValue; 23: vat
             //tableGR.displayTable(view.getTbFilter()); 
             Object[] filterData = new Object[2]; // 0: expense; 1: Object2D filter
-//            switch (filterIdx) {
-//                case 0:
-//                    filterData = tableGR.filterExpense(8, 23); // 8: người tạo PO
-//                    view.setColumn(new String[]{"Tài khoản", "Họ tên", "Tổng chi phí"});
-//                    break;
-//                case 1:
-//                    filterData = tableGR.filterExpense(12, 23); // 12: mã hàng
-//                    view.setColumn(new String[]{"Mã hàng", "Tên hàng", "Tổng chi phí"});
-//                    break;
-//                case 2:
-//                    filterData = tableGR.filterExpense(15, 23); // 15: mã NCC
-//                    view.setColumn(new String[]{"Mã NCC", "Tên NCC", "Tổng chi phí"});
-//                    break;      
-//                default:
-//                    throw new AssertionError();
-//            }
-//            Object[][] listObjData = (Object[][]) filterData[1];
-//            for (int i = 0; i < listObjData.length; i++){
-//                
-//            }
-//            String[] description = new String[filterData[2]];
-//            
-//            
-//            view.setColumn(GoodsReceipt.columns);
-//            view.displayTable(dsObjGR);
-//            view.loadData();   
-            
+            switch (filterIdx) {
+                case 0:
+                    filterData = tableGR.filterExpense(8, 9, 24); // 8: người tạo PO, 9: họ tên buyer
+                    view.setColumn(new String[]{"Tài khoản", "Họ tên", "Tổng chi phí"});
+                    break;
+                case 1:
+                    filterData = tableGR.filterExpense(13, 14, 24); // 13: mã hàng, 14: tên hàng
+                    view.setColumn(new String[]{"Mã hàng", "Tên hàng", "Tổng chi phí"});
+                    break;
+                case 2:
+                    filterData = tableGR.filterExpense(16, 17, 24); // 15: mã NCC, 16: tên NCC
+                    view.setColumn(new String[]{"Mã NCC", "Tên NCC", "Tổng chi phí"});
+                    break;      
+                default:
+                    throw new AssertionError();
+            }
+            double totalExpense = (double) filterData[0];
+            Object[][] listObjData = (Object[][]) filterData[1];
+            view.setData(listObjData);
+            view.loadData();
+            String toTalExpenseStr = CurrencyUtils.format(totalExpense);
+            view.getFieldTotalExpense().setText(toTalExpenseStr);
+            view.getTbFilter().setVisible(true);
             
         }
     }
+    
+    private class ExportActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnSave is clicked");
+            // Chọn nơi lưu file
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Xác định tệp để lưu");
+            
+            // Thiết lập file filter để để extension .xls
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("XLS files", "xls");
+            fileChooser.setFileFilter(filter);
+            
+            int userSelection = fileChooser.showSaveDialog(null);
+            
+            if (userSelection == JFileChooser.APPROVE_OPTION){
+                File fileToSave = fileChooser.getSelectedFile();
+                try{
+                    //view.getTableERP().exportToCSV(fileToSave);
+                    view.getTableERP().exportToXLS(fileToSave);
+                    JOptionPane.showMessageDialog(null, "Xuất dữ liệu ra thành cong!");
+                } catch (IOException ex){
+                    JOptionPane.showMessageDialog(null, "Có lỗi khi xuất dữ liệu");
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
+
     
 
     

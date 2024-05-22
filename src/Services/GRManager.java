@@ -134,7 +134,7 @@ public class GRManager {
             
             GoodsReceipt gr = new GoodsReceipt();
             gr.setSoCT(rs.getInt("soCT"));
-            gr.setUser(rs.getString("nguoiTao"));
+            gr.setTenTK(rs.getString("nguoiTao"));
             gr.setNgayTao(rs.getDate("ngayTao"));
             gr.setNgaySua(rs.getDate("ngaySua"));
             gr.setTrangThai(rs.getInt("trangThai"));
@@ -153,8 +153,7 @@ public class GRManager {
     }
     
     // Phương thức import data từ CSDL cho "Expense Report"
-    public ArrayList<GoodsReceipt> loadData_DB(String s) throws SQLException{
-
+    public ArrayList<GoodsReceipt> loadData_DB(int year) throws SQLException{
         dsGR = new ArrayList(); // Khởi tạo lại dsGoodsReceipt như một ArrayList mới (xoá data cũ) trước khi lấy dữ liệu từ SQL
         // đối tượng s kết nối SQL Server
         SQLConnection conn = new SQLConnection("sa", "sa");
@@ -166,8 +165,11 @@ public class GRManager {
                     	JOIN PurchaseRequest ON PO_PR.soPR_line = PurchaseRequest.soCT_line
                     	JOIN Item ON PurchaseRequest.maHang = Item.maHang
                     	JOIN Vendor ON PurchaseOrder.maNCC = Vendor.maNCC
+                        JOIN NhanVien ON PurchaseOrder.nguoiTao = NhanVien.tenTK
+                    WHERE YEAR(GoodsReceipt.ngayTao) = ?
                    """;
         PreparedStatement stmt = conn.getConnection().prepareStatement(q);
+        stmt.setInt(1, year);
 
         ResultSet rs = stmt.executeQuery();
         while (rs.next()){
@@ -186,21 +188,22 @@ public class GRManager {
             pr.setSoCT(Integer.parseInt(soPR_line[0]));
             pr.setItemLine(Integer.parseInt(soPR_line[1]));
             pr.setItem(item);
-            pr.setUser(rs.getString("prCreator")); //
+            pr.setTenTK(rs.getString("prCreator")); //
             
             PurchaseOrder po = new PurchaseOrder();
             String[] soPO_line = rs.getString("soPO_line").split("_");
             po.setSoCT(Integer.parseInt(soPO_line[0]));
             po.setItemLine(Integer.parseInt(soPO_line[1]));
             po.setSlChoNhan(rs.getInt("slChoNhan"));
-            po.setUser(rs.getString("poCreator")); //
+            po.setTenTK(rs.getString("poCreator")); //
             po.setGia(rs.getLong("gia")); //
             po.setVat(rs.getFloat("vat")); //
+            po.setTen(rs.getString("ho") + " " + rs.getString("ten"));
             
             
             GoodsReceipt gr = new GoodsReceipt();
             gr.setSoCT(rs.getInt("soCT"));
-            gr.setUser(rs.getString("nguoiTao"));
+            gr.setTenTK(rs.getString("nguoiTao"));
             gr.setNgayTao(rs.getDate("ngayTao"));
             gr.setNgaySua(rs.getDate("ngaySua"));
             gr.setTrangThai(rs.getInt("trangThai"));
@@ -234,7 +237,7 @@ public class GRManager {
             String soPO_line = gr.getSoPO() + "_" + gr.getPOline();
             stmt.setString(1, soCT_line);
             stmt.setInt(2, gr.getSoCT());
-            stmt.setString(3, gr.getUser());
+            stmt.setString(3, gr.getTenTK());
             Date ngayTao = gr.getNgayTao();
             stmt.setDate(4, new java.sql.Date(ngayTao.getTime()));
             Date ngaySua = gr.getNgaySua();

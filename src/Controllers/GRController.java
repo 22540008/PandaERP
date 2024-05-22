@@ -268,7 +268,7 @@ public class GRController {
                 int soCT = Integer.parseInt(String.valueOf(view.getFieldSoCT_add().getText()));
                 GoodsReceipt gr = new GoodsReceipt();
                 gr.setSoCT(soCT);
-                gr.setUser(view.getFieldUser_add().getText());
+                gr.setTenTK(view.getFieldUser_add().getText());
                 gr.setNgayTao(view.getDate_add().getDate());
                 gr.setNgaySua(view.getDate_add().getDate());
                 gr.setTrangThai(4); // Trạng thái "Duyệt"

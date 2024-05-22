@@ -155,7 +155,7 @@ public class PRManager {
             String soCT_line = pr.getSoCT() + "_" + pr.getItemLine();
             stmt.setString(1, soCT_line);
             stmt.setInt(2, pr.getSoCT());
-            stmt.setString(3, pr.getUser());
+            stmt.setString(3, pr.getTenTK());
             //stmt.setDate(4, (Date) pr.getNgayTao());
             Date ngayTao = pr.getNgayTao();
             stmt.setDate(4, new java.sql.Date(ngayTao.getTime()));

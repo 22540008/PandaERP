@@ -34,6 +34,7 @@ public class GoodsReceipt extends Transaction {
         "Mã hàng", "Tên hàng", "ĐVT", "Mã NCC", "Tên NCC", "Số chưa nhận", "Số lượng nhận", "Lưu kho", "Nhận Lần Cuối", "đơn giá", "vat", "lineValue"};
 
     public GoodsReceipt() {
+        super();
         po = new PurchaseOrder();
         slNhan = 0;
         luuKho = 0;
@@ -117,7 +118,7 @@ public class GoodsReceipt extends Transaction {
     // Export gr thành Object 2D
     public Object[] getObjPO(){
         Object[] objPO =  new Object[]{this.getSoCT(), 
-            this.getUser(), 
+            this.getTenTK(), 
             DateUtils.format(this.getNgayTao()),
             DateUtils.format(this.getNgaySua()),
             this.getTrangThaiStr(),
@@ -143,18 +144,18 @@ public class GoodsReceipt extends Transaction {
     // Export gr thành Object 2D cho Expense Report
     public Object[] getObjPO(String s){
         Object[] objPO =  new Object[]{this.getSoCT(), 
-            this.getUser(), 
+            this.getTenTK(), 
             DateUtils.format(this.getNgayTao()),
             DateUtils.format(this.getNgaySua()),
             this.getTrangThaiStr(),
             this.itemLine,
             getSoPO(),
             getPOline(),
-            po.getUser(), // người tạo PO
- 
+            po.getTenTK(), // người tạo PO
+            po.getTen(), // tên buyer
             getSoPR(),
             getPRline(),
-            po.getPr().getUser(), // người tạo PR
+            po.getPr().getTenTK(), // người tạo PR
             getMaHang(),
             getTenHang(),
             getDvt(),
@@ -166,7 +167,7 @@ public class GoodsReceipt extends Transaction {
             this.lanCuoi,
             po.getGia(),
             po.getVat(),
-            0 // giá trị của itemLine
+            0 // giá trị của itemLine mặc định
         };
                    
         return objPO;

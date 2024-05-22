@@ -24,6 +24,7 @@ public class PurchaseRequest extends Transaction {
         "Giá Est", "Số lượng", "Tổng giá"};
 
     public PurchaseRequest() {
+        super();
         item = new Item();
     }
     
@@ -81,7 +82,7 @@ public class PurchaseRequest extends Transaction {
 
     public Object[] getObjPR(){
         Object[] objPR =  new Object[]{this.getSoCT(), 
-            this.getUser(), 
+            this.getTenTK(), 
             //this.getNgayTao().format(DateUtils.DATE_FORMAT), 
             //this.getNgaySua().format(DateUtils.DATE_FORMAT), 
             DateUtils.format(this.getNgayTao()),

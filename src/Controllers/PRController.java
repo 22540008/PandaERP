@@ -150,7 +150,7 @@ public class PRController {
             for (int i = 0; i < rowCount; i++){
                 PurchaseRequest updatePR = view.getUpdatePRinfo(i);
                 updatePR.setSoCT(soCT);
-                updatePR.setUser(user);
+                updatePR.setTenTK(user);
                 updatePR.setNgaySua(date);
                 updatePR.setNgayTao(date);
 
@@ -295,7 +295,7 @@ public class PRController {
                 
                 PurchaseRequest pr = new PurchaseRequest();
                 pr.setSoCT(Integer.parseInt(view.getFieldSoCT_add().getText()));
-                pr.setUser(view.getFieldUser_add().getText());
+                pr.setTenTK(view.getFieldUser_add().getText());
                 pr.setNgayTao(view.getDate_add().getDate());
                 pr.setNgaySua(view.getDate_add().getDate()); // Ngày sửa = ngày tạo khi tạo mới PR.
                 pr.setItemLine(i+1);
@@ -578,7 +578,7 @@ public class PRController {
             if (!paramSearch[1].isBlank()){
                 trackUser = paramSearch[1];
                 for (PurchaseRequest pr : loadData){
-                    if (pr.getUser().equals(trackUser)){
+                    if (pr.getTenTK().equals(trackUser)){
                         trackResult.add(pr);
                     }
                 }

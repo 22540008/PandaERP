@@ -379,7 +379,7 @@ public class POController {
                 int maNCC = Integer.parseInt(maNCCStr);
                 PurchaseOrder po = new PurchaseOrder();
                 po.setSoCT(soCT);
-                po.setUser(view.getFieldUser_add().getText());
+                po.setTenTK(view.getFieldUser_add().getText());
                 po.setNgayTao(view.getDate_add().getDate());
                 po.setNgaySua(view.getDate_add().getDate());
                 po.setTrangThai(0);

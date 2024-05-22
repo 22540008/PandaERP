@@ -5,6 +5,11 @@
 package Views;
 
 
+import com.opencsv.CSVWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -18,6 +23,10 @@ import javax.swing.JTable;
 
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 /**
  *
@@ -444,12 +453,12 @@ public class TableERP extends DefaultTableModel {
     
     
     /**
-     * Tính tổng giá trị của cột subExpense cho mỗi giá trị duy nhất trong cột uniqueFilterCol.
-     * Trả về một mảng Object[] chứa tổng giá trị của cột subExpense và một mảng Object[][] chứa các giá trị duy nhất và tổng giá trị tương ứng.
-     * Lưu ý: không nên dùng HashMap vì key không có thứ tự khi thêm vào.
-     * @param uniqueFilterCol chỉ số của cột chứa các giá trị duy nhất để lọc.
-     * @param subExpense chỉ số của cột chứa các giá trị để tính tổng.
-     * @return Mảng Object[] chứa tổng giá trị của cột subExpense (kiểu Double) và một mảng Object[][] chứa các giá trị duy nhất và tổng giá trị tương ứng.
+     * Lọc và tính tổng chi phí dựa trên cột duy nhất và cột mô tả.
+     *
+     * @param uniqueFilterCol Chỉ số của cột chứa giá trị duy nhất để lọc.
+     * @param descriptionCol Chỉ số của cột chứa mô tả cho giá trị duy nhất.
+     * @param subExpense Chỉ số của cột chứa chi phí cần tính tổng.
+     * @return Một mảng Object[] chứa tổng chi phí và một mảng 2 chiều chứa giá trị duy nhất, mô tả và tổng chi phí tương ứng.
      */
     public Object[] filterExpense(int uniqueFilterCol, int descriptionCol, int subExpense) {
         Map<String, Double> uniqueExpensesMap = new LinkedHashMap<>();
@@ -485,6 +494,61 @@ public class TableERP extends DefaultTableModel {
         }
 
         return new Object[] {total, uniqueExpenses};
+    }
+
+    /**
+     * Xuất dữ liệu từ TableERP ra file CSV.
+     *
+     * @param file Đối tượng File đại diện cho file mà dữ liệu sẽ được xuất ra.
+     * @throws IOException Nếu có lỗi xảy ra trong quá trình ghi file.
+     */
+    public void exportToCSV(File file) throws IOException {
+        try (FileWriter out = new FileWriter(file)) {
+            CSVWriter writer = new CSVWriter(out);
+
+            // Write column names
+            String[] columnNames = new String[this.getColumnCount()];
+            for (int i = 0; i < this.getColumnCount(); i++) {
+                columnNames[i] = this.getColumnName(i);
+            }
+            writer.writeNext(columnNames);
+
+            // Write data
+            for (int i = 0; i < this.getRowCount(); i++) {
+                writer.writeNext(Arrays.stream(this.getDataVector().elementAt(i).toArray()).map(Object::toString).toArray(String[]::new));
+            }
+        }
+    }
+
+    /**
+     * Xuất dữ liệu từ TableERP ra file XLS.
+     *
+     * @param file Đối tượng File đại diện cho file mà dữ liệu sẽ được xuất ra.
+     * @throws IOException Nếu có lỗi xảy ra trong quá trình ghi file.
+     */
+    public void exportToXLS(File file) throws IOException {
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet sheet = workbook.createSheet("Sheet1");
+
+        // Write column names
+        HSSFRow rowHead = sheet.createRow((short) 0);
+        for (int i = 0; i < this.getColumnCount(); i++) {
+            HSSFCell cell = rowHead.createCell(i);
+            cell.setCellValue(this.getColumnName(i));
+        }
+
+        // Write data
+        for (int i = 0; i < this.getRowCount(); i++) {
+            HSSFRow row = sheet.createRow((short) i + 1);
+            for (int j = 0; j < this.getColumnCount(); j++) {
+                HSSFCell cell = row.createCell(j);
+                cell.setCellValue(this.getValueAt(i, j).toString());
+            }
+        }
+
+        try (FileOutputStream out = new FileOutputStream(file)) {
+            workbook.write(out);
+        }
     }
     
 }

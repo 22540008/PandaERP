@@ -1282,6 +1282,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="fieldSearchSoCT">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="2024"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

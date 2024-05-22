@@ -28,6 +28,7 @@ public class PurchaseOrder extends Transaction {
         "Giá", "Số lượng", "VAT%", "Giá tổng", "SL chờ nhận"};
 
     public PurchaseOrder() {
+        super();
         pr = new PurchaseRequest();
         vendor = new Vendor();
         //giaDonHang = 0f;
@@ -82,7 +83,7 @@ public class PurchaseOrder extends Transaction {
     
     public Object[] getObjPO(){
         Object[] objPR =  new Object[]{this.getSoCT(), 
-            this.getUser(), 
+            this.getTenTK(), 
             DateUtils.format(this.getNgayTao()),
             DateUtils.format(this.getNgaySua()),
             this.getTrangThaiStr(),
