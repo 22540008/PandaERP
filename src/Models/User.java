@@ -221,6 +221,43 @@ public class User {
         conn.close();
         return null;
     }
+    
+    
+    private boolean hasRole(String role) {
+        for (String r : systemRoles) {
+            if (r.equals(role) || r.equals("admin")) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean hasAccessToUser() {
+        return hasRole("admin");
+    }
 
+    public boolean hasAccessToPR() {
+        return hasRole("requester");
+    }
+
+    public boolean hasAccessToPO() {
+        return hasRole("buyer");
+    }
+
+    public boolean hasAccessToGR() {
+        return hasRole("requester");
+    }
+    
+    public boolean hasAccessToBuyerReport(){
+        return hasRole("buyer");
+    }
+    
+    public boolean hasAccessToVendor(){
+        return hasRole("buyer");
+    }
+    
+    public boolean hasAccessToItem(){
+        return hasRole("buyer");
+    }
     
 }
