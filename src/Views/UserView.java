@@ -414,13 +414,12 @@ public class UserView extends javax.swing.JPanel {
         fieldMatKhau_add.setToolTipText("");
 
         listSystemRole_add.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "admin", "requester", "purchaser" };
+            String[] strings = { "admin", "requester", "buyer" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
         listSystemRole_add.setToolTipText("");
         listSystemRole_add.setName(""); // NOI18N
-        listSystemRole_add.setSelectedIndex(1);
         jScrollPane3.setViewportView(listSystemRole_add);
 
         btnCreate.setText("Tạo");
@@ -551,13 +550,12 @@ public class UserView extends javax.swing.JPanel {
         fieldMatKhau_update.setToolTipText("");
 
         listSystemRole_update.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "admin", "requester", "purchaser" };
+            String[] strings = { "admin", "requester", "buyer" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
         listSystemRole_update.setToolTipText("");
         listSystemRole_update.setName(""); // NOI18N
-        listSystemRole_update.setSelectedIndex(1);
         jScrollPane4.setViewportView(listSystemRole_update);
 
         btnUpdate.setText("Cập nhật");
@@ -757,7 +755,7 @@ public class UserView extends javax.swing.JPanel {
                 .addGap(22, 22, 22)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
