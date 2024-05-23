@@ -395,7 +395,7 @@ public class PRController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("btnTinhTongPR_update is clicked");
-            double totalPrice = view.getTableERP().capNhatTongGia(5, 6, 7);
+            double totalPrice = view.getTablePRupdate().capNhatTongGia(5, 6, 7);
             view.getFieldTongPR_update().setText(CurrencyUtils.VN_FORMAT.format(totalPrice));
         }
     }
@@ -408,7 +408,7 @@ public class PRController {
             // Phải stop edit JTable thì mới lưu dữ liệu vào bảng được.
             if (view.getTbPRupdate().isEditing())
                 view.getTbPRupdate().getCellEditor().stopCellEditing();
-            double totalPrice = view.getTableERP().capNhatTongGia(5, 6, 7);
+            double totalPrice = view.getTablePRupdate().capNhatTongGia(5, 6, 7);
             view.getFieldTongPR_update().setText(CurrencyUtils.VN_FORMAT.format(totalPrice));
             
 
@@ -522,11 +522,17 @@ public class PRController {
                 JOptionPane.showMessageDialog(view, "Vui lòng chọn dòng PR cần xoá");
                 return;
             }
+            int selRow = view.getTbPR().getSelectedRow();
+            if (!String.valueOf(view.getTableERP().getValueAt(selRow, 4)).equals("Đang xử lý")){
+                JOptionPane.showMessageDialog(null, "Bạn chỉ có thể xoá khi transaction ở trạng thái \"Đang xử lý\" ");
+                return;
+            }
+            
             int confirmResult = JOptionPane.showConfirmDialog(null, "Vui lòng xác nhận chắc chắn muốn xoá", "Xác nhận", JOptionPane.YES_NO_OPTION);
             if(confirmResult == JOptionPane.NO_OPTION){
                 return;
             }
-            int selRow = view.getTbPR().getSelectedRow();
+            //int selRow = view.getTbPR().getSelectedRow();
             int deleteSoCT = (int)view.getTbPR().getValueAt(selRow, 0);
             int deleteItemLine = (int)view.getTbPR().getValueAt(selRow, 5);
             

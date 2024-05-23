@@ -522,11 +522,11 @@ public class VendorView extends javax.swing.JPanel {
 
         int maNCC = Integer.parseInt(maNCCStr);
         float vat = 0f;
-        if (vatStr.matches("0\\.\\d+")){
+        if (vatStr.matches("\\d+\\.\\d+")){
             vat = Float.parseFloat(vatStr);
         }
         else {
-            JOptionPane.showMessageDialog(null, "Vui lòng nhập vào số có định dạng dd.ff (VD: 10.00");
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập vào số có định dạng dd.ff (VD: 10.00)");
             return null;
         }
 
@@ -557,11 +557,11 @@ public class VendorView extends javax.swing.JPanel {
 
         int maNCC = Integer.parseInt(maNCCStr);
         float vat = 0f;
-        if (vatStr.matches("0\\.\\d+")){
+        if (vatStr.matches("\\d+\\.\\d+")){
             vat = Float.parseFloat(vatStr);
         }
         else {
-            JOptionPane.showMessageDialog(null, "Vui lòng nhập vào số có định dạng 0.x");
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập vào số có định dạng dd.ff (VD: 10.00)");
             return null;
         }
 

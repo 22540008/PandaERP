@@ -278,34 +278,7 @@ public class UserController {
         }       
     }
     
-    
-    private boolean hasRole(User user, String role) {
-        for (String r : model.getSystemRoles(user)) {
-            if (r.equals(role)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    public boolean hasAccessToUser(User user) {
-        return hasRole(user, "admin");
-    }
 
-    public boolean hasAccessToPR(User user) {
-        return hasRole(user, "PR");
-    }
-
-    public boolean hasAccessToPO(User user) {
-        return hasRole(user, "PO");
-    }
-
-    public boolean hasAccessToGR(User user) {
-        return hasRole(user, "GR");
-    }
-    
-
-    
     public boolean isDuplicateTenTK(String tenTK){
         ArrayList<User> dsAciveUser = model.filterActiveUser();
         int rowCount = dsAciveUser.size();       

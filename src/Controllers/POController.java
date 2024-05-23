@@ -64,11 +64,11 @@ public class POController {
         this.view.btnDiagTimNCCaddActionListener(new TimNCCaddActionListener());
         this.view.btnLoadVendorActionListener(new LoadVendorActionListener());
         this.view.btnSearchVendorActionListener(new SearchVendorActionListener());
-        //this.view.btnSelVendorActionListener(new SelVendorActionListener());
         this.view.btnTinhTongPOdraftActionListener (new TinhTongPOdraftActionListener());
         this.view.btnCreateActionListener(new CreateActionListener());
         this.view.btnEditActionListener(new EditActionListener());
         this.view.btnDiagTimNCCupdateActionListener(new TimNCCaddActionListener());
+        this.view.btnTinhTongPoUpdateActionListener(new TinhTongPoUpdateActionListener());
         this.view.btnUpdateActionListener(new UpdateActionListener());
         this.view.btnCloseActionListener(new CloseActionListener());
         this.view.btnDeleteActionListener(new DeleteActionListener());
@@ -475,6 +475,20 @@ public class POController {
             view.getDialogTimVendor().dispose(); 
         }
     }
+    
+    
+    // Action khi nút tính tổng ở Dialog "Sửa PO" được nhấn
+    private class TinhTongPoUpdateActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("btnTinhTongPoUpdate is clicked");
+            double totalPrice = view.getTablePOupdate().capNhatTongGia(13, 14, 16, 15); // Cập nhật giaTong ở mỗi item
+            ArrayList<PurchaseOrder> listPOupdate = new ArrayList();
+            view.getFieldTongPOupdate().setText(CurrencyUtils.VN_FORMAT.format(totalPrice)); 
+        }
+        
+    }
+
     
     // Action khi nút "Cập nhật" của Dialog "Sửa PO" được nhấn
     private class UpdateActionListener implements ActionListener {

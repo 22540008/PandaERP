@@ -270,7 +270,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="btnTinhTongPOdraft" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="fieldTongPOdraft" min="-2" pref="75" max="-2" attributes="0"/>
+                              <Component id="fieldTongPOdraft" min="-2" pref="106" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnRemove_add" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -599,9 +599,9 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane4" alignment="0" pref="586" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnTinhTongPR1" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnTinhTongPoUpdate" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="fieldTongPOupdate" min="-2" pref="75" max="-2" attributes="0"/>
+                              <Component id="fieldTongPOupdate" min="-2" pref="107" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnClose" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -619,7 +619,7 @@
                       <Component id="jScrollPane4" pref="240" max="32767" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnTinhTongPR1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnTinhTongPoUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="fieldTongPOupdate" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnClose" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -761,7 +761,7 @@
                 <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnTinhTongPR1">
+            <Component class="javax.swing.JButton" name="btnTinhTongPoUpdate">
               <Properties>
                 <Property name="text" type="java.lang.String" value="T&#xed;nh t&#x1ed5;ng"/>
               </Properties>
@@ -1605,7 +1605,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnTotalItemPrice" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="fieldTotalPrice" min="-2" pref="113" max="-2" attributes="0"/>
+                  <Component id="fieldTotalPrice" min="-2" pref="133" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="btnDelete" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>

@@ -277,8 +277,13 @@ public class GRController {
                 gr.setPOline((int)(view.getTableGRdraft().getValueAt(i, 7)));
                 gr.setSoPR((int)(view.getTableGRdraft().getValueAt(i, 8)));
                 gr.setPRline((int)(view.getTableGRdraft().getValueAt(i, 9)));
-                System.out.println("So PO: " + gr.getPo().getSoCT());
-                System.out.println("So PR: " + gr.getPr().getSoCT());
+                //System.out.println("So PO: " + gr.getPo().getSoCT());
+                //System.out.println("So PR: " + gr.getPr().getSoCT());
+                gr.setMaHang((int)(view.getTableGRdraft().getValueAt(i, 10)));
+                gr.setTenHang(String.valueOf(view.getTableGRdraft().getValueAt(i, 11)));
+                gr.setDvt(String.valueOf(view.getTableGRdraft().getValueAt(i, 12)));
+                gr.setMaNCC((int)(view.getTableGRdraft().getValueAt(i, 13)));
+                gr.setTenNCC(String.valueOf(view.getTableGRdraft().getValueAt(i, 14)));
                 int slNhan = (int)(view.getTableGRdraft().getValueAt(i, 16));
                 gr.setSlNhan(slNhan);
                 gr.getPo().setSlChoNhan((int)(view.getTableGRdraft().getValueAt(i, 15)));
@@ -357,10 +362,10 @@ public class GRController {
                 
                 int soGR = Integer.parseInt(String.valueOf(view.getTableERP().getValueAt(i, 0)));
                 int selSoGR = Integer.parseInt(String.valueOf(view.getTableERP().getValueAt(selRow, 0)));
-                if (soGR < selSoGR){
-                    JOptionPane.showMessageDialog(null, "Tồn tại GR khác được tạo trước đó cho PO item tương ứng, nên không thể xoá được");
-                    return;
-                }
+//                if (soGR < selSoGR){
+//                    JOptionPane.showMessageDialog(null, "Tồn tại GR khác được tạo trước đó cho PO item tương ứng, nên không thể xoá được");
+//                    return;
+//                }
             }
             
             int confirmResult = JOptionPane.showConfirmDialog(null, "Vui lòng xác nhận chắc chắn muốn xoá", "Xác nhận", JOptionPane.YES_NO_OPTION);

@@ -155,14 +155,14 @@ public class MainController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("menuExpenseFilter is clicked");
-            boolean permission = false;
-            for (String role : loginUser.getSystemRoles()){
-                if (role.equals("admin") || role.equals("buyer")){
-                    permission = true;
-                    break;
-                }
-            }
-            if (permission == false){
+//            boolean permission = false;
+//            for (String role : loginUser.getSystemRoles()){
+//                if (role.equals("admin") || role.equals("buyer")){
+//                    permission = true;
+//                    break;
+//                }
+//            }
+            if (loginUser.hasAccessToBuyerReport() == false){
                 JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào chức năng này");
                 return;
             }
@@ -176,14 +176,14 @@ public class MainController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("menuGR is clicked");
-            boolean permission = false;
-            for (String role : loginUser.getSystemRoles()){
-                if (role.equals("admin") || role.equals("requester")){
-                    permission = true;
-                    break;
-                }
-            }
-            if (permission == false){
+//            boolean permission = false;
+//            for (String role : loginUser.getSystemRoles()){
+//                if (role.equals("admin") || role.equals("requester")){
+//                    permission = true;
+//                    break;
+//                }
+//            }
+            if (loginUser.hasAccessToGR() == false){
                 JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào chức năng này");
                 return;
             }
@@ -197,14 +197,14 @@ public class MainController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("menuPO is clicked");
-            boolean permission = false;
-            for (String role : loginUser.getSystemRoles()){
-                if (role.equals("admin") || role.equals("buyer")){
-                    permission = true;
-                    break;
-                }
-            }
-            if (permission == false){
+//            boolean permission = false;
+//            for (String role : loginUser.getSystemRoles()){
+//                if (role.equals("admin") || role.equals("buyer")){
+//                    permission = true;
+//                    break;
+//                }
+//            }
+            if (loginUser.hasAccessToPO() == false){
                 JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào chức năng này");
                 return;
             }
@@ -218,14 +218,14 @@ public class MainController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("menuPR is clicked");
-            boolean permission = false;
-            for (String role : loginUser.getSystemRoles()){
-                if (role.equals("admin") || role.equals("requester")){
-                    permission = true;
-                    break;
-                }
-            }
-            if (permission == false){
+//            boolean permission = false;
+//            for (String role : loginUser.getSystemRoles()){
+//                if (role.equals("admin") || role.equals("requester")){
+//                    permission = true;
+//                    break;
+//                }
+//            }
+            if (loginUser.hasAccessToPR() == false){
                 JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào chức năng này");
                 return;
             }
@@ -241,14 +241,14 @@ public class MainController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("menuVendor is clicked");
-            boolean permission = false;
-            for (String role : loginUser.getSystemRoles()){
-                if (role.equals("admin") || role.equals("buyer")){
-                    permission = true;
-                    break;
-                }
-            }
-            if (permission == false){
+//            boolean permission = false;
+//            for (String role : loginUser.getSystemRoles()){
+//                if (role.equals("admin") || role.equals("buyer")){
+//                    permission = true;
+//                    break;
+//                }
+//            }
+            if (loginUser.hasAccessToVendor() == false){
                 JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào chức năng này");
                 return;
             }
@@ -263,14 +263,18 @@ public class MainController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("menuItem is clicked");
-            boolean permission = false;
-            for (String role : loginUser.getSystemRoles()){
-                if (role.equals("admin") || role.equals("buyer")){
-                    permission = true;
-                    break;
-                }
-            }
-            if (permission == false){
+//            boolean permission = false;
+//            for (String role : loginUser.getSystemRoles()){
+//                if (role.equals("admin") || role.equals("buyer")){
+//                    permission = true;
+//                    break;
+//                }
+//            }
+//            if (permission == false){
+//                JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào chức năng này");
+//                return;
+//            }
+            if (loginUser.hasAccessToItem() == false){
                 JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào chức năng này");
                 return;
             }
@@ -284,14 +288,14 @@ public class MainController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("menuDSUser is clicked");
-            boolean permission = false;
-            for (String role : loginUser.getSystemRoles()){
-                if (role.equals("admin")){
-                    permission = true;
-                    break;
-                }
-            }
-            if (permission == false){
+//            boolean permission = false;
+//            for (String role : loginUser.getSystemRoles()){
+//                if (role.equals("admin")){
+//                    permission = true;
+//                    break;
+//                }
+//            }
+            if (loginUser.hasAccessToUser()== false){
                 JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào chức năng này");
                 return;
             }

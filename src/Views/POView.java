@@ -513,7 +513,7 @@ public class POView extends javax.swing.JPanel {
         jScrollPane4 = new javax.swing.JScrollPane();
         tbPOupdate = new javax.swing.JTable();
         btnUpdate = new javax.swing.JButton();
-        btnTinhTongPR1 = new javax.swing.JButton();
+        btnTinhTongPoUpdate = new javax.swing.JButton();
         fieldTongPOupdate = new javax.swing.JTextField();
         btnClose = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
@@ -730,7 +730,7 @@ public class POView extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(btnTinhTongPOdraft)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fieldTongPOdraft, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(fieldTongPOdraft, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnRemove_add)
                         .addGap(18, 18, 18)
@@ -863,7 +863,7 @@ public class POView extends javax.swing.JPanel {
 
         btnUpdate.setText("Cập nhật");
 
-        btnTinhTongPR1.setText("Tính tổng");
+        btnTinhTongPoUpdate.setText("Tính tổng");
 
         fieldTongPOupdate.setEditable(false);
 
@@ -878,9 +878,9 @@ public class POView extends javax.swing.JPanel {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(btnTinhTongPR1)
+                        .addComponent(btnTinhTongPoUpdate)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fieldTongPOupdate, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(fieldTongPOupdate, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnClose)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -894,7 +894,7 @@ public class POView extends javax.swing.JPanel {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTinhTongPR1)
+                    .addComponent(btnTinhTongPoUpdate)
                     .addComponent(btnUpdate)
                     .addComponent(fieldTongPOupdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnClose)))
@@ -1335,7 +1335,7 @@ public class POView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(btnTotalItemPrice)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fieldTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fieldTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnDelete)
                 .addGap(18, 18, 18)
@@ -1415,7 +1415,7 @@ public class POView extends javax.swing.JPanel {
     private javax.swing.JButton btnTimNCC_update;
     private javax.swing.JButton btnTimPR_add;
     private javax.swing.JButton btnTinhTongPOdraft;
-    private javax.swing.JButton btnTinhTongPR1;
+    private javax.swing.JButton btnTinhTongPoUpdate;
     private javax.swing.JButton btnTotalItemPrice;
     private javax.swing.JButton btnUpdate;
     private com.toedter.calendar.JDateChooser date_add;
@@ -1698,7 +1698,9 @@ public class POView extends javax.swing.JPanel {
         return po;
     }
     
- 
+    public void btnTinhTongPoUpdateActionListener(ActionListener listener){
+        btnTinhTongPoUpdate.addActionListener(listener);
+    }
     
     public void btnUpdateActionListener(ActionListener listener){
         btnUpdate.addActionListener(listener);
