@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  * @author Ricardo
  */
 public class TableERPTest {
-    TableERP tableERP1, tableERP2, tableERP3;
+    TableERP tableERP1, tableERP2, tableERP3, tableERP4;
     
     public TableERPTest() {
         String[] column1 = new String[] {"0", "1", "2", "3", "4"};
@@ -40,6 +40,15 @@ public class TableERPTest {
                 {"Nguyễn Văn C", "Trần Quang Hùng", 1002, 2002, 50000f},
                 {"Nguyễn Văn B", "Trần Quang Hùng", 1003, 2003, 40000f}};
         tableERP3 = new TableERP(data3,column3);
+        
+        String[] column4 = new String[]{"Mã Item", "Mô tả", "Đơn giá", "Số lượng", "VAT", "Tổng"};
+        Object[][] data4 = new Object[][]
+                {{"10001", "Sản phẩm A", 1000, 10, 10, 50000f},
+                {"10002", "Sản phẩm B", 2000, 20, 10, 30000f},
+                {"10003", "Sản phẩm C", 3000, 30, 10, 60000f},
+                {"10004", "Sản phẩm D", 4000, 40, 10, 50000f},
+                {"10005", "Sản phẩm E", 5000, 50, 10, 40000f}};
+        tableERP4 = new TableERP(data4,column4);
 
     }
 
@@ -98,10 +107,18 @@ public class TableERPTest {
 
     @Test
     public void testCapNhatTongGia_3args() {
+        double result = tableERP4.capNhatTongGia(2, 3, 5);
+        double expected = 550_000d;
+        double delta = 0.0001d; // sai số cho phép
+        assertEquals(expected, result, delta);
     }
 
     @Test
     public void testCapNhatTongGia_4args() {
+        double result = tableERP4.capNhatTongGia(2, 3, 5, 4);
+        double expected = 605_000d;
+        double delta = 0.0001d; // sai số cho phép
+        assertEquals(expected, result, delta);
     }
 
     @Test
