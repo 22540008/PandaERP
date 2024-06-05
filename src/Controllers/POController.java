@@ -123,6 +123,7 @@ public class POController {
         }
     }
     
+    // Active khi nút Search của "Quản lý PO" được nhấn
     private class SearchActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -528,8 +529,7 @@ public class POController {
         }
     }
 
-
-
+    // Active nhấn vào nút "Đóng" của Dialog "Sửa PO" được nhấn.
     private class CloseActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -574,7 +574,6 @@ public class POController {
 
         }
     }
-
 
     //Action khi nút "Xoá" của màn hình quản lý danh sách PO được nhấn
     private class DeleteActionListener implements ActionListener {
